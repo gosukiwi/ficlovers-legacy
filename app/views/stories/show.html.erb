@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @story.title %></h1>
+<p class="subtitle">Created by 
+  <%= link_to @story.user.name, @story.user %>, 
+  <%= time_ago_in_words @story.updated_at %> ago in 
+  <%= link_to @story.category.name, @story.category %>.</p>
+
+<p>
+  <%= @story.summary %>
+</p>
+
+<h2>Chapters</h2>
+<ol>
+  <% @story.chapters.each do |chapter| %>
+    <li><%= chapter.title %></li>
+  <% end %>
+</ol>
+
+<p>
+  <%= link_to 'Read story', [@story, @story.chapters.first] %>
+</p>
+
+<%= link_to 'Chapters', story_chapters_path(@story) %> |
+<%= link_to 'Edit', edit_story_path(@story) %> |
+<%= link_to 'Back', stories_path %>
