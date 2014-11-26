@@ -11,7 +11,7 @@ class StoryTest < ActiveSupport::TestCase
   should belong_to :user
   should have_many :chapters
 
-  test 'chapter must be deleted after a story' do
+  test 'story must delete all related chapters when deleted' do
     chapter = FactoryGirl.create(:chapter)
     story = chapter.story
 
