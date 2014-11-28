@@ -1,9 +1,88 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
+    <header class="profile-header">
+      <img class="profile-avatar" src="http://placehold.it/150x150" alt="">
+      <div class="profile-box">
+        <h2>Federico</h2>
+        
+        <div class="profile-box-info">
+          Joined 23 days ago, from Argentina
+        </div>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+        <div class="profile-box-action">
+          <a class="btn btn-primary" href="#"><i class="fa fa-check"></i> follow</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="container-fluid profile-body">
+      <div class="row">
+        <div class="col-md-2 col-sm-3">
+          <h3>About me</h3>
+          <p>Superflexer and writer.</p>
+
+          <ul class="profile-social">
+            <li><a href="#"><i class="fa fa-facebook"></i> federico</a></li>
+            <li><a href="#"><i class="fa fa-twitter"></i> @gosukiwi</a></li>
+            <li><a href="#"><i class="fa fa-google-plus"></i> +federico</a></li>
+          </ul>
+        </div>
+        <div class="col-md-10 col-sm-9">
+          <ul class="nav nav-pills">
+            <li class="active"><a href="#">Fics</a></li>
+            <li><a href="#">Groups</a></li>
+            <li><a href="#">Following</a></li>
+            <li><a href="#">Followers</a></li>
+          </ul>
+
+          <div class="profile-fic clearfix">
+            <div class="hidden-xs profile-fic-thumb">
+              <img src="http://placehold.it/120x150" alt="" />
+            </div>
+            <div class="profile-fic-info">
+              <h2><a href="#">Hinata's Potato</a></h2>
+              <p>Everyone loses his shit when Hinata introduces a potato in her
+              Byakugan.</p>
+              <p><a class="btn btn-primary" href="#">Read</a></p>
+            </div>
+          </div>
+
+          <div class="profile-fic clearfix">
+            <div class="profile-fic-thumb is-missing hidden-xs"><a href="#">Hinata's Potato</a></div>
+            <div class="profile-fic-info">
+              <h2><a href="#">Hinata's Potato</a></h2>
+              <p>Everyone loses his shit when Hinata introduces a potato in her
+              Byakugan.</p>
+              <p><a class="btn btn-primary" href="#">Read</a></p>
+            </div>
+          </div>
+
+          <div class="profile-fic clearfix">
+            <div class="hidden-xs profile-fic-thumb">
+              <img src="http://placehold.it/120x150" alt="" />
+            </div>
+            <div class="profile-fic-info">
+              <h2><a href="#">Hinata's Potato</a></h2>
+              <p>Everyone loses his shit when Hinata introduces a potato in her
+              Byakugan.</p>
+              <p><a class="btn btn-primary" href="#">Read</a></p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container-fluid">
+        <div class="col-xs-6">
+          All stories &copy; to their respective authors.
+        </div>
+        <div class="col-xs-6 footer-menu">
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>

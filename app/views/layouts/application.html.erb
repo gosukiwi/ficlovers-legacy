@@ -1,22 +1,76 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Fanfic</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <meta charset="utf-8">
+    <title>ficlovers</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
 
-<% if flash[:danger] %>
-  <div class="danger"><%= flash[:danger] %></div>
-<% end %>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">ficlovers</a>
+        </div>
 
-<% if flash[:error] %>
-  <div class="error"><%= flash[:error] %></div>
-<% end %>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="#"><i class="fa fa-fire"></i> Hot</a></li>
+            <li><a href="#"><i class="fa fa-leaf"></i> Fresh</a></li>
+            <li><a href="#"><i class="fa fa-group"></i> Groups</a></li>
+          </ul>
 
-<%= yield %>
+          <form class="navbar-form navbar-left" action="">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search">
+              <i class="fa fa-search"></i>
+            </div>
+          </form>
 
-</body>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="#"><i class="fa fa-pencil"></i> Write</a></li>
+            <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+              <i class="fa fa-cog single"></i> 
+              <span class="visible-xs-inline-block">Profile</span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <% if flash[:danger] %>
+      <div class="danger"><%= flash[:danger] %></div>
+    <% end %>
+
+    <% if flash[:error] %>
+      <div class="error"><%= flash[:error] %></div>
+    <% end %>
+
+    <%= yield %>
+
+  </body>
 </html>
