@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :stories do
     resources :chapters
   end
+  get 'write', to: 'stories#write'
 
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'

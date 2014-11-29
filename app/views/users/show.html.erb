@@ -34,55 +34,17 @@
             <li><a href="#">Followers</a></li>
           </ul>
 
-          <div class="profile-fic clearfix">
-            <div class="hidden-xs profile-fic-thumb">
-              <img src="http://placehold.it/120x150" alt="" />
+          <% @user.stories.each do |story| %>
+            <div class="profile-fic clearfix">
+              <div class="profile-fic-thumb is-missing hidden-xs"><%= link_to story.title, story %></a></div>
+              <div class="profile-fic-info">
+                <h2><a href="<%= story_path story %>"><%= story.title %></a></h2>
+                <p><%= story.summary %></p>
+                <p><%= link_to "Read", story, { class: "btn btn-primary" } %></p>
+              </div>
             </div>
-            <div class="profile-fic-info">
-              <h2><a href="#">Hinata's Potato</a></h2>
-              <p>Everyone loses his shit when Hinata introduces a potato in her
-              Byakugan.</p>
-              <p><a class="btn btn-primary" href="#">Read</a></p>
-            </div>
-          </div>
-
-          <div class="profile-fic clearfix">
-            <div class="profile-fic-thumb is-missing hidden-xs"><a href="#">Hinata's Potato</a></div>
-            <div class="profile-fic-info">
-              <h2><a href="#">Hinata's Potato</a></h2>
-              <p>Everyone loses his shit when Hinata introduces a potato in her
-              Byakugan.</p>
-              <p><a class="btn btn-primary" href="#">Read</a></p>
-            </div>
-          </div>
-
-          <div class="profile-fic clearfix">
-            <div class="hidden-xs profile-fic-thumb">
-              <img src="http://placehold.it/120x150" alt="" />
-            </div>
-            <div class="profile-fic-info">
-              <h2><a href="#">Hinata's Potato</a></h2>
-              <p>Everyone loses his shit when Hinata introduces a potato in her
-              Byakugan.</p>
-              <p><a class="btn btn-primary" href="#">Read</a></p>
-            </div>
-          </div>
+          <% end %>
 
         </div>
       </div>
     </div>
-
-    <footer class="footer">
-      <div class="container-fluid">
-        <div class="col-xs-6">
-          All stories &copy; to their respective authors.
-        </div>
-        <div class="col-xs-6 footer-menu">
-          <ul>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Help</a></li>
-          </ul>
-        </div>
-      </div>
-    </footer>

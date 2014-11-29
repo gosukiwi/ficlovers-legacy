@@ -22,6 +22,10 @@ class StoriesController < ApplicationController
   def edit
   end
 
+  def write
+    render layout: 'write'
+  end
+
   # POST /stories
   # POST /stories.json
   def create

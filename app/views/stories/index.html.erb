@@ -1,32 +1,30 @@
-<h1>Latest stories</h1>
+    <header class="hot-header">
+      <h1>Hot Fics</h1>
+      <p>The hottest stories right now! Don't miss them!</p>
+    </header>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>User</th>
-      <th>Category</th>
-      <th>Summary</th>
-      <th colspan="4"></th>
-    </tr>
-  </thead>
+    <div class="container-fluid article hot">
+      <div class="row">
 
-  <tbody>
-    <% @stories.each do |story| %>
-      <tr>
-        <td><%= story.title %></td>
-        <td><%= story.user_id %></td>
-        <td><%= story.category_id %></td>
-        <td><%= story.summary %></td>
-        <td><%= link_to 'Chapters', story_chapters_path(story) %></td>
-        <td><%= link_to 'Show', story %></td>
-        <td><%= link_to 'Edit', edit_story_path(story) %></td>
-        <td><%= link_to 'Destroy', story, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        <% @stories.each do |story| %>
+          <div class="col-sm-6 fic">
+            <div class="fic-thumb is-missing">
+              <%= link_to story.title, story %>
+            </div>
+            <div class="fic-text">
+              <h2><%= link_to story.title, story %></h2>
+              <p class="fic-info"><%= link_to story.user.name, story.user %>, <%= time_ago_in_words story.created_at %> ago.
+                <span class="fic-info-data"><i class="fa fa-eye"></i> 1526</span>
+                <span class="fic-info-data"><i class="fa fa-heart"></i> 25</span>
+              </p>
+              <p class="fic-description"><%= story.summary %></p>
+              <div class="fic-action">
+                <%= link_to 'Read', story, { class: 'btn btn-primary' } %>
+              </div>
+            </div>
+          </div>
+        <% end %>
 
-<br>
+      </div>
+    </div>
 
-<%= link_to 'New Story', new_story_path %>
