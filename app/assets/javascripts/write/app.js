@@ -1,16 +1,4 @@
-/* global Backbone */
-
-var bootstrap = {
-  title: 'My TODO story!',
-  chapters: [
-    { title: 'Hinata\'s love', content: 'Some text...', order: 2 },
-    { title: 'Hinata\'s eagerness', content: 'Some more text...', order: 1 },
-    { title: 'Hinata\'s potato', content: 'Some more text...', order: 3 },
-    { title: 'Hinata\'s rage', content: 'Some more text...', order: 4 },
-    { title: 'Hinata\'s butt', content: 'Some more text...', order: 5 },
-  ]
-};
-
+/* global Backbone, bootstrap */
 (function (/*$*/) {
   'use strict';
 

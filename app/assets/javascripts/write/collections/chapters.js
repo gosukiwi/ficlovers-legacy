@@ -9,16 +9,34 @@
     comparator: 'order',
 
     initialize: function () {
-      //this.sort();
-      // Start off with selected = null
       this.selected = null;
 
       this.on('change:selected', this.changeSelection);
       this.on('change:order', this.reorder);
     },
 
+    setStoryId: function (id) {
+      this.url = '/stories/' + id + '/chapters';
+    },
+
+    getFirstAndSelect: function () {
+      var chapter = this.first();
+      if(chapter === undefined) {
+        chapter = new app.Chapter({ order: 1 });
+        this.add(chapter);
+      }
+      chapter.select();
+      return chapter;
+    },
+
     select: function (chapter) {
       this.changeSelection(chapter);
+    },
+
+    save: function() {
+      this.each(function(chapter) {
+        chapter.save();
+      });
     },
 
     changeSelection: function (chapter) {

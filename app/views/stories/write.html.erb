@@ -41,7 +41,7 @@
       </div>
     </div>
 
-    <script id="tpl-chapter" type="x/template">
+<script id="tpl-chapter" type="x/template">
 {{#chapter.selected}}
 <li class="active">
 {{/chapter.selected}}
@@ -50,9 +50,10 @@
 {{/chapter.selected}}
   <a href="#chapter/{{chapter.title}}" class="chapter-title">{{chapter.title}}</a>
   <div class="chapter-action">
-    <span class="btn-up glyphicon glyphicon-chevron-up"></span>
-    <span class="btn-down glyphicon glyphicon-chevron-down"></span>
-    <span class="btn-delete glyphicon glyphicon-remove"></span>
+    <span class="btn-up fa fa-chevron-up"></span>
+    <span class="btn-down fa fa-chevron-down"></span>
+    <span class="btn-delete fa fa-times"></span>
   </div>
 </li>
-    </script>
+</script>
+<script>var bootstrap = <%= raw @story.to_json(only: [:id, :title, :summary], include: { chapters: { only: [:id, :title, :content] } }) %>;</script>

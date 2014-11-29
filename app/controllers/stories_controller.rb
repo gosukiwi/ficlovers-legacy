@@ -23,6 +23,7 @@ class StoriesController < ApplicationController
   end
 
   def write
+    @story = Story.find(params[:id])
     render layout: 'write'
   end
 

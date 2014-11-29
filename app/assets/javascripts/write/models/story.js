@@ -10,12 +10,11 @@
       chapters: []
     },
 
-    urlRoot: '/stories',
-
     initialize: function () {
       var chapters = this.get('chapters');
       if(chapters) {
         this.chapters = new app.Chapters(chapters);
+        this.chapters.setStoryId(this.get('id'));
         this.unset('chapters');
       }
     }

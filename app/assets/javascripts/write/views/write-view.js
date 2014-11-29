@@ -17,7 +17,7 @@
     },
 
     setupChildViews: function () {
-      var firstChapter = this.model.chapters.first().select();
+      var firstChapter = this.model.chapters.getFirstAndSelect();
       this.writeAreaView = new app.WriteAreaView({
         el: this.el,
         model: firstChapter
@@ -42,9 +42,7 @@
     },
 
     save: function () {
-      var model = this.model.clone();
-      model.set('chapters', this.model.chapters);
-      model.save();
+      this.model.chapters.save();
     },
 
     events: {
