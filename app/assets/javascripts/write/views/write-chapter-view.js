@@ -18,11 +18,7 @@
 
     // Select the first chapter, if there aren't any, create an empty one.
     selectChapter: function () {
-      if(this.model.length === 0) {
-        this.createChapter();
-      }
-
-      this.model.first().select();
+      this.model.getFirstAndSelect();
     },
 
     render: function () {
@@ -36,8 +32,7 @@
     },
 
     createChapter: function () {
-      var chapter = new app.Chapter({ order: this.model.length + 1 });
-      this.model.add(chapter);
+      this.model.addChapter();
     },
 
     events: {

@@ -19,14 +19,19 @@
       this.url = '/stories/' + id + '/chapters';
     },
 
+    // Gets the first chapter, creating one if there isn't any, selects it and
+    // returns it.
     getFirstAndSelect: function () {
-      var chapter = this.first();
-      if(chapter === undefined) {
-        chapter = new app.Chapter({ order: 1 });
-        this.add(chapter);
+      if(this.length === 0) {
+        this.addChapter();
       }
-      chapter.select();
-      return chapter;
+
+      return this.first().select();
+    },
+
+    // Adds a new chapter to the collection with the appropiate order
+    addChapter: function () {
+      this.add(new app.Chapter({ order: this.length + 1 }));
     },
 
     select: function (chapter) {
