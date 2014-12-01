@@ -1,6 +1,7 @@
 class ChaptersController < ApplicationController
   before_action :set_chapter, only: [:show, :edit, :update, :destroy]
   before_action :set_story
+  protect_from_forgery with: :null_session
 
   # GET /chapters
   # GET /chapters.json
@@ -27,28 +28,20 @@ class ChaptersController < ApplicationController
     @chapter = Chapter.new(chapter_params)
     @chapter.story = @story
 
-    respond_to do |format|
-      if @chapter.save
-        format.html { redirect_to [@story, @chapter], notice: 'Chapter was successfully created.' }
-        format.json { render :show, status: :created, location: @chapter }
-      else
-        format.html { render :new }
-        format.json { render json: @chapter.errors, status: :unprocessable_entity }
-      end
+    if @chapter.save
+      head :no_content, location: [@story, @chapter]
+    else
+      render json: @chapter.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /chapters/1
   # PATCH/PUT /chapters/1.json
   def update
-    respond_to do |format|
-      if @chapter.update(chapter_params)
-        format.html { redirect_to [@story, @chapter], notice: 'Chapter was successfully updated.' }
-        format.json { render :show, status: :ok, location: @chapter }
-      else
-        format.html { render :edit }
-        format.json { render json: @chapter.errors, status: :unprocessable_entity }
-      end
+    if @chapter.update(chapter_params)
+      head :no_content, location: [@story, @chapter]
+    else
+      render json: @chapter.errors, status: :unprocessable_entity
     end
   end
 
@@ -56,10 +49,7 @@ class ChaptersController < ApplicationController
   # DELETE /chapters/1.json
   def destroy
     @chapter.destroy
-    respond_to do |format|
-      format.html { redirect_to chapters_url, notice: 'Chapter was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    head :no_content
   end
 
   private
