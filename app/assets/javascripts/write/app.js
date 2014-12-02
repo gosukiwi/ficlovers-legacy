@@ -2,6 +2,15 @@
 (function (/*$*/) {
   'use strict';
 
+  // Set up CSRF token
+  var token = $('meta[name="csrf-token"]').attr('content');
+  $.ajaxSetup({
+    beforeSend: function (xhr) {
+      xhr.setRequestHeader('X-CSRF-Token', token);
+    }
+  });
+
+  // Get app namespace or initialize
   var app = window.app || {};
 
   var appRouter = new (Backbone.Router.extend({

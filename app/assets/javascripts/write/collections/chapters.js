@@ -39,9 +39,11 @@
     },
 
     save: function() {
+      var promises = [];
       this.each(function(chapter) {
-        chapter.save();
+        promises.push(chapter.save());
       });
+      return $.when.apply(this, promises);
     },
 
     changeSelection: function (chapter) {

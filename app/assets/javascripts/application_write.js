@@ -4,6 +4,7 @@
 //= require backbone
 //= require medium-editor
 //= require hogan
+//= require jquery.jgrowl
 //= require write/models/chapter
 //= require write/collections/chapters
 //= require write/models/story

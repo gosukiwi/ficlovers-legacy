@@ -9,7 +9,7 @@ class UserPolicy < ApplicationPolicy
 
   def destroy?
     # Only admins can delete, and they cannot delete themselves!
-    user.admin? && record != user
+    user.admin?
   end
 
   class Scope < Scope

@@ -16,7 +16,7 @@ class UserTest < ActiveSupport::TestCase
 
   should ensure_length_of(:password).is_at_least(6)
 
-  should ensure_inclusion_of(:role).in_array(['admin', 'user'])
+  should validate_inclusion_of(:role).in_array(['admin', 'user'])
 
   test "regular user should not be admin" do
     user = FactoryGirl.create(:user)

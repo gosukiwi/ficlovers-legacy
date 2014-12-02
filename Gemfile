@@ -41,6 +41,7 @@ end
 
 group :development, :test do
   gem 'factory_girl_rails'
+  gem 'test_unit_pundit'
 end
 
 # Use ActiveModel has_secure_password

@@ -24,6 +24,7 @@ class StoriesController < ApplicationController
 
   def write
     @story = Story.find(params[:id])
+    authorize @story
     render layout: 'write'
   end
 
