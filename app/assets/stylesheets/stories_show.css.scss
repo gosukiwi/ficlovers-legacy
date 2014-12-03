@@ -1,0 +1,56 @@
+.story-header {
+  background: asset-url('generic-header.jpg') 50% 55%;
+  background-size: cover;
+  height: 50px;
+  width: 100vw;
+  display: table-cell;
+  vertical-align: middle;
+  color: white;
+  text-align: center;
+  @include gradient-background;
+}
+
+.article.story {
+  h3 {
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+}
+
+.read-area {
+  padding-top: 10px;
+}
+
+.read-story {
+  border: 1px solid #ccc;
+  position: relative;
+  font-family: source-serif-pro, sans-serif;
+  font-size: 16px;
+}
+
+  .read-story-full-screen {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: #777;
+  }
+
+  .read-story-left {
+    position: absolute;
+    left: 5px;
+    top: 40%;
+    font-size: 20px;
+    color: #CCC;
+  }
+
+  .read-story-right {
+    position: absolute;
+    right: 5px;
+    top: 40%;
+    font-size: 20px;
+    color: #CCC;
+  }
+
+  .read-story-content {
+    padding: 0 50px;
+  }

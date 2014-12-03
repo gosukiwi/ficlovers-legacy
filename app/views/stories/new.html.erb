@@ -1,5 +1,41 @@
-<h1>New story</h1>
+<header class="header">
+  <h1 class="header-title"><%= link_to 'Fic Lovers', stories_path %></h1>
+</header>
+<div class="new-story">
+  <h1 class="title">Write</h1>
+  <%= form_for(@story) do |f| %>
+    <% if @story.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@story.errors.count, "error") %> prohibited this story from being saved:</h2>
 
-<%= render 'form' %>
+        <ul>
+        <% @story.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-<%= link_to 'Back', stories_path %>
+    <div class="l-input-group">
+      <div class="input">
+        <%= f.label 'Title', { for: :title, class: 'input-label' } %>
+        <%= f.text_field :title, { id: :title, class: 'input-text', placeholder: 'My Story Title' } %>
+      </div>
+
+      <div class="input">
+        <%= f.label 'Summary', { for: :summary, class: 'input-label' } %>
+        <%= f.text_area :summary, { id: :summary, class: 'input-textarea', placeholder: 'What is your story about?' } %>
+      </div>
+
+      <div class="input">
+        <%= f.label 'Category', { for: :category, class: 'input-label' } %>
+        <%= f.select :category_id, @categories.all.collect {|c| [c.name, c.id] }, {}, { class: 'input-select' } %>
+      </div>
+    </div>
+
+    <div class="actions">
+      <%= f.submit 'Start writing', { class: 'btn btn-primary' } %>
+    </div>
+  <% end %>
+</div>
+

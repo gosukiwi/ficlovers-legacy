@@ -8,17 +8,7 @@
   color: white;
   position: relative;
   z-index: 1000;
-
-  &:after {
-    position: absolute;
-    content: ' ';
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    background: asset-url('banner-gradient.png') 0 0 repeat-x;
-    z-index: 1100;
-  }
+  @include gradient-background;
 
   .profile-avatar {
     position: absolute;

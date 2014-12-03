@@ -11,11 +11,14 @@ class StoriesController < ApplicationController
   # GET /stories/1
   # GET /stories/1.json
   def show
+    authorize @story
   end
 
   # GET /stories/new
   def new
     @story = Story.new
+    authorize @story
+    render layout: 'story_new'
   end
 
   # GET /stories/1/edit
@@ -25,7 +28,7 @@ class StoriesController < ApplicationController
   def write
     @story = Story.find(params[:id])
     authorize @story
-    render layout: 'write'
+    render layout: 'story_write'
   end
 
   # POST /stories
@@ -33,10 +36,11 @@ class StoriesController < ApplicationController
   def create
     @story = Story.new(story_params)
     @story.user = current_user
+    authorize @story
 
     respond_to do |format|
       if @story.save
-        format.html { redirect_to @story, notice: 'Story was successfully created.' }
+        format.html { redirect_to write_story_path @story }
         format.json { render :show, status: :created, location: @story }
       else
         format.html { render :new }

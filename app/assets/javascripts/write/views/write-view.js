@@ -53,7 +53,6 @@
       var json = data.responseJSON;
       var i;
       var len;
-      console.log(json);
       Object.keys(json).forEach(function (key) {
         len = json[key].length;
         for(i = 0; i < len; i++) {

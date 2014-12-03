@@ -18,4 +18,9 @@ class StoryTest < ActiveSupport::TestCase
     story.destroy
     assert_raise(ActiveRecord::RecordNotFound) { Chapter.find(chapter.id) }
   end
+
+  test 'story must have a default published value of false' do
+    chapter = FactoryGirl.create(:story)
+    assert_equals false, chapter.published
+  end
 end
