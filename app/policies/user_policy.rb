@@ -11,14 +11,4 @@ class UserPolicy < ApplicationPolicy
     # Only admins can delete, and they cannot delete themselves!
     user.admin?
   end
-
-  class Scope < Scope
-    def resolve
-      if user.admin?
-        scope.all
-      else
-        scope.where(id: user.id)
-      end
-    end
-  end
 end

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :check_logged, only: [:edit]
-  after_action :verify_authorized, except: [:index]
+  after_action :verify_authorized, except: [:index, :new, :create]
 
   # GET /users
   # GET /users.json
@@ -18,7 +18,6 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
-    authorize @user
   end
 
   # GET /users/1/edit
@@ -33,7 +32,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to login_path, notice: 'Congratulations! Your account has been created. Please log in.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
