@@ -1,5 +1,5 @@
 WebFontConfig = {
-  google: { families: [ 'Source+Sans+Pro:400,900:latin' ] }
+  google: { families: [ 'Noto+Serif:400,700:latin', 'Source+Sans+Pro:400,900:latin' ] }
 };
 (function() {
   var wf = document.createElement('script');
