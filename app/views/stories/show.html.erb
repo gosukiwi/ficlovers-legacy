@@ -1,71 +1,23 @@
 <header class="story-header"></header>
 
-<div class="container-fluid article story">
-  <div class="row">
-    <div class="col-sm-3">
-      <h3><%= @story.title %></h3>
-      <p class="subtitle">
-        By 
-        <%= link_to @story.user.name, @story.user %>, 
-        <%= time_ago_in_words @story.updated_at %> ago in 
-        <%= link_to @story.category.name, @story.category %>.
-      </p>
-      <p class="description">
-        <%= @story.summary %>
-      </p>
-    </div>
-    <div class="col-sm-6 read-area">
-      <div class="read-story">
-        <div class="read-story-left"><i class="fa fa-chevron-left"></i></div>
-        <div class="read-story-right"><i class="fa fa-chevron-right"></i></div>
-        <div class="read-story-full-screen"><i class="fa fa-arrows-alt"></i></div>
-        <div class="read-story-content">
-          <h1>The Chapter Title</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-          condimentum sagittis erat, nec auctor nunc varius vel. In hac
-          habitasse platea dictumst. Pellentesque maximus tortor nibh, eu
-          aliquet tortor tincidunt quis. Aliquam faucibus lorem orci. Nulla
-          ullamcorper accumsan nisi sed pulvinar. Duis rutrum dolor sit amet
-          eros lobortis mollis. Sed porttitor nunc vel risus commodo elementum.
-          Curabitur massa ante, egestas at nibh a, viverra pulvinar nibh.</p>
+<div class="reader">
+  <h1><%= @story.title %></h1>
 
-          <p>Nulla blandit dui vel ligula porta, nec molestie sapien dapibus.
-          Integer fermentum, leo a pellentesque dictum, quam sem feugiat diam,
-          at congue leo quam sed enim. Phasellus non porttitor mauris, nec
-          pretium tellus. Vestibulum ante ipsum primis in faucibus orci luctus
-          et ultrices posuere cubilia Curae; Quisque consequat in mauris vitae
-          interdum. Praesent vel neque elit. Morbi varius semper tortor.
-          Maecenas laoreet urna nec fermentum lobortis. Fusce aliquet sapien sit
-          amet arcu varius, non pulvinar tellus elementum. Praesent in urna at
-          sem commodo mollis.</p>
+  <div class="reader-author">
+    <%= link_to @story.user.name, @story.user, { class: 'reader-author-link' } %>, <%= time_ago_in_words @story.created_at %> ago
+  </div>
 
-          <p>Mauris gravida ut lacus sed vulputate. Vivamus rhoncus eros
-          accumsan, malesuada quam lobortis, ullamcorper enim. Curabitur eu
-          ultrices nunc. In diam metus, fringilla eu lorem quis, porttitor
-          consequat neque. Cras ultricies convallis condimentum. Sed vitae quam
-          ex. Nulla facilisi. Maecenas hendrerit vel tellus eget cursus.
-          Vestibulum ut accumsan nisi, sit amet cursus lacus. Sed vitae pharetra
-          nunc. Quisque hendrerit accumsan ipsum at fringilla.</p>
-
-          <p>Duis luctus auctor lacinia. Nunc erat lectus, pellentesque id
-          sapien eu, varius molestie risus. Nunc cursus tortor dolor, nec
-          pulvinar lorem lacinia finibus. Morbi ut nunc dolor. Donec posuere
-          metus id pretium auctor. Vestibulum erat risus, eleifend vitae
-          scelerisque ut, viverra id diam. Cras in hendrerit nisi, at suscipit
-          massa. Pellentesque porttitor massa at metus elementum, vitae
-          consectetur neque tristique. Sed a ligula ut arcu egestas elementum
-          viverra consequat velit.</p>
-        </div>
+  <div class="reader-chapters">
+    <% @story.chapters.each do |chapter| %>
+      <div class="chapter">
+        <h2><%= chapter.title %></h2>
+        <%= raw chapter.content %>
       </div>
-    </div>
-    <div class="col-sm-3">
-      Comments
-    </div>
+    <% end %>
+  </div>
+
+  <div class="reader-actions clearfix">
+    <a class="btn btn-default prev" id="reader-btn-prev" href="#"><i class="fa fa-chevron-left"></i> Previous Chapter</a>
+    <a class="btn btn-default next" id="reader-btn-next" href="#">Next Chapter <i class="fa fa-chevron-right"></i></a>
   </div>
 </div>
-
-<script>
-var chapters = [<% @story.chapters.each do |chapter| %>
-{ title: '<%= chapter.title %>', content: '<%= raw chapter.content %>' },
-<% end %>];
-</script>

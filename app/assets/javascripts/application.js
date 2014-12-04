@@ -11,7 +11,8 @@
 // about supported directives.
 //
 //= require jquery
-//xx= require jquery_ujs
+//x= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
 //= require fonts
+//= require stories
