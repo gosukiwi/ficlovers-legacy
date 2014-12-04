@@ -19,11 +19,12 @@
 
 .reader {
   font-family: 'Noto Serif', sans-serif;
-  font-size: 16px; // Increase font size by default
+  font-size: 16px; // Use 16px base font size
   line-height: 1.5;
-  max-width: 960px;
+  max-width: 640px;
   margin: 0 auto -20px;
   padding: 35px 15px 15px;
+  color: #444;
 
   h1 {
     text-align: center;
@@ -32,6 +33,13 @@
     animation: appear-from-below 1s;
     animation-delay: 0.3s;
     animation-fill-mode: forwards;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 900;
   }
 }
 
@@ -56,6 +64,8 @@
     animation: appear-from-below 1s;
     animation-delay: 0.15s;
     animation-fill-mode: forwards;
+    margin-bottom: 15px 0 50px;
+    color: #777;
   }
 
   .chapter {
@@ -64,6 +74,13 @@
 
   .reader-actions {
     padding: 15px 0;
+
+    /* buttons are hidden by default and displayed with Javascript, because
+     * paginatino is also made with Javascript, it makes no sense to have
+     * buttons if Javascript is disabled. */
+    .btn {
+      display: none;
+    }
 
     .fa {
       transition: padding 0.25s;
@@ -85,6 +102,41 @@
       &:hover {
         .fa {
           padding-left: 5px;
+        }
+      }
+    }
+  }
+
+  .reader-pagination {
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    width: 50%;
+    height: 34px;
+    line-height: 34px;
+
+    > li {
+      display: inline-block;
+      margin: 0 3px;
+
+      &.active a {
+        color: #777;
+      }
+
+      a {
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        border-radius: 2px;
+        color: #222;
+
+        &:hover {
+          background-color: #e7e7e7;
+          text-decoration: none;
+        }
+
+        &:focus,
+        &:active {
+          text-decoration: none;
         }
       }
     }

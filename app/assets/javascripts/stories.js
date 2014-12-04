@@ -1,15 +1,28 @@
-function dynamicReader() {
-  var $reader   = $('.reader');
-  var $chapters = $reader.find('.chapter');
-  var $btnNext  = $('#reader-btn-next');
-  var $btnPrev  = $('#reader-btn-prev'); 
+function prettyReader($reader) {
+  var $chapters   = $reader.find('.chapter');
+  var $pagination = $reader.find('#reader-pagination');
+  var $btnNext    = $reader.find('#reader-btn-next');
+  var $btnPrev    = $reader.find('#reader-btn-prev'); 
+  var current     = 0;
 
-  $chapters
-    .addClass('hidden')
-    .first()
-    .removeClass('hidden');
+  function initialize() {
+    setupDOM();
+    bindEvents();
+  }
 
-  var current = 0;
+  function setupDOM() {
+    // Hide all chapters and show first
+    $chapters
+      .addClass('hidden')
+      .first()
+      .removeClass('hidden');
+    // Set up pagination
+    var html = '';
+    for(var i = 0; i < $chapters.length; i++) {
+      html += '<li><a href="#" data-page="'+i+'">' + (i + 1) + '</a></li>';
+    }
+    $pagination.html(html);
+  }
 
   function setChapterHash(idx) {
     window.location.hash = '/chapter-' + (idx + 1);
@@ -32,6 +45,10 @@ function dynamicReader() {
     } else {
       $btnNext.show();
     }
+
+    // Set .active class for pagination
+    $pagination.find('.active').removeClass('active');
+    $pagination.find('a[data-page=' + idx + ']').parent().addClass('active');
   }
 
   function loadChapter() {
@@ -45,9 +62,7 @@ function dynamicReader() {
     selectChapter(idx);
   }
 
-  // Event binding
-  // --------------------------------------------------------------------------
-  function bind () {
+  function bindEvents() {
     $btnPrev.click(function (e) {
       e.preventDefault();
       if(current === 0) {
@@ -68,12 +83,24 @@ function dynamicReader() {
       selectChapter(current);
     });
 
+    $pagination.find('a').click(function (e) {
+      e.preventDefault();
+      var $el = $(this);
+      var idx = (+$el.data('page'));
+      current = idx;
+      selectChapter(idx);
+    });
+
     $(window).ready(loadChapter);
   }
 
-  bind();
+  return {
+    initialize: initialize
+  };
 }
 
-if($('.reader').length > 0) {
-  dynamicReader();
+var $reader = $('.reader');
+if($reader.length > 0) {
+  var reader = prettyReader($reader);
+  reader.initialize();
 }
