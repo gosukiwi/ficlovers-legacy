@@ -1,9 +1,7 @@
 function prettyReader($reader) {
   var $chapters   = $reader.find('.chapter');
-  var $pagination = $reader.find('#reader-pagination');
   var $btnNext    = $reader.find('#reader-btn-next');
-  var $btnPrev    = $reader.find('#reader-btn-prev'); 
-  var current     = 0;
+  var $btnPrev    = $reader.find('#reader-btn-prev'); var current     = 0;
 
   function initialize() {
     setupDOM();
@@ -16,12 +14,6 @@ function prettyReader($reader) {
       .addClass('hidden')
       .first()
       .removeClass('hidden');
-    // Set up pagination
-    var html = '';
-    for(var i = 0; i < $chapters.length; i++) {
-      html += '<li><a href="#" data-page="'+i+'">' + (i + 1) + '</a></li>';
-    }
-    $pagination.html(html);
   }
 
   function setChapterHash(idx) {
@@ -46,9 +38,10 @@ function prettyReader($reader) {
       $btnNext.show();
     }
 
-    // Set .active class for pagination
-    $pagination.find('.active').removeClass('active');
-    $pagination.find('a[data-page=' + idx + ']').parent().addClass('active');
+    // Set according chapter in chapter navigation
+    $reader
+      .find('[data-page]').parent().removeClass('active')
+      .find('[data-page=' + idx + ']').parent().addClass('active');
   }
 
   function loadChapter() {
@@ -83,12 +76,23 @@ function prettyReader($reader) {
       selectChapter(current);
     });
 
-    $pagination.find('a').click(function (e) {
+    $reader.find('.btn-chapter').click(function (e) {
       e.preventDefault();
       var $el = $(this);
       var idx = (+$el.data('page'));
       current = idx;
       selectChapter(idx);
+    });
+
+    $('.btn-set-theme').click(function (e) {
+      e.preventDefault();
+      var theme = $(this).text().toLowerCase();
+
+      if(theme === 'dark') {
+        $('body').addClass('dark');
+      } else {
+        $('body').removeClass('dark');
+      }
     });
 
     $(window).ready(loadChapter);
