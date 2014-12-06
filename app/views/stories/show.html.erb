@@ -21,7 +21,7 @@
     <a class="btn btn-default prev" id="reader-btn-prev" href="#"><i class="fa fa-chevron-left"></i> Previous Chapter</a>
     <a class="btn btn-default next" id="reader-btn-next" href="#">Next Chapter <i class="fa fa-chevron-right"></i></a>
     <% if logged_in? %>
-      <%= link_to raw('<i class="fa fa-heart"></i> <span id="fav-status">Add to favs</span>'), add_to_fav_path(@story), remote: true, method: :post, class: 'btn-fav' %>
+      <%= link_to raw('<i class="fa fa-heart"></i> <span id="fav-status">Add to favs</span>'), add_to_fav_path(@story, format: :js), remote: true, method: :post, class: 'btn-fav' %>
     <% end %>
   </div>
 

@@ -4,7 +4,7 @@ class StoryPolicy < ApplicationPolicy
   end
 
   def add_to_fav?
-    user != nil && user != record.user # can't fav yourself
+    user != nil
   end
 
   def write?
