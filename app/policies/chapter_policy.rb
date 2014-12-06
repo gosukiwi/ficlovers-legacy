@@ -4,7 +4,7 @@ class ChapterPolicy < ApplicationPolicy
   end
 
   def create?
-    user.admin? || record.story.user == user
+    user && (user.admin? || record.story.user == user)
   end
 
   def destroy?

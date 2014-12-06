@@ -8,10 +8,15 @@ class StoriesController < ApplicationController
     @stories = Story.all
   end
 
+  def hot
+    @stories = Story.hot
+  end
+
   # GET /stories/1
   # GET /stories/1.json
   def show
     authorize @story
+    @story.increment_views
   end
 
   # GET /stories/new

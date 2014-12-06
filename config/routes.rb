@@ -5,11 +5,14 @@ Rails.application.routes.draw do
 
   resources :categories
 
-  resources :stories do
+  # Story-related routes
+  resources :stories, except: [:index] do
     resources :chapters
   end
   get 'write/:id', to: 'stories#write', as: :write_story
+  get 'hot', to: 'stories#hot', as: :hot
 
+  # Users
   get 'login', to: 'sessions#new', as: :login
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy', as: :logout

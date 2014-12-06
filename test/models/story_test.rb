@@ -20,7 +20,12 @@ class StoryTest < ActiveSupport::TestCase
   end
 
   test 'story must have a default published value of false' do
-    chapter = FactoryGirl.create(:story)
-    assert_equals false, chapter.published
+    story = FactoryGirl.create(:story)
+    assert_equal false, story.published
+  end
+
+  test 'stories must have views starting at 0' do
+    story = FactoryGirl.create(:story)
+    assert_equal 0, story.views
   end
 end
