@@ -1,4 +1,3 @@
-
     <div class="write clearfix" id="write">
 
       <div class="chapters">
@@ -56,4 +55,4 @@
   </div>
 </li>
 </script>
-<script>var bootstrap = <%= raw @story.to_json(only: [:id, :title, :summary], include: { chapters: { only: [:id, :title, :content] } }) %>;</script>
+<script>var bootstrap = <%= raw @story.to_json(only: [:id, :title, :summary], include: { chapters: { only: [:id, :title, :content, :order] } }) %>;</script>

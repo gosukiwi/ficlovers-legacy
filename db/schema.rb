@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141206061438) do
+ActiveRecord::Schema.define(version: 20141206191205) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20141206061438) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "order",      default: 0
   end
 
   create_table "favs", force: true do |t|
