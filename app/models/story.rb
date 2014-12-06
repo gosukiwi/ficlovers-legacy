@@ -8,8 +8,8 @@ class Story < ActiveRecord::Base
 
   # Find hot stories
   # TODO: Fetch most viewed/liked latest (< 1 week) stories
-  def self.hot
-    self.all
+  def self.hot(limit = 10)
+    self.order(views: :desc, created_at: :desc).limit(limit)
   end
   
   def increment_views

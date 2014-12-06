@@ -28,4 +28,27 @@ class StoryTest < ActiveSupport::TestCase
     story = FactoryGirl.create(:story)
     assert_equal 0, story.views
   end
+
+  test 'stories incremental function' do
+    story = FactoryGirl.create(:story)
+    assert_equal 0, story.views
+
+    story.increment_views
+    assert_equal 1, story.views
+  end
+
+  test 'popular stories should come first' do
+    popular = FactoryGirl.create(:story_popular)
+    common = FactoryGirl.create(:story)
+    hot = Story.hot
+    assert_equal hot.first().title, popular.title
+  end
+
+  test 'hot stories are only 10' do
+    for i in 0..20 do
+      FactoryGirl.create(:story)
+    end
+
+    assert_equal 10, Story.hot.count
+  end
 end

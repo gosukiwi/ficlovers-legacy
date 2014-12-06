@@ -4,9 +4,9 @@ class StoriesController < ApplicationController
 
   # GET /stories
   # GET /stories.json
-  def index
-    @stories = Story.all
-  end
+  #def index
+  #  @stories = Story.all
+  #end
 
   def hot
     @stories = Story.hot
