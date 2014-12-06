@@ -16,7 +16,6 @@ class Story < ActiveRecord::Base
       .group('stories.id')
       .order('favs_count DESC, stories.views DESC')
       .where('created_at >= :one_week_ago', { one_week_ago: 1.week.ago })
-      .limit(10)
   }
 
   def increment_views

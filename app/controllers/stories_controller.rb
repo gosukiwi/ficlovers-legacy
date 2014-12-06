@@ -18,7 +18,7 @@ class StoriesController < ApplicationController
   end
 
   def hot
-    @stories = Story.hot
+    @stories = Story.hot.limit(10)
   end
 
   # GET /stories/1
@@ -52,14 +52,10 @@ class StoriesController < ApplicationController
     @story.user = current_user
     authorize @story
 
-    respond_to do |format|
-      if @story.save
-        format.html { redirect_to write_story_path @story }
-        format.json { render :show, status: :created, location: @story }
-      else
-        format.html { render :new }
-        format.json { render json: @story.errors, status: :unprocessable_entity }
-      end
+    if @story.save
+      redirect_to write_story_path @story
+    else
+      render :new, layout: 'story_new'
     end
   end
 

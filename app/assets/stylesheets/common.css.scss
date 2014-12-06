@@ -97,6 +97,16 @@ body {
       }
     }
 
+    /* fix colors for dropdown items in navbar */
+    .dropdown-toggle:focus {
+      color: white;
+    }
+
+    .dropdown-toggle:hover {
+      color: #444;
+    }
+    /* end of fix */
+
     li {
       a {
         color: white;
