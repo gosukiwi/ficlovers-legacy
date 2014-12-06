@@ -67,4 +67,25 @@ class StoryTest < ActiveSupport::TestCase
     assert_equal 1, user.favs.count
     assert_equal story.title, user.favorites.first().title
   end
+
+  test 'story should fetch chapters ordered' do
+    story = FactoryGirl.create(:story)
+
+    chapter_1 = FactoryGirl.create(:chapter)
+    chapter_1.order = 2
+    story.chapters << chapter_1
+
+    chapter_2 = FactoryGirl.create(:chapter)
+    chapter_2.order = 1
+    story.chapters << chapter_2
+
+    story.save
+
+    assert_equal 2, story.reload.chapters.count
+
+    # Okay, test for order
+    chapters = story.chapters.ordered
+    assert_equal chapters.first(), chapter_2
+    assert_equal chapters.last(), chapter_1
+  end
 end
