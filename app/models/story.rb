@@ -10,11 +10,15 @@ class Story < ActiveRecord::Base
   validates :summary, presence: true, length: { in: 50..250 }
 
   # Find hot stories
-  # TODO: Fetch most viewed/liked latest (< 1 week) stories
   def self.hot(limit = 10)
-    self.order(views: :desc, created_at: :desc).limit(limit)
+    select('stories.*, count(favs.id) as favs_count')
+      .joins('LEFT JOIN `favs` ON `favs`.story_id = `stories`.id')
+      .group('stories.id')
+      .order('favs_count DESC, stories.views DESC')
+      .where('created_at >= :one_week_ago', { one_week_ago: 1.week.ago })
+      .limit(10)
   end
-  
+
   def increment_views
     self.views = self.views + 1
     save

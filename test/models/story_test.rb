@@ -37,19 +37,26 @@ class StoryTest < ActiveSupport::TestCase
     assert_equal 1, story.views
   end
 
-  test 'popular stories should come first' do
+  test 'hot stories, fav matter more than views' do
+    # a popular story has more views than a common one, but favs are more
+    # important
     popular = FactoryGirl.create(:story_popular)
-    common = FactoryGirl.create(:story)
+    faved = FactoryGirl.create(:story)
+    faved.add_to_fav(popular.user)
+
+    # so now hot should have 'faved' as the first story
     hot = Story.hot
-    assert_equal hot.first().title, popular.title
+    assert_equal hot.first(), faved
   end
 
-  test 'hot stories are only 10' do
-    for i in 0..20 do
-      FactoryGirl.create(:story)
-    end
+  test 'hot stories, if favs are even, views matter' do
+    # both stories have 0 favs, so now views should matter
+    popular = FactoryGirl.create(:story_popular)
+    common = FactoryGirl.create(:story)
 
-    assert_equal 10, Story.hot.count
+    # popular should be first
+    hot = Story.hot
+    assert_equal hot.first(), popular
   end
 
   test 'stories can be faved' do
