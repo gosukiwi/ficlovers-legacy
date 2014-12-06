@@ -51,4 +51,13 @@ class StoryTest < ActiveSupport::TestCase
 
     assert_equal 10, Story.hot.count
   end
+
+  test 'stories can be faved' do
+    story = FactoryGirl.create(:story)
+    user = FactoryGirl.create(:user) # a different user than the author
+
+    story.add_to_fav user
+    assert_equal 1, user.favs.count
+    assert_equal story.title, user.favorites.first().title
+  end
 end

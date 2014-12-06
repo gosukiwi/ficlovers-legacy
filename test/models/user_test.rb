@@ -27,13 +27,4 @@ class UserTest < ActiveSupport::TestCase
     user = FactoryGirl.create(:user_admin)
     assert user.admin?
   end
-
-  test 'users can have favourites stories' do
-    story = FactoryGirl.create(:story)
-    user = story.user
-
-    user.add_to_fav story
-    assert_equal 1, user.favs.count
-    assert_equal story.title, user.favorites.first().title
-  end
 end

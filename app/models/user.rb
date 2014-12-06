@@ -21,15 +21,4 @@ class User < ActiveRecord::Base
     role == 'admin'
   end
 
-  # Add a story to this user favs
-  def add_to_fav(story)
-    raise 'Invalid story' unless story.valid?
-    begin
-      favorites << story
-      return true if save
-    rescue
-      false
-    end
-  end
-
 end
