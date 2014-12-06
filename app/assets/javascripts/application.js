@@ -12,7 +12,7 @@
 //
 //= require jquery
 //x= require jquery_ujs
-//= require turbolinks
+//x= require turbolinks
 //= require bootstrap
 //= require fonts
 //= require stories
