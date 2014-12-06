@@ -1,0 +1,5 @@
+<% if @success %>
+$('#fav-status').text('Thank you!').blur();
+<% else %>
+$('#fav-status').text('Oops, Already faved!').blur();
+<% end %>

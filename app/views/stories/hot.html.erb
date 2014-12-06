@@ -15,7 +15,7 @@
               <h2><%= link_to story.title, story %></h2>
               <p class="fic-info"><%= link_to story.user.name, story.user %>, <%= time_ago_in_words story.created_at %> ago.
                 <span class="fic-info-data"><i class="fa fa-eye"></i> <%= story.views %></span>
-                <span class="fic-info-data"><i class="fa fa-heart"></i> 25</span>
+                <span class="fic-info-data"><i class="fa fa-heart"></i> <%= story.favorited_by.count %></span>
               </p>
               <p class="fic-description"><%= story.summary %></p>
               <div class="fic-action">

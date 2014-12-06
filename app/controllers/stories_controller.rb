@@ -1,5 +1,5 @@
 class StoriesController < ApplicationController
-  before_action :set_story, only: [:show, :edit, :update, :destroy]
+  before_action :set_story, only: [:show, :edit, :update, :destroy, :add_to_fav]
   before_action :set_category, only: [:new, :edit, :create]
 
   # GET /stories
@@ -7,6 +7,15 @@ class StoriesController < ApplicationController
   #def index
   #  @stories = Story.all
   #end
+
+  def add_to_fav
+    authorize @story
+    @success = current_user.add_to_fav(@story)
+    respond_to do |format|
+      format.js
+      format.html { head :no_content }
+    end
+  end
 
   def hot
     @stories = Story.hot

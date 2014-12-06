@@ -3,6 +3,7 @@ class Story < ActiveRecord::Base
   has_many :chapters, dependent: :destroy
   belongs_to :user
   # favs
+  has_many :favs
   has_many :favorited_by, through: :favs, source: :user
 
   validates :title, presence: true, length: { in: 5..100 }

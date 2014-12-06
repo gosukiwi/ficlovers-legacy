@@ -2,12 +2,12 @@
 
 <%= form_for(:session, url: login_path) do |f| %>
   <div class="field">
-    <%= f.label 'Email' %><br>
-    <%= f.email_field :email %>
+    <%= f.label 'Email', for: :email %><br>
+    <%= f.email_field :email, id: :email %>
   </div>
   <div class="field">
-    <%= f.label 'Password' %><br>
-    <%= f.password_field :password %>
+    <%= f.label 'Password', for: :password %><br>
+    <%= f.password_field :password, id: :password %>
   </div>
   <div class="actions">
     <%= f.submit 'Login' %>

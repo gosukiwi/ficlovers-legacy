@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
   get 'write/:id', to: 'stories#write', as: :write_story
   get 'hot', to: 'stories#hot', as: :hot
+  post 'add_to_fav/:id', to: 'stories#add_to_fav', as: :add_to_fav
 
   # Users
   get 'login', to: 'sessions#new', as: :login

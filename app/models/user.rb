@@ -23,9 +23,13 @@ class User < ActiveRecord::Base
 
   # Add a story to this user favs
   def add_to_fav(story)
-    raise "Invalid story" unless story.valid?
-    favorites << story
-    save
+    raise 'Invalid story' unless story.valid?
+    begin
+      favorites << story
+      return true if save
+    rescue
+      false
+    end
   end
 
 end

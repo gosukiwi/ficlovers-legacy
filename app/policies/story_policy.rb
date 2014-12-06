@@ -3,6 +3,10 @@ class StoryPolicy < ApplicationPolicy
     user != nil
   end
 
+  def add_to_fav?
+    user != nil && user != record.user # can't fav yourself
+  end
+
   def write?
     user.admin? || record.user == user
   end

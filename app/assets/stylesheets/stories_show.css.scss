@@ -63,6 +63,8 @@
 
   .reader-actions {
     padding: 15px 0;
+    text-align: center;
+    position: relative;
 
     /* buttons are hidden by default and displayed with Javascript, because
      * paginatino is also made with Javascript, it makes no sense to have
@@ -71,12 +73,19 @@
       display: none;
     }
 
+    .btn-fav {
+      font-size: 90%;
+      text-transform: uppercase;
+    }
+
     .fa {
       transition: padding 0.25s;
     }
 
     .prev {
-      float: left;
+      position: absolute;
+      left: 0;
+      top: 10px;
 
       &:hover {
         .fa {
@@ -86,7 +95,9 @@
     }
 
     .next {
-      float: right;
+      position: absolute;
+      right: 0;
+      top: 10px;
 
       &:hover {
         .fa {
@@ -176,7 +187,6 @@
     }
   }
 }
-
 
 /* Animations */
 @keyframes appear-from-below {
