@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
   has_many :stories
 
+  has_many :favs
+  has_many :favorites, through: :favs, source: :story
+
   has_secure_password
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -16,6 +19,13 @@ class User < ActiveRecord::Base
 
   def admin?
     role == 'admin'
+  end
+
+  # Add a story to this user favs
+  def add_to_fav(story)
+    raise "Invalid story" unless story.valid?
+    favorites << story
+    save
   end
 
 end
