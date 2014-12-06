@@ -23,13 +23,14 @@ class Story < ActiveRecord::Base
   # Add a story to this user favs
   def add_to_fav(user)
     return 'Invalid story' unless valid?
-    return 'You cannot fav your own story!' unless self.user != user
+    return 'Oops, cannot fav your own story!' unless self.user != user
 
     begin
       user.favorites << self
-      return 'Faved!' if user.save
+      return user.save ? 'Faved!' : 'Please try again'
     rescue
-      return 'Oops, already faved!'
+      user.favorites.delete self
+      return 'Unfaved'
     end
   end
 

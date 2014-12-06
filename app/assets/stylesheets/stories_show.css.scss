@@ -65,6 +65,7 @@
     padding: 15px 0;
     text-align: center;
     position: relative;
+    margin-bottom: 20px;
 
     /* buttons are hidden by default and displayed with Javascript, because
      * paginatino is also made with Javascript, it makes no sense to have
@@ -75,7 +76,12 @@
 
     .btn-fav {
       font-size: 90%;
-      text-transform: uppercase;
+
+      &:active,
+      &:focus {
+        color: $brand-primary;
+        text-decoration: none;
+      }
     }
 
     .fa {
