@@ -9,7 +9,7 @@
   </div>
 
   <div class="reader-chapters">
-    <% @story.chapters.each do |chapter| %>
+    <% @story.chapters.ordered.each do |chapter| %>
       <div class="chapter">
         <h2><%= chapter.title %></h2>
         <%= raw chapter.content %>
@@ -31,7 +31,7 @@
         <i class="fa fa-list"></i>
       </button>
       <ul class="dropdown-menu">
-        <% @story.chapters.each_with_index do |chapter, index| %>
+        <% @story.chapters.ordered.each_with_index do |chapter, index| %>
           <li tabindex="-1"><a href="#" class="btn-chapter" data-page="<%= index %>"><%= chapter.title %></a></li>
         <% end %>
       </ul>
@@ -51,5 +51,10 @@
       <li><a class="btn-set-theme" tabindex="-1" href="#">Dark</a></li>
     </ul>
   </div>
+
+  <% if @story.user == current_user %>
+    <%= link_to raw('<i class="fa fa-pencil"></i>'), write_story_path(@story), class: 'btn btn-primary' %>
+    <%= link_to raw('<i class="fa fa-times"></i>'), @story, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default' %>
+  <% end %>
 </div>
 </div>
