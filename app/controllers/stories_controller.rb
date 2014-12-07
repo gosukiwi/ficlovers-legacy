@@ -1,5 +1,5 @@
 class StoriesController < ApplicationController
-  before_action :set_story, only: [:show, :edit, :update, :destroy, :add_to_fav]
+  before_action :set_story, only: [:show, :edit, :update, :destroy, :add_to_fav, :update_tags]
   before_action :set_category, only: [:new, :edit, :create]
 
   # GET /stories
@@ -7,6 +7,16 @@ class StoriesController < ApplicationController
   #def index
   #  @stories = Story.all
   #end
+  
+  # PUT /stories/1/update_tags
+  def update_tags
+    #authorize @story
+    if @story.set_tags(params[:fandom], params[:character])
+      head :no_content
+    else
+      render json: 'Please try again', status: :unprocessable_entity
+    end
+  end
 
   def add_to_fav
     authorize @story

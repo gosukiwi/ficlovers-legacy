@@ -32,8 +32,10 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Pundit for authorization
 gem 'pundit'
 
+# Front-end related gems
 gem 'font-awesome-rails'
 gem 'autoprefixer-rails'
+gem 'jquery-ui-rails'
 
 group :test do
   gem 'shoulda'
