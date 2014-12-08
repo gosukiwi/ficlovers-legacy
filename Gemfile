@@ -1,5 +1,7 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org' # the https version fails in windows...
 
+# windows fix <https://github.com/tzinfo/tzinfo/wiki/Resolving-TZInfo::DataSourceNotFound-Errors>
+gem 'tzinfo-data'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.8'
