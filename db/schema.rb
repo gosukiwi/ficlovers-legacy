@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141206191205) do
+ActiveRecord::Schema.define(version: 20141207072153) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -47,6 +47,21 @@ ActiveRecord::Schema.define(version: 20141206191205) do
   end
 
   add_index "stories", ["published"], name: "index_stories_on_published"
+
+  create_table "tags", force: true do |t|
+    t.string   "name"
+    t.string   "context",    limit: 15
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "status",     limit: 10, default: "pending"
+  end
+
+  create_table "taxonomies", force: true do |t|
+    t.integer "tag_id"
+    t.integer "story_id"
+  end
+
+  add_index "taxonomies", ["story_id", "tag_id"], name: "index_taxonomies_on_story_id_and_tag_id", unique: true
 
   create_table "users", force: true do |t|
     t.string   "name"

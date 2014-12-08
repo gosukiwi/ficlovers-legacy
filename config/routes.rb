@@ -12,11 +12,16 @@ Rails.application.routes.draw do
   get 'write/:id', to: 'stories#write', as: :write_story
   get 'hot', to: 'stories#hot', as: :hot
   post 'add_to_fav/:id', to: 'stories#add_to_fav', as: :add_to_fav
+  put 'story/:id/update_tags', to: 'stories#update_tags', as: :stories_update_tags
 
   # Users
   get 'login', to: 'sessions#new', as: :login
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy', as: :logout
+
+  # Tags
+  resources :tags, only: [:create, :update, :delete]
+  get 'search_tag/:context', to: 'tags#search', as: :search_tag
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

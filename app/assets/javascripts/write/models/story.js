@@ -10,6 +10,21 @@
       chapters: []
     },
 
+    save: function () {
+      console.log('called save');
+      // save tags
+      $.ajax({
+        url: '/story/' + this.get('id') + '/update_tags',
+        method: 'post',
+        dataType: 'json',
+        data: {
+          _method: 'put',
+          fandom: this.get('fandom_tags') || [],
+          character: this.get('character_tags') || [],
+        }
+      });
+    },
+
     initialize: function () {
       var chapters = this.get('chapters');
       if(chapters) {

@@ -31,6 +31,16 @@
       this.writeConfigView = new app.WriteConfigView({
         el: this.$el.find('.write-config')
       });
+
+      this.writeTagView = new app.WriteTagView({
+        el: this.$el.find('#tag-fandoms'),
+        context: 'fandoms'
+      });
+
+      this.writeTagView = new app.WriteTagView({
+        el: this.$el.find('#tag-characters'),
+        context: 'characters'
+      });
     },
 
     setCurrentChapter: function (chapter) {
@@ -43,6 +53,9 @@
 
     save: function () {
       this.model.chapters.save().then(this.onSaveSuccessful, this.onSaveError);
+
+      var fandomTags = this.$el.find('#tag-fandoms').val().split(',');
+      this.model.set('fandom_tags', fandomTags).save();
     },
 
     onSaveSuccessful: function () {
