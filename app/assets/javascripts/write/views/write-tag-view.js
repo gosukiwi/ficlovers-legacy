@@ -8,9 +8,16 @@
 
     initialize: function (options) {
       var self = this;
-      this.$el.tagsInput({
-        autocomplete_url: '/search_tag/' + options.context
-      });
+      var tagList = _.chain(bootstrap.tags || [])
+        .filter(function (tag) { return tag.context === options.context; })
+        .pluck('name')
+        .value();
+      // Initialize tagsInput in this element, with the given options
+      this.$el
+        .tagsInput({
+          autocomplete_url: '/search_tag/' + options.context
+        })
+        .importTags(tagList.join(','));
     },
 
   });

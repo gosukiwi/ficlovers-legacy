@@ -15,7 +15,7 @@
           <label for="tag-fandoms">Fandoms</label>
           <input type="text" id="tag-fandoms" name="tag-fandoms">
 
-          <label for="tag-fandoms">Characters</label>
+          <label for="tag-characters">Characters</label>
           <input type="text" id="tag-characters" name="tag-fandoms">
         </div>
       </div>
@@ -38,9 +38,9 @@
           buttons.</p>
 
           <h4>Saving</h4>
-          <p>Saving is done automatically every 30 seconds, but you can do it
-          manually by clicking the <strong>save</strong> button at the bottom
-          right of the screen.</p>
+          <p>Saving is done automatically 30 seconds after you stopped typing,
+          but you can do it manually by clicking the <strong>save</strong>
+          button at the bottom right of the screen.</p>
         </div>
       </div>
 
@@ -65,4 +65,4 @@
   </div>
 </li>
 </script>
-<script>var bootstrap = <%= raw @story.to_json(only: [:id, :title, :summary], include: { chapters: { only: [:id, :title, :content, :order] } }) %>;</script>
+<script>var bootstrap = <%= raw @story.to_json(only: [:id, :title, :summary], include: { tags: { only: [:name, :context] }, chapters: { only: [:id, :title, :content, :order] } }) %>;</script>

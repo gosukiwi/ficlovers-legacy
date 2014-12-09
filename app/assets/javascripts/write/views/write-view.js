@@ -55,7 +55,11 @@
       this.model.chapters.save().then(this.onSaveSuccessful, this.onSaveError);
 
       var fandomTags = this.$el.find('#tag-fandoms').val().split(',');
-      this.model.set('fandom_tags', fandomTags).save();
+      var characterTags = this.$el.find('#tag-characters').val().split(',');
+      this.model.set({
+        'fandom_tags': fandomTags,
+        'character_tags': characterTags
+      }).save();
     },
 
     onSaveSuccessful: function () {

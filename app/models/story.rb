@@ -60,6 +60,8 @@ class Story < ActiveRecord::Base
 
   private
 
+    # Given a context a list of names, find all tag objects by that name in the
+    # given context
     def fetch_tags(context, names)
       return [] if names == nil
       names.map { |name| Tag.find_by(name: name, context: context) || Tag.new(name: name, context: context) }
