@@ -1,7 +1,4 @@
-class Admin::DashboardController < ApplicationController
-  after_action :verify_authorized
-
+class Admin::DashboardController < Admin::AdminController
   def index
-    authorize Admin::Dashboard.new
   end
 end

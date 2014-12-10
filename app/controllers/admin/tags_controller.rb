@@ -1,14 +1,12 @@
-class Admin::TagsController < ApplicationController
-  after_action :verify_authorized
-
+class Admin::TagsController < Admin::AdminController
   def index
-    authorize Admin::Tag.new
-    @tags = Tag.pending_tags
+    # we use :: so we don't end up using the Admin::Tag model
+    @tags = ::Tag.pending_tags
   end
 
   def approve
-    authorize Admin::Tag.new
-    @tag = Tag.find(params[:id])
+    authorize Tag.new
+    @tag = ::Tag.find(params[:id])
     @tag.status = 'active'
     @success = @tag.save
 
@@ -19,8 +17,8 @@ class Admin::TagsController < ApplicationController
   end
 
   def deny
-    authorize Admin::Tag.new
-    @tag = Tag.find(params[:id])
+    authorize Tag.new
+    @tag = ::Tag.find(params[:id])
     @tag.status = 'removed'
     @success = @tag.save
 
