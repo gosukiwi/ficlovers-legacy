@@ -14,7 +14,7 @@
       console.log('called save');
       // save tags
       $.ajax({
-        url: '/story/' + this.get('id') + '/update_tags',
+        url: '/stories/' + this.get('id') + '/update_tags',
         method: 'post',
         dataType: 'json',
         data: {

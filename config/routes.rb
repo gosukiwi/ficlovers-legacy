@@ -5,22 +5,26 @@ Rails.application.routes.draw do
   resources :categories
 
   # Story-related routes
-  resources :stories, except: [:index] do
+  resources :stories, only: [:create, :update, :destroy, :new, :show] do
     resources :chapters
+    get 'search', on: :collection
+    put 'update_tags', to: 'stories#update_tags', on: :member
   end
   get 'write/:id', to: 'stories#write', as: :write_story
   get 'hot', to: 'stories#hot', as: :hot
   post 'add_to_fav/:id', to: 'stories#add_to_fav', as: :add_to_fav
-  put 'story/:id/update_tags', to: 'stories#update_tags', as: :stories_update_tags
+  #put 'story/:id/update_tags', to: 'stories#update_tags', as: :stories_update_tags
 
   # Users
   get 'login', to: 'sessions#new', as: :login
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy', as: :logout
+  get 'register', to: 'users#new', as: :register
 
   # Tags
-  resources :tags, only: [:create, :update, :delete]
-  get 'search_tag/:context', to: 'tags#search', as: :search_tag
+  resources :tags, only: [:create, :update, :delete] do
+    get 'search/:context', to: 'tags#search', on: :collection
+  end
 
   # Admin/Mod dashboard
   namespace :admin do

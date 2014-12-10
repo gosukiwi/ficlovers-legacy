@@ -8,6 +8,9 @@ class StoriesController < ApplicationController
   #  @stories = Story.all
   #end
   
+  def search
+  end
+  
   # PUT /stories/1/update_tags
   def update_tags
     #authorize @story
@@ -43,10 +46,6 @@ class StoriesController < ApplicationController
     @story = Story.new
     authorize @story
     render layout: 'story_new'
-  end
-
-  # GET /stories/1/edit
-  def edit
   end
 
   def write
