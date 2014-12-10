@@ -2,12 +2,6 @@ class StoriesController < ApplicationController
   before_action :set_story, only: [:show, :edit, :update, :destroy, :add_to_fav, :update_tags]
   before_action :set_category, only: [:new, :edit, :create]
 
-  # GET /stories
-  # GET /stories.json
-  #def index
-  #  @stories = Story.all
-  #end
-  
   def search
   end
   
