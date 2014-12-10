@@ -21,13 +21,17 @@ class Story < ActiveRecord::Base
       .where('created_at >= :one_week_ago', { one_week_ago: 1.week.ago })
   }
 
-  def character_tags
-    tags.where(status: 'active', context: 'characters')
+  def active_tags
+    tags.where(status: 'active')
   end
 
-  def fandom_tags
-    tags.where(status: 'active', context: 'fandoms')
-  end
+  #def character_tags
+  #  tags.where(status: 'active', context: 'characters')
+  #end
+
+  #def fandom_tags
+  #  tags.where(status: 'active', context: 'fandoms')
+  #end
 
   # right now there are two types of tagging
   def set_tags(fandom_names, character_names)

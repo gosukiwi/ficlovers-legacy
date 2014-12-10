@@ -56,6 +56,35 @@
     margin-bottom: 15px 0 50px;
     color: #777;
   }
+  
+  .reader-tags {
+    padding: 10px 0;
+    font-size: 90%;
+    font-family: 'Source Sans Pro', sans-serif;
+    margin: 40px 0 -20px;
+    text-align: center;
+    backgrond-color: #f1f1f1;
+    overflow: hidden;
+    box-sizing: border-box;
+    transition: max-height 0.5s;
+    background-color: lighten(#ccc, 10%);
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+
+    li {
+      padding: 3px 6px;
+      display: inline-block;
+    }
+
+    a {
+      text-decoration: underline;
+      color: black;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
 
   .chapter {
     animation: appear-from-below 1s;

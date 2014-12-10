@@ -8,6 +8,31 @@
     <%= link_to @story.user.name, @story.user, { class: 'reader-author-link' } %>, <%= time_ago_in_words @story.created_at %> ago
   </div>
 
+  <div class="reader-navigation">
+    <div class="dropdown">
+      <button class="btn btn-default btn-chapters dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+        <i class="fa fa-list"></i>
+      </button>
+      <ul class="dropdown-menu">
+        <% @story.chapters.ordered.each_with_index do |chapter, index| %>
+          <li tabindex="-1"><a href="#" class="btn-chapter" data-page="<%= index %>"><%= chapter.title %></a></li>
+        <% end %>
+      </ul>
+    </div>
+    <ul>
+    </ul>
+  </div>
+</div>
+
+<% if @story.active_tags.exists? %>
+<ul class="reader-tags">
+  <% @story.active_tags.each do |tag| %>
+    <li><a href="#"><%= tag.name %></a></li>
+  <% end %>
+</ul>
+<% end %>
+
+<div class="reader">
   <div class="reader-chapters">
     <% @story.chapters.ordered.each do |chapter| %>
       <div class="chapter">
@@ -25,20 +50,6 @@
     <% end %>
   </div>
 
-  <div class="reader-navigation">
-    <div class="dropdown">
-      <button class="btn btn-default btn-chapters dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-        <i class="fa fa-list"></i>
-      </button>
-      <ul class="dropdown-menu">
-        <% @story.chapters.ordered.each_with_index do |chapter, index| %>
-          <li tabindex="-1"><a href="#" class="btn-chapter" data-page="<%= index %>"><%= chapter.title %></a></li>
-        <% end %>
-      </ul>
-    </div>
-    <ul>
-    </ul>
-  </div>
 </div>
 
 <div class="reader-options">
