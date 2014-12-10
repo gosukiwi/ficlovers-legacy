@@ -26,12 +26,12 @@ class TagsApiTest < ActionDispatch::IntegrationTest
     active_tag = FactoryGirl.create(:tag_active)
     pending_tag = FactoryGirl.create(:tag) 
     
-    get search_tag_url(active_tag.context, active_tag.name[1, 4])
+    get search_tag_url(active_tag.context), term: active_tag.name[1, 4]
 
     assert_equal 200, response.status
 
     json = JSON.parse response.body, symbolize_names: true
-    assert_equal active_tag.name, json.first[:name]
+    assert_equal active_tag.name, json.first
     assert_equal 1, json.count
   end
 end

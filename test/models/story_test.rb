@@ -89,19 +89,11 @@ class StoryTest < ActiveSupport::TestCase
     assert_equal chapters.last(), chapter_1
   end
 
-  test 'gets character_tags' do
+  test 'should fetch active_tags' do
     story = FactoryGirl.create(:story)
     tag = FactoryGirl.create(:tag_active)
 
     story.tags << tag
-    assert_equal tag, story.character_tags.first
-  end
-
-  test 'gets fandom_tags' do
-    story = FactoryGirl.create(:story)
-    tag = FactoryGirl.create(:tag_active_fandom)
-
-    story.tags << tag
-    assert_equal tag, story.fandom_tags.first
+    assert_equal tag, story.active_tags.first
   end
 end
