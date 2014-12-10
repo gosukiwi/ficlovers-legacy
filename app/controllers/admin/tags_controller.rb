@@ -5,7 +5,6 @@ class Admin::TagsController < Admin::AdminController
   end
 
   def approve
-    authorize Tag.new
     @tag = ::Tag.find(params[:id])
     @tag.status = 'active'
     @success = @tag.save
@@ -17,7 +16,6 @@ class Admin::TagsController < Admin::AdminController
   end
 
   def deny
-    authorize Tag.new
     @tag = ::Tag.find(params[:id])
     @tag.status = 'removed'
     @success = @tag.save
