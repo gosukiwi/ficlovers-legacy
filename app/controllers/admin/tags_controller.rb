@@ -4,22 +4,24 @@ class Admin::TagsController < ApplicationController
   end
 
   def approve
-    tag = Tag.find(params[:id])
-    tag.status = 'active'
-    if tag.save
-      head :no_content
-    else
-      render json: tag.errors, status: :unprocessable_entity
+    @tag = Tag.find(params[:id])
+    @tag.status = 'active'
+    @success = @tag.save
+
+    respond_to do |format|
+      format.js
+      format.html { redirect_to :admin_tags }
     end
   end
 
   def deny
-    tag = Tag.find(params[:id])
-    tag.status = 'removed'
-    if tag.save
-      head :no_content
-    else
-      render json: tag.errors, status: :unprocessable_entity
+    @tag = Tag.find(params[:id])
+    @tag.status = 'removed'
+    @success = @tag.save
+
+    respond_to do |format|
+      format.js
+      format.html { redirect_to :admin_tags }
     end
   end
 end
