@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 
   # Tags
   resources :tags, only: [:create, :update, :delete] do
-    get 'search/:context', to: 'tags#search', on: :collection
+    get 'search/:context', to: 'tags#search', on: :collection, as: 'search'
   end
 
   # Admin/Mod dashboard

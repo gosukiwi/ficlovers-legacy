@@ -14,7 +14,7 @@ class TagsApiTest < ActionDispatch::IntegrationTest
     active_tag = FactoryGirl.create(:tag_active)
     pending_tag = FactoryGirl.create(:tag) 
     
-    get search_tag_url(active_tag.context), term: active_tag.name[1, 4]
+    get search_tags_url(active_tag.context), term: active_tag.name[1, 4]
 
     assert_equal 200, response.status
 
