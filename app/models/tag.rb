@@ -7,6 +7,10 @@ class Tag < ActiveRecord::Base
   has_many :taxonomies
   has_many :stories, through: :taxonomies
 
+  scope :pending_tags, ->{
+    where(status: 'pending').order(context: :asc, name: :asc)
+  }
+
   def self.search(context, keyword)
     wcard_keyword = "%#{keyword}%"
     where("context = :context AND name LIKE :keyword AND status = 'active'", keyword: wcard_keyword, context: context)

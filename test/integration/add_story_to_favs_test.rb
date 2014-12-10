@@ -1,13 +1,6 @@
 require 'test_helper'
 
 class AddStoryToFavsTest < ActionDispatch::IntegrationTest
-  #def login_as user
-  #  visit login_url
-  #  fill_in 'Email', with: user.email
-  #  fill_in 'Password', with: user.password
-  #  click_on 'Login'
-  #end
-
   test 'logged user should be able to add a fav' do
     story = FactoryGirl.create(:story)
     user = FactoryGirl.create(:user)

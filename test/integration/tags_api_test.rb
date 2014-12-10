@@ -10,18 +10,6 @@ class TagsApiTest < ActionDispatch::IntegrationTest
     assert_equal 1, story.reload.tags.count
   end
 
-  #test 'should update a story tags accordingly' do
-  #  story = FactoryGirl.create(:story)
-  #  active_tag = FactoryGirl.create(:tag_active)
-  #  story.tags << active_tag
-
-  #  another_active = FactoryGirl.create(:tag_active)
-  #  
-  #  patch story, json
-  #  assert_equal 1, story.tags.count
-  #  assert_equal another_active, story.tags.first
-  #end
-
   test 'should retrieve only active tags in search' do
     active_tag = FactoryGirl.create(:tag_active)
     pending_tag = FactoryGirl.create(:tag) 

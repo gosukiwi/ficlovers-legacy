@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :tag do
-    name 'Haruno Sakura'
+    name 'SomeSurname Kiba'
     context 'characters'
 
     factory :tag_active do
@@ -16,5 +16,4 @@ FactoryGirl.define do
       context 'fandoms'
     end
   end
-
 end

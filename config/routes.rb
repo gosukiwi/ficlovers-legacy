@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   get 'sessions/new'
 
   resources :users
-
   resources :categories
 
   # Story-related routes
@@ -22,6 +21,16 @@ Rails.application.routes.draw do
   # Tags
   resources :tags, only: [:create, :update, :delete]
   get 'search_tag/:context', to: 'tags#search', as: :search_tag
+
+  # Admin/Mod dashboard
+  namespace :admin do
+    #resources :admin, only: [:index]
+    get '', to: 'dashboard#index', as: 'dashboard'
+    resources :tags, only: [:index]
+    put 'tags/:id/approve', to: 'tags#approve', as: 'tag_approve'
+    put 'tags/:id/deny', to: 'tags#deny', as: 'tag_deny'
+  end
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
