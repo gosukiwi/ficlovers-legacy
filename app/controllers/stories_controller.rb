@@ -3,6 +3,10 @@ class StoriesController < ApplicationController
   before_action :set_category, only: [:new, :edit, :create]
 
   def search
+    @stories = []
+    return unless params[:fandoms] || params[:characters] || params[:category]
+
+    @stories = Story.search(fandoms: params[:fandoms], characters: params[:characters], category: params[:category])
   end
   
   # PUT /stories/1/update_tags
