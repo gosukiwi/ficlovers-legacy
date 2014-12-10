@@ -10,7 +10,7 @@
   </div>
   <div class="input">
     <%= label_tag :category, 'Category' %>
-    <%= text_field_tag :category, params[:category] %>
+    <%= select_tag :category, options_from_collection_for_select(@categories, "id", "name", params[:category]) %>
   </div>
   <%= submit_tag "Search", name: nil %>
 <% end %>

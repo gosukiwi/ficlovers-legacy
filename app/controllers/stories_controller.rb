@@ -4,6 +4,8 @@ class StoriesController < ApplicationController
 
   def search
     @stories = []
+    @categories = Category.all
+    @categories.unshift Category.new(name: 'All', id: 0)
     return unless params[:fandoms] || params[:characters] || params[:category]
 
     @stories = Story.search(fandoms: params[:fandoms], characters: params[:characters], category: params[:category])
