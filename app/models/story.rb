@@ -26,7 +26,7 @@ class Story < ActiveRecord::Base
       .joins('JOIN `taxonomies` ON `taxonomies`.`story_id` = `stories`.id')
       .joins('JOIN `tags` ON `taxonomies`.tag_id = `tags`.id')
 
-    query = query.where(category_id: options[:category]) unless options[:category].to_i == 0
+    query = query.where(category_id: options[:category]) unless options[:category] == '0'
 
     # given a hash of tags (options[:fandoms], options[:characters], etc) parse
     # them into { ors: 'STMT1 OR STMT2 OR...', [query_arg1, query_arg_2], ... }
