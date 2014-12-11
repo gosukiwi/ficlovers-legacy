@@ -17,7 +17,7 @@
   <tr>
     <td><%= link_to story.title, story %></td>
     <td><%= story.summary %></td>
-    <td><%= story.category.name %></td>
+    <td><%= link_to story.category.name, search_stories_path(tags: '', category: story.category.id) %></td>
     <td><% story.tags.each do |tag| %>
       <span class="label label-default"><%= tag.name %></span>
     <% end %></td>
