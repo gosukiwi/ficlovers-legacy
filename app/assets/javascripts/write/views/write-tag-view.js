@@ -9,8 +9,7 @@
     initialize: function (options) {
       var self = this;
       var tagList = _.chain(bootstrap.tags || [])
-        .filter(function (tag) { return tag.context === options.context; })
-        .pluck('name')
+        .map(function (tag) { return tag.name + ' (' + tag.context + ')'; })
         .value();
       // Initialize tagsInput in this element, with the given options
       this.$el

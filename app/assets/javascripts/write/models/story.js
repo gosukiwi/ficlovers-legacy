@@ -19,8 +19,7 @@
         dataType: 'json',
         data: {
           _method: 'put',
-          fandom: this.get('fandom_tags') || [],
-          character: this.get('character_tags') || [],
+          tags: this.get('tags') || []
         }
       });
     },

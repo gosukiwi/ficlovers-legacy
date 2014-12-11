@@ -14,7 +14,7 @@ class StoriesController < ApplicationController
   # PUT /stories/1/update_tags
   def update_tags
     #authorize @story
-    if @story.set_tags(params[:fandom], params[:character])
+    if @story.set_tags(params[:tags])
       head :no_content
     else
       render json: 'Please try again', status: :unprocessable_entity

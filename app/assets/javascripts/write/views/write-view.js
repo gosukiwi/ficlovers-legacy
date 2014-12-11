@@ -48,12 +48,17 @@
     save: function () {
       this.model.chapters.save().then(this.onSaveSuccessful, this.onSaveError);
 
-      var fandomTags = this.$el.find('#tag-fandoms').val().split(',');
-      var characterTags = this.$el.find('#tag-characters').val().split(',');
-      this.model.set({
-        'fandom_tags': fandomTags,
-        'character_tags': characterTags
-      }).save();
+      var tags = this.$el
+        .find('#tags')
+        .val()
+        .split(',');
+      console.log(tags);
+      tags = _.map(tags, function (tag) {
+        // Return either ['my tag'] or ['my tag', 'context']
+        return tag.match(/^(.+?)(?:\((.+?)\))?$/).splice(1, 2);
+      });
+
+      this.model.set({ 'tags': tags }).save();
     },
 
     onSaveSuccessful: function () {
