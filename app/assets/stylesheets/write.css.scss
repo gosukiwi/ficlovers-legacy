@@ -177,10 +177,13 @@ $brand-primary: #EC2B48;
 
   .tagsinput {
     width: 100% !important; // override inline-css tagsInput plugin uses for some reason
+
     .tag {
       background-color: #e7e7e7;
-      border: 1px solid #ccc;
+      border: none;
       color: #444;
+      border-radius: 2px;
+      padding: 3px 10px;
 
       a {
         color: #444;
