@@ -30,8 +30,14 @@ class Story < ActiveRecord::Base
 
     # given a hash of tags (options[:fandoms], options[:characters], etc) parse
     # them into { where: 'STMT1 OR STMT2 OR...', [query_arg1, query_arg_2], ... }
-    tags = parse_tags(options)
-    return query.where(tags[:where], *tags[:args]).uniq.includes([:category, :tags])
+    result = parse_tags(options)
+    tags = result[:filter]
+    having = result[:having]
+    return query
+      .where(tags[:where], *tags[:args])
+      .group('stories.id')
+      .having(having[:stmt], *having[:args])
+      .includes([:category, :tags])
   end
 
   def active_tags
@@ -72,12 +78,17 @@ class Story < ActiveRecord::Base
     # Helper method used by search, transforms a comma-separated string of tags
     # into matching SQL OR clauses
     def self.parse_tags(options) 
-      conditions = []
+      wheres = []
       args = []
+      havings = []
+      havings_args = []
       options[:tags].each do |tag|
-        conditions << '(`tags`.context = ? AND `tags`.name LIKE ?)'
+        wheres << '(`tags`.context = ? AND `tags`.name LIKE ?)'
         args.concat [tag[1], "%#{tag[0]}%"]
+
+        havings << "SUM(`tags`.name LIKE ?) > 0"
+        havings_args << "%#{tag[0]}%"
       end
-      return { where: conditions.join(' OR '), args: args }
+      return { filter: { where: wheres.join(' OR '), args: args }, having: { stmt: havings.join(' AND '), args: havings_args } }
     end
 end
