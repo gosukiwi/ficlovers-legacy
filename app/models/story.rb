@@ -40,11 +40,11 @@ class Story < ActiveRecord::Base
 
   # right now there are two types of tagging
   def set_tags(tags)
-    self.tags.clear
-    tag_list = tags.each do |tag|
+    tag_list = tags.map do |tag|
       tag = tag[1]
-      self.tags << Tag.find_or_create_by(name: tag[0], context: tag[1] || 'pending')
+      Tag.find_or_create_by(name: tag[0], context: tag[1] || 'pending')
     end
+    self.tags = tag_list
     save
   end
 
