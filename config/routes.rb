@@ -22,8 +22,8 @@ Rails.application.routes.draw do
   get 'register', to: 'users#new', as: :register
 
   # Tags
-  resources :tags, only: [:create, :update, :delete] do
-    get 'search/:context', to: 'tags#search', on: :collection, as: 'search'
+  resources :tags, only: [:create] do
+    get 'search', to: 'tags#search', on: :collection, as: 'search'
   end
 
   # Admin/Mod dashboard

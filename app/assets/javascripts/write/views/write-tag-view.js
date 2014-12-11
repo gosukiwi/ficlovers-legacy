@@ -15,7 +15,7 @@
       // Initialize tagsInput in this element, with the given options
       this.$el
         .tagsInput({
-          autocomplete_url: '/tags/search/' + options.context
+          autocomplete_url: '/tags/search'
         })
         .importTags(tagList.join(','));
     },

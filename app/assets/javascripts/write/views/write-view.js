@@ -33,13 +33,7 @@
       });
 
       this.writeTagView = new app.WriteTagView({
-        el: this.$el.find('#tag-fandoms'),
-        context: 'fandoms'
-      });
-
-      this.writeTagView = new app.WriteTagView({
-        el: this.$el.find('#tag-characters'),
-        context: 'characters'
+        el: this.$el.find('#tags')
       });
     },
 

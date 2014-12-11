@@ -11,8 +11,8 @@ class Tag < ActiveRecord::Base
     where(status: 'pending').order(context: :asc, name: :asc)
   }
 
-  def self.search(context, keyword)
+  def self.search(keyword)
     wcard_keyword = "%#{keyword}%"
-    where("context = :context AND name LIKE :keyword AND status = 'active'", keyword: wcard_keyword, context: context)
+    where("name LIKE :keyword AND status = 'active'", keyword: wcard_keyword)
   end
 end

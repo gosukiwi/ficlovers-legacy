@@ -12,8 +12,10 @@ class TagsController < ApplicationController
   end
 
   def search
-    tags = Tag.search(params[:context], params[:term]).pluck(:name)
-    render json: tags, status: :ok, only: [:name, :context]
+    tags = Tag.search(params[:term]).limit(10).map do |tag|
+      "#{tag.name} (#{tag.context})"
+    end
+    render json: tags, status: :ok
   end
 
   private
