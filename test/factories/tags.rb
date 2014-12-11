@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :tag do
-    name 'SomeSurname Kiba'
+    sequence(:name) { |i| "Some Kiba#{i}" }
     context 'characters'
 
     factory :tag_active do
@@ -12,7 +12,6 @@ FactoryGirl.define do
     end
 
     factory :tag_fandom do
-      name 'Naruto Shippuden'
       context 'fandoms'
     end
   end

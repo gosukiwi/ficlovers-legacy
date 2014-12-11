@@ -11,6 +11,10 @@ class StoryTest < ActiveSupport::TestCase
   should belong_to :user
   should have_many :chapters
 
+  test 'searching for tags should be inclusive' do
+    story = FactoryGirl.create(:story)
+  end
+
   test 'story must delete all related chapters when deleted' do
     chapter = FactoryGirl.create(:chapter)
     story = chapter.story
