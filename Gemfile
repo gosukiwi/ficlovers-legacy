@@ -37,6 +37,11 @@ gem 'font-awesome-rails'
 gem 'autoprefixer-rails'
 gem 'jquery-ui-rails'
 
+group :development do
+  gem 'guard'
+  gem 'guard-minitest'
+end
+
 group :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'

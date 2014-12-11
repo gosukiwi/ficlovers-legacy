@@ -1,6 +1,7 @@
 class Admin::TagsController < Admin::AdminController
   def index
     # we use :: so we don't end up using the Admin::Tag model
+    #
     @tags = ::Tag.pending_tags
   end
 

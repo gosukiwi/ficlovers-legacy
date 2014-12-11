@@ -12,10 +12,14 @@
 //
 //= require jquery
 //= require jquery_ujs
+//" tags.input
+//= require jquery-ui/autocomplete
+//= require jquery.tagsinput
 //x= require turbolinks
 //= require bootstrap
 //= require fonts
 //= require stories
+//= require stories_search
 
 $('.dropdown').on('show.bs.dropdown', function(e){
   $(this).find('.dropdown-menu').first().stop(true, true).slideDown('fast');
