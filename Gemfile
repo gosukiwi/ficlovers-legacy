@@ -40,7 +40,7 @@ gem 'jquery-ui-rails'
 group :development do
   gem 'guard'
   gem 'guard-minitest'
-  gem 'debugger'
+  gem 'byebug'
 end
 
 group :test do

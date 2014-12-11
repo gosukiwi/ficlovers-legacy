@@ -13,7 +13,8 @@
     <tr id="<%= tag.id %>-actions">
       <td><%= tag.context %></td>
       <td><%= tag.name %></td>
-      <td><%= link_to 'Approve', admin_tag_approve_path(tag, format: :js), remote: true, method: :put, class: 'approve' %></td>
+      <td><%= link_to 'Approve as Fandom', admin_tag_approve_path(tag, format: :js, as: 'fandoms'), remote: true, method: :put, class: 'approve' %></td>
+      <td><%= link_to 'Approve as Character', admin_tag_approve_path(tag, format: :js, as: 'characters'), remote: true, method: :put, class: 'approve' %></td>
       <td><%= link_to 'Deny', admin_tag_deny_path(tag, format: :js), remote: true, method: :put, class: 'deny' %></td>
     </tr>
   <% end %>

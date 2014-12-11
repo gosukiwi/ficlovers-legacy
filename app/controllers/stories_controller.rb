@@ -6,9 +6,15 @@ class StoriesController < ApplicationController
     @stories = []
     @categories = Category.all
     @categories.unshift Category.new(name: 'All', id: 0)
-    return unless params[:fandoms] || params[:characters] || params[:category]
+    return unless params[:tags] || params[:category]
 
-    @stories = Story.search(fandoms: params[:fandoms], characters: params[:characters], category: params[:category])
+    # returns a list of items such as: ['tag name', 'context']
+    tags = params[:tags].split(',').map do |tag|
+      matches = tag.match(/^(.+?)(?:\((.+?)\))?$/).to_a
+      [matches[1].strip!, matches[2]]
+    end
+
+    @stories = Story.search(tags: tags, category: params[:category])
   end
   
   # PUT /stories/1/update_tags

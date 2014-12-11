@@ -7,6 +7,7 @@ class Admin::TagsController < Admin::AdminController
 
   def approve
     @tag = ::Tag.find(params[:id])
+    @tag.context = params[:as]
     @tag.status = 'active'
     @success = @tag.save
 

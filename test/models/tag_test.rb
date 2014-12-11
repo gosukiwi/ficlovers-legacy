@@ -22,4 +22,12 @@ class TagTest < ActiveSupport::TestCase
     tag = Tag.new name: 'Haruno Sakura'
     assert_equal 'pending', tag.context
   end
+
+  test 'should not be able to be active and pending in context' do
+    tag = Tag.new name: 'Haruno Sakura'
+    tag.status = 'active'
+    assert_raise RuntimeError do
+      tag.save
+    end
+  end
 end

@@ -7,6 +7,10 @@ class Tag < ActiveRecord::Base
     self.context = 'pending' unless attribute_present? 'context'
   end
 
+  before_save do
+    raise 'Cannot activate a tag with a "pending" context' if self.status == 'active' && self.context == 'pending'
+  end
+
   # tags
   has_many :taxonomies
   has_many :stories, through: :taxonomies
