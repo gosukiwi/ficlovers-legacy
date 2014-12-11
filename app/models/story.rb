@@ -78,8 +78,8 @@ class Story < ActiveRecord::Base
       clauses = []
       args = []
       tags.each do |tag|
-        clauses << "SUM(`tags`.name LIKE ?) > 0"
-        args << "%#{tag[0]}%"
+        clauses << "SUM(`tags`.name = ?) > 0"
+        args << tag[0]
       end
       return { stmt: clauses.join(' AND '), args: args }
     end
