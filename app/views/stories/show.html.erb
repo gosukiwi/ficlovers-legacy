@@ -27,7 +27,7 @@
 <% if @story.active_tags.exists? %>
 <ul class="reader-tags">
   <% @story.active_tags.each do |tag| %>
-    <li><a class="tag-<%= tag.context %>" href="<%= search_stories_path(tags: "#{tag.name} (#{tag.context})", category: 0) %>"><%= tag.name %></a></li>
+    <li><a class="tag-<%= tag.context %>" href="<%= search_stories_path(tags: tag.to_s, category: 0) %>"><%= tag.name %></a></li>
   <% end %>
 </ul>
 <% end %>

@@ -11,6 +11,10 @@ class Tag < ActiveRecord::Base
     raise 'Cannot activate a tag with a "pending" context' if self.status == 'active' && self.context == 'pending'
   end
 
+  def to_s
+    "#{name} (#{context})"
+  end
+
   # tags
   has_many :taxonomies
   has_many :stories, through: :taxonomies

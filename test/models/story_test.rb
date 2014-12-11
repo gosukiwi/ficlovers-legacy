@@ -15,6 +15,11 @@ class StoryTest < ActiveSupport::TestCase
     story = FactoryGirl.create(:story)
   end
 
+  test 'search should return only published stories' do
+    story = FactoryGirl.create(:story)
+    #Story.search(category: 0, tags: story.first.name + ' (' + story.first.context + ')')
+  end
+
   test 'story must delete all related chapters when deleted' do
     chapter = FactoryGirl.create(:chapter)
     story = chapter.story

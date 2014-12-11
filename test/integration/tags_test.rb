@@ -19,7 +19,7 @@ class TagsApiTest < ActionDispatch::IntegrationTest
     assert_equal 200, response.status
 
     json = JSON.parse response.body, symbolize_names: true
-    assert_equal active_tag.name, json.first
+    assert_equal active_tag.to_s, json.first
     assert_equal 1, json.count
   end
 end

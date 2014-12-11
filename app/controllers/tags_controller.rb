@@ -13,7 +13,7 @@ class TagsController < ApplicationController
 
   def search
     tags = Tag.search(params[:term]).limit(10).map do |tag|
-      "#{tag.name} (#{tag.context})"
+      tag.to_s
     end
     render json: tags, status: :ok
   end

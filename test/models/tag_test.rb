@@ -6,6 +6,12 @@ class TagTest < ActiveSupport::TestCase
   should validate_inclusion_of(:context).in_array(['characters', 'fandoms', 'pending'])
   should validate_inclusion_of(:status).in_array(['pending', 'active', 'removed'])
 
+  test 'should override to_s' do
+    tag = FactoryGirl.create(:tag)
+    assert_equal "#{tag.name} (#{tag.context})", tag.to_s
+  end
+
+
   test 'search should work for active tags' do
     tag = FactoryGirl.create(:tag_active)
     search_result = Tag.search(tag.name[0, 4])
