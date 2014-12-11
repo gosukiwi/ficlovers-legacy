@@ -5,25 +5,6 @@ body {
 }
 
 /* REUSABLE */
-%tag {
-  color: white;
-  text-shadow: 1px 1px 1px black;
-  padding: 3px 10px;
-  text-decoration: none;
-  border-radius: 2px;
-  display: inline-block;
-  margin: 1px 0;
-  font-weight: bold;
-  box-sizing: border-box;
-
-  &:hover,
-  &:active,
-  &:focus {
-    color: white;
-    text-decoration: none;
-  }
-}
-
 .tag-fandoms {
   @extend %tag;
   background-color: #89BA28;

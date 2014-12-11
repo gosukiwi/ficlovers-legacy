@@ -8,7 +8,7 @@ class StoryPolicy < ApplicationPolicy
   end
 
   def write?
-    user.admin? || record.user == user
+    user && user.admin? || record.user == user
   end
 
   class Scope < Scope
