@@ -18,8 +18,8 @@
     <td><%= link_to story.title, story %></td>
     <td><%= story.summary %></td>
     <td><%= link_to story.category.name, search_stories_path(tags: '', category: story.category.id) %></td>
-    <td><% story.tags.each do |tag| %>
-      <span class="label label-default"><%= tag.name %></span>
+    <td><% story.active_tags.each do |tag| %>
+        <span class="tag-<%= tag.context %>"><%= tag.name %></span>
     <% end %></td>
   </tr>
 <% end %>

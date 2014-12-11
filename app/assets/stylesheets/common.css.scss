@@ -4,6 +4,46 @@ body {
   font-family: 'Source Sans Pro', serif;
 }
 
+/* REUSABLE */
+%tag {
+  color: white;
+  text-shadow: 1px 1px 1px black;
+  padding: 3px 10px;
+  text-decoration: none;
+  border-radius: 2px;
+  display: inline-block;
+  margin: 1px 0;
+  font-weight: bold;
+  box-sizing: border-box;
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.tag-fandoms {
+  @extend %tag;
+  background-color: #89BA28;
+
+  &:hover {
+    background-color: lighten(#89BA28, 10%);
+  }
+}
+
+.tag-characters {
+  @extend %tag;
+  background-color: rgb(43, 148, 236);
+
+  &:hover {
+    background-color: lighten(rgb(43, 148, 236), 10%);
+  }
+}
+
+/* LAYOUT */
+
 .header {
   background: asset-url('header-bg.jpg') 50% 50%;
   background-size: cover;

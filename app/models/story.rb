@@ -32,6 +32,7 @@ class Story < ActiveRecord::Base
     # them into { where: 'STMT1 OR STMT2 OR...', [query_arg1, query_arg_2], ... }
     having = parse_tags(options[:tags])
     return query
+      .where('`tags`.status = "active"')
       .group('stories.id')
       .having(having[:stmt], *having[:args])
       .includes([:category, :tags])
