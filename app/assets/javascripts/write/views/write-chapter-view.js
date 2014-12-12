@@ -1,5 +1,5 @@
 /* global Backbone  */
-(function () {
+(function ($) {
   'use strict';
 
   var app = window.app || {};

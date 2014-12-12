@@ -1,5 +1,5 @@
 /* global Backbone, MediumEditor */
-(function () {
+(function ($) {
   'use strict';
 
   var app = window.app || {};
