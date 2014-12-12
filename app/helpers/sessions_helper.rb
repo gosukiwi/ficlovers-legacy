@@ -4,6 +4,7 @@ module SessionsHelper
   end
 
   def current_user
+    return nil if session[:user_id].nil?
     @current_user ||= User.find_by(id: session[:user_id])
   end
 

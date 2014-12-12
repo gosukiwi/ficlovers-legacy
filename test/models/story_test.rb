@@ -20,6 +20,13 @@ class StoryTest < ActiveSupport::TestCase
     #Story.search(category: 0, tags: story.first.name + ' (' + story.first.context + ')')
   end
 
+  test 'should have published? method' do
+    story = FactoryGirl.create(:story)
+    story_p = FactoryGirl.create(:story_published)
+    assert_equal false, story.published?
+    assert_equal true, story_p.published?
+  end
+
   test 'story must delete all related chapters when deleted' do
     chapter = FactoryGirl.create(:chapter)
     story = chapter.story
@@ -50,7 +57,7 @@ class StoryTest < ActiveSupport::TestCase
     # a popular story has more views than a common one, but favs are more
     # important
     popular = FactoryGirl.create(:story_popular)
-    faved = FactoryGirl.create(:story)
+    faved = FactoryGirl.create(:story_published)
     faved.add_to_fav(popular.user)
 
     # so now hot should have 'faved' as the first story
@@ -61,7 +68,7 @@ class StoryTest < ActiveSupport::TestCase
   test 'hot stories, if favs are even, views matter' do
     # both stories have 0 favs, so now views should matter
     popular = FactoryGirl.create(:story_popular)
-    common = FactoryGirl.create(:story)
+    common = FactoryGirl.create(:story_published)
 
     # popular should be first
     hot = Story.hot

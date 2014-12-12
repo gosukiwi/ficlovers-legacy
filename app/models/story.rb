@@ -18,7 +18,7 @@ class Story < ActiveRecord::Base
       .joins('LEFT JOIN `favs` ON `favs`.story_id = `stories`.id')
       .group('stories.id')
       .order('favs_count DESC, stories.views DESC')
-      .where('created_at >= :one_week_ago', { one_week_ago: 1.week.ago })
+      .where('created_at >= :one_week_ago and published <> 0', { one_week_ago: 1.week.ago })
   }
 
   def self.search(options)
@@ -32,10 +32,14 @@ class Story < ActiveRecord::Base
     # them into { where: 'STMT1 OR STMT2 OR...', [query_arg1, query_arg_2], ... }
     having = parse_tags(options[:tags])
     return query
-      .where('`tags`.status = "active"')
+      .where('`tags`.status = "active" and `stories`.published <> 0')
       .group('stories.id')
       .having(having[:stmt], *having[:args])
       .includes([:category, :tags])
+  end
+
+  def published?
+    self.published
   end
 
   def active_tags

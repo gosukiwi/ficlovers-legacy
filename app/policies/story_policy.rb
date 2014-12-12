@@ -11,6 +11,10 @@ class StoryPolicy < ApplicationPolicy
     user && user.admin? || record.user == user
   end
 
+  def show?
+    record.published? || (user && (record.user == user || user.admin?))
+  end
+
   class Scope < Scope
     def resolve
       scope
