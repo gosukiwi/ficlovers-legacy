@@ -28,8 +28,10 @@ class Story < ActiveRecord::Base
 
     query = query.where(category_id: options[:category]) unless options[:category] == '0'
 
-    # given a hash of tags (options[:fandoms], options[:characters], etc) parse
-    # them into { where: 'STMT1 OR STMT2 OR...', [query_arg1, query_arg_2], ... }
+    # given an array of tags, parse them into HAVING statements joined by ANDs
+    # also return an array with all the prepared statement's parameters
+    # returns something which looks like
+    # { stmt: 'COUNT(?) > 0 AND COUNT(?) > 0 ...', args: [arg1, arg2, ...] }
     having = parse_tags(options[:tags])
     return query
       .where('`tags`.status = "active" and `stories`.published <> 0')
