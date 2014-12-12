@@ -53,13 +53,13 @@
 
     publish: function (e) {
       e.preventDefault();
-      var published = !this.model.get('published');
 
       // If it's gonna publish, ask
-      if(published && !confirm('Are you sure you want to publish?')) {
+      if(!confirm('Are you sure?')) {
         return;
       }
 
+      var published = !this.model.get('published');
       this.model.set({ 'published': published });
       this
         .save()
