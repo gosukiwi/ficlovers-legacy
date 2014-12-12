@@ -18,14 +18,14 @@ class StoriesController < ApplicationController
   end
   
   # PUT /stories/1/update_tags
-  def update_tags
-    #authorize @story
-    if @story.set_tags(params[:tags])
-      head :no_content
-    else
-      render json: 'Please try again', status: :unprocessable_entity
-    end
-  end
+  #def update_tags
+  #  #authorize @story
+  #  if @story.set_tags(params[:tags])
+  #    head :no_content
+  #  else
+  #    render json: 'Please try again', status: :unprocessable_entity
+  #  end
+  #end
 
   def add_to_fav
     authorize @story
@@ -77,11 +77,11 @@ class StoriesController < ApplicationController
   # PATCH/PUT /stories/1
   # PATCH/PUT /stories/1.json
   def update
-    @story.user = current_user
+    @story.set_tags(params[:tags]) if params[:tags]
     respond_to do |format|
       if @story.update(story_params)
         format.html { redirect_to @story, notice: 'Story was successfully updated.' }
-        format.json { render :show, status: :ok, location: @story }
+        format.json { head :no_content, location: @story }
       else
         format.html { render :edit }
         format.json { render json: @story.errors, status: :unprocessable_entity }
@@ -111,6 +111,6 @@ class StoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def story_params
-      params.require(:story).permit(:title, :user_id, :category_id, :summary)
+      params.require(:story).permit(:title, :user_id, :category_id, :summary, :published)
     end
 end

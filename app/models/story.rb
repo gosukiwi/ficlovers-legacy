@@ -48,10 +48,11 @@ class Story < ActiveRecord::Base
     tags.where(status: 'active')
   end
 
-  # right now there are two types of tagging
+  # takes an array of [:name, :context?] and sets the appropiate tagging for
+  # this story
   def set_tags(tags)
     tag_list = tags.map do |tag|
-      tag = tag[1]
+      #tag = tag[1]
       Tag.find_or_create_by(name: tag[0], context: tag[1] || 'pending')
     end
     self.tags = tag_list

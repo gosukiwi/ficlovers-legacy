@@ -33,7 +33,8 @@
       });
 
       this.writeTagView = new app.WriteTagView({
-        el: this.$el.find('#tags')
+        el: this.$el.find('#tags'),
+        model: this.model
       });
     },
 
@@ -46,26 +47,21 @@
     },
 
     save: function () {
-      this.model.chapters.save().then(this.onSaveSuccessful, this.onSaveError);
-
-      var tags = this.$el
-        .find('#tags')
-        .val()
-        .split(',');
-      console.log(tags);
-      tags = _.map(tags, function (tag) {
-        // Return either ['my tag'] or ['my tag', 'context']
-        return tag.match(/^(.+?)(?:\((.+?)\))?$/).splice(1, 2);
-      });
-
-      this.model.set({ 'tags': tags }).save();
+      this.model.chapters.save().then(this.chapterSaved, this.chapterFailed);
+      this.model.save();
     },
 
-    onSaveSuccessful: function () {
+    publish: function (e) {
+      e.preventDefault();
+      this.model.set({ 'published': !this.model.get('published') });
+      this.save();
+    },
+
+    chapterSaved: function () {
         $.jGrowl('Changes saved.');
     },
 
-    onSaveError: function (data) {
+    chapterFailed: function (data) {
       var json = data.responseJSON;
       var i;
       var len;
@@ -78,7 +74,8 @@
     },
 
     events: {
-      'click .btn-save': 'save'
+      'click .btn-save': 'save',
+      'click .btn-publish': 'publish',
     }
 
   });

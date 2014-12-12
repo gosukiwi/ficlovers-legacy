@@ -7,10 +7,11 @@
   app.Story = Backbone.Model.extend({
     defaults: {
       title: 'My Story',
+      published: false,
       chapters: []
     },
 
-    save: function () {
+    saveTags: function () {
       console.log('called save');
       // save tags
       $.ajax({
@@ -31,6 +32,11 @@
         this.chapters.setStoryId(this.get('id'));
         this.unset('chapters');
       }
+
+      var self = this;
+      this.url = function () {
+        return '/stories/' + self.get('id');
+      };
     }
   });
 

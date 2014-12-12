@@ -14,9 +14,22 @@
       // Initialize tagsInput in this element, with the given options
       this.$el
         .tagsInput({
-          autocomplete_url: '/tags/search'
+          autocomplete_url: '/tags/search',
+          onChange: $.proxy(self.tagsChanged, self)
         })
         .importTags(tagList.join(','));
+    },
+
+    tagsChanged: function () {
+      var tags = this.$el
+        .val()
+        .split(',');
+      tags = _.map(tags, function (tag) {
+        // Return either ['my tag'] or ['my tag', 'context']
+        return tag.match(/^(.+?)(?:\((.+?)\))?$/).splice(1, 2);
+      });
+
+      this.model.set({ 'tags': tags });
     },
 
   });
