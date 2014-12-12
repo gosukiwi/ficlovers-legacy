@@ -2,7 +2,7 @@
 /**
  * Read UI for FicLovers
  */
-(function () {
+(function ($) {
   'use strict';
 
   var $page = $('.read-story-content');
