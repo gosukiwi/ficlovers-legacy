@@ -1,5 +1,5 @@
 /* global Backbone, bootstrap */
-(function (/*$*/) {
+(function ($) {
   'use strict';
 
   // Set up CSRF token
