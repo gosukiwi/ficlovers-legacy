@@ -16,7 +16,6 @@
   var appRouter = new (Backbone.Router.extend({
 
     initialize: function () {
-      //TODO: story.fetch() instead of manually adding chapters.
       this.story = new app.Story(bootstrap);
       this.story.chapters.on('change:title', this.updateCurrentRoute, this);
       
@@ -24,6 +23,15 @@
         el: '#write',
         model: this.story
       });
+
+      this.autosave();
+    },
+
+    // save every 60 seconds
+    autosave: function () {
+      this.story.save();
+      this.story.chapters.save();
+      setTimeout($.proxy(this.autosave, this), 60 * 1000);
     },
 
     start: function () {
