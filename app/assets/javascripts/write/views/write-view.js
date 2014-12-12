@@ -48,13 +48,25 @@
 
     save: function () {
       this.model.chapters.save().then(this.chapterSaved, this.chapterFailed);
-      this.model.save();
+      return this.model.save();
     },
 
     publish: function (e) {
       e.preventDefault();
-      this.model.set({ 'published': !this.model.get('published') });
-      this.save();
+      var published = !this.model.get('published');
+
+      // If it's gonna publish, ask
+      if(published && !confirm('Are you sure you want to publish?')) {
+        return;
+      }
+
+      this.model.set({ 'published': published });
+      this
+        .save()
+        .then(function () {
+          $('.btn-publish').text(published ? 'Unpublish' : 'Publish');
+        })
+      ;
     },
 
     chapterSaved: function () {

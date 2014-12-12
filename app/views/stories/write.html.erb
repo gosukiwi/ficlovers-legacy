@@ -43,7 +43,11 @@
       </div>
 
       <div class="write-actions">
-        <a class="btn btn-default btn-publish" href="#">Publish</a>
+        <% if @story.published? %>
+          <a class="btn btn-default btn-publish" href="#">Unpublish</a>
+        <% else %>
+          <a class="btn btn-default btn-publish" href="#">Publish</a>
+        <% end %>
         <div class="btn btn-primary btn-save">Save</div>
         <%= link_to 'Back to fic', @story, { class: 'btn btn-default' } %>
       </div>
@@ -64,4 +68,4 @@
   </div>
 </li>
 </script>
-<script>var bootstrap = <%= raw @story.to_json(only: [:id, :title, :summary], include: { tags: { only: [:name, :context] }, chapters: { only: [:id, :title, :content, :order] } }) %>;</script>
+<script>var bootstrap = <%= raw @story.to_json(only: [:id, :title, :summary, :published], include: { tags: { only: [:name, :context] }, chapters: { only: [:id, :title, :content, :order] } }) %>;</script>

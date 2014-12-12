@@ -11,20 +11,6 @@
       chapters: []
     },
 
-    saveTags: function () {
-      console.log('called save');
-      // save tags
-      $.ajax({
-        url: '/stories/' + this.get('id') + '/update_tags',
-        method: 'post',
-        dataType: 'json',
-        data: {
-          _method: 'put',
-          tags: this.get('tags') || []
-        }
-      });
-    },
-
     initialize: function () {
       var chapters = this.get('chapters');
       if(chapters) {
