@@ -28,3 +28,8 @@
       </div>
     </div>
 
+<%= will_paginate @stories unless @stories.empty? %>
+
+<div class="pagination-info">
+  <%= page_entries_info @stories, model: 'fics' unless @stories.empty? %>
+</div>

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     put 'update_tags', to: 'stories#update_tags', on: :member
   end
   get 'fresh', to: 'stories#fresh', as: :fresh_stories
-  get 'hot', to: 'stories#hot', as: :hot
+  get 'hot', to: 'stories#hot', as: :hot_stories
   get 'write/:id', to: 'stories#write', as: :write_story
   post 'add_to_fav/:id', to: 'stories#add_to_fav', as: :add_to_fav
 

@@ -14,7 +14,9 @@ class StoriesController < ApplicationController
       [matches[1].strip!, matches[2]]
     end
 
-    @stories = Story.search(tags: tags, category: params[:category])
+    @stories = Story
+      .search(tags: tags, category: params[:category])
+      .paginate(page: params[:page], per_page: 10)
   end
   
   def add_to_fav
@@ -27,7 +29,7 @@ class StoriesController < ApplicationController
   end
 
   def fresh
-    @stories = Story.fresh.limit(10)
+    @stories = Story.fresh.paginate(page: params[:page], per_page: 10)
   end
 
   def hot
