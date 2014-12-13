@@ -10,10 +10,10 @@ Rails.application.routes.draw do
     get 'search', on: :collection
     put 'update_tags', to: 'stories#update_tags', on: :member
   end
-  get 'write/:id', to: 'stories#write', as: :write_story
+  get 'fresh', to: 'stories#fresh', as: :fresh_stories
   get 'hot', to: 'stories#hot', as: :hot
+  get 'write/:id', to: 'stories#write', as: :write_story
   post 'add_to_fav/:id', to: 'stories#add_to_fav', as: :add_to_fav
-  #put 'story/:id/update_tags', to: 'stories#update_tags', as: :stories_update_tags
 
   # Users
   get 'login', to: 'sessions#new', as: :login

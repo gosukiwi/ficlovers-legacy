@@ -21,6 +21,10 @@ class Story < ActiveRecord::Base
       .where('created_at >= :one_week_ago and published <> 0', { one_week_ago: 1.week.ago })
   }
 
+  scope :fresh, ->{
+    where('published <> 0').order('updated_at desc')
+  }
+
   def self.search(options)
     query = select('stories.*')
       .joins('JOIN `taxonomies` ON `taxonomies`.`story_id` = `stories`.id')

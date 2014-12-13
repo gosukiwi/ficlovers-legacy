@@ -17,16 +17,6 @@ class StoriesController < ApplicationController
     @stories = Story.search(tags: tags, category: params[:category])
   end
   
-  # PUT /stories/1/update_tags
-  #def update_tags
-  #  #authorize @story
-  #  if @story.set_tags(params[:tags])
-  #    head :no_content
-  #  else
-  #    render json: 'Please try again', status: :unprocessable_entity
-  #  end
-  #end
-
   def add_to_fav
     authorize @story
     @message = @story.add_to_fav(current_user)
@@ -34,6 +24,10 @@ class StoriesController < ApplicationController
       format.js
       format.html { head :no_content }
     end
+  end
+
+  def fresh
+    @stories = Story.fresh.limit(10)
   end
 
   def hot

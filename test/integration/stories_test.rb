@@ -1,6 +1,19 @@
 require 'test_helper'
 
 class StoryShowTest < ActionDispatch::IntegrationTest
+  test 'fresh stories should be the latest' do
+    10.times do
+      FactoryGirl.create(:story_published)
+    end
+    newest = FactoryGirl.create(:story_published)
+    
+    visit fresh_stories_url
+
+    assert_equal fresh_stories_path, current_path
+    # assert that the first story is the newest
+    assert all('.fic').first.text.include?(newest.title)
+  end
+
   test 'stories should increase view count' do
     story = FactoryGirl.create(:story_published)
     assert_equal 0, story.views
