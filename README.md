@@ -16,8 +16,8 @@ on this. A summary would be
     $ bundle install
     $ bundle exec guard # watch and run tests
 
-The Gemfile includes `byebug` as a debugger also, so don't forget to use it if
-you are stuck.
+The Gemfile includes `Guard` to watch and run tests automagically and `byebug`
+as a debugger also, so don't forget to use it if you are stuck.
 
 ## Trello
 For a to-do, doing, done list, see
@@ -25,7 +25,3 @@ For a to-do, doing, done list, see
 
 ## Bitbucket
 [The official repo](https://bitbucket.org/gosukiwi/fanfic) is at bitbucket.
-
-## Devenv
-Fanfic uses [Guard](https://github.com/guard/guard) to watch and run tests
-automagically.
