@@ -1,18 +1,39 @@
-%tag {
-  color: white;
-  text-shadow: 1px 1px 1px black;
-  padding: 3px 10px;
-  text-decoration: none;
-  border-radius: 2px;
-  display: inline-block;
-  margin: 1px 0;
-  font-weight: bold;
-  box-sizing: border-box;
-
-  &:hover,
-  &:active,
-  &:focus {
+@mixin tag-genre($name, $color) {
+  .tag-#{$name} {
     color: white;
+    text-shadow: 1px 1px 1px black;
+    padding: 3px 10px;
     text-decoration: none;
+    border-radius: 2px;
+    display: inline-block;
+    margin: 1px 0;
+    font-weight: bold;
+    box-sizing: border-box;
+    background-color: $color;
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: white;
+      text-decoration: none;
+      background-color: lighten($color, 10%);
+    }
   }
 }
+
+@mixin gradient-background {
+  overflow: hidden;
+  position: relative;
+
+  &:after {
+    position: absolute;
+    content: ' ';
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: asset-url('banner-gradient.png') 0 0 repeat-x;
+    z-index: 1100;
+  }
+}
+

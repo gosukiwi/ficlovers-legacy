@@ -1,18 +1,5 @@
 $brand-primary: #EC2B48;
 
-@mixin gradient-background {
-  overflow: hidden;
-  position: relative;
-
-  &:after {
-    position: absolute;
-    content: ' ';
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    background: asset-url('banner-gradient.png') 0 0 repeat-x;
-    z-index: 1100;
-  }
-}
-
+$color-fandoms: #89ba28;
+$color-characters: #2b94ec;
+$color-genres: complement($color-characters);

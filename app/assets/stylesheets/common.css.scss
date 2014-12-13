@@ -5,26 +5,11 @@ body {
 }
 
 /* REUSABLE */
-.tag-fandoms {
-  @extend %tag;
-  background-color: #89BA28;
-
-  &:hover {
-    background-color: lighten(#89BA28, 10%);
-  }
-}
-
-.tag-characters {
-  @extend %tag;
-  background-color: rgb(43, 148, 236);
-
-  &:hover {
-    background-color: lighten(rgb(43, 148, 236), 10%);
-  }
-}
+@include tag-genre('fandoms', $color-fandoms);
+@include tag-genre('characters', $color-characters);
+@include tag-genre('genres', $color-genres);
 
 /* LAYOUT */
-
 .header {
   background: asset-url('header-bg.jpg') 50% 50%;
   background-size: cover;

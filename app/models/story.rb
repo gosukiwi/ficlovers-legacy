@@ -48,14 +48,12 @@ class Story < ActiveRecord::Base
     tags.where(status: 'active')
   end
 
-  # takes an array of [:name, :context?] and sets the appropiate tagging for
-  # this story
-  def set_tags(tags)
-    tag_list = tags.map do |tag|
-      #tag = tag[1]
-      Tag.find_or_create_by(name: tag[0], context: tag[1] || 'pending')
-    end
+  # Takes an array of [:name, :context?] and sets the appropiate tagging for
+  # this story. Ignores tags which are flagged as 'removed'.
+  def set_tags(tag_list)
     self.tags = tag_list
+      .reject{ |tag| Tag.exists?(name: tag[0], context: 'removed') }
+      .map{ |tag| Tag.find_or_create_by(name: tag[0], context: tag[1] || 'pending') }
     save
   end
 
