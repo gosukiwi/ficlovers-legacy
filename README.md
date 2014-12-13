@@ -13,7 +13,11 @@ on this. A summary would be
 
     $ ruby -v #2.1+
     $ rails -v #4.1+
+    $ bundle install
     $ bundle exec guard # watch and run tests
+
+The Gemfile includes `byebug` as a debugger also, so don't forget to use it if
+you are stuck.
 
 ## Trello
 For a to-do, doing, done list, see
