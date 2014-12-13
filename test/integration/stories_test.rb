@@ -12,7 +12,7 @@ class StoryShowTest < ActionDispatch::IntegrationTest
   end
 
   test 'logged user should be able to add a fav' do
-    story = FactoryGirl.create(:story)
+    story = FactoryGirl.create(:story_published)
     user = FactoryGirl.create(:user)
 
     assert_equal 0, story.favs.count
