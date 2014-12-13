@@ -1,6 +1,6 @@
 class Tag < ActiveRecord::Base
   validates :name, presence: true, format: { with: /[^,]+/, message: 'tag name must contain no commas' }
-  validates :context, presence: true, inclusion: { in: ['fandoms', 'characters', 'pending'] }
+  validates :context, presence: true, inclusion: { in: ['fandoms', 'characters', 'genres', 'pending'] }
   validates :status, presence: true, inclusion: { in: ['pending', 'active', 'removed'] }
 
   after_initialize do
