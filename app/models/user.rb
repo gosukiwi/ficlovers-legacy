@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   validates :role, inclusion: { in: ['user', 'admin'] }
 
   before_save do
-    self.email = email.downcase
+    self.email = email.downcase unless email == nil
     self.role ||= 'user'
   end
 

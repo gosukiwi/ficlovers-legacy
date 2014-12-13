@@ -1,10 +1,26 @@
 require 'test_helper'
 
 class StoryShowTest < ActionDispatch::IntegrationTest
+  test 'search should be paginated, 10 per page' do
+    # todo
+  end
+
+  test 'fresh stories should be paginated, 10 per page' do
+    visit fresh_stories_url
+
+    assert_equal fresh_stories_path, current_path
+    assert_not has_selector?('.pagination')
+
+    11.times { FactoryGirl.create(:story_published) }
+    visit fresh_stories_url
+
+    assert_equal fresh_stories_path, current_path
+    assert has_selector?('.pagination')
+    assert_equal 10, all('.fic').count
+  end
+
   test 'fresh stories should be the latest' do
-    10.times do
-      FactoryGirl.create(:story_published)
-    end
+    FactoryGirl.create(:story_published)
     newest = FactoryGirl.create(:story_published)
     
     visit fresh_stories_url
