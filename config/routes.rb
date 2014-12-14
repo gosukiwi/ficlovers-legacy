@@ -33,6 +33,8 @@ Rails.application.routes.draw do
     resources :tags, only: [:index]
     put 'tags/:id/approve', to: 'tags#approve', as: 'tag_approve'
     put 'tags/:id/deny', to: 'tags#deny', as: 'tag_deny'
+
+    resources :forum_categories
   end
 
 

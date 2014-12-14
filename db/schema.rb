@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141207072153) do
+ActiveRecord::Schema.define(version: 20141214081828) do
+
+  create_table "admin_forum_categories", force: true do |t|
+    t.string   "name"
+    t.integer  "parent_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -33,7 +40,14 @@ ActiveRecord::Schema.define(version: 20141207072153) do
     t.integer "user_id"
   end
 
-  add_index "favs", ["user_id", "story_id"], name: "index_favs_on_user_id_and_story_id", unique: true
+  add_index "favs", ["user_id", "story_id"], name: "index_favs_on_user_id_and_story_id", unique: true, using: :btree
+
+  create_table "forum_categories", force: true do |t|
+    t.string   "name"
+    t.integer  "parent_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "stories", force: true do |t|
     t.string   "title"
@@ -46,7 +60,7 @@ ActiveRecord::Schema.define(version: 20141207072153) do
     t.integer  "views",       default: 0
   end
 
-  add_index "stories", ["published"], name: "index_stories_on_published"
+  add_index "stories", ["published"], name: "index_stories_on_published", using: :btree
 
   create_table "tags", force: true do |t|
     t.string   "name"
@@ -61,7 +75,7 @@ ActiveRecord::Schema.define(version: 20141207072153) do
     t.integer "story_id"
   end
 
-  add_index "taxonomies", ["story_id", "tag_id"], name: "index_taxonomies_on_story_id_and_tag_id", unique: true
+  add_index "taxonomies", ["story_id", "tag_id"], name: "index_taxonomies_on_story_id_and_tag_id", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -72,6 +86,6 @@ ActiveRecord::Schema.define(version: 20141207072153) do
     t.string   "role",            default: "user"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
 end

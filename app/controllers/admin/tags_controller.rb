@@ -1,12 +1,10 @@
 class Admin::TagsController < Admin::AdminController
   def index
-    # we use :: so we don't end up using the Admin::Tag model
-    #
-    @tags = ::Tag.pending_tags
+    @tags = Tag.pending_tags
   end
 
   def approve
-    @tag = ::Tag.find(params[:id])
+    @tag = Tag.find(params[:id])
     @tag.context = params[:as]
     @tag.status = 'active'
     @success = @tag.save
@@ -18,7 +16,7 @@ class Admin::TagsController < Admin::AdminController
   end
 
   def deny
-    @tag = ::Tag.find(params[:id])
+    @tag = Tag.find(params[:id])
     @tag.status = 'removed'
     @success = @tag.save
 
