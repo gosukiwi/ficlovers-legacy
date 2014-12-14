@@ -1,7 +1,12 @@
 <h1>Admin#index</h1>
 <p>Welcome <%= current_user.name %>! This is the admin dashboard.</p>
 
-<ul>
-  <li><%= link_to 'Tags', admin_tags_path %></li>
-  <li><%= link_to 'Forum Categories', admin_forum_categories_path %></li>
-</ul>
+<h3>Tags</h3>
+<%= link_to 'Pending tags', admin_tags_path %> |
+<%= link_to 'Manage tags', admin_tags_path %>
+
+<h3>Stories</h3>
+<%= link_to 'Categories', admin_forum_categories_path %>
+
+<h3>Forum</h3>
+<%= link_to 'Categories', admin_forum_categories_path %>
