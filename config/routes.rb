@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
-  get 'sessions/new'
+  # Users
+  #get 'sessions/new'
 
-  resources :users
-  resources :categories
-
-  # Story-related routes
+  # Stories
   resources :stories, only: [:create, :update, :destroy, :new, :show] do
     resources :chapters
     get 'search', on: :collection
@@ -16,6 +14,7 @@ Rails.application.routes.draw do
   post 'add_to_fav/:id', to: 'stories#add_to_fav', as: :add_to_fav
 
   # Users
+  resources :users, only: [:show, :new, :create, :update]
   get 'login', to: 'sessions#new', as: :login
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy', as: :logout
@@ -34,6 +33,7 @@ Rails.application.routes.draw do
     put 'tags/:id/approve', to: 'tags#approve', as: 'tag_approve'
     put 'tags/:id/deny', to: 'tags#deny', as: 'tag_deny'
 
+    resources :categories
     resources :forum_categories
   end
 

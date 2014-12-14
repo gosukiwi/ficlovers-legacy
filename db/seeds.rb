@@ -18,3 +18,10 @@ Category.create([
   { name: 'Plays/Musicals' },
   { name: 'TV Shows' }
 ])
+
+ForumCategory.create([
+  { name: 'Fic Discussion' },
+  { name: 'General Discussion' },
+  { name: 'Support' },
+  { name: 'Off-Topic' }
+]);
