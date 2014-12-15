@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141214085120) do
+ActiveRecord::Schema.define(version: 20141215042043) do
 
   create_table "admin_forum_categories", force: true do |t|
     t.string   "name"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20141214085120) do
 
   add_index "favs", ["user_id", "story_id"], name: "index_favs_on_user_id_and_story_id", unique: true, using: :btree
 
-  create_table "forum_categories", force: true do |t|
+  create_table "forums", force: true do |t|
     t.string   "name"
     t.integer  "parent_id"
     t.datetime "created_at"

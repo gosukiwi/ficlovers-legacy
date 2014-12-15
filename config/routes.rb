@@ -40,7 +40,7 @@ Rails.application.routes.draw do
     put 'tags/:id/deny', to: 'tags#deny', as: 'tag_deny'
 
     resources :categories
-    resources :forum_categories
+    resources :forums
   end
 
 

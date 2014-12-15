@@ -1,4 +1,4 @@
-<h1>Listing categories</h1>
+<h1>Listing forums</h1>
 
 <table>
   <thead>
@@ -9,11 +9,11 @@
   </thead>
 
   <tbody>
-    <% @categories.each do |category| %>
+    <% @forums.each do |category| %>
       <tr>
         <td><%= category.name %></td>
         <td><%= link_to 'Show', [:admin, category] %></td>
-        <td><%= link_to 'Edit', edit_admin_forum_category_path(category) %></td>
+        <td><%= link_to 'Edit', edit_admin_forum_path(category) %></td>
         <td><%= link_to 'Destroy', [:admin, category], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -22,5 +22,5 @@
 
 <br>
 
-<%= link_to 'New Category', new_admin_forum_category_path %> |
+<%= link_to 'New Category', new_admin_forum_path %> |
 <%= link_to 'Back to Dashboard', admin_dashboard_path %>
