@@ -3,6 +3,7 @@ class Forum < ActiveRecord::Base
 
   has_many :posts
 
+  # make pretty URL's {id}-{title} format
   def to_param
     "#{id}-#{name.parameterize}"
   end

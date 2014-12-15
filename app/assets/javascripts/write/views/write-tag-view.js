@@ -21,9 +21,15 @@
     },
 
     tagsChanged: function () {
+      if(this.$el.val() === '') {
+        this.model.set({ 'tags': [] });
+        return;
+      }
+
       var tags = this.$el
         .val()
         .split(',');
+
       tags = _.map(tags, function (tag) {
         // Return either ['my tag'] or ['my tag', 'context']
         return tag.match(/^(.+?)(?:\((.+?)\))?$/).splice(1, 2);

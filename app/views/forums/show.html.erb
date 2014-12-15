@@ -1,0 +1,8 @@
+<h1><%= @forum.name %>'s posts</h1>
+
+<% @forum.posts.each do |post| %>
+  <%= link_to post.title, [@forum, post] %>
+<% end %>
+
+<%= link_to 'New', new_forum_post_path(@forum) %>
+<%= link_to 'Back to Forums', forums_path %>

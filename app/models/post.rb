@@ -4,4 +4,9 @@ class Post < ActiveRecord::Base
   validates :content, presence: true, length: { minimum: 50 }
   belongs_to :user
   belongs_to :forum
+
+  # make pretty URL's {id}-{title} format
+  def to_param
+    "#{id}-#{title.parameterize}"
+  end
 end

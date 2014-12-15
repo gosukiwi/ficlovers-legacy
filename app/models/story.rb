@@ -80,6 +80,11 @@ class Story < ActiveRecord::Base
     end
   end
 
+  # make pretty URL's {id}-{title} format
+  def to_param
+    "#{id}-#{title.parameterize}"
+  end
+
   private
 
     # Helper method used by search, transforms a comma-separated string of tags
