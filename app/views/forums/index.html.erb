@@ -1,1 +1,5 @@
 <h1>Forums Index</h1>
+
+<% @forums.each do |forum| %>
+  <%= link_to forum.name, forum %>
+<% end %>

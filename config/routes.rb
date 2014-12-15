@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   end
 
   # Forum
-  resources :forums, only: [:index] do
+  resources :forums, only: [:index, :show] do
     resources :posts, only: [:index, :show, :new, :create, :edit, :update]
   end
 
