@@ -19,7 +19,7 @@ Category.create([
   { name: 'TV Shows' }
 ])
 
-ForumCategory.create([
+Forum.create([
   { name: 'Fic Discussion' },
   { name: 'General Discussion' },
   { name: 'Support' },

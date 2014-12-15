@@ -26,8 +26,7 @@ Rails.application.routes.draw do
   end
 
   # Forum
-  namespace :forums do
-    get '', to: 'posts#index', as: :index
+  resources :forums, only: [:index] do
     resources :posts, only: [:index, :show, :new, :create, :edit, :update]
   end
 

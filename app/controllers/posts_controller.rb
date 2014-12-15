@@ -1,5 +1,6 @@
-class Forums::PostsController < ApplicationController
+class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update]
+  before_action :set_forum
 
   def index
     @posts = Post.all
@@ -36,6 +37,10 @@ class Forums::PostsController < ApplicationController
 
     def set_post
       @post = Post.find(params[:id])
+    end
+
+    def set_forum
+      @forum = Forum.find(params[:forum_id])
     end
 
     def post_params
