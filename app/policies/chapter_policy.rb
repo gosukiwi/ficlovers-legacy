@@ -1,19 +1,21 @@
 class ChapterPolicy < ApplicationPolicy
   def update?
-    user.admin? || record.story.user == user
+    author_or_admin?
   end
 
   def create?
-    user && (user.admin? || record.story.user == user)
+    author_or_admin?
   end
 
   def destroy?
-    user.admin? || record.story.user == user
+    author_or_admin?
   end
 
-  class Scope < Scope
-    def resolve
-      scope
+  protected
+
+    # Override ApplicationPolicy's helper method
+    def author_or_admin?
+      return false if user.nil?
+      user.admin? || record.story.user == user
     end
-  end
 end

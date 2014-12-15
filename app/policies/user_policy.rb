@@ -1,5 +1,6 @@
 class UserPolicy < ApplicationPolicy
   def update?
+    return false if user.nil?
     user.admin? || record == user
   end
 
@@ -7,8 +8,9 @@ class UserPolicy < ApplicationPolicy
     true
   end
 
+  # Only admins can delete, and they cannot delete themselves!
   def destroy?
-    # Only admins can delete, and they cannot delete themselves!
-    user.admin?
+    return false if user.nil?
+    user.admin? && user != record
   end
 end

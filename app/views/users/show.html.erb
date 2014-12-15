@@ -2,10 +2,10 @@
     <header class="profile-header">
       <img class="profile-avatar" src="http://placehold.it/150x150" alt="">
       <div class="profile-box">
-        <h2>Federico</h2>
+        <h2><%= @user.name %></h2>
         
         <div class="profile-box-info">
-          Joined 23 days ago, from Argentina
+          Joined <%= time_ago_in_words @user.created_at %> ago, from Argentina
         </div>
 
         <div class="profile-box-action">
@@ -43,6 +43,11 @@
                 <p><%= link_to "Read", story, { class: "btn btn-primary" } %></p>
               </div>
             </div>
+          <% end %>
+
+          <h1>Forum Posts</h1>
+          <% @user.posts.each do |post| %>
+            <%= link_to post.title, [post.forum, post] %>
           <% end %>
 
         </div>

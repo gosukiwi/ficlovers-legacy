@@ -8,5 +8,5 @@ class PostTest < ActiveSupport::TestCase
   should ensure_length_of(:title).is_at_least(50)
 
   should belong_to :user
-  #should belong_to :forum # TODO: Rename ForumCategory to Forum
+  should belong_to :forum
 end

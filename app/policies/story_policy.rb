@@ -1,18 +1,18 @@
 class StoryPolicy < ApplicationPolicy
   def create?
-    user != nil
+    !user.nil?
   end
 
   def add_to_fav?
-    user != nil
+    !user.nil?
   end
 
   def write?
-    user && user.admin? || record.user == user
+    author_or_admin?
   end
 
   def show?
-    record.published? || (user && (record.user == user || user.admin?))
+    record.published? || author_or_admin?
   end
 
   class Scope < Scope

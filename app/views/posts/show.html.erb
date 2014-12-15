@@ -1,5 +1,35 @@
 <h1><%= @post.title %></h1>
 <%= @post.content %>
 
-<%= link_to 'Edit', edit_forum_post_path(@forum, @post) %>
+<p>
+<%= link_to 'Edit', edit_forum_post_path(@forum, @post) if policy(@post).update? %>
 <%= link_to 'Back to Forum', @forum %>
+</p>
+
+<% @replies.each do |reply| %>
+  <div class="reply">
+    <%= reply.content %>
+    <div class="actions">
+      <%= link_to 'Edit', edit_forum_post_reply_path(@forum, @post, reply) if policy(reply).update? %>
+    </div>
+  </div>
+<% end %>
+
+<%= will_paginate @replies unless @replies.empty? %>
+
+<div class="pagination-info">
+  <%= page_entries_info @replies, model: 'replies' unless @replies.empty? %>
+</div>
+
+<p>
+  <h3>Reply</h3>
+  <%= form_for [@forum, @post, Reply.new] do |f| %>
+  <div class="field">
+    <%= f.label :content %><br>
+    <%= f.text_area :content %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  <% end %>
+</p>

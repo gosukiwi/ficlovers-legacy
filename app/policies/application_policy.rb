@@ -51,5 +51,13 @@ class ApplicationPolicy
       scope
     end
   end
+
+  protected
+
+    # Only the author and admins are allowed
+    def author_or_admin?
+      return false if user.nil?
+      user == record.user || admin?
+    end
 end
 
