@@ -25,6 +25,12 @@ Rails.application.routes.draw do
     get 'search', to: 'tags#search', on: :collection, as: 'search'
   end
 
+  # Forum
+  namespace :forums do
+    get '', to: 'posts#index', as: :index
+    resources :posts, only: [:index, :show, :new, :create, :edit, :update]
+  end
+
   # Admin/Mod dashboard
   namespace :admin do
     #resources :admin, only: [:index]

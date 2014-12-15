@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   has_many :favs
   has_many :favorites, through: :favs, source: :story
 
+  has_many :posts
+
   has_secure_password
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -20,5 +22,4 @@ class User < ActiveRecord::Base
   def admin?
     role == 'admin'
   end
-
 end
