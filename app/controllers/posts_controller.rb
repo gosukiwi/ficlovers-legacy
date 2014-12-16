@@ -2,19 +2,21 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update]
   before_action :set_forum
 
+  layout 'forums'
+
   def show
     authorize @post
     @replies = @post.paginated_replies(params[:page])
   end
 
   def new
-    authorize @post
     @post = Post.new
+    authorize @post
   end
 
   def create
-    authorize @post
     @post = Post.new post_params
+    authorize @post
     @post.forum = @forum
     @post.user = current_user
     if(@post.save)

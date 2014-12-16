@@ -55,7 +55,7 @@
     font-size: 90%;
 
     &:hover {
-      background-color: lighten($brand-primary, 10%);
+      background-color: darken($brand-primary, 10%);
       color: white;
     }
   }
@@ -63,6 +63,7 @@
 
 .forum-notifications {
   border: 1px solid #e1e1e1;
+  margin-top: 10px;
 
   p {
     padding: 5px 10px;
@@ -75,4 +76,30 @@
 .forum-content {
   width: 1110px;
   margin: 30px auto;
+}
+
+.btn {
+  padding: 3px 10px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: bold;
+  border: none;
+  border-radius: 2px;
+}
+
+.btn-default {
+  background-color: #e7e7e7;
+
+  &:hover {
+    background-color: darken(#e7e7e7, 5%);
+  }
+}
+
+.alert {
+  h1, h2, h3 {
+    margin: 0 0 10px;
+  }
+  
+  ul {
+    padding-left: 20px;
+  }
 }

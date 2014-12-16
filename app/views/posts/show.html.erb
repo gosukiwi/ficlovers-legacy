@@ -1,10 +1,19 @@
-<h1><%= @post.title %></h1>
-<%= @post.content %>
+<div class="post">
+  <h1 class="post-title"><%= @post.title %></h1>
+  <div class="l-post-stack">
+    <div class="stack author">
+      <%= @post.user.name %>
+    </div>
+    <div class="stack content">
+      <%= @post.content %>
+    </div>
+  </div>
 
-<p>
-<%= link_to 'Edit', edit_forum_post_path(@forum, @post) if policy(@post).update? %>
-<%= link_to 'Back to Forum', @forum %>
-</p>
+  <p>
+  <%= link_to 'Edit', edit_forum_post_path(@forum, @post) if policy(@post).update? %>
+  <%= link_to 'Back to Forum', @forum %>
+  </p>
+</div>
 
 <% @replies.each do |reply| %>
   <div class="reply">
@@ -21,15 +30,14 @@
   <%= page_entries_info @replies, model: 'replies' unless @replies.empty? %>
 </div>
 
-<p>
-  <h3>Reply</h3>
+<div class="new-reply">
+  <h3 class="new-reply-title">Reply</h3>
   <%= form_for [@forum, @post, Reply.new] do |f| %>
   <div class="field">
-    <%= f.label :content %><br>
-    <%= f.text_area :content %>
+   <%= f.text_area :content, class: 'new-reply-content', placeholder: 'Reply content in here...' %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Reply', class: 'btn btn-primary' %>
   </div>
   <% end %>
-</p>
+</div>

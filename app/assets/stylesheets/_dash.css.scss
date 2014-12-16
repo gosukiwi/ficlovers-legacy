@@ -6,10 +6,11 @@
 // ---------------------------------------------------------------------------
 ._dropdown {
   position: relative;
+  user-select: none;
 
   &.active {
     ._dropdown-content {
-      transition: max-height 1s ease-in-out, opacity .25s;
+      transition: max-height .5s ease-in-out, opacity .2s;
       max-height: 999px;
       height: auto;
       opacity: 1;
@@ -20,7 +21,6 @@
     position: absolute;
     z-index: 1000;
     top: 110%;
-    left: 0;
     min-width: 150px;
     background-color: white;
     border-radius: 2px;
