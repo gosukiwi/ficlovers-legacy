@@ -1,5 +1,17 @@
-<h1>Forums Index</h1>
+<div class="forum-menu-container">
+  <div class="_dropdown forum-categories-container">
+    <span class="forum-categories">All categories</span>
+    <ul class="_dropdown-content forum-categories-menu">
+      <li><%= link_to 'All categories', forums_path, class: 'forum-categories-item' %></li>
+      <% @forums.each do |forum| %>
+        <li><%= link_to forum.name, forum, class: 'forum-categories-item' %></li>
+      <% end %>
+    </ul>
+  </div>
 
-<% @forums.each do |forum| %>
-  <%= link_to forum.name, forum %>
-<% end %>
+  <ul class="forum-menu">
+    <li class="forum-menu-item"><a class="forum-menu-link active" href="#">Latest</a></li>
+    <li class="forum-menu-item"><a class="forum-menu-link" href="#">New</a></li>
+    <li class="forum-menu-item"><a class="forum-menu-link" href="#">Starred</a></li>
+  </ul>
+</div>

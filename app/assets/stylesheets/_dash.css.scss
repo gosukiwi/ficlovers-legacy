@@ -1,0 +1,33 @@
+// _dash is a collection of minimal CSS + JS widgets for swift websites.
+// @author Federico Ramirez
+// @licence MIT
+
+// Dropdowns
+// ---------------------------------------------------------------------------
+._dropdown {
+  position: relative;
+
+  &.active {
+    ._dropdown-content {
+      transition: max-height 1s ease-in-out, opacity .25s;
+      max-height: 999px;
+      height: auto;
+      opacity: 1;
+    }
+  }
+
+  ._dropdown-content {
+    position: absolute;
+    z-index: 1000;
+    top: 110%;
+    left: 0;
+    min-width: 150px;
+    background-color: white;
+    border-radius: 2px;
+    height: 0;
+    max-height: 0;
+    overflow-y: hidden;
+    opacity: 0;
+    transition: none; // reset transition
+  }
+}
