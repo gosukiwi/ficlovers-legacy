@@ -1,6 +1,24 @@
 require 'test_helper'
 
 class PostsTest < ActionDispatch::IntegrationTest
+  test 'everyone can see post' do
+    post = FactoryGirl.create(:post)
+    
+    visit forum_post_url(post.forum, post)
+
+    assert_equal post.title, find('.post-title').text
+  end
+
+  test 'non author cannot see edit link' do
+    post = FactoryGirl.create(:post)
+    user = FactoryGirl.create(:user) # another user
+
+    login_as user
+    visit forum_post_url(post.forum, post)
+
+    assert has_no_selector?(".post .btn-edit")
+  end
+
   test 'logged user can create new post' do
     user = FactoryGirl.create(:user)
     forum = FactoryGirl.create(:forum)
@@ -25,17 +43,6 @@ class PostsTest < ActionDispatch::IntegrationTest
     assert_equal login_path, current_path
   end
 
-  test 'admin can edit other users posts' do
-    post = FactoryGirl.create(:post)
-    forum = post.forum
-    admin = FactoryGirl.create(:user_admin)
-    login_as admin
-
-    visit edit_forum_post_url(forum, post)
-
-    assert_equal edit_forum_post_path(forum, post), current_path
-  end
-
   test 'cannot edit other people posts' do
     post = FactoryGirl.create(:post)
     forum = post.forum
@@ -47,15 +54,26 @@ class PostsTest < ActionDispatch::IntegrationTest
     assert_equal login_path, current_path
   end
 
+  test 'admin can edit other users posts' do
+    post = FactoryGirl.create(:post)
+    forum = post.forum
+    admin = FactoryGirl.create(:user_admin)
+    login_as admin
+
+    visit edit_forum_post_url(forum, post)
+
+    assert_equal edit_forum_post_path(forum, post), current_path
+  end
+
   test 'author can edit post' do
     # Given
     post = FactoryGirl.create(:post)
-    forum = post.forum
     user = post.user
     login_as user
 
     # When
-    visit edit_forum_post_url(forum, post)
+    visit forum_post_url(post.forum, post)
+    find(".post .btn-edit").click
 
     # Then
     other_content = post.content + ' and some more'

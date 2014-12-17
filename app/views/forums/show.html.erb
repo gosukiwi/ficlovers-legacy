@@ -15,7 +15,9 @@
     <li class="forum-menu-item"><a class="forum-menu-link" href="#">Starred</a></li>
   </ul>
 
-  <%= link_to 'New', new_forum_post_path(@forum), class: 'new-post' %>
+  <% if logged_in? %>
+    <%= link_to 'New', new_forum_post_path(@forum), class: 'new-post' %>
+  <% end %>
 </div>
 
 <h1 class="forum-title"><%= @forum.name %></h1>
