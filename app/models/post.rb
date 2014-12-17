@@ -24,4 +24,18 @@ class Post < ActiveRecord::Base
   def to_param
     "#{id}-#{title.parameterize}"
   end
+
+  def pin
+    self.pinned = true
+    save
+  end
+
+  def unpin
+    self.pinned = false
+    save
+  end
+
+  def pinned?
+    pinned
+  end
 end

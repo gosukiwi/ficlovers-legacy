@@ -10,4 +10,8 @@ class PostPolicy < ApplicationPolicy
   def destroy?
     author_or_admin?
   end
+
+  def pin?
+    !user.nil? && user.admin?
+  end
 end

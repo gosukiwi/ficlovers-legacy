@@ -32,6 +32,13 @@
         <%= @post.content %>
       </div>
       <div class="actions">
+        <% if policy(@post).pin? %>
+          <% if @post.pinned? %>
+            <%= link_to 'Unpin', pin_forum_post_path(@forum, @post, format: :js), method: :delete, remote: true, class: 'btn btn-default btn-pin' %>
+          <% else %>
+            <%= link_to 'Pin', pin_forum_post_path(@forum, @post, format: :js), method: :delete, remote: true, class: 'btn btn-default btn-pin' %>
+          <% end %>
+        <% end %>
         <%= link_to 'Edit', edit_forum_post_path(@forum, @post), class: 'btn btn-default btn-edit' if policy(@post).update? %>
         <%= link_to 'Delete', [@forum, @post], method: :delete, class: 'btn btn-default btn-delete' if policy(@post).destroy? %>
       </div>

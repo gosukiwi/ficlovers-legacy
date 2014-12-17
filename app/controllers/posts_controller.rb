@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update]
+  before_action :set_post, only: [:show, :edit, :update, :pin]
   before_action :set_forum
 
   layout 'forums'
@@ -40,6 +40,10 @@ class PostsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def pin
+    @success = @post.toggle! :pinned
   end
 
   private

@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   # Forum
   resources :forums, only: [:index, :show] do
     resources :posts, only: [:show, :new, :create, :edit, :update] do
+      delete 'pin', to: 'posts#pin', on: :member, as: 'pin'
       resources :replies, only: [:create, :edit, :update]
     end
   end

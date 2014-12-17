@@ -21,4 +21,15 @@ class PostTest < ActiveSupport::TestCase
     assert_equal post.user, new_post.user
     assert_equal count + 1, user.reload.post_count
   end
+
+  test 'post pinning' do
+    post = FactoryGirl.create(:post)
+    assert_not post.pinned?
+
+    post.pin
+    assert post.pinned?
+
+    post.unpin
+    assert_not post.pinned?
+  end
 end

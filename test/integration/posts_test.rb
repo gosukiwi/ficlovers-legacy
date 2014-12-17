@@ -100,4 +100,28 @@ class PostsTest < ActionDispatch::IntegrationTest
 
     assert find('.alert h3').text.include?('error')
   end
+
+  test 'admin pinning post' do
+    post = FactoryGirl.create(:post)
+    admin = FactoryGirl.create(:user_admin)
+
+    assert_not post.pinned?
+
+    login_as admin
+    visit forum_post_url(post.forum, post)
+
+    click_on 'Pin'
+
+    assert post.reload.pinned?
+  end
+
+  test 'normal user cannot see pin' do
+    post = FactoryGirl.create(:post)
+    user = post.user
+
+    login_as user
+    visit forum_post_url(post.forum, post)
+
+    assert has_no_selector?('.btn-pin')
+  end
 end
