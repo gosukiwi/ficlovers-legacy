@@ -27,7 +27,7 @@
     } else if(align === 'right') {
       $content.css('right', 0);
     } else {
-      $content.css('left', '-' + (($content.width() / 2) - ($el.width() - 2)) + 'px')
+      $content.css('left', '-' + (($content.outerWidth() / 2) - ($el.outerWidth() / 2)) + 'px')
     }
 
     $content.click(function (e) { e.stopPropagation(); } );
