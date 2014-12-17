@@ -3,6 +3,10 @@ class Forum < ActiveRecord::Base
 
   has_many :posts
 
+  def formatted_posts
+    posts.order('pinned DESC, id DESC')
+  end
+
   # make pretty URL's {id}-{title} format
   def to_param
     "#{id}-#{name.parameterize}"

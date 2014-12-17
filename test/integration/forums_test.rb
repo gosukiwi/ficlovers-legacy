@@ -29,4 +29,18 @@ class ForumsTest < ActionDispatch::IntegrationTest
 
     assert_equal post.title, all('.posts-table a').first.text
   end
+
+  test 'pinned posts come first' do
+    post = FactoryGirl.create(:post)
+    forum = post.forum
+    newer_post = FactoryGirl.create(:post, forum: forum)
+
+    visit forum_url(forum)
+    assert_equal newer_post.title, all('.posts-table tbody tr').first.all('a').first.text
+
+    # Now that the old post is pinned, it must appear first
+    post.pin
+    visit forum_url(forum)
+    assert_equal post.title, all('.posts-table tbody tr').first.all('a').first.text
+  end
 end
