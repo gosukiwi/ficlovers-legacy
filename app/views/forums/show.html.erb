@@ -32,7 +32,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @forum.posts.each do |post| %>
+    <% @posts.each do |post| %>
       <tr>
         <td><%= link_to post.title, [@forum, post] %></td>
         <td><%= post.replies.count %></td>
@@ -47,3 +47,9 @@
   </tbody>
 </table>
 
+<div class="forum-pagination">
+  <%= will_paginate @posts unless @posts.empty? %>
+  <div class="pagination-info">
+    <%= page_entries_info @posts, model: 'posts' unless @posts.empty? %>
+  </div>
+</div>

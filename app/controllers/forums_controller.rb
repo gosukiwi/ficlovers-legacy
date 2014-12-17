@@ -8,5 +8,6 @@ class ForumsController < ApplicationController
   def show
     @forums = Forum.all
     @forum = Forum.find(params[:id])
+    @posts = @forum.posts.paginate(page: params[:page])
   end
 end
