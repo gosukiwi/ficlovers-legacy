@@ -10,6 +10,7 @@
 .l-post-stack {
   display: table;
   width: 100%;
+  margin-bottom: 20px;
 
   > .stack {
     display: table-cell;
@@ -20,7 +21,17 @@
     width: 100px;
     text-align: center;
   }
+
+  .gravatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+  }
 /* End of layout */
+
+.reply {
+  margin-bottom: 20px;
+}
 
 .new-reply {
   font-family: 'Source Sans Pro', sans-serif;

@@ -103,3 +103,54 @@
     padding-left: 20px;
   }
 }
+
+// Location bar
+.location {
+  display: block;
+  margin: 15px 0 10px;
+  padding: 0;
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #444;
+  margin-bottom: 20px;
+
+  li {
+    padding: 3px;
+    margin: 0;
+    display: inline-block;
+    background-color: #e7e7e7;
+    padding: 3px 10px;
+    font-weight: bold;
+
+    &:last-child {
+      &:after {
+        display: none;
+      }
+    }
+
+    &:after {
+      content: '\f105';
+      font-family: FontAwesome;
+      padding-left: 10px;
+    }
+  }
+
+  li.active:after {
+    content: '\f107';
+  }
+
+  a {
+    color: #777;
+
+    &:hover {
+      color: #444;
+      text-decoration: none;
+    }
+  }
+}
+
+  .location-forums-link {
+    background-color: #e7e7e7;
+    display: block;
+    padding: 3px 10px;
+    margin-bottom: 2px;
+  }

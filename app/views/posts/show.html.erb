@@ -1,25 +1,45 @@
+<h1 class="post-title"><%= @post.title %></h1>
+
+<ul class="location">
+  <li><%= link_to 'Forums', forums_path %></li>
+  <li class="_dropdown" data-align="left">
+    <%= @post.forum.name %>
+    <div class="_dropdown-content location-forums">
+      <% @forums.each do |forum| %>
+        <%= link_to forum.name, forum, class: 'location-forums-link' %>
+      <% end %>
+    </div>
+  </li>
+  <li><%= @post.title %></li>
+</ul>
+
 <div class="post">
-  <h1 class="post-title"><%= @post.title %></h1>
   <div class="l-post-stack">
     <div class="stack author">
-      <%= @post.user.name %>
+      <%= link_to @post.user.name, @post.user %>
+      <%= raw gravatar_for(@post.user) %>
     </div>
     <div class="stack content">
       <%= @post.content %>
+      <div class="actions">
+        <%= link_to 'Edit', edit_forum_post_path(@forum, @post) if policy(@post).update? %>
+      </div>
     </div>
   </div>
-
-  <p>
-  <%= link_to 'Edit', edit_forum_post_path(@forum, @post) if policy(@post).update? %>
-  <%= link_to 'Back to Forum', @forum %>
-  </p>
 </div>
 
 <% @replies.each do |reply| %>
-  <div class="reply">
-    <%= reply.content %>
-    <div class="actions">
-      <%= link_to 'Edit', edit_forum_post_reply_path(@forum, @post, reply) if policy(reply).update? %>
+  <div class="l-post-stack reply">
+    <div class="stack author">
+      <%= link_to reply.user.name, reply.user %>
+      <%= raw gravatar_for(reply.user) %>
+    </div>
+    <div class="stack content">
+      <%= reply.content %>
+
+      <div class="actions">
+        <%= link_to 'Edit', edit_forum_post_reply_path(@forum, @post, reply) if policy(reply).update? %>
+      </div>
     </div>
   </div>
 <% end %>
@@ -30,7 +50,20 @@
   <%= page_entries_info @replies, model: 'replies' unless @replies.empty? %>
 </div>
 
+<% if policy(Reply.new).new? %>
 <div class="new-reply">
+  <% if @post.errors.any? %>
+    <div class="alert alert-danger">
+      <h3>Please fix the following <%= pluralize(@post.errors.count, "error") %> before continuing:</h3>
+
+      <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <h3 class="new-reply-title">Reply</h3>
   <%= form_for [@forum, @post, Reply.new] do |f| %>
   <div class="field">
@@ -41,3 +74,4 @@
   </div>
   <% end %>
 </div>
+<% end %>
