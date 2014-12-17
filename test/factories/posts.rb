@@ -3,6 +3,7 @@ FactoryGirl.define do
     title "My New Post"
     content "This is the post content, it doesn't have to be long but at least 50 characters."
     user
+    forum
     views 0
   end
 end

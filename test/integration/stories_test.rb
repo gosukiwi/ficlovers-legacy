@@ -74,6 +74,6 @@ class StoryShowTest < ActionDispatch::IntegrationTest
     assert_equal 0, story.favs.count
 
     visit story_url(story)
-    assert has_no_selector?("//#fav-status")
+    assert has_no_selector?('#fav-status')
   end
 end

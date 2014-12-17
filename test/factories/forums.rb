@@ -1,7 +1,5 @@
 FactoryGirl.define do
-  factory :forum_category do
-    name "MyString"
-parent_id 1
+  factory :forum do
+    name "Example Forum"
   end
-
 end
