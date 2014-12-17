@@ -5,7 +5,7 @@
   width: 1110px;
   box-sizing: border-box;
   margin: 0 auto;
-  font-size: 1.1em;
+  font-size: 1.2em;
 
   .logo {
     padding: 0;
@@ -13,7 +13,7 @@
     font-weight: 900;
     text-transform: uppercase;
     float: left;
-    font-size: 1.3em;
+    font-size: 1.5em;
 
     a {
       text-decoration: none;
@@ -52,7 +52,7 @@
     border-radius: 2px;
     color: white;
     text-decoration: none;
-    font-size: 90%;
+    font-size: 82.5%;
 
     &:hover {
       background-color: darken($brand-primary, 10%);
@@ -64,6 +64,7 @@
 .forum-notifications {
   border: 1px solid #e1e1e1;
   margin-top: 10px;
+  font-size: 85%;
 
   p {
     padding: 5px 10px;
