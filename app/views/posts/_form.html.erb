@@ -13,17 +13,18 @@
 
   <div class="field">
     <%= f.label :title %><br>
-    <%= f.text_field :title, class: 'post-title', placeholder: 'Your title, please be descriptive' %>
+    <%= f.text_field :title, class: 'new-post-title', placeholder: 'Your title, please be descriptive' %>
   </div>
   <div class="field">
     <%= f.label :content %><br>
-    <%= f.text_area :content, class: 'post-content', placeholder: 'Your post content, type ahead!' %>
+    <%= f.text_area :content, class: 'new-post-content', placeholder: 'Your post content, type ahead!' %>
   </div>
   <div class="actions">
-    <%= f.submit 'Create post', class: 'btn btn-primary' %>
     <% if @post.new_record? %>
+      <%= f.submit 'Create post', class: 'btn btn-primary' %>
       <%= link_to 'Cancel', @forum, class: 'btn btn-default' %>
     <% else %>
+      <%= f.submit 'Edit post', class: 'btn btn-primary' %>
       <%= link_to 'Cancel', [@forum, @post], class: 'btn btn-default' %>
     <% end %>
   </div>
