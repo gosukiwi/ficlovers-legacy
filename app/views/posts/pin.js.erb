@@ -1,0 +1,8 @@
+<% if @success %>
+  var $btn = $('.btn-pin');
+  if($btn.text() === 'Pin') {
+    $btn.text('Unpin');
+  } else {
+    $btn.text('Pin');
+  }
+<% end %>
