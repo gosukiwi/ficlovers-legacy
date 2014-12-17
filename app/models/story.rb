@@ -62,8 +62,7 @@ class Story < ActiveRecord::Base
   end
 
   def increment_views
-    self.views = self.views + 1
-    save
+    self.increment! :views
   end
 
   # Add a story to this user favs

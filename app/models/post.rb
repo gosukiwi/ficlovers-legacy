@@ -14,6 +14,10 @@ class Post < ActiveRecord::Base
     replies.order('id ASC').paginate(page: page, per_page: per_page)
   end
 
+  def increment_views
+    self.increment! :views
+  end
+
   # make pretty URL's {id}-{title} format
   def to_param
     "#{id}-#{title.parameterize}"
