@@ -11,9 +11,9 @@ default: &default
 
 development:
   adapter: mysql2
-  database: fanfic
-  username: root
-  password: root
+  database: <%= ENV['FANFIC_DEV_DB_NAME'] %>
+  username: <%= ENV['FANFIC_DEV_DB_USER'] %>
+  password: <%= ENV['FANFIC_DEV_DB_PASS'] %>
   host: localhost
   socket: /tmp/mysql.sock
 
