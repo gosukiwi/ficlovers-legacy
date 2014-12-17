@@ -7,7 +7,7 @@ class PostsController < ApplicationController
   def show
     authorize @post
     @forums = Forum.all
-    @replies = @post.paginated_replies(params[:page])
+    @replies = @post.replies.paginate(params[:page])
     @new_reply = Reply.new
   end
 

@@ -15,3 +15,37 @@
     <li class="forum-menu-item"><a class="forum-menu-link" href="#">Starred</a></li>
   </ul>
 </div>
+
+<h1 class="forum-title">Latest posts</h1>
+
+<table class="posts-table">
+  <thead>
+    <tr>
+      <th>Topic</th>
+      <th>Replies</th>
+      <th>Views</th>
+      <th>Activity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= link_to post.title, [post.forum, post] %></td>
+        <td><%= post.replies.count %></td>
+        <td><%= post.views %></td>
+        <% if post.replies.count > 0 %>
+          <td><%= time_ago_in_words post.replies.last.updated_at %> ago</td>
+        <% else %>
+          <td><%= time_ago_in_words post.updated_at %> ago</td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="forum-pagination">
+  <%= will_paginate @posts unless @posts.empty? %>
+  <div class="pagination-info">
+    <%= page_entries_info @posts, model: 'posts' unless @posts.empty? %>
+  </div>
+</div>
