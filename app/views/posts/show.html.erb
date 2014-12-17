@@ -65,22 +65,17 @@
   </div>
 </div>
 
-<% if policy(Reply.new).new? %>
+<% if policy(@new_reply).new? %>
 <div class="new-reply">
-  <% if @post.errors.any? %>
+  <% if flash[:alert] %>
     <div class="alert alert-danger">
-      <h3>Please fix the following <%= pluralize(@post.errors.count, "error") %> before continuing:</h3>
-
-      <ul>
-      <% @post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+      <h3>Oops! Please fix the following errors before continuing:</h3>
+      <%= flash[:alert] %>
     </div>
   <% end %>
 
   <h3 class="new-reply-title">Reply</h3>
-  <%= form_for [@forum, @post, Reply.new] do |f| %>
+  <%= form_for [@forum, @post, @new_reply] do |f| %>
   <div class="field">
    <%= f.text_area :content, class: 'new-reply-content', placeholder: 'Reply content in here...' %>
   </div>

@@ -8,7 +8,7 @@ class RepliesController < ApplicationController
     if @reply.save
       redirect_to [@post.forum, @post], notice: 'Reply was successfully created.'
     else
-      render :new
+      redirect_to [@post.forum, @post], alert: @reply.errors.full_messages.to_sentence
     end
   end
 
