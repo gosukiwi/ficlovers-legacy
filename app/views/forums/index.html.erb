@@ -38,7 +38,7 @@
       <tr>
         <td><%= link_to post.title, [post.forum, post] %></td>
         <td><%= post.replies.count %></td>
-        <td><span class="forum-tag forum-<%= post.forum.name.downcase.parameterize %>"><%= post.forum.name %></span></td>
+        <td><a href="<%= forum_path post.forum %>" class="forum-tag forum-<%= post.forum.name.downcase.parameterize %>"><%= post.forum.name %></a></td>
         <td><%= post.views %></td>
         <% if post.replies.count > 0 %>
           <td><%= time_ago_in_words post.replies.last.updated_at %> ago</td>

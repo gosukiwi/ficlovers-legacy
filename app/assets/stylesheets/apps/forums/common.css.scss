@@ -170,6 +170,11 @@
   color: white;
   background-color: #444;
   font-weight: bold;
+
+  &:hover, &:active, &:focus {
+    color: white;
+    text-decoration: none;
+  }
 }
 
 .forum-general-discussion {
