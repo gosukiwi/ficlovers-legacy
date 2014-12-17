@@ -8,6 +8,17 @@ class Story < ActiveRecord::Base
   # tags
   has_many :taxonomies
   has_many :tags, through: :taxonomies
+  # forum
+  belongs_to :post
+
+  after_create do
+    self.post = Post.create({
+      title: "Fic discussion: [#{self.title}]",
+      content: "Please discuss \"#{self.title}\" below. Please be respectful and remember to provide constructive feedback.",
+      user: user,
+      forum: Forum.find_or_create_by(name: 'Fic Discussion')
+    })
+  end
 
   validates :title, presence: true, length: { in: 5..100 }
   validates :summary, presence: true, length: { in: 50..250 }

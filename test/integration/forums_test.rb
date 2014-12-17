@@ -27,6 +27,6 @@ class ForumsTest < ActionDispatch::IntegrationTest
 
     visit forum_url(post.forum)
 
-    assert_equal post.title, find('.posts-table a').text
+    assert_equal post.title, all('.posts-table a').first.text
   end
 end

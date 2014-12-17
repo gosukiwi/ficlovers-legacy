@@ -9,6 +9,7 @@ class PostTest < ActiveSupport::TestCase
 
   should belong_to :user
   should belong_to :forum
+  should have_one :story
 
   test 'should increment users post_count' do
     post = FactoryGirl.create(:post)

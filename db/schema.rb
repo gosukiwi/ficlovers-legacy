@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141217064029) do
+ActiveRecord::Schema.define(version: 20141217085422) do
 
   create_table "admin_forum_categories", force: true do |t|
     t.string   "name"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 20141217064029) do
     t.datetime "updated_at"
     t.boolean  "published",   default: false
     t.integer  "views",       default: 0
+    t.integer  "post_id"
   end
 
   add_index "stories", ["published"], name: "index_stories_on_published", using: :btree

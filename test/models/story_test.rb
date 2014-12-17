@@ -10,6 +10,7 @@ class StoryTest < ActiveSupport::TestCase
   should belong_to :category
   should belong_to :user
   should have_many :chapters
+  should belong_to :post
 
   test 'searching for tags should be inclusive' do
     story = FactoryGirl.create(:story)
@@ -111,5 +112,15 @@ class StoryTest < ActiveSupport::TestCase
 
     story.tags << tag
     assert_equal tag, story.active_tags.first
+  end
+
+  test 'story must have an associated forum post when created' do
+    Forum.create(name: 'Fic Discussion')
+
+    story = FactoryGirl.create(:story)
+
+    assert story.post.title.include?('Fic discussion')
+    assert_equal 'Fic Discussion', story.post.forum.name
+    assert_equal story.user, story.post.user
   end
 end
