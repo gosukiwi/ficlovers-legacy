@@ -153,4 +153,8 @@
     display: block;
     padding: 3px 10px;
     margin-bottom: 2px;
+
+    &.active {
+      background-color: darken(#e7e7e7, 10%);
+    }
   }

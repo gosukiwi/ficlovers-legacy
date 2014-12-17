@@ -6,4 +6,8 @@ class PostPolicy < ApplicationPolicy
   def create?
     !user.nil?
   end
+
+  def destroy?
+    author_or_admin?
+  end
 end

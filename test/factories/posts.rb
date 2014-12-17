@@ -1,9 +1,8 @@
 FactoryGirl.define do
   factory :post do
-    title "MyString"
-content "MyText"
-user_id 1
-views 1
+    title "My New Post"
+    content "This is the post content, it doesn't have to be long but at least 50 characters."
+    user
+    views 0
   end
-
 end

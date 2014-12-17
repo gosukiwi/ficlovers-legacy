@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :reply do
-    content "MyText"
-post_id 1
-user_id 1
+    content "This is the reply text, it must be at least 50 characters long to be valid."
+    user
+    post
   end
 
 end

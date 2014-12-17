@@ -6,6 +6,10 @@ class Post < ActiveRecord::Base
   belongs_to :forum
   has_many :replies
 
+  after_create do
+    user.increment! :post_count
+  end
+
   def paginated_replies(page, per_page = 10)
     replies.order('id ASC').paginate(page: page, per_page: per_page)
   end
