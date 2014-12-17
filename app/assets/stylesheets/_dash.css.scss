@@ -8,6 +8,7 @@
   position: relative;
   user-select: none;
   cursor: pointer;
+  white-space: nowrap;
 
   &.active {
     ._dropdown-content {
@@ -23,6 +24,7 @@
     z-index: 1000;
     top: 110%;
     min-width: 150px;
+    white-space: normal;
     background-color: white;
     border-radius: 2px;
     height: 0;
