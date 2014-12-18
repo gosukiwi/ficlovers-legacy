@@ -15,12 +15,8 @@ class Story < ActiveRecord::Base
   belongs_to :post
 
   after_create do
-    self.post = Post.create({
-      title: "Fic discussion: [#{self.title}]",
-      content: "Please discuss \"#{self.title}\" below. Please be respectful and remember to provide constructive feedback.",
-      user: user,
-      forum: Forum.find_or_create_by(name: 'Fic Discussion')
-    })
+    story_post = StoryPost.new(self)
+    self.post = story_post.create
   end
 
   # Find hot stories
@@ -40,10 +36,6 @@ class Story < ActiveRecord::Base
     tags.where(status: 'active').order('context desc, name asc')
   end
 
-  def published?
-    self.published
-  end
-
   # Takes an array of [:name, :context?] and sets the appropiate tagging for
   # this story. Ignores tags which are flagged as 'removed'.
   def set_tags(tag_list)
@@ -51,6 +43,10 @@ class Story < ActiveRecord::Base
       .reject{ |tag| Tag.exists?(name: tag[0], context: 'removed') }
       .map{ |tag| Tag.find_or_create_by(name: tag[0], context: tag[1] || 'pending') }
     save
+  end
+
+  def published?
+    self.published
   end
 
   def increment_views

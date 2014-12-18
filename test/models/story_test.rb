@@ -115,11 +115,9 @@ class StoryTest < ActiveSupport::TestCase
   end
 
   test 'story must have an associated forum post when created' do
-    Forum.create(name: 'Fic Discussion')
-
     story = FactoryGirl.create(:story)
 
-    assert story.post.title.include?('Fic discussion')
+    assert_equal story.title, story.post.title
     assert_equal 'Fic Discussion', story.post.forum.name
     assert_equal story.user, story.post.user
   end
