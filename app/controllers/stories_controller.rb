@@ -1,6 +1,6 @@
 class StoriesController < ApplicationController
   before_action :set_story, only: [:show, :edit, :update, :destroy, :add_to_fav, :update_tags]
-  before_action :set_category, only: [:new, :edit, :create]
+  before_action :set_categories, only: [:new, :edit, :create]
 
   def search
     @stories = []
@@ -8,14 +8,8 @@ class StoriesController < ApplicationController
     @categories.unshift Category.new(name: 'All', id: 0)
     return unless params[:tags] || params[:category]
 
-    # returns a list of items such as: ['tag name', 'context']
-    tags = params[:tags].split(',').map do |tag|
-      matches = tag.match(/^(.+?)(?:\((.+?)\))?$/).to_a
-      [matches[1].strip!, matches[2]]
-    end
-
-    @stories = Story
-      .search(tags: tags, category: params[:category])
+    @stories = StorySearch
+      .search(tags: params[:tags], category: params[:category])
       .paginate(page: params[:page], per_page: 10)
   end
   
@@ -101,7 +95,7 @@ class StoriesController < ApplicationController
       @story = Story.find(params[:id])
     end
 
-    def set_category
+    def set_categories
       @categories = Category.all
     end      
 

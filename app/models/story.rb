@@ -36,25 +36,6 @@ class Story < ActiveRecord::Base
     where('published <> 0').order('updated_at desc')
   }
 
-  def self.search(options)
-    query = select('stories.*')
-      .joins('JOIN `taxonomies` ON `taxonomies`.`story_id` = `stories`.id')
-      .joins('JOIN `tags` ON `taxonomies`.tag_id = `tags`.id')
-
-    query = query.where(category_id: options[:category]) unless options[:category] == '0'
-
-    # given an array of tags, parse them into HAVING statements joined by ANDs
-    # also return an array with all the prepared statement's parameters
-    # returns something which looks like
-    # { stmt: 'COUNT(?) > 0 AND COUNT(?) > 0 ...', args: [arg1, arg2, ...] }
-    having = parse_tags(options[:tags])
-    return query
-      .where('`tags`.status = "active" and `stories`.published <> 0')
-      .group('stories.id')
-      .having(having[:stmt], *having[:args])
-      .includes([:category, :tags])
-  end
-
   def published?
     self.published
   end
@@ -94,18 +75,4 @@ class Story < ActiveRecord::Base
   def to_param
     "#{id}-#{title.parameterize}"
   end
-
-  private
-
-    # Helper method used by search, transforms a comma-separated string of tags
-    # into matching SQL OR clauses
-    def self.parse_tags(tags) 
-      clauses = []
-      args = []
-      tags.each do |tag|
-        clauses << "SUM(`tags`.name = ?) > 0"
-        args << tag[0]
-      end
-      return { stmt: clauses.join(' AND '), args: args }
-    end
 end
