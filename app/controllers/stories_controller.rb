@@ -1,5 +1,5 @@
 class StoriesController < ApplicationController
-  before_action :set_story, only: [:show, :edit, :update, :destroy, :add_to_fav, :update_tags]
+  before_action :set_story, only: [:show, :edit, :update, :destroy, :add_to_fav]
   before_action :set_categories, only: [:new, :edit, :create, :search]
 
   def search
