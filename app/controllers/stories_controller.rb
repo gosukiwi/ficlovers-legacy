@@ -1,13 +1,9 @@
 class StoriesController < ApplicationController
   before_action :set_story, only: [:show, :edit, :update, :destroy, :add_to_fav, :update_tags]
-  before_action :set_categories, only: [:new, :edit, :create]
+  before_action :set_categories, only: [:new, :edit, :create, :search]
 
   def search
-    @stories = []
-    @categories = Category.all
-    @categories.unshift Category.new(name: 'All', id: 0)
-    return unless params[:tags] || params[:category]
-
+    @categories = [Category.new(name: 'All', id: 0)] + @categories
     @stories = StorySearch
       .search(tags: params[:tags], category: params[:category])
       .paginate(page: params[:page], per_page: 10)
