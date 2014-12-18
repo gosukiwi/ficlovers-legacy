@@ -8,7 +8,7 @@ module SessionsHelper
     @current_user ||= User.find_by(id: session[:user_id])
   end
 
-  def is_admin?
+  def admin?
     logged_in? && current_user.role == 'admin'
   end
 
