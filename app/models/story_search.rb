@@ -6,7 +6,7 @@ class StorySearch
   # `category` is optional and it's the id of the category to filter by, user 0
   # or nil to ignore category
   def self.search(tags: tags, category: category = 0)
-    return Story.none if tags.empty?
+    return Story.none if tags.nil?
 
     query = Story
       .select('stories.*')

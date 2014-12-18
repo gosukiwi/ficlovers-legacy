@@ -1,6 +1,6 @@
 class Admin::TagsController < Admin::AdminController
   def index
-    @tags = Tag.pending_tags
+    @tags = Tag.pending
   end
 
   def approve

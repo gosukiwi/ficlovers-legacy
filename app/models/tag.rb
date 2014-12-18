@@ -7,8 +7,12 @@ class Tag < ActiveRecord::Base
   has_many :taxonomies
   has_many :stories, through: :taxonomies
 
-  scope :pending_tags, ->{
+  scope :pending, ->{
     where(status: 'pending').order(context: :asc, name: :asc)
+  }
+
+  scope :active, ->{
+    where(status: 'active').order(context: :asc, name: :asc)
   }
 
   after_initialize do

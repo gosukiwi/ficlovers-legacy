@@ -33,7 +33,7 @@ class Story < ActiveRecord::Base
   }
 
   def active_tags
-    tags.where(status: 'active').order('context desc, name asc')
+    tags.merge(Tag.active)
   end
 
   # Takes an array of [:name, :context?] and sets the appropiate tagging for
