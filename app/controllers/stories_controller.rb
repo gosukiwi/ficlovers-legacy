@@ -12,10 +12,6 @@ class StoriesController < ApplicationController
   def add_to_fav
     authorize @story
     @message = @story.add_to_fav(current_user)
-    respond_to do |format|
-      format.js
-      format.html { head :no_content }
-    end
   end
 
   def fresh
