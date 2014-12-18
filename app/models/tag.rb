@@ -3,6 +3,14 @@ class Tag < ActiveRecord::Base
   validates :context, presence: true, inclusion: { in: ['fandoms', 'characters', 'genres', 'pending'] }
   validates :status, presence: true, inclusion: { in: ['pending', 'active', 'removed'] }
 
+  # tags
+  has_many :taxonomies
+  has_many :stories, through: :taxonomies
+
+  scope :pending_tags, ->{
+    where(status: 'pending').order(context: :asc, name: :asc)
+  }
+
   after_initialize do
     self.context = 'pending' unless attribute_present? 'context'
   end
@@ -14,14 +22,6 @@ class Tag < ActiveRecord::Base
   def to_s
     "#{name} (#{context})"
   end
-
-  # tags
-  has_many :taxonomies
-  has_many :stories, through: :taxonomies
-
-  scope :pending_tags, ->{
-    where(status: 'pending').order(context: :asc, name: :asc)
-  }
 
   def self.search(keyword)
     wcard_keyword = "%#{keyword}%"

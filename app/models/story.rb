@@ -1,4 +1,7 @@
 class Story < ActiveRecord::Base
+  validates :title, presence: true, length: { in: 5..100 }
+  validates :summary, presence: true, length: { in: 50..250 }
+
   belongs_to :category
   has_many :chapters, dependent: :destroy
   belongs_to :user
@@ -20,9 +23,6 @@ class Story < ActiveRecord::Base
     })
   end
 
-  validates :title, presence: true, length: { in: 5..100 }
-  validates :summary, presence: true, length: { in: 50..250 }
-
   # Find hot stories
   scope :hot, ->{
     select('stories.*, count(favs.id) as favs_count')
@@ -36,12 +36,12 @@ class Story < ActiveRecord::Base
     where('published <> 0').order('updated_at desc')
   }
 
-  def published?
-    self.published
-  end
-
   def active_tags
     tags.where(status: 'active').order('context desc, name asc')
+  end
+
+  def published?
+    self.published
   end
 
   # Takes an array of [:name, :context?] and sets the appropiate tagging for
