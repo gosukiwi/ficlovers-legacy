@@ -3,7 +3,7 @@ class Forum < ActiveRecord::Base
 
   has_many :posts
 
-  def formatted_posts
+  def sorted_posts
     posts.order('pinned DESC, id DESC')
   end
 

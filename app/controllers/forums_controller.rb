@@ -10,6 +10,6 @@ class ForumsController < ApplicationController
   def show
     @forums = Forum.all
     @forum = Forum.find(params[:id])
-    @posts = @forum.formatted_posts.paginate(page: params[:page], per_page: 25)
+    @posts = @forum.sorted_posts.paginate(page: params[:page], per_page: 25)
   end
 end
