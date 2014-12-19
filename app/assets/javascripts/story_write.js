@@ -1,0 +1,21 @@
+// Write SAP scripts.
+//= require jquery
+//= require underscore
+//= require backbone
+//= require medium-editor
+//= require hogan
+//= require jquery.jgrowl
+//= require jquery-ui/autocomplete
+//= require jquery.tagsinput
+//= require common/fonts
+//= require apps/story_write/models/chapter
+//= require apps/story_write/collections/chapters
+//= require apps/story_write/models/story
+//= require apps/story_write/views/write-area-view
+//= require apps/story_write/views/write-chapter-item-view
+//= require apps/story_write/views/write-chapter-view
+//= require apps/story_write/views/write-config-view
+//= require apps/story_write/views/write-tag-view
+//= require apps/story_write/views/write-view
+//= require apps/story_write/app
+//xx= require_tree .
