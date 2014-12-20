@@ -21,3 +21,6 @@ public/assets/
 # Ignore secrets
 config/initializers/secret_token.rb
 config/secrets.yml
+
+# Windows stuff
+Thumbs.db
