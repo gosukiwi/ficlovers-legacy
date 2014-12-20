@@ -4,7 +4,7 @@ source 'http://rubygems.org' # the https version fails in windows...
 gem 'tzinfo-data'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.8'
+gem 'rails', '4.1.9'
 # Use SCSS for stylesheets
 # gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -44,7 +44,7 @@ gem 'jquery-ui-rails'
 group :development do
   gem 'guard'
   gem 'guard-minitest'
-  gem 'byebug'
+  gem 'web-console', '~> 2.0'
 end
 
 group :test do
