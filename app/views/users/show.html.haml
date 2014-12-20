@@ -1,7 +1,6 @@
 .user-header
   .user-header-content
-    .user-avatar
-      != gravatar_for(@user, size: 125)
+    != gravatar_for(@user, size: 125, class: 'user-avatar')
     .user-profile
       %h3
         = @user.name
@@ -11,26 +10,81 @@
       Follow
       %i.fa.fa-plus
 
+%ul.user-bar
+  %li 
+    %a.user-link{href: '#'}
+      %i.fa.fa-user
+      Profile
+  %li 
+    %a.user-link{href: '#'}
+      %i.fa.fa-file-text
+      Fics
+  %li 
+    %a.user-link{href: '#'}
+      %i.fa.fa-heart
+      Favs
+
 .user-container
-  .user-info
-    %h2 About
-    %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet viverra nulla. Vestibulum luctus id enim in venenatis. Vivamus aliquet rutrum ultricies.   
   .user-entries
-    ._tabs
-      %ul.tabs-header
-        %li.active{ data: { for: 'fics' } } Fics
-        %li{ data: { for: 'favs' } } Favorites
-        %li{ data: { for: 'posts' } } Posts
-      .tabs-content#fics.active
+    .fic-container
+      %h2.fic-header Fics
+      - @user.stories.each do |story|
         .fic
-          .fic-thumb
-            .fic-no-image
-              %a{href: '#'} Sakura's Journey
-          .fic-info
-            %h2.fic-title Sakura's Journey
-            %p.fic-description Some description
-      .tabs-content#favs
-        %p Favs content in here!
+          .fic-content
+            %h3.fic-title
+              = story.title
+            .fic-description 
+              %p 
+                = story.summary
+            %ul.fic-info
+              %li
+                = story.views
+                views
+              %li
+                = story.favorited_by.count
+                favs
+            %ul.fic-tags
+              %li.fic-tags-info
+                =story.active_tags.count
+                tags:
+              - story.active_tags.each do |tag|
+                %li 
+                  %span{ class: "tag-#{tag.context}" }
+                    = tag.name
+            = link_to 'Read', story, class: 'fic-link'
+      - if @user.stories.empty?
+        %p.fic-nothing Seems like this user has not written anything yet!
+    .fav-container
+      %h2 Favs
+      - @user.favorites.each do |story|
+        .fic
+          .fic-content
+            %h3.fic-title
+              = story.title
+            .fic-description 
+              %p 
+                = story.summary
+            %ul.fic-info
+              %li
+                = story.views
+                views
+              %li
+                = story.favorited_by.count
+                favs
+              %li 
+                = link_to 'Read', story, class: 'fic-link'
+      - if @user.favorites.empty?
+        %p.fic-nothing Seems like this user has not faved anything yet!
 
   .user-wall
-    Wall
+    %h2.activity-title Activity
+    %ul.activity
+      %li Created fic SOME FIC
+      %li Commented on SOMEONE's profile
+      %li Created ASDASD forum post
+      %li Replied to potato's MYTITLE forum post
+      %li Followed ANAUTHOR
+      %li Faved SOMEFIC
+
+    %h2.wall-info Info
+    %p Full stack web developer, gamer and cat lover from Argentina

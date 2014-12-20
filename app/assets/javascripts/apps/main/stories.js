@@ -1,3 +1,6 @@
+(function($) {
+  'use strict';
+
 function prettyReader($reader) {
   var $chapters   = $reader.find('.chapter');
   var $btnNext    = $reader.find('#reader-btn-next');
@@ -108,3 +111,57 @@ if($reader.length > 0) {
   var reader = prettyReader($reader);
   reader.initialize();
 }
+
+// Fic scroll
+// ---------------------------------------------------------------------------
+var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+$('.fic-description').each(function (idx, el) {
+  var $el = $(el);
+  var $p = $el.find('p');
+  if($p.height() < $el.height()) return;
+
+  var stop = false;
+  var ammountToMove = ($p.height() + 55) - $el.height();
+  var speed = 25 / 1000;
+  var lastStep = 0;
+  var current = 0;
+
+  function step(now) {
+    if(stop) {
+      lastStep = 0;
+      current = 0;
+      stop = false;
+      return;
+    }
+
+    if(lastStep === 0) {
+      lastStep = now;
+      raf(step);
+      return;
+    }
+
+    var delta = now - lastStep;
+    lastStep = now;
+    current = current + (speed * delta);
+
+    if(current >= ammountToMove) {
+      current = ammountToMove;
+      stop = true;
+    }
+
+    $p.css('transform', 'translateY(-' + current + 'px)');
+    raf(step);
+  }
+
+  $el.mouseenter(function () {
+    stop = false;
+    raf(step);
+  });
+
+  $el.mouseleave(function () {
+    stop = true;
+    $p.css('transform', 'translateY(0)');
+  });
+});
+
+}(jQuery));
