@@ -2,6 +2,7 @@
   display: table;
   font-family: 'Source Sans Pro', sans-serif;
   width: 100%;
+  font-size: 90%;
 }
 
 // Forums menu
@@ -55,6 +56,7 @@
   width: 80px;
   text-align: center;
   border-radius: 2px;
+  text-decoration: none;
   
   &:hover, &:focus {
     background-color: darken($brand-primary, 10%);

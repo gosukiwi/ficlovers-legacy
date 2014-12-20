@@ -1,0 +1,36 @@
+.user-header
+  .user-header-content
+    .user-avatar
+      != gravatar_for(@user, size: 125)
+    .user-profile
+      %h3
+        = @user.name
+      %p
+        <strong>wrote</strong> #{@user.stories.count} fics, <strong>read</strong> 123
+    %a.user-follow-btn{href: '#'} 
+      Follow
+      %i.fa.fa-plus
+
+.user-container
+  .user-info
+    %h2 About
+    %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet viverra nulla. Vestibulum luctus id enim in venenatis. Vivamus aliquet rutrum ultricies.   
+  .user-entries
+    ._tabs
+      %ul.tabs-header
+        %li.active{ data: { for: 'fics' } } Fics
+        %li{ data: { for: 'favs' } } Favorites
+        %li{ data: { for: 'posts' } } Posts
+      .tabs-content#fics.active
+        .fic
+          .fic-thumb
+            .fic-no-image
+              %a{href: '#'} Sakura's Journey
+          .fic-info
+            %h2.fic-title Sakura's Journey
+            %p.fic-description Some description
+      .tabs-content#favs
+        %p Favs content in here!
+
+  .user-wall
+    Wall

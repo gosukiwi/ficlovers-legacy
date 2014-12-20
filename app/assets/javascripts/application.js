@@ -15,7 +15,7 @@
 //= require jquery-ui/autocomplete
 //= require jquery.tagsinput
 //x= require turbolinks
-//= require bootstrap
 //= require common/fonts
+//= require common/_dash
 //= require apps/main/stories
 //= require apps/main/stories_search

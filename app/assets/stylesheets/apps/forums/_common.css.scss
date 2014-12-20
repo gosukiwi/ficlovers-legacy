@@ -5,7 +5,6 @@
   width: 1110px;
   box-sizing: border-box;
   margin: 0 auto;
-  font-size: 1.2em;
 
   .logo {
     padding: 0;
@@ -52,7 +51,7 @@
     border-radius: 2px;
     color: white;
     text-decoration: none;
-    font-size: 82.5%;
+    font-size: 85%;
 
     &:hover {
       background-color: darken($brand-primary, 10%);
@@ -143,10 +142,10 @@
 
   a {
     color: #777;
+    text-decoration: none;
 
     &:hover, &:active, &:focus {
       color: #444;
-      text-decoration: none;
     }
   }
 }
@@ -156,6 +155,7 @@
     display: block;
     padding: 3px 10px;
     margin-bottom: 2px;
+    text-decoration: none;
 
     &.active {
       background-color: darken(#e7e7e7, 10%);
@@ -165,12 +165,13 @@
 // Forum Tags
 .forum-tag {
   font-family: "Source Sans Pro", sans-serif;
-  font-size: 80%;
+  font-size: 85%;
   text-transform: uppercase;
   padding: 3px 8px;
   color: white;
   background-color: #444;
   font-weight: bold;
+  text-decoration: none;
 
   &:hover, &:active, &:focus {
     color: white;

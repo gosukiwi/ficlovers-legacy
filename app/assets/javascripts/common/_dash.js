@@ -13,7 +13,7 @@
   //
   // Ex: <div class="_dropdown" data-align="center"></div>
 
-  var dropdowns = $('._dropdown').click(function (e) {
+  var $dropdowns = $('._dropdown').click(function (e) {
     e.preventDefault();
     e.stopPropagation();
     var $el = $(this);
@@ -34,7 +34,22 @@
   })
 
   $('html').click(function (e) {
-    dropdowns.removeClass('active');
+    $dropdowns.removeClass('active');
+  });
+
+  // Tabs
+  // ---------------------------------------------------------------------------
+  
+  var $tabs = $('._tabs');
+  var $menuItem = $tabs.find('li.active');
+  var $content = $tabs.find('.tabs-content.active');
+  $tabs.find('li').click(function () {
+    // Remove the active class from old items
+    $menuItem.removeClass('active');
+    $content.removeClass('active');
+    // Add it to the new ones
+    $menuItem = $(this).addClass('active');
+    $content = $tabs.find('#' + $menuItem.data('for')).addClass('active');
   });
 
 }(jQuery));

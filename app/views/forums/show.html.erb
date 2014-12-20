@@ -45,7 +45,7 @@
           <% if post.pinned? %>
             <i class="fa fa-thumb-tack"></i>
           <% end %>
-          <%= link_to post.title, [@forum, post] %>
+          <%= link_to post.title, [@forum, post], class: 'posts-table-link' %>
         </td>
         <td><%= post.replies.count %></td>
         <td><a href="<%= forum_path post.forum %>" class="forum-tag forum-<%= post.forum.name.downcase.parameterize %>"><%= post.forum.name %></a></td>

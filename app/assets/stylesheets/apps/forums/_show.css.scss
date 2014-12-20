@@ -20,6 +20,15 @@
   }
 }
 
+  .posts-table-link {
+    color: #444;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
 .forum-title {
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 900;

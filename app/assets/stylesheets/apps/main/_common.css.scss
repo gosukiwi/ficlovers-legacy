@@ -1,189 +1,107 @@
-.header {
-  background: asset-url('header-bg.jpg') 50% 50%;
-  background-size: cover;
-  height: 100vh;
-  width: 100vw;
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
-  color: white;
+.navigation {
+  background-color: white;
+  padding: 20px 0;
+  font-family: "Source Sans Pro", sans-serif;
+  width: 1110px;
+  box-sizing: border-box;
+  margin: 0 auto;
 
-  h1 {
-    text-shadow: 1px 1px 0 black;
-    font-size: 3.5em;
+  .logo {
+    padding: 0;
+    margin: 0;
     font-weight: 900;
     text-transform: uppercase;
+    float: left;
+    font-size: 1.5em;
+
+    a {
+      text-decoration: none;
+      color: $brand-primary;
+
+      &:hover {
+        color: lighten($brand-primary, 10%);
+      }
+    }
   }
 
-  p {
-    font-size: 1.7em;
-    text-shadow: 1px 1px 0 black;
-    font-weight: 300;
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    float: right;
   }
 
-  .btn {
-    font-size: 1.2em;
-    margin-top: 40px;
-    font-weight: 900;
-    text-transform: uppercase;
-    padding: 7px 55px;
-  }
-}
+  li {
+    display: inline-block;
+    padding: 0 10px; 
+  } 
 
-.navbar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  border-radius: 0;
-  background-color: rgba(255, 255, 255, 0.2);
-  border: none;
-  z-index: 2000;
-
-  .navbar-brand {
-    color: white;
-    font-weight: 900;
-    text-transform: uppercase;
+  a {
+    color: #777;
 
     &:hover {
-      color: #e7e7e7;
+      color: black;
     }
   }
+    
+  .user {
+    background-color: $brand-primary;
+    font-weight: bold;
+    padding: 3px 15px;
+    border-radius: 2px;
+    color: white;
+    text-decoration: none;
+    font-size: 85%;
 
-  .navbar-form {
-    .form-group {
-      position: relative;
-
-      .fa {
-        position: absolute;
-        left: 15px;
-        top: 10px;
-        color: white;
-        opacity: 0.75;
-      }
-
-      .form-control {
-        background-color: rgba(255, 255, 255, 0.2);
-        color: white;
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        width: 100px;
-        transition: width 0.25s, border-radius 0.4s;
-        padding-left: 35px;
-
-        &:focus {
-          width: 250px;
-          border-radius: 30px;
-        }
-
-        &::placeholder {
-          color: #e7e7e7;
-        }
-      }
-    }
-  }
-
-  .navbar-nav {
-    i {
-      padding-right: 5px;
-      
-      &.single {
-        padding-right: 0;
-      }
-    }
-
-    /* fix colors for dropdown items in navbar */
-    .dropdown-toggle:focus {
+    &:hover {
+      background-color: darken($brand-primary, 10%);
       color: white;
-    }
-
-    .dropdown-toggle:hover {
-      color: #444;
-    }
-    /* end of fix */
-
-    li {
-      a {
-        color: white;
-
-        &:hover {
-          background-color: #e7e7e7;
-        }
-      }
-
-      &.active a {
-        background-color: $brand-primary;
-        color: white;
-
-        &:hover {
-          background-color: lighten($brand-primary, 5%);
-          color: white;
-        }
-      }
-    }
-
-    .visible-xs-inline-block {
-      padding-left: 5px;
-    }
-  }
-
-  .dropdown-menu {
-    background-color: #e7e7e7;
-    border-radius: 0;
-    border: none;
-
-    li a {
-      color: #444;
     }
   }
 }
 
+  .navigation-notifications {
+    border: 1px solid #e1e1e1;
+    margin-top: 10px;
+    font-size: 85%;
+
+    p {
+      padding: 5px 10px;
+      margin: 0;
+      color: #444;
+      font-weight: 80%;
+    }
+  }
+
 .footer {
-  margin-top: 20px;
-  border-top: 1px solid #ccc;
-  padding: 20px;
+  font-size: 80%;
   color: #777;
-  font-size: 90%;
+  border-top: 1px solid #ccc;
+  margin-top: 30px;
+  padding: 15px 0 15px;
+  @include container;
+}
+
+  .footer-copy {
+    @include span(6);
+  }
 
   .footer-menu {
+    @include span(6);
     text-align: right;
 
     ul {
-      list-style: none;
       padding: 0;
       margin: 0;
+      list-style: none;
     }
-    
+
     li {
       display: inline-block;
-      margin-left: 10px;
-    }
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .navbar {
-    .navbar-form {
-      display: none;
-    }
-
-    .navbar-collapse {
-      background-color: #e7e7e7;
-
-      li {
-        a {
-          color: #444;
-        }
-
-        &.active a {
-          background-color: $brand-primary;
-          color: white;
-
-          &:hover {
-            background-color: lighten($brand-primary, 5%);
-            color: white;
-          }
-        }
+      
+      a {
+        color: #444;
+        padding: 0 5px;
       }
     }
   }
-}
