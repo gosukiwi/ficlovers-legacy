@@ -27,7 +27,7 @@
 .user-container
   .user-entries
     .fic-container
-      %h2.fic-header Fics
+      %h3.fic-header Fics
       - @stories.each do |story|
         .fic
           .fic-content
@@ -54,11 +54,11 @@
             = link_to 'Read', story, class: 'fic-link'
       .fic-action
         - if @user.stories.empty?
-          %p.fic-nothing Seems like this user has not written anything yet!
+          %p.fic-nothing Nothing here boss! Seems like this user has not written anything yet!
         - else
           %a{ href: '#', class: 'fic-see-all-btn' } See all
     .fav-container
-      %h2 Favs
+      %h3 Favs
       - @favs.each do |story|
         .fic
           .fic-content
@@ -76,11 +76,71 @@
                 favs
               %li 
                 = link_to 'Read', story, class: 'fic-link'
-      - if @user.favorites.empty?
-        %p.fic-nothing Seems like this user has not faved anything yet!
+      .fic-action
+        - if @user.favorites.empty?
+          %p.fic-nothing Nothing here boss! Seems like this user has no favs yet!
+        - else
+          %a{ href: '#', class: 'fic-see-all-btn' }
 
-  .user-wall
-    %h2.activity-title Activity
+  .user-info
+
+    .user-bio
+      %h3.user-bio-title 
+        About me
+      %p.user-bio-content 
+        Full stack web developer, gamer and cat lover from Argentina
+
+    %ul.user-tabs._tabs
+      %li{ class: 'active', data: { for: '.user-wall' } } Wall
+      %li{ data: { for: '.user-followers' } } Followers
+      %li{ data: { for: '.user-following' } } Following
+
+    %ul.user-wall.u-hidden
+      %li.user-wall-entry
+        .user-wall-author 
+          %img{ src: 'http://placehold.it/50x50' }
+        .user-wall-message 
+          .user-wall-message-content 
+            .user-wall-message-info
+              %a{ href: '#', class: 'user-wall-message-info-link' } Someone
+              .user-wall-message-info-date 1 day ago
+            %p Hello, World
+            %p Hello, World
+            %p Hello, World
+      %li.user-wall-entry
+        .user-wall-author 
+          %img{ src: 'http://placehold.it/50x50' }
+        .user-wall-message 
+          .user-wall-message-content 
+            .user-wall-message-info
+              %a{ href: '#', class: 'user-wall-message-info-link' } Someone
+              .user-wall-message-info-date 1 day ago
+            Hello There! 
+      %li.user-wall-entry
+        .user-wall-author 
+          %img{ src: 'http://placehold.it/50x50' }
+        .user-wall-message 
+          .user-wall-message-content 
+            .user-wall-message-info
+              %a{ href: '#', class: 'user-wall-message-info-link' } Someone
+              .user-wall-message-info-date 1 day ago
+            Hello There! 
+      - if logged_in?
+        %li.user-wall-entry
+          .user-wall-author 
+            %img{ src: 'http://placehold.it/50x50' }
+          .user-wall-message 
+            .user-wall-message-content.user-wall-new
+              %h3.user-wall-new-title Add a comment
+              %textarea.user-wall-new-content
+              %input{ type: 'button', value: 'Preview', class: 'user-wall-new-preview-btn' }
+              %input{ type: 'submit', value: 'Add comment', class: 'user-wall-new-add-btn' }
+    .user-followers.u-hidden
+      Followers here!
+    .user-following.u-hidden
+      Following here
+
+    %h3.activity-title Activity
     %ul.activity
       %li Created fic SOME FIC
       %li Commented on SOMEONE's profile
@@ -89,5 +149,3 @@
       %li Followed ANAUTHOR
       %li Faved SOMEFIC
 
-    %h2.wall-info Info
-    %p Full stack web developer, gamer and cat lover from Argentina

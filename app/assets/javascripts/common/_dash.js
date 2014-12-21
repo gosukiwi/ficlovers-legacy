@@ -39,17 +39,19 @@
 
   // Tabs
   // ---------------------------------------------------------------------------
-  
-  var $tabs = $('._tabs');
-  var $menuItem = $tabs.find('li.active');
-  var $content = $tabs.find('.tabs-content.active');
-  $tabs.find('li').click(function () {
-    // Remove the active class from old items
-    $menuItem.removeClass('active');
-    $content.removeClass('active');
-    // Add it to the new ones
-    $menuItem = $(this).addClass('active');
-    $content = $tabs.find('#' + $menuItem.data('for')).addClass('active');
+
+  $('._tabs').each(function (idx, el) {
+    var $el     = $(el);
+    var $active = $el.find('li.active');
+    var $target = $( $active.data('for') ).show();
+
+    $el.find('li').click(function(e) {
+      e.preventDefault();
+      $active.removeClass('active');
+      $active = $(this).addClass('active');
+      $target.hide();
+      $target = $( $(this).data('for') ).show();
+    });
   });
 
 }(jQuery));
