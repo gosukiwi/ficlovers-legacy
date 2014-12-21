@@ -41,6 +41,9 @@ gem 'font-awesome-rails'
 gem 'autoprefixer-rails'
 gem 'jquery-ui-rails'
 
+# Decorators!
+gem 'draper', '~> 1.3'
+
 group :development do
   gem 'guard'
   gem 'guard-minitest'

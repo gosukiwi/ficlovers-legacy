@@ -6,20 +6,22 @@ class User < ActiveRecord::Base
   validates :role, inclusion: { in: ['user', 'admin'] }
 
   has_many :stories
-
   has_many :favs
   has_many :favorites, through: :favs, source: :story
-
   has_many :posts
 
   has_secure_password
 
-  before_save do
-    self.email = email.downcase unless email == nil
-    self.role ||= 'user'
-  end
+  before_save :set_defaults
 
   def admin?
     role == 'admin'
   end
+
+  protected
+
+    def set_defaults
+      self.email = email.downcase unless email == nil
+      self.role ||= 'user'
+    end
 end

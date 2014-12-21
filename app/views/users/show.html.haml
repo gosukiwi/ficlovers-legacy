@@ -11,7 +11,7 @@
       %i.fa.fa-plus
 
 %ul.user-bar
-  %li 
+  %li.active
     %a.user-link{href: '#'}
       %i.fa.fa-user
       Profile
@@ -28,7 +28,7 @@
   .user-entries
     .fic-container
       %h2.fic-header Fics
-      - @user.stories.each do |story|
+      - @stories.each do |story|
         .fic
           .fic-content
             %h3.fic-title
@@ -52,11 +52,14 @@
                   %span{ class: "tag-#{tag.context}" }
                     = tag.name
             = link_to 'Read', story, class: 'fic-link'
-      - if @user.stories.empty?
-        %p.fic-nothing Seems like this user has not written anything yet!
+      .fic-action
+        - if @user.stories.empty?
+          %p.fic-nothing Seems like this user has not written anything yet!
+        - else
+          %a{ href: '#', class: 'fic-see-all-btn' } See all
     .fav-container
       %h2 Favs
-      - @user.favorites.each do |story|
+      - @favs.each do |story|
         .fic
           .fic-content
             %h3.fic-title

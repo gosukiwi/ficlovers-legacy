@@ -9,11 +9,12 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-
   # GET /users/1
   # GET /users/1.json
   def show
     authorize @user
+    @stories = @user.stories.fresh.limit(6)
+    @favs = @user.favorites.fresh.limit(6)
   end
 
   # GET /users/new
