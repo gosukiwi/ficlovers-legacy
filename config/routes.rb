@@ -13,11 +13,12 @@ Rails.application.routes.draw do
   post 'add_to_fav/:id', to: 'stories#add_to_fav', as: :add_to_fav
 
   # Users
-  resources :users, only: [:new, :create, :show], param: :username
+  resources :users, only: [:create], param: :username
+  get 'u/:username', to: 'users#show', as: :user
+  get 'register', to: 'users#new', as: :register
   get 'login', to: 'sessions#new', as: :login
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy', as: :logout
-  get 'register', to: 'users#new', as: :register
 
   # Tags
   resources :tags, only: [:create] do
@@ -43,9 +44,6 @@ Rails.application.routes.draw do
     resources :categories
     resources :forums
   end
-
-  get 'u/:username', to: 'users#show', as: :show
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
