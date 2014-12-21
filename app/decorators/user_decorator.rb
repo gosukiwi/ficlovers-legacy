@@ -1,13 +1,15 @@
 class UserDecorator < Draper::Decorator
   delegate_all
 
-  # Define presentation-specific methods here. Helpers are accessed through
-  # `helpers` (aka `h`). You can override attributes, for example:
-  #
-  #   def created_at
-  #     helpers.content_tag :span, class: 'time' do
-  #       object.created_at.strftime("%a %m/%d/%y")
-  #     end
-  #   end
-
+  def gravatar(options = {})
+    options = { html: true, class: 'gravatar', size: 80, default: :retro, rating: :g }.merge(options)
+    email = object.email
+    hash = Digest::MD5.hexdigest(email)
+    url = "//www.gravatar.com/avatar/#{hash}?s=#{options[:size]}&d=#{options[:default]}&r=#{options[:rating]}"
+    if options[:html]
+      "<img src=\"#{url}\" alt=\"#{object.name}\" class=\"#{options[:class]}\" />"
+    else
+      url
+    end
+  end
 end
