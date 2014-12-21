@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   post 'add_to_fav/:id', to: 'stories#add_to_fav', as: :add_to_fav
 
   # Users
-  resources :users, only: [:show, :new, :create, :update]
+  resources :users, only: [:new, :create, :show], param: :username
   get 'login', to: 'sessions#new', as: :login
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy', as: :logout
@@ -43,6 +43,8 @@ Rails.application.routes.draw do
     resources :categories
     resources :forums
   end
+
+  get 'u/:username', to: 'users#show', as: :show
 
 
   # The priority is based upon order of creation: first created -> highest priority.

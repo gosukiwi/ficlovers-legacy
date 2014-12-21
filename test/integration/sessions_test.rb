@@ -9,7 +9,6 @@ class StoriesTest < ActionDispatch::IntegrationTest
     fill_in 'Password', with: user.password
     find('input[type=submit]').click
 
-
     assert_not_equal login_path, current_path
   end
 end

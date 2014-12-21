@@ -19,6 +19,10 @@ class User < ActiveRecord::Base
     role == 'admin'
   end
 
+  def to_param
+    username
+  end
+
   protected
 
     def set_defaults
