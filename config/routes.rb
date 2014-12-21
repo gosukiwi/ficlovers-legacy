@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  # Users
-  #get 'sessions/new'
+  root to: 'stories#hot'
 
   # Stories
   resources :stories, only: [:create, :update, :destroy, :new, :show] do
