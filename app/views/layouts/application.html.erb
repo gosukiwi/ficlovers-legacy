@@ -14,7 +14,7 @@
     <![endif]-->
 
     <nav class="navigation u-cf">
-      <h3 class="logo"><%= link_to 'FicLovers', forums_path %></h3>
+      <h3 class="logo"><%= link_to 'FicLovers', root_url %></h3>
       <ul>
         <% if logged_in? %>
           <li><%= link_to current_user.name, current_user, class: 'user' %></li>
