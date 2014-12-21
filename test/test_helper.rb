@@ -23,6 +23,6 @@ class ActionDispatch::IntegrationTest
     visit login_url
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password
-    click_on 'Login'
+    find('input[type=submit]').click
   end
 end
