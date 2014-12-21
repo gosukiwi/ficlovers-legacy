@@ -11,8 +11,11 @@ class UserTest < ActiveSupport::TestCase
   should_not allow_value('gmail.com').for(:email)
 
   should validate_presence_of :name
-  should validate_uniqueness_of :name
   should ensure_length_of(:name).is_at_most(50).is_at_least(2)
+
+  should validate_presence_of :username
+  should validate_uniqueness_of :username
+  should ensure_length_of(:username).is_at_most(25).is_at_least(3)
 
   should ensure_length_of(:password).is_at_least(6)
 

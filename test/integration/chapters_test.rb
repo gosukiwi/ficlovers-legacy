@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ChaptersApiTest < ActionDispatch::IntegrationTest
   def login_as(user)
-    post '/login', { session: { email: user.email, password: user.password } }
+    post '/login', { session: { username: user.username, password: user.password } }
   end
 
   test 'add chapter to story without logging in' do

@@ -2,8 +2,8 @@
 
 <%= form_for(:session, url: login_path) do |f| %>
   <div class="field">
-    <%= f.label 'Email', for: :email %><br>
-    <%= f.email_field :email, id: :email %>
+    <%= f.label 'Username', for: :username %><br>
+    <%= f.text_field :username, id: :username %>
   </div>
   <div class="field">
     <%= f.label 'Password', for: :password %><br>

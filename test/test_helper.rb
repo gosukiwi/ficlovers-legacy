@@ -21,7 +21,7 @@ class ActionDispatch::IntegrationTest
 
   def login_as user
     visit login_url
-    fill_in 'Email', with: user.email
+    fill_in 'Username', with: user.username
     fill_in 'Password', with: user.password
     find('input[type=submit]').click
   end
