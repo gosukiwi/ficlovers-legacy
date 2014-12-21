@@ -1,22 +1,3 @@
-.story-header {
-  background: asset-url('generic-header.jpg') 50% 55%;
-  background-size: cover;
-  height: 50px;
-  width: 100vw;
-  display: table-cell;
-  vertical-align: middle;
-  color: white;
-  text-align: center;
-  @include gradient-background;
-}
-
-.article.story {
-  h3 {
-    font-weight: 900;
-    text-transform: uppercase;
-  }
-}
-
 .reader {
   font-family: 'Noto Serif', sans-serif;
   font-size: 16px; // Use 16px base font size
@@ -164,57 +145,6 @@
 
   .dropdown {
     display: inline-block;
-  }
-}
-
-/* Dark theme */
-.dark {
-  .reader-container {
-    background-color: #444;
-
-    .reader {
-      color: #f1f1f1;
-
-      .reader-author {
-        color: #CCC;
-      }
-
-        .reader-author-link {
-          color: white;
-          text-decoration: underline;
-
-          &:hover {
-            text-decoration: none;
-          }
-        }
-    }
-  }
-
-  .reader-options {
-    .btn-default {
-      background-color: #111;
-      color: #f1f1f1;
-      border: none;
-    }
-  }
-
-  .btn-chapters {
-    background-color: #777;
-  }
-
-  .footer {
-    background-color: #444;
-    color: #f1f1f1;
-    border-top: 1px solid #777;
-    
-    a {
-      color: #f1f1f1;
-      text-decoration: underline;
-
-      &:hover {
-        text-decoration: none;
-      }
-    }
   }
 }
 

@@ -5,7 +5,7 @@
   <h1><%= @story.title %></h1>
 
   <div class="reader-author">
-    <%= link_to @story.user.name, @story.user, { class: 'reader-author-link' } %>, <%= time_ago_in_words @story.created_at %> ago
+    <%= link_to @story.user.username, @story.user, { class: 'reader-author-link' } %>, <%= time_ago_in_words @story.created_at %> ago
   </div>
 
   <div class="reader-navigation">

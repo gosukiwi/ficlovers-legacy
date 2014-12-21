@@ -21,7 +21,7 @@
 <div class="post">
   <div class="l-post-stack">
     <div class="stack author">
-      <%= link_to @post.user.name, @post.user %>
+      <%= link_to @post.user.username, @post.user %>
       <%= raw @post.user.gravatar %>
       <span class="stack post-count">
         <%= @post.user.post_count %> posts
@@ -50,7 +50,7 @@
 <% @replies.each do |reply| %>
   <div class="l-post-stack reply id-<%= reply.id %>">
     <div class="stack author">
-      <%= link_to reply.user.name, reply.user %>
+      <%= link_to reply.user.username, reply.user %>
       <%= raw reply.user.gravatar %>
       <span class="stack post-count">
         <%= reply.user.post_count %> posts
