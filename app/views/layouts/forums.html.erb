@@ -10,8 +10,8 @@
   </head>
   <body>
 
-    <nav class="forum-navigation">
-      <h3 class="logo"><%= link_to 'FicLovers', forums_path %></h3>
+    <nav class="navigation">
+      <h3 class="logo"><%= link_to 'FicLovers', root_url %></h3>
       <ul>
         <% if logged_in? %>
           <li><%= link_to current_user.username, current_user, class: 'user' %></li>
@@ -20,7 +20,7 @@
         <% end %>
         <li class="_dropdown">
           <a href="javascript:"><i class="fa fa-comment"></i></a>
-          <div class="_dropdown-content forum-notifications">
+          <div class="_dropdown-content navigation-notifications">
             <p>You have no notifications right now.</p>
           </div>
         </li>

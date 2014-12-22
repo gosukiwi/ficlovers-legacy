@@ -1,5 +1,46 @@
-@import "variables"
-@import "extensions"
-@import "typography"
-@import "utils"
-@import "dash"
+// Common: Shared styles across all apps
+.navigation
+  background-color: white
+  padding: 20px 0
+  font-family: "Source Sans Pro", sans-serif
+  width: 1110px
+  box-sizing: border-box
+  margin: 0 auto
+  .logo
+    padding: 0
+    margin: 0
+    font-weight: 900
+    text-transform: uppercase
+    float: left
+    font-size: 1.5em
+    a
+      text-decoration: none
+      color: $brand-primary
+      &:hover
+        color: lighten($brand-primary, 10%)
+  ul
+    padding: 0
+    margin: 0
+    list-style: none
+    float: right
+  li
+    display: inline-block
+    padding: 0 10px
+  a
+    color: #777
+    &:hover
+      color: black
+  .user
+    +button
+    font-size: 85%
+
+.navigation-notifications
+  border: 1px solid #e1e1e1
+  margin-top: 10px
+  font-size: 85%
+  p
+    padding: 5px 10px
+    margin: 0
+    color: #444
+    font-weight: 80%
+

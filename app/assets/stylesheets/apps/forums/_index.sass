@@ -21,25 +21,21 @@
   vertical-align: baseline
 
 .forum-menu-link
-  color: #777
-  text-decoration: none
-  padding: 4px 10px
-  border-radius: 2px
+  +button(white, #777)
   &:hover
     color: #444
-    text-decoration: none
     background-color: #e7e7e7
   &.active
-    background-color: $brand-primary
+    background-color: $color-primary
     color: white
     &:hover
-      background-color: darken($brand-primary, 10%)
+      background-color: darken($color-primary, 10%)
 
 // New post link
 .new-post
   display: table-cell
   text-align: right
-  background-color: $brand-primary
+  background-color: $color-primary
   color: white
   font-weight: bold
   padding: 3px 10px
@@ -48,6 +44,6 @@
   border-radius: 2px
   text-decoration: none
   &:hover, &:focus
-    background-color: darken($brand-primary, 10%)
+    background-color: darken($color-primary, 10%)
     color: white
     text-decoration: none
