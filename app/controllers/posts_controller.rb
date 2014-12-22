@@ -6,7 +6,7 @@ class PostsController < ApplicationController
 
   def show
     authorize @post
-    @post = @post.decorate
+    @post = @post
     @post.increment_views
     @forums = Forum.all
     @replies = @post.paginated_replies(params[:page])

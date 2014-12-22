@@ -22,7 +22,7 @@
   <div class="l-post-stack">
     <div class="stack author">
       <%= link_to @post.user.username, @post.user %>
-      <%= raw @post.user.gravatar %>
+      <%= raw gravatar_for(@post.user) %>
       <span class="stack post-count">
         <%= @post.user.post_count %> posts
       </span>
@@ -51,7 +51,7 @@
   <div class="l-post-stack reply id-<%= reply.id %>">
     <div class="stack author">
       <%= link_to reply.user.username, reply.user %>
-      <%= raw reply.user.gravatar %>
+      <%= raw gravatar_for(reply.user) %>
       <span class="stack post-count">
         <%= reply.user.post_count %> posts
       </span>
