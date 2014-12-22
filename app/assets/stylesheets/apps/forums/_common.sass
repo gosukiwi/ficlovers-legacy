@@ -1,18 +1,13 @@
+// Common styles across this app/module
 .forum-content
   width: 1110px
   margin: 30px auto
 
-.btn
-  padding: 3px 10px
-  font-family: 'Source Sans Pro', sans-serif
-  font-weight: bold
-  border: none
-  border-radius: 2px
-
 .btn-default
-  background-color: #e7e7e7
-  &:hover
-    background-color: darken(#e7e7e7, 5%)
+  +button(#e7e7e7, #111)
+
+.btn-primary
+  +button
 
 .alert
   h1, h2, h3
@@ -79,3 +74,31 @@
   background-color: $color-forum-sp
 .forum-offtopic
   background-color: $color-forum-ot
+
+// Table
+.posts-table
+  width: 100%
+  margin-top: 20px
+  th
+    color: #777
+    text-transform: uppercase
+    text-align: left
+  td
+    padding: 5px
+  .fa
+    color: #777
+    font-size: 90%
+    padding-right: 5px
+
+.forum-tag
+  font-size: 85%
+
+.posts-table-link
+  &:hover
+    text-decoration: underline
+
+.forum-title
+  margin-top: 15px
+
+.forum-pagination
+  margin-top: 50px

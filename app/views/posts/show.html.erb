@@ -34,13 +34,13 @@
       <div class="actions">
         <% if policy(@post).pin? %>
           <% if @post.pinned? %>
-            <%= link_to 'Unpin', pin_forum_post_path(@forum, @post, format: :js), method: :delete, remote: true, class: 'btn btn-default btn-pin' %>
+            <%= link_to 'Unpin', pin_forum_post_path(@forum, @post, format: :js), method: :delete, remote: true, class: 'btn-default btn-pin' %>
           <% else %>
-            <%= link_to 'Pin', pin_forum_post_path(@forum, @post, format: :js), method: :delete, remote: true, class: 'btn btn-default btn-pin' %>
+            <%= link_to 'Pin', pin_forum_post_path(@forum, @post, format: :js), method: :delete, remote: true, class: 'btn-default btn-pin' %>
           <% end %>
         <% end %>
-        <%= link_to 'Edit', edit_forum_post_path(@forum, @post), class: 'btn btn-default btn-edit' if policy(@post).update? %>
-        <%= link_to 'Delete', [@forum, @post], method: :delete, class: 'btn btn-default btn-delete' if policy(@post).destroy? %>
+        <%= link_to 'Edit', edit_forum_post_path(@forum, @post), class: 'btn-default btn-edit' if policy(@post).update? %>
+        <%= link_to 'Delete', [@forum, @post], method: :delete, class: 'btn-default btn-delete' if policy(@post).destroy? %>
       </div>
     </div>
   </div>
@@ -62,8 +62,8 @@
       </div>
 
       <div class="actions">
-        <%= link_to 'Edit', edit_forum_post_reply_path(@forum, @post, reply), class: 'btn btn-default btn-edit' if policy(reply).update? %>
-        <%= link_to 'Delete', [@forum, @post, reply], method: :delete, class: 'btn btn-default btn-delete' if policy(reply).destroy? %>
+        <%= link_to 'Edit', edit_forum_post_reply_path(@forum, @post, reply), class: 'btn-default btn-edit' if policy(reply).update? %>
+        <%= link_to 'Delete', [@forum, @post, reply], method: :delete, class: 'btn-default btn-delete' if policy(reply).destroy? %>
       </div>
     </div>
   </div>
