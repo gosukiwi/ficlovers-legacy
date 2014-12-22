@@ -1,0 +1,317 @@
+// Header
+// ---------------------------------------------------------------------------
+.user-header
+  background: asset-url("pattern.png")
+
+.user-header-content
+  height: 250px
+  width: 100%
+  box-sizing: border-box
+  position: relative
+
+.user-avatar
+  position: absolute
+  bottom: -15px
+  left: 15px
+  border: 5px solid #363636
+  border-radius: 3px
+
+.user-profile
+  position: absolute
+  left: 160px
+  bottom: 0
+  color: white
+  p
+    margin-top: 0
+    font-size: 90%
+  h3
+    margin: 0 0 5px
+
+.user-follow-btn
+  position: absolute
+  right: 15px
+  bottom: 15px
+  background-color: $brand-primary
+  color: white
+  font-weight: bold
+  text-decoration: none
+  padding: 3px 15px
+  font-size: 85%
+  text-transform: lowercase
+  border-radius: 2px
+  .fa
+    padding-left: 5px
+  &:hover
+    background-color: darken($brand-primary, 10%)
+
+// User bar
+// ---------------------------------------------------------------------------
+.user-bar
+  padding: 0
+  margin: 0 0 20px
+  text-align: center
+  list-style: none
+  font-size: 90%
+  border-bottom: 1px solid #ccc
+  li
+    display: inline-block
+    margin: 0 -2px -1px
+  .fa
+    padding-right: 3px
+  .user-link
+    padding: 10px 15px
+    color: #444
+    display: block
+    text-decoration: none
+    &:hover
+      background-color: #e9e9e9
+      border-bottom: 4px solid $brand-primary
+      color: $brand-primary
+      transition: border-bottom 0.25s, color 0.3s
+  li.active .user-link
+    border-bottom: 4px solid $brand-primary
+    font-weight: bold
+
+// Main content
+// ---------------------------------------------------------------------------
+.user-container
+  +outer-container(100%)
+  padding: 0 5px
+
+.user-entries
+  +span-columns(6)
+
+.user-info
+  +span-columns(6)
+
+// Modules
+// ---------------------------------------------------------------------------
+
+// Module: Fics
+.fic-container
+  +outer-container(100%)
+
+.fic
+  $gutter: golden-ratio(1em, 1) !default
+  +span-columns(4)
+  +omega(3n)
+  margin-bottom: 10px
+
+.fic-header
+  margin: 0 0 10px
+
+.fic-content
+  border: 1px solid #999
+  box-shadow: 1px 1px 3px #999
+
+.fic-title
+  padding: 10px
+  margin: 0
+  background-color: white
+  a
+    color: #111
+    text-decoration: none
+    &:hover
+      text-decoration: underline
+
+.fic-description
+  margin: 0
+  padding: 0 10px
+  height: 90px
+  overflow: hidden
+  position: relative
+  p
+    margin: 0
+    line-height: 1.35
+
+.fic-info
+  background-color: white
+  padding: 5px 0 5px
+  margin: 0
+  list-style: none
+  text-align: center
+  color: #777
+  font-size: 90%
+  li
+    margin: 0 2px
+    display: inline-block
+
+.fic-tags
+  list-style: none
+  padding: 0
+  margin: 0 5px 5px
+  font-size: 80%
+  max-height: 22px
+  overflow: hidden
+  transition: max-height 0.2s
+  text-align: center
+  &:hover
+    max-height: 500px
+    transition: max-height 1s
+  li
+    display: inline-block
+
+.fic-tags-info
+  color: #777
+  text-transform: uppercase
+  padding-right: 5px
+  font-weight: bold
+
+.fic-link
+  +button(#e9e9e9, #111111)
+  border-right: 1px solid white
+  border-left: 1px solid white
+  border-bottom: 1px solid white
+  display: block
+  border-radius: 0
+  text-align: center
+  text-transform: uppercase
+  font-size: 85%
+  margin-top: 5px
+
+.fic-action
+  display: block
+  clear: both
+  text-align: center
+
+.fic-nothing
+  color: #777
+  font-size: 90%
+
+.fic-see-all-btn
+  +button($brand-primary, white)
+  font-size: 90%
+  padding: 3px 15px
+
+// Module: Activity
+.activity-title
+  margin: 0 0 10px
+
+.activity
+  list-style: none
+  padding: 0
+  margin: 0
+  font-size: 85%
+  color: #777
+  li
+    padding: 5px 10px
+    border-bottom: 1px solid #ccc
+    background-color: #e9e9e9
+    text-transform: lowercase
+    &:first-child
+      border-top: 1px solid #ccc
+
+// Module: Tabs
+.user-tabs
+  list-style: none
+  margin: 0 0 15px
+  padding: 0
+  font-size: 90%
+  border-bottom: 1px solid #ccc
+  li
+    padding: 5px 15px
+    display: inline-block
+    cursor: pointer
+    margin: 0 -2px
+    background-color: white
+    &.active
+      border-top: 4px solid $brand-primary
+      font-weight: bold
+    &:hover
+      border-top: 4px solid $brand-primary
+      transition: border-top 0.25s
+      background-color: #e9e9e9
+
+// Module: User Bio
+.user-bio-title
+  margin: 0 0 5px
+
+.user-bio-content
+  margin: 0 0 20px
+
+// Module: Wall
+.user-wall
+  padding: 10px
+  margin: 0
+  list-style: none
+
+.user-wall-entry
+  display: table
+  width: 100%
+  margin-bottom: 10px
+
+.user-wall-author
+  width: 55px
+  display: table-cell
+
+.user-wall-message
+  display: table-cell
+  vertical-align: top
+  font-size: 90%
+  position: relative
+  &:after
+    position: absolute
+    left: -5px
+    top: 5px
+    width: 0
+    height: 0
+    content: ' '
+    border-style: solid
+    border-width: 3px 10px 3px 0
+    border-color: transparent #e1e1e1 transparent transparent
+
+.user-wall-message-content
+  padding: 10px 15px
+  margin: 0
+  margin-left: 5px
+  background-color: #e1e1e1
+  border-radius: 2px
+  p
+    margin: 0 0 16px
+    &:last-child
+      margin: 0
+
+.user-wall-message-info
+  margin-bottom: 5px
+
+.user-wall-message-info-link
+  color: #111
+  text-decoration: none
+  font-weight: bold
+  &:hover
+    text-decoration: underline
+
+.user-wall-message-info-date
+  font-size: 90%
+  color: #777
+  display: inline-block
+  padding-left: 5px
+
+// New wall entry related
+.user-wall-new
+  text-align: right
+
+.user-wall-new-title
+  margin: 0 0 10px
+  font-weight: bold
+  text-align: left
+
+.user-wall-new-content
+  display: block
+  width: 100%
+  padding: 5px
+  box-sizing: border-box
+  height: 250px
+  max-height: 50px
+  transition: max-height 0.25s
+  &:focus
+    max-height: 250px
+    transition: max-height 0.25s
+
+.user-wall-new-add-btn
+  +button
+  margin: 10px 0 0
+
+.user-wall-new-preview-btn
+  +button(#e1e1e1, #111111)
+  margin: 10px 0 0

@@ -122,7 +122,7 @@ $('.fic-description').each(function (idx, el) {
   if($p.height() < $el.height()) return;
 
   var stop = false;
-  var ammountToMove = ($p.height() + 55) - $el.height();
+  var ammountToMove = ($p.height() + 45) - $el.height();
   var speed = 25 / 1000;
   var lastStep = 0;
   var current = 0;

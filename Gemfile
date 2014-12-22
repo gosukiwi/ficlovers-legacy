@@ -33,9 +33,9 @@ gem 'will_paginate', '~> 3.0.6'
 
 # Front-end related gems
 gem "haml-rails"
-# use susy, for this we need beta sass support
+# use "new" sass, neat and bourbon
 gem 'sass-rails', '~> 5.0.0.beta1'
-gem 'susy'
+gem 'neat'
 # others
 gem 'font-awesome-rails'
 gem 'autoprefixer-rails'
