@@ -4,7 +4,8 @@
 function prettyReader($reader) {
   var $chapters   = $reader.find('.chapter');
   var $btnNext    = $reader.find('#reader-btn-next');
-  var $btnPrev    = $reader.find('#reader-btn-prev'); var current     = 0;
+  var $btnPrev    = $reader.find('#reader-btn-prev'); 
+  var current     = 0;
 
   function initialize() {
     setupDOM();
@@ -116,8 +117,8 @@ if($reader.length > 0) {
 // Fic scroll
 // ---------------------------------------------------------------------------
 var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
-$('.fic-description').each(function (idx, el) {
-  var $el = $(el);
+var buildFicScroll = function (idx, el) {
+  var $el = $(el).unbind();
   var $p = $el.find('p');
   if($p.height() < $el.height()) return;
 
@@ -163,6 +164,11 @@ $('.fic-description').each(function (idx, el) {
     stop = true;
     $p.css('transform', 'translateY(0)');
   });
-});
+};
+
+$('.fic-description').each(buildFicScroll);
+$(window).resize(_.debounce(function () {
+  $('.fic-description').each(buildFicScroll);
+}, 200));
 
 }(jQuery));

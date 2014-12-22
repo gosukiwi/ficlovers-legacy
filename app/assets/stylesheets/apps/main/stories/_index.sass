@@ -1,0 +1,43 @@
+.stories-container
+  +outer-container(1110px)
+  margin-bottom: 20px
+
+// Module: Stories navigation
+.stories-navigation
+  text-align: center
+  padding: 0
+  margin: 0 0 30px
+  list-style: none
+
+  li
+    display: inline-block
+    margin: 0 2px
+
+  .active .stories-navigation-link
+    +button
+
+.stories-navigation-link
+  +button(white, #111)
+
+.stories-navigation-title
+  text-transform: uppercase
+  color: #777
+  font-size: 95%
+
+// Module: Stories header
+.stories-header
+  background: asset-url('pattern.png')
+  text-align: center
+  margin-bottom: 30px
+  padding: 50px 0
+
+.stories-header-title
+  color: white
+  font-family: $serif
+
+.stories-header-info
+  margin: 0
+  color: white
+  font-size: 90%
+  color: rgba(255, 255, 255, 0.85)
+  text-transform: uppercase

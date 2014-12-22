@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery-ui/autocomplete
 //= require jquery.tagsinput
+//= require underscore
 //x= require turbolinks
 //= require common/fonts
 //= require common/_dash

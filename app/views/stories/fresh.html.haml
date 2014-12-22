@@ -1,0 +1,49 @@
+.stories-header
+  %h1.stories-header-title Fresh Stories
+  %p.stories-header-info Latest published fics, be the first to check them out!
+
+%ul.stories-navigation
+  %li.stories-navigation-title Browsing Fics:
+  %li
+    = link_to 'Hot', hot_stories_path, class: 'stories-navigation-link'
+  %li.active
+    = link_to 'Fresh', fresh_stories_path, class: 'stories-navigation-link'
+
+.stories-container
+  - @stories.each do |story|
+    .fic
+      .fic-content
+        %h4.fic-title
+          = link_to story.title, story
+        .fic-author
+          = link_to story.user.username, story.user
+          ,
+          = time_ago_in_words story.updated_at 
+          ago
+        .fic-description 
+          %p 
+            = story.summary
+        %ul.fic-info
+          %li
+            = story.chapters.count
+            chapters
+          %li
+            = story.views
+            views
+          %li
+            = story.favorited_by.count
+            favs
+        %ul.fic-tags
+          %li.fic-tags-info
+            =story.active_tags.count
+            tags:
+          - story.active_tags.each do |tag|
+            %li 
+              %span{ class: "tag-#{tag.context}" }
+                = tag.name
+        = link_to 'Read', story, class: 'fic-link'
+
+- unless @stories.empty?
+  = will_paginate @stories
+  .pagination-info
+    = page_entries_info @stories, model: 'fics'
