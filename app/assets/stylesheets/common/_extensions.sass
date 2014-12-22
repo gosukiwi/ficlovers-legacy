@@ -1,4 +1,4 @@
-=button($bg: $brand-primary, $fg: white)
+=button($bg: $color-primary, $fg: white)
   background-color: $bg
   font-size: 90%
   font-weight: bold
@@ -10,5 +10,7 @@
   border-radius: 2px
   font-family: $sans-serif
   cursor: pointer
+
   &:hover
+    color: $fg
     background-color: darken($bg, 10%)
