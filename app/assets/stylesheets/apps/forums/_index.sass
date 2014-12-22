@@ -1,0 +1,53 @@
+.forum-menu-container
+  display: table
+  font-family: 'Source Sans Pro', sans-serif
+  width: 100%
+  font-size: 90%
+
+// Forums menu
+.forum-menu
+  padding: 0
+  margin: 0
+  list-style: none
+  padding-left: 20px
+  display: table-cell
+
+.forum-menu-item
+  display: inline-block
+  padding: 0
+  margin: 0
+  font-weight: bold
+  color: #777
+  vertical-align: baseline
+
+.forum-menu-link
+  color: #777
+  text-decoration: none
+  padding: 4px 10px
+  border-radius: 2px
+  &:hover
+    color: #444
+    text-decoration: none
+    background-color: #e7e7e7
+  &.active
+    background-color: $brand-primary
+    color: white
+    &:hover
+      background-color: darken($brand-primary, 10%)
+
+// New post link
+.new-post
+  display: table-cell
+  text-align: right
+  background-color: $brand-primary
+  color: white
+  font-weight: bold
+  padding: 3px 10px
+  width: 80px
+  text-align: center
+  border-radius: 2px
+  text-decoration: none
+  &:hover, &:focus
+    background-color: darken($brand-primary, 10%)
+    color: white
+    text-decoration: none
