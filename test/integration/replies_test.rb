@@ -53,7 +53,7 @@ class RepliesTest < ActionDispatch::IntegrationTest
     visit forum_post_url(post.forum, post)
 
     assert_equal post.title, find('.post-title').text
-    assert_equal reply.user.name, find(".reply.id-#{reply.id} .stack.author a:first-child").text
+    assert_equal reply.user.username, find(".reply.id-#{reply.id} .stack.author a:first-child").text
     assert_equal reply.content, find(".reply.id-#{reply.id} .reply-text").text
   end
 

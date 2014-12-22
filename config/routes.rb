@@ -33,6 +33,9 @@ Rails.application.routes.draw do
     end
   end
 
+  # Notification
+  resources :notifications, only: [:index]
+
   # Admin/Mod dashboard
   namespace :admin do
     #resources :admin, only: [:index]

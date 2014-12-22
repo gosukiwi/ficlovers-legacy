@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :favs
   has_many :favorites, through: :favs, source: :story
   has_many :posts
+  has_many :notifications
 
   has_secure_password
 
