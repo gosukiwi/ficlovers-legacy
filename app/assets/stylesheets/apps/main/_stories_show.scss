@@ -1,62 +1,75 @@
+// Module: Header
+.story-header {
+  background: asset-url('pattern-stardust.png');
+  display: table;
+  width: 100%;
+}
+  
+  .story-header-content {
+    height: 250px;
+    box-sizing: border-box;
+    position: relative;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+  }
+
+  .story-header-content-title {
+    font-size: 3.5em;
+    font-family: $serif;
+    margin: 15px 0;
+    padding: 0;
+
+    opacity: 0;
+    animation: appear-from-below 1s;
+    animation-delay: 0.15s;
+    animation-fill-mode: forwards;
+  }
+
+  .story-header-content-link {
+    color: white;
+    font-weight: bold;
+
+    opacity: 0;
+    animation: appear-from-below 1s;
+    animation-delay: 0.35s;
+    animation-fill-mode: forwards;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+.story-tags {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  background-color: #e9e9e9;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+
+  li {
+    display: inline-block;
+    font-size: 85%;
+  }
+}
+
+// Module: Reader
 .reader {
-  font-family: 'Noto Serif', sans-serif;
+  font-family: $serif;
   font-size: 16px; // Use 16px base font size
   line-height: 1.5;
   max-width: 640px;
   margin: 0 auto -20px;
-  padding: 35px 15px 15px;
+  padding: 15px 15px 15px;
   color: #444;
   position: relative;
 
-  h1 {
-    text-align: center;
-    font-size: 3em;
-    opacity: 0;
-    animation: appear-from-below 1s;
-    animation-delay: 0.3s;
-    animation-fill-mode: forwards;
-    max-width: 540px;
-    margin: 20px auto 10px;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4 {
+  h2, h3, h4, h5 {
     font-weight: 900;
   }
 }
-
-  .reader-author {
-    opacity: 0;
-    text-align: center;
-    display: block;
-    animation: appear-from-below 1s;
-    animation-delay: 0.15s;
-    animation-fill-mode: forwards;
-    margin-bottom: 15px 0 50px;
-    color: #777;
-  }
-  
-  .reader-tags {
-    padding: 10px 0;
-    font-size: 90%;
-    font-family: 'Source Sans Pro', sans-serif;
-    margin: 40px 0 -20px;
-    text-align: center;
-    backgrond-color: #f1f1f1;
-    overflow: hidden;
-    box-sizing: border-box;
-    transition: max-height 0.5s;
-    background-color: lighten(#ccc, 10%);
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-
-    li {
-      padding: 3px 6px;
-      display: inline-block;
-    }
-  }
 
   .chapter {
     animation: appear-from-below 1s;
@@ -64,15 +77,31 @@
 
   .reader-actions {
     padding: 15px 0;
-    text-align: center;
-    position: relative;
-    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
 
     /* buttons are hidden by default and displayed with Javascript, because
      * paginatino is also made with Javascript, it makes no sense to have
      * buttons if Javascript is disabled. */
-    .btn {
-      display: none;
+    .btn { 
+      display: inline-block;
+      @include button(#e1e1e1, #444);
+
+      .fa {
+        font-size: 70%;
+      }
+    }
+
+    .btn-prev {
+      float: left;
+
+      .fa { padding-right: 5px; }
+    }
+
+    .btn-next {
+      float: right;
+
+      .fa { padding-left: 5px; }
     }
 
     .btn-fav {
@@ -84,70 +113,53 @@
         text-decoration: none;
       }
     }
+  }
 
-    .fa {
-      transition: padding 0.25s;
-    }
+// Module: Story Options
+.story-options {
+  position: fixed;
+  top: 380px;
+  left: 0;
 
-    .prev {
-      position: absolute;
-      left: 0;
-      top: 10px;
+  &:hover .story-options-link {
+    width: 120px;
 
-      &:hover {
-        .fa {
-          padding-right: 5px;
-        }
-      }
-    }
-
-    .next {
-      position: absolute;
-      right: 0;
-      top: 10px;
-
-      &:hover {
-        .fa {
-          padding-left: 5px;
-        }
-      }
+    .story-options-link-text {
+      display: inline-block;
     }
   }
-  
-.reader-navigation {
-  position: absolute;
-  top: 61px;
-  left: 10px;
-  opacity: 0;
-  animation: appear-from-below 1s;
-  animation-delay: 0.5s;
-  animation-fill-mode: forwards;
 }
 
-  .btn-chapters {
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    background-color: #444;
-    color: #e7e7e7;
-    border: none;
+  .story-options-link {
+    background-color: #111;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+    text-align: right;
 
     &:hover {
-      background-color: #777;
-      color: white;
+      background-color: #333;
     }
   }
+    
+    .story-options-link-text {
+      text-transform: uppercase;
+      font-size: 90%;
+      padding-right: 5px;
+      display: none;
+    }
 
-.reader-options {
-  position: absolute;
-  top: 65px;
-  right: 15px;
-
-  .dropdown {
-    display: inline-block;
-  }
+// Module: Status
+.story-status {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 10px;
+  color: #777;
+  font-weight: bold;
 }
-
+  
 /* Animations */
 @keyframes appear-from-below {
   from {
@@ -162,22 +174,4 @@
 }
 
 @media screen and (max-width: 640px) {
-  .reader-navigation {
-    top: 10px;
-  }
-
-  .reader-options {
-    top: 60px;
-  }
-
-  .reader {
-    h1 {
-      font-size: 2.6em;
-      margin-top: 40px;
-    }
-  }
-
-  .reader-author {
-    margin-bottom: 30px;
-  }
 }

@@ -1,0 +1,44 @@
+.story-header
+  .story-header-content
+    %h1.story-header-content-title
+      = @story.title
+    %span by
+    %a.story-header-content-link{ href: user_path(@story.user) }
+      = @story.user.username
+
+
+- if @story.active_tags.exists?
+  %ul.story-tags
+    - @story.active_tags.each do |tag|
+      %li
+        %a{ class: "tag-#{tag.context}", href: search_stories_path(tags: tag.to_s, category: 0) }
+          = tag.name
+
+.reader
+  .reader-chapters
+    - @story.chapters.ordered.each do |chapter|
+      .chapter
+        %h2
+          = chapter.title
+        != chapter.content
+    .reader-actions.u-cf
+      %a.btn.btn-prev#reader-btn-prev
+        %i.fa.fa-chevron-left
+        Previous Chapter
+      %a.btn.btn-next#reader-btn-next
+        Next Chapter
+        %i.fa.fa-chevron-right
+
+.story-options
+  %a{ href: add_to_fav_path(@story, format: :js), class: 'story-options-link', data: { method: :post, remote: true } }
+    %span.story-options-link-text Add to favs
+    %i.fa.fa-heart
+  - if policy(@story).write?
+    %a{ href: write_story_path(@story), class: 'story-options-link' }
+      %span.story-options-link-text Edit
+      %i.fa.fa-pencil
+    %a{ href: story_path(@story), class: 'story-options-link', data: { method: :delete, confirm: 'Are you sure?' } }
+      %span.story-options-link-text Delete
+      %i.fa.fa-times
+
+.story-status

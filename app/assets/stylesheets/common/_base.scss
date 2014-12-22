@@ -4,6 +4,58 @@ body {
   font-family: 'Source Sans Pro', serif;
 }
 
+// Typography
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  line-height: 1.25;
+  margin: 0 0 .3em;
+  text-rendering: optimizeLegibility;
+
+  a {
+    font-weight: inherit;
+  }
+}
+
+/**
+* set typographic scale 
+* <http://spencermortensen.com/articles/typographic-scale/>
+* start from "48px" for h1, as the base font-size is 16px, use (48/16)ems.
+*/
+h1 {
+  font-size: 3em;
+}
+
+h2 {
+  font-size: 2.25em;
+}
+
+h3 {
+  font-size: 1.5em;
+}
+
+h4 {
+  font-size: 1.5em;
+}
+
+h5 {
+  font-size: 1.3125em;
+}
+
+h6 {
+  font-size: 1.125em;
+}
+
+// Adjust paragraphs
+p {
+  margin: 0 0 1.5em 0;
+  line-height: 1.5;
+
+  img {
+    margin: 0;
+  }
+}
+// End of Typography
+
 @include tag-genre('fandoms', $color-fandoms);
 @include tag-genre('characters', $color-characters);
 @include tag-genre('genres', $color-genres);

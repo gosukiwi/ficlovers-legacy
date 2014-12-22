@@ -9,6 +9,11 @@ $color-forum-gd: complement($color-forum-fd);
 $color-forum-sp: #89ba28;
 $color-forum-ot: complement($color-forum-sp);
 
+// Fonts
+$serif: 'Noto Serif', serif;
+$sans-serif: 'Source Sans Pro', sans-serif;
+
+
 $susy: (
   columns: 12,
   gutter-position: inside,

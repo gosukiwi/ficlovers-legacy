@@ -14,9 +14,10 @@ function prettyReader($reader) {
   function setupDOM() {
     // Hide all chapters and show first
     $chapters
-      .addClass('hidden')
+      .hide()
       .first()
-      .removeClass('hidden');
+      .show()
+    ;
   }
 
   function setChapterHash(idx) {
@@ -24,8 +25,8 @@ function prettyReader($reader) {
   }
 
   function selectChapter(idx) {
-    $chapters.addClass('hidden');
-    $( $chapters.get(idx) ).removeClass('hidden');
+    $chapters.hide();
+    $( $chapters.get(idx) ).show();
     $('body').animate({scrollTop: 0});
     setChapterHash(idx);
 
