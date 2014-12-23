@@ -4,23 +4,26 @@
   %ul
     %li
       - if logged_in?
-        %a{ href: new_story_path, class: 'nav-write' }
+        %a{ href: new_story_path, class: 'nav-link-primary' }
           %i.fa.fa-pencil
           Write
     %li._dropdown
-      %a{ href: 'javascript:' }
+      %a{ href: 'javascript:', class: 'nav-link-icon' }
         %i.fa.fa-comment
       ._dropdown-content.navigation-notifications
         %p You have no notifications right now
     %li
-      %a{ href: '#' }
+      %a{ href: '#', class: 'nav-link-icon' }
         %i.fa.fa-search
     %li
       - if logged_in?
-        %a{ href: user_path(current_user), class: 'nav-user' }
+        %a{ href: user_path(current_user), class: 'nav-link' }
           %i.fa.fa-user
+          Profile
       - else
-        = link_to 'Login', login_path, class: 'nav-user'
-    %li
+        %a{ href: login_path, class: 'nav-link-primary' }
+          %i.fa.fa-sign-in
+          Login
+    %li.nav-link-hidden
       %a{ href: '#' }
         %i.fa.fa-navicon
