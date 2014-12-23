@@ -7,14 +7,17 @@
         %a{ href: new_story_path, class: 'nav-link-primary' }
           %i.fa.fa-pencil
           Write
-    %li._dropdown
-      %a{ href: 'javascript:', class: 'nav-link-icon' }
-        %i.fa.fa-comment
-      ._dropdown-content.navigation-notifications
-        %p You have no notifications right now
+    %li
+      %a{ href: forums_path, class: 'nav-link-icon' }
+        %i.fa.fa-comments
     %li
       %a{ href: '#', class: 'nav-link-icon' }
         %i.fa.fa-search
+    %li._dropdown
+      %a{ href: 'javascript:', class: 'nav-link-icon' }
+        %i.fa.fa-bell
+      ._dropdown-content.navigation-notifications
+        %p You have no notifications right now
     %li
       - if logged_in?
         %a{ href: user_path(current_user), class: 'nav-link' }
