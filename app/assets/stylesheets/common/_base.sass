@@ -1,5 +1,6 @@
 // Common: Shared styles across all apps
 .navigation
+  +clearfix
   background-color: white
   padding: 20px 0
   font-family: "Source Sans Pro", sans-serif
@@ -30,9 +31,13 @@
     color: #777
     &:hover
       color: black
-  .user
+  .nav-user
+    color: #111
+  .nav-write
     +button
     font-size: 85%
+    .fa
+      padding-right: 5px
 
 .navigation-notifications
   border: 1px solid #e1e1e1

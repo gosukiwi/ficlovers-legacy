@@ -13,24 +13,7 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <nav class="navigation u-cf">
-      <h3 class="logo"><%= link_to 'FicLovers', root_url %></h3>
-      <ul>
-        <% if logged_in? %>
-          <li><%= link_to current_user.username, current_user, class: 'user' %></li>
-        <% else %>
-          <li><%= link_to 'Login', login_path, class: 'user' %></li>
-        <% end %>
-        <li class="_dropdown">
-          <a href="javascript:"><i class="fa fa-comment"></i></a>
-          <div class="_dropdown-content navigation-notifications">
-            <p>You have no notifications right now.</p>
-          </div>
-        </li>
-        <li><a href="#"><i class="fa fa-search"></i></a></li>
-        <li><a href="#"><i class="fa fa-navicon"></i></a></li>
-      </ul>
-    </nav>
+    <%= render '/layouts/navigation' %>
 
     <% if flash[:danger] %>
       <div class="danger"><%= flash[:danger] %></div>

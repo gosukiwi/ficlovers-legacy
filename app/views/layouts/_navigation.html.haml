@@ -1,0 +1,26 @@
+%nav.navigation
+  %h3.logo 
+    = link_to 'FicLovers', root_url
+  %ul
+    %li
+      - if logged_in?
+        %a{ href: new_story_path, class: 'nav-write' }
+          %i.fa.fa-pencil
+          Write
+    %li._dropdown
+      %a{ href: 'javascript:' }
+        %i.fa.fa-comment
+      ._dropdown-content.navigation-notifications
+        %p You have no notifications right now
+    %li
+      %a{ href: '#' }
+        %i.fa.fa-search
+    %li
+      - if logged_in?
+        %a{ href: user_path(current_user), class: 'nav-user' }
+          %i.fa.fa-user
+      - else
+        = link_to 'Login', login_path, class: 'nav-user'
+    %li
+      %a{ href: '#' }
+        %i.fa.fa-navicon
