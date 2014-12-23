@@ -7,7 +7,7 @@
   app.Chapter = Backbone.Model.extend({
     defaults: {
       title: null,
-      content: 'Lorem ipsum dolor sit amet.',
+      content: 'Once upon a time...',
       selected: false,
       order: 1
     },

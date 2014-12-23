@@ -26,8 +26,8 @@ class ChaptersApiTest < ActionDispatch::IntegrationTest
       content: 'This is the contentthe contentthe contentthe contentthe contentthe contentthe contentthe contentthe contentthe contentthe contentthe contentthe content'
     }.to_json, { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s }
 
-    # 204: no_content
-    assert_equal 204, response.status
+    assert_equal 200, response.status
+    assert_equal story.id, JSON.parse(response.body, symbolize_names: true).id
   end
 
   test 'add invalid chapter to story' do
