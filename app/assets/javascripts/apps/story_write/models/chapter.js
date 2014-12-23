@@ -6,10 +6,16 @@
 
   app.Chapter = Backbone.Model.extend({
     defaults: {
-      title: 'My Chapter Title',
+      title: null,
       content: 'Lorem ipsum dolor sit amet.',
       selected: false,
       order: 1
+    },
+
+    initialize: function () {
+      if(null === this.get('title')) {
+        this.set('title', 'Chapter ' + this.get('order'));
+      }
     },
 
     select: function () {

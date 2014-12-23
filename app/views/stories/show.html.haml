@@ -14,7 +14,7 @@
     %ul._dropdown-content.story-chapters-list
       - @story.chapters.each_with_index do |chapter, index|
         %li
-          %a{ href: '#', data: { page: index }, class: 'btn-chapter' } Chapter #{index + 1}
+          %a{ href: '#', data: { page: index }, class: 'btn-chapter' } Chapter #{index + 1}: #{chapter.title}
 
   - if @story.active_tags.exists?
     %ul.story-tags

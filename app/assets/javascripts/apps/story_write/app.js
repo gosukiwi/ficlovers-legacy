@@ -13,49 +13,31 @@
   // Get app namespace or initialize
   var app = window.app || {};
 
-  var appRouter = new (Backbone.Router.extend({
+  var initializers = {
 
-    initialize: function () {
+    start: function() {
+      this.writeView();
+      this.autosave();
+    },
+
+    // Load the story from the bootstrap and set up the main view
+    writeView: function () {
       this.story = new app.Story(bootstrap);
-      this.story.chapters.on('change:title', this.updateCurrentRoute, this);
-      
       new app.WriteView({
         el: '#write',
         model: this.story
       });
-
-      this.autosave();
     },
 
-    // save every 60 seconds
+    // Save once and fire up autosave
     autosave: function () {
       this.story.save();
       this.story.chapters.save();
       setTimeout($.proxy(this.autosave, this), 60 * 1000);
     },
 
-    start: function () {
-      Backbone.history.start({ pushState: false });
-    },
+  };
 
-    routes: {
-      'chapter/:name': 'showChapter',
-    },
-
-    updateCurrentRoute: function (chapter) {
-      var title = decodeURIComponent(chapter.get('title'));
-      this.navigate('chapter/' + title);
-    },
-
-    showChapter: function(name) {
-      var chapter = this.story.chapters.findWhere({ title: name });
-      if(chapter) {
-        this.story.chapters.select(chapter);
-      }
-    },
-
-  }))();
-
-  appRouter.start();
+  initializers.start();
 
 }(jQuery));

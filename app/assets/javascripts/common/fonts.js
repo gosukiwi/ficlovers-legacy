@@ -1,5 +1,5 @@
 WebFontConfig = {
-  google: { families: [ 'Raleway:100:latin', 'Droid+Serif:400,700:latin', 'Source+Sans+Pro:400,900:latin' ] }
+  google: { families: [ 'Droid+Serif:400,700:latin', 'Source+Sans+Pro:400,900:latin' ] }
 };
 (function() {
   var wf = document.createElement('script');

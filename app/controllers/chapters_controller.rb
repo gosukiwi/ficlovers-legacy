@@ -34,7 +34,9 @@ class ChaptersController < ApplicationController
     authorize @chapter
 
     if @chapter.save
-      head :no_content, location: [@story, @chapter]
+      # return the saved object so Backbone can assign the 'id' property to 
+      # the model
+      render json: @chapter, status: :ok, location: [@story, @chapter]
     else
       render json: @chapter.errors, status: :unprocessable_entity
     end

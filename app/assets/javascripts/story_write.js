@@ -7,6 +7,7 @@
 //= require jquery.jgrowl
 //= require jquery-ui/autocomplete
 //= require jquery.tagsinput
+//= require pace
 //= require common/fonts
 //= require apps/story_write/models/chapter
 //= require apps/story_write/collections/chapters

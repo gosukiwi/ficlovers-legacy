@@ -15,7 +15,7 @@
     },
 
     toggleHelp: function () {
-      this.$text.toggleClass('hidden');
+      this.$text.toggle();
     }
 
   });

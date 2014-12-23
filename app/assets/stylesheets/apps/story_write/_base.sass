@@ -1,132 +1,89 @@
+@import "pace"
+
+// Wrapper
 .write
-  font-size: 18px
-  height: 100%
-  input,
-  textarea,
-  select
-    font-family: 'Noto Serif', Georgia, serif
-  .chapters
-    font-family: 'Noto Serif', Georgia, serif
-    width: 300px
-    box-sizing: border-box
-    padding: 0 20px
-    position: fixed
-    top: 0
-    left: 0
+  +outer-container(100%)
+  color: #444
+  padding-bottom: 50px
+
+  input, textarea
+    font-family: $serif
+
+// Left menu wrapper
+.left-menu
+  +span-columns(3)
+
+  h4
+    color: #57585A
+    font-size: 1.35em
+    padding: 15px 0
+    text-transform: uppercase
+
+// Module: Chapters
+.chapters
+  padding: 0 15px
+
+  p
+    font-family: $sans-serif
+    font-size: 90%
+  ol
+    margin: 0
+    padding-left: 25px
+    &:hover
+      .chapter-action
+        opacity: 1
+  li
+    position: relative
+    padding: 15px 0
+    border-right: 2px solid #ccc
+  .chapter-title
     color: #444
-    p
-      font-family: 'Source Sans Pro', sans-serif
-      font-size: 90%
-    h3
-      font-weight: 700
-    ol
-      margin: 0
-      padding-left: 25px
-      &:hover
-        .chapter-action
-          opacity: 1
-    li
-      position: relative
-      padding: 15px 0
-      border-right: 2px solid #ccc
-    .chapter-title
-      color: #444
-      cursor: pointer
-    .chapter-action
-      position: absolute
-      right: 0
-      top: 18px
-      font-size: 90%
-      opacity: 0
-      transition: opacity 0.25s
-      background-color: white
-      padding: 0 15px
-      .fa
-        cursor: pointer
-        color: #999
-        &:hover
-          color: #444
-    .btn-add-chapter
-      margin-top: 20px
-      width: 100%
-    .active
-      border-right: 2px solid $brand-primary
-      .chapter-title
-        font-weight: bold
-  .write-area
-    float: left
-    width: 50%
-    padding: 10px
-    box-sizing: border-box
-    min-height: 100vh
-    transform: translateX(50%)
-    background-color: white
-
-    .write-area-title
-      display: block
-      width: 100%
-      padding: 5px
-      border: none
-      outline: none
-      font-size: 2em
-      font-weight: 700
-
-    .write-area-text
-      font-family: 'Noto Serif', Georgia, serif
-      display: block
-      width: 100%
-      padding: 5px
-      border: none
-      outline: none
-      box-sizing: border-box
-      resize: none
-      overflow: hidden
-      h3
-        color: $brand-primary
-        font-weight: 700
-        font-size: 1.5em
-      h4
-        font-weight: 700
-        font-size: 1.2em
-
-  .write-config
+    cursor: pointer
+  .chapter-action
     position: absolute
-    right: 5px
-    top: 0
-    text-align: right
-    .write-config-panel
-      font-size: 80%
-      color: #444
-      border: 1px solid #ccc
-      padding: 10px
-      text-align: left
-      background-color: white
-      width: 350px
-      h3
-        margin-top: 0
-
-    span
-      color: #777
-      padding: 10px 5px
-      box-sizing: border-box
+    right: 0
+    top: 18px
+    font-size: 90%
+    opacity: 0
+    transition: opacity 0.25s
+    background-color: white
+    padding: 0 15px
+    .fa
       cursor: pointer
+      color: #999
       &:hover
         color: #444
+  .btn-add-chapter
+    +button(#e7e7e7, #111)
+    margin-top: 20px
+    display: block
+    width: 100%
+    font-size: 90%
+    box-sizing: border-box
+    text-align: center
+  .active
+    border-right: 2px solid $brand-primary
+    .chapter-title
+      font-weight: bold
 
-  .write-actions
-    position: fixed
-    right: 10px
-    bottom: 10px
+// Module: Tags
+.tags
+  padding: 0 15px
 
-  // Tags
   .tag-selector .alert
     font-size: 80%
     margin-top: 10px
-    font-family: 'Source Sans Pro', sans-serif
+    font-family: $sans-serif
     border-radius: 0
     padding: 5px 10px
+
+    strong
+      text-transform: uppercase
+
   .tagsinput
     width: 100% !important
+    box-sizing: border-box
+
     // override inline-css tagsInput plugin uses for some reason
     .tag
       background-color: #e7e7e7
@@ -134,5 +91,86 @@
       color: #444
       border-radius: 2px
       padding: 3px 10px
+      font-family: $sans-serif
       a
         color: #444
+
+// Module: Write Area
+.write-area
+  +span-columns(9)
+  +omega
+  min-height: 100vh
+  background-color: white
+
+  .write-area-title
+    display: block
+    width: 100%
+    padding: 15px 5px 5px 0
+    border: none
+    outline: none
+    font-size: 2em
+    font-weight: 700
+
+  .write-area-text
+    font-family: $serif
+    display: block
+    width: 100%
+    padding: 5px 15px 5px 0
+    border: none
+    outline: none
+    box-sizing: border-box
+    resize: none
+    overflow: hidden
+    h3
+      color: $brand-primary
+      font-weight: 700
+      font-size: 1.5em
+    h4
+      font-weight: 700
+      font-size: 1.2em
+
+// Module: Write Help
+.write-config
+  position: absolute
+  right: 5px
+  top: 0
+  text-align: right
+  .write-config-panel
+    font-size: 80%
+    color: #444
+    border: 1px solid #ccc
+    padding: 10px
+    text-align: left
+    background-color: white
+    width: 350px
+    h3
+      margin-top: 0
+
+  span
+    color: #777
+    padding: 10px 5px
+    box-sizing: border-box
+    cursor: pointer
+    &:hover
+      color: #444
+
+// Module: Write Actions
+.write-actions
+  position: fixed
+  left: 0
+  right: 0
+  bottom: 0
+  background-color: white
+  padding: 10px
+  text-align: right
+
+  .btn
+    +button(#e7e7e7, #111)
+    display: inline-block
+    font-size: 90%
+  .btn-save
+    background-color: $color-primary
+    color: white
+    &:hover
+      background-color: darken($color-primary, 10%)
+      color: white

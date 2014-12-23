@@ -20,6 +20,10 @@
     },
 
     events: {
+      'click .chapter-title': function () {
+        this.model.select();
+      },
+
       'click .btn-up': function () {
         this.model.moveUp();
       },

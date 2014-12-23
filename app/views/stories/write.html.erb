@@ -1,20 +1,24 @@
     <div class="write clearfix" id="write">
 
-      <div class="chapters">
-        <h3>Chapters</h3>
-        <ol>
-        </ol>
-        <a class="btn btn-default btn-add-chapter">
-          <span class="fa fa-plus"></span>
-          Add Chapter
-        </a>
+      <div class="left-menu">
+        <div class="chapters">
+          <h4>Chapters</h4>
+          <ol>
+          </ol>
+          <a class="btn-add-chapter">
+            <span class="fa fa-plus"></span>
+            Add Chapter
+          </a>
+        </div>
 
-        <h3>Tags</h3>
-        <div class="tag-selector">
-          <input type="text" id="tags" name="tags">
-          <div class="alert alert-info"><strong>Please note</strong> If you
-          use already-existing tags you won't have to wait for them to be
-          moderated.</div>
+        <div class="tags">
+          <h4>Tags</h4>
+          <div class="tag-selector">
+            <input type="text" id="tags" name="tags">
+            <div class="alert alert-info"><strong>Please note</strong> If you
+              use already-existing tags you won't have to wait for them to be
+              moderated.</div>
+          </div>
         </div>
       </div>
 
@@ -25,7 +29,7 @@
 
       <div class="write-config">
         <span class="fa fa-question-circle btn-help"></span>
-        <div class="write-config-panel hidden">
+        <div class="write-config-panel u-hidden">
           <h3>Help</h3>
           <p>Below are the most common help topics, if you can't find what you
           are looking for, feel free to <a href="#">post at the forums</a> or <a
@@ -44,11 +48,11 @@
 
       <div class="write-actions">
         <% if @story.published? %>
-          <a class="btn btn-default btn-publish" href="#">Unpublish</a>
+          <a class="btn btn-publish" href="#">Unpublish</a>
         <% else %>
-          <a class="btn btn-default btn-publish" href="#">Publish</a>
+          <a class="btn btn-publish" href="#">Publish</a>
         <% end %>
-        <div class="btn btn-primary btn-save">Save</div>
+        <div class="btn btn-save">Save</div>
         <%= link_to 'Back to fic', @story, { class: 'btn btn-default' } %>
       </div>
     </div>
@@ -60,7 +64,7 @@
 {{^chapter.selected}}
 <li>
 {{/chapter.selected}}
-  <a href="#chapter/{{chapter.title}}" class="chapter-title">{{chapter.title}}</a>
+  <a href="javascript:" class="chapter-title">{{chapter.title}}</a>
   <div class="chapter-action">
     <span class="btn-up fa fa-chevron-up"></span>
     <span class="btn-down fa fa-chevron-down"></span>
