@@ -31,6 +31,7 @@
     }
 
     $content.click(function (e) { e.stopPropagation(); } );
+    $content.find('a').click(function(e) { $dropdowns.removeClass('active'); });
   })
 
   $('html').click(function (e) {

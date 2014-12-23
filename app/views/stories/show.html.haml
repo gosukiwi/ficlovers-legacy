@@ -2,22 +2,34 @@
   .story-header-content
     %h1.story-header-content-title
       = @story.title
-    %span by
-    %a.story-header-content-link{ href: user_path(@story.user) }
-      = @story.user.username
+    .story-header-content-author
+      %span by
+      %a.story-header-content-link{ href: user_path(@story.user) }
+        = @story.user.username
 
+.story-meta
+  .story-chapters._dropdown
+    %i.fa.fa-navicon
+    Chapters
+    %ul._dropdown-content.story-chapters-list
+      - @story.chapters.each_with_index do |chapter, index|
+        %li
+          %a{ href: '#', data: { page: index }, class: 'btn-chapter' } Chapter #{index + 1}
 
-- if @story.active_tags.exists?
-  %ul.story-tags
-    - @story.active_tags.each do |tag|
-      %li
-        %a{ class: "tag-#{tag.context}", href: search_stories_path(tags: tag.to_s, category: 0) }
-          = tag.name
+  - if @story.active_tags.exists?
+    %ul.story-tags
+      %li.story-tags-title
+        = @story.active_tags.count
+        tags:
+      - @story.active_tags.each do |tag|
+        %li
+          %a{ class: "tag-#{tag.context}", href: search_stories_path(tags: tag.to_s, category: 0) }
+            = tag.name
 
 .reader
   .reader-chapters
     - @story.chapters.ordered.each do |chapter|
-      .chapter
+      .chapter.hyphenate
         %h2
           = chapter.title
         != chapter.content
@@ -33,6 +45,7 @@
   %a{ href: add_to_fav_path(@story, format: :js), class: 'story-options-link', data: { method: :post, remote: true } }
     %span.story-options-link-text Add to favs
     %i.fa.fa-heart
+
   - if policy(@story).write?
     %a{ href: write_story_path(@story), class: 'story-options-link' }
       %span.story-options-link-text Edit

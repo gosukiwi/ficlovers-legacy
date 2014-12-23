@@ -13,3 +13,14 @@
   &:hover, &:active, &:focus
     color: $fg
     background-color: darken($bg, 10%)
+
+=expand($pad: 0)
+  position: absolute
+  top: $pad
+  left: $pad
+  right: $pad
+  bottom: $pad
+
+=fa($icon)
+  @extend .fa
+  @extend .fa-#{$icon}:before

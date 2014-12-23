@@ -16,6 +16,7 @@
 //= require jquery.tagsinput
 //= require underscore
 //x= require turbolinks
+//= require hyphenate
 //= require common/fonts
 //= require common/_dash
 //= require apps/main/stories

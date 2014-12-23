@@ -81,7 +81,7 @@ function prettyReader($reader) {
       selectChapter(current);
     });
 
-    $reader.find('.btn-chapter').click(function (e) {
+    $('.btn-chapter').click(function (e) {
       e.preventDefault();
       var $el = $(this);
       var idx = (+$el.data('page'));
