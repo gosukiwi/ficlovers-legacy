@@ -3,7 +3,7 @@ module HasThumbnail
 
   def thumb_real_url
     @fetch_service ||= FetchThumb.new self
-    FetchThumb.fetch
+    @fetch_service.fetch
   end
 
   def expired?
