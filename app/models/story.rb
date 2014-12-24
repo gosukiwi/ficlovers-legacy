@@ -16,11 +16,6 @@ class Story < ActiveRecord::Base
   # forum
   belongs_to :post
 
-  after_create do
-    create_action = CreateStoryPost.new(self)
-    self.post = create_action.run
-  end
-
   # Find hot stories
   scope :hot, ->{
     select('stories.*, count(favs.id) as favs_count')
@@ -33,6 +28,8 @@ class Story < ActiveRecord::Base
   scope :fresh, ->{
     where('published <> 0').order('updated_at desc')
   }
+
+  after_save :create_post
 
   def active_tags
     tags.merge(Tag.active)
@@ -73,4 +70,12 @@ class Story < ActiveRecord::Base
   def to_param
     "#{id}-#{title.parameterize}"
   end
+
+  private
+
+    def create_post
+      return unless published?
+      create_action = CreateStoryPost.new(self)
+      create_action.run
+    end
 end
