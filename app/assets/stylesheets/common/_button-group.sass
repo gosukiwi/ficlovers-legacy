@@ -11,6 +11,7 @@
   color: $button-group-text
   display: inline-block
   float: left
+  +transition(background-color 0.2s)
 
   &:first-child
     border-left-width: 1px
@@ -23,6 +24,7 @@
   &:hover, &:active, &:focus
     color: $button-group-text
     background-color: $button-group-hover
+    +transition(background-color 0.2s)
 
   &.active
     background-color: $button-group-active-background
