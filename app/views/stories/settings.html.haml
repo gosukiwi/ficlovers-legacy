@@ -1,0 +1,34 @@
+.settings
+  %h1.settings-title 
+    %i.fa.fa-cog
+    = link_to @story.title, @story
+    \/ Settings
+
+  .settings-menu
+    %ul
+      %li 
+        %a{ href: '#basic-information' } 
+          Basic Information
+      %li 
+        %a{ href: '#fic-image' } 
+          Fic Image
+
+  .settings-content
+    .settings-group
+      %h4.settings-group-title#basic-information Basic Information
+      = form_for @story do |f|
+        .settings-group-inputs
+          = f.label :title
+          = f.text_field :title
+        .settings-group-inputs
+          = f.label :summary
+          = f.text_area :summary
+        .settings-group-action
+          = f.submit 'Save'
+
+    .settings-group
+      %h4.settings-group-title#fic-image Fic Image
+      .settings-group-inputs
+        %label Image
+        %input{ type: 'file' }
+        .settings-group-info No image selected.

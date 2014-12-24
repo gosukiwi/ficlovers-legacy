@@ -24,3 +24,15 @@
 =fa($icon)
   @extend .fa
   @extend .fa-#{$icon}:before
+
+=fa-after($icon, $pad: 5)
+  &:after
+    +fa($icon)
+    padding-left: $pad
+    display: inline-block
+
+=fa-before($icon, $pad: 5)
+  &:before
+    +fa($icon)
+    padding-right: $pad
+    display: inline-block
