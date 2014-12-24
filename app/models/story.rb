@@ -25,7 +25,7 @@ class Story < ActiveRecord::Base
       .joins('LEFT JOIN `favs` ON `favs`.story_id = `stories`.id')
       .group('stories.id')
       .order('favs_count DESC, stories.views DESC')
-      .where('created_at >= :one_week_ago and published <> 0', { one_week_ago: 1.week.ago })
+      .where('updated_at >= :one_week_ago and published <> 0', { one_week_ago: 1.week.ago })
   }
 
   scope :fresh, ->{
