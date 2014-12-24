@@ -50,8 +50,8 @@
     %a{ href: write_story_path(@story), class: 'story-options-link' }
       %span.story-options-link-text Edit
       %i.fa.fa-pencil
-    %a{ href: story_path(@story), class: 'story-options-link', data: { method: :delete, confirm: 'Are you sure?' } }
-      %span.story-options-link-text Delete
-      %i.fa.fa-times
+    %a{ href: settings_story_path(@story), class: 'story-options-link' }
+      %span.story-options-link-text Settings
+      %i.fa.fa-cog
 
 .story-status
