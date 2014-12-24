@@ -28,6 +28,7 @@
   .user-entries
     .fic-container
       %h3.fic-header Fics
+    .fic-container
       - @stories.each do |story|
         .fic
           .fic-content
@@ -62,6 +63,7 @@
           %a{ href: '#', class: 'fic-see-all-btn' } See all
     .fav-container
       %h3 Favs
+    .fav-container
       - @favs.each do |story|
         .fic
           .fic-content
