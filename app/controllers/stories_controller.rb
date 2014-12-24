@@ -5,8 +5,8 @@ class StoriesController < ApplicationController
   # POST /stories/1/upload 
   # upload story thumb
   def upload
-    upload_service = UploadThumb.new params[:thumb], @story
-    upload_service.upload
+    thumb_service = ThumbnailService.new @story
+    thumb_service.set_thumb params[:thumb]
     redirect_to settings_story_url(@story), notice: "Your fic's image is beeing processed right now."
   end
 

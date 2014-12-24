@@ -1,9 +1,9 @@
 module HasThumbnail
   extend ActiveSupport::Concern
 
-  def thumb_real_url
-    @fetch_service ||= FetchThumb.new self
-    @fetch_service.fetch
+  def thumb_url
+    @thumb_service ||= ThumbnailService.new self
+    @thumb_service.get_thumb
   end
 
   def expired?
