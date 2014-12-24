@@ -1,5 +1,8 @@
 require "dropbox_sdk"
 
+# A service used to talk with Dropbox. Uses Dropbox-SDK as dependency.
+# An ENV variable 'FANFIC_DROPBOX_TOKEN' must exist and contain the access token
+# for the account to be used to store data.
 class DropboxService
   def initialize
     raise 'Dropbox token not defined' unless ENV.has_key? 'FANFIC_DROPBOX_TOKEN'
