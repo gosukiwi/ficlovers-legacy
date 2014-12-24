@@ -2,12 +2,11 @@
   %h1.stories-header-title Hot Stories
   %p.stories-header-info FicLover's hottests fics, don't miss them!
 
-%ul.stories-navigation
-  %li.stories-navigation-title Browsing Fics:
-  %li.active
-    = link_to 'Hot', hot_stories_path, class: 'stories-navigation-link'
-  %li
-    = link_to 'Fresh', fresh_stories_path, class: 'stories-navigation-link'
+.stories-navigation
+  %span.stories-navigation-title Browsing Fics
+  .button-group
+    = link_to 'Hot', hot_stories_path, class: 'button-group-item active'
+    = link_to 'Fresh', fresh_stories_path, class: 'button-group-item'
 
 .stories-container
   - @stories.each do |story|

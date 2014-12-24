@@ -2,12 +2,11 @@
   %h1.stories-header-title Fresh Stories
   %p.stories-header-info Newly published fics, be the first to check them out!
 
-%ul.stories-navigation
-  %li.stories-navigation-title Browsing Fics:
-  %li
-    = link_to 'Hot', hot_stories_path, class: 'stories-navigation-link'
-  %li.active
-    = link_to 'Fresh', fresh_stories_path, class: 'stories-navigation-link'
+.stories-navigation
+  %span.stories-navigation-title Browsing Fics
+  .button-group
+    = link_to 'Hot', hot_stories_path, class: 'button-group-item'
+    = link_to 'Fresh', fresh_stories_path, class: 'button-group-item active'
 
 .stories-container
   - @stories.each do |story|

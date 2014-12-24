@@ -1,0 +1,60 @@
+.navigation
+  +clearfix
+  background-color: white
+  padding: 20px 0
+  font-family: "Source Sans Pro", sans-serif
+  width: 1110px
+  box-sizing: border-box
+  margin: 0 auto
+  .logo
+    padding: 0
+    margin: 0
+    font-weight: 900
+    text-transform: uppercase
+    float: left
+    font-size: 1.5em
+    a
+      text-decoration: none
+      color: $brand-primary
+      &:hover
+        color: lighten($brand-primary, 10%)
+  ul
+    padding: 0
+    margin: 0
+    margin-right: -10px
+    list-style: none
+    float: right
+  li
+    display: inline-block
+    padding: 0
+    margin: 0
+  %link
+    font-size: 85%
+    margin: 0 10px
+    .fa
+      padding-right: 5px
+  .nav-link
+    +button(#e9e9e9, #333)
+    @extend %link
+  .nav-link-primary
+    +button
+    @extend %link
+  .nav-link-icon
+    color: #444
+    padding: 0 10px
+    &:hover
+      color: #777
+  .nav-link-hidden
+    display: none
+
+.navigation-notifications
+  background-color: $tooltip-background
+  margin-top: 10px
+  font-size: 85%
+  p
+    background-color: $tooltip-background
+    padding: 5px 10px
+    margin: 0
+    color: $tooltip-color
+    font-weight: 80%
+

@@ -4,25 +4,22 @@
 
 // Module: Stories navigation
 .stories-navigation
+  display: table
+  vertical-align: middle
   text-align: center
-  padding: 0
-  margin: 0 0 30px
-  list-style: none
+  margin: 0 auto 30px
 
-  li
-    display: inline-block
-    margin: 0 2px
-
-  .active .stories-navigation-link
-    +button
-
-.stories-navigation-link
-  +button(white, #111)
+  .button-group
+    font-weight: bold
+    font-size: 95%
 
 .stories-navigation-title
-  text-transform: uppercase
+  display: table-cell
+  vertical-align: middle
   color: #777
-  font-size: 95%
+  text-transform: uppercase
+  padding-right: 10px
+  font-size: 85%
 
 // Module: Stories header
 .stories-header
