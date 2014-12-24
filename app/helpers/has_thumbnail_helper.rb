@@ -1,10 +1,10 @@
 module HasThumbnailHelper
-  def thumb_url_for(story)
-    story.thumb_url
+  def thumb_for(item, options = {})
+    tag :img, { src: item.get_thumb }.merge(options)
   end
 
-  def thumb_background_for(story)
-    return '' unless story.thumb_url
-    "background: url(#{story.thumb_url}) 0 50%; background-size: cover;"
+  def thumb_background_for(item)
+    return '' unless item.get_thumb
+    "background: url(#{item.get_thumb}) 0 50%; background-size: cover;"
   end
 end

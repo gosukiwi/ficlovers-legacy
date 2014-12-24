@@ -1,5 +1,5 @@
-# Gets and sets thumbnails using dropbox
-class ThumbnailService
+# A Thumbnail service which uses Dropbox as the persistance service
+class DropboxThumbService
   def initialize(story)
     @story = story
     @dropbox = DropboxService.new
