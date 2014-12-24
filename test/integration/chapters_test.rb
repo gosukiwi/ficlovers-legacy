@@ -5,6 +5,10 @@ class ChaptersApiTest < ActionDispatch::IntegrationTest
     post '/login', { session: { username: user.username, password: user.password } }
   end
 
+  def to_json(str)
+    JSON.parse str, symbolize_names: true
+  end
+
   test 'add chapter to story without logging in' do
     story = FactoryGirl.create(:story)
 
@@ -27,7 +31,7 @@ class ChaptersApiTest < ActionDispatch::IntegrationTest
     }.to_json, { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s }
 
     assert_equal 200, response.status
-    assert_equal story.id, JSON.parse(response.body, symbolize_names: true).id
+    assert_equal story.id, to_json(response.body)[:id]
   end
 
   test 'add invalid chapter to story' do
@@ -41,9 +45,7 @@ class ChaptersApiTest < ActionDispatch::IntegrationTest
 
     assert_equal 422, response.status
 
-    response_chapter = JSON.parse response.body, symbolize_names: true
-    refute_empty response_chapter[:content]
-
+    refute_empty to_json(response.body)[:content]
     assert_equal Mime::JSON, response.content_type
   end
 
