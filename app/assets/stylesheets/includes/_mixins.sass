@@ -14,19 +14,22 @@
     color: $fg
     background-color: darken($bg, 10%)
 
-=expand($pad: 0)
-  position: absolute
-  top: $pad
-  left: $pad
-  right: $pad
-  bottom: $pad
+=expand($pad: 0 0 0 0)
+  +position(absolute, $pad)
+
+=shade-background($opacity: 0.45)
+  position: relative
+  &:before
+    +expand
+    content: ' '
+    background-color: rgba(0, 0, 0, $opacity)
 
 =tint-background($opacity: 0.45)
   position: relative
   &:before
     +expand
     content: ' '
-    background-color: rgba(0, 0, 0, $opacity)
+    background-color: rgba(255, 255, 255, $opacity)
 
 =fa($icon)
   @extend .fa
