@@ -12,6 +12,11 @@
       %li 
         %a{ href: '#fic-image' } 
           Fic Image
+      %li 
+        = link_to 'Write', write_story_path(@story)
+      %li 
+        %a{ href: '#', class: 'settings-menu-danger' } 
+          Delete
 
   .settings-content
     .settings-group
@@ -28,7 +33,12 @@
 
     .settings-group
       %h4.settings-group-title#fic-image Fic Image
-      .settings-group-inputs
-        %label Image
-        %input{ type: 'file' }
-        .settings-group-info No image selected.
+      = form_tag upload_story_path(@story), multipart: true do
+        .settings-group-inputs
+          = label_tag :thumb
+          = file_field_tag :thumb
+          .settings-group-info
+            No image selected.
+        .settings-group-action
+          = submit_tag 'Upload'
+
