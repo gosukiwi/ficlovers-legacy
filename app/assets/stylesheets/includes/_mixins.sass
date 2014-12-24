@@ -21,6 +21,13 @@
   right: $pad
   bottom: $pad
 
+=tint-background($opacity: 0.45)
+  position: relative
+  &:before
+    +expand
+    content: ' '
+    background-color: rgba(0, 0, 0, $opacity)
+
 =fa($icon)
   @extend .fa
   @extend .fa-#{$icon}:before

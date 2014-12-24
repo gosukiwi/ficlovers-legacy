@@ -9,16 +9,11 @@
 .story-header-content
   height: 250px
   box-sizing: border-box
-  position: relative
   display: table-cell
   text-align: center
   vertical-align: middle
   color: white
-
-  &:before
-    +expand
-    content: ' '
-    background-color: rgba(0, 0, 0, 0.45)
+  +tint-background
 
 .story-header-content-title
   font-size: 3.7em

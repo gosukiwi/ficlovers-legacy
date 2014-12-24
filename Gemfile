@@ -30,6 +30,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'pundit'
 # Pagination
 gem 'will_paginate', '~> 3.0.6'
+# Dropbox API
+gem "dropbox-sdk"
 
 # Front-end related gems
 gem "haml-rails"

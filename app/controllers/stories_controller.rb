@@ -1,7 +1,17 @@
 class StoriesController < ApplicationController
-  before_action :set_story, only: [:show, :edit, :update, :destroy, :add_to_fav, :settings]
+  before_action :set_story, only: [:show, :edit, :update, :destroy, :add_to_fav, :settings, :upload]
   before_action :set_categories, only: [:new, :edit, :create, :search]
 
+  # POST /stories/1/upload 
+  # upload story thumb
+  def upload
+    uploader = StoryThumb.new(@story)
+    uploader.upload(params[:thumb])
+    redirect_to settings_story_url(@story), notice: "Your fic's image is beeing processed right now."
+  end
+
+  # GET /stories/1/settings 
+  # settings page
   def settings
   end
 
