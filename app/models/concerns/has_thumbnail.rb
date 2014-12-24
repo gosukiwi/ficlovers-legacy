@@ -8,7 +8,7 @@ module HasThumbnail
   extend ActiveSupport::Concern
 
   included do
-    after_initialize :set_thumb_service
+    after_initialize :construct
   end
 
   def get_thumb
@@ -29,8 +29,7 @@ module HasThumbnail
   
   private
 
-    def set_thumb_service(service = nil)
-      service = DropboxThumbService.new self if service.nil?
-      @thumb_service = service
+    def construct
+      @thumb_service = DropboxThumbService.new self
     end
 end

@@ -1,6 +1,5 @@
 class Story < ActiveRecord::Base
   include HasThumbnail
-  set_thumb_service Object.new
 
   validates :title, presence: true, length: { in: 5..100 }
   validates :summary, presence: true, length: { in: 50..250 }
