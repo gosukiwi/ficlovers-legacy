@@ -17,8 +17,8 @@ class Story < ActiveRecord::Base
   belongs_to :post
 
   after_create do
-    story_post = StoryPost.new(self)
-    self.post = story_post.create
+    create_action = CreateStoryPost.new(self)
+    self.post = create_action.run
   end
 
   # Find hot stories
