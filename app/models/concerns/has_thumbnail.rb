@@ -1,3 +1,6 @@
+# Add thumbnail functionality to models.
+# In order to work, the model needs the following attributes:
+# thumb_path:string, thumb_expiration:datetime, thumb_temp_url:string
 module HasThumbnail
   extend ActiveSupport::Concern
 

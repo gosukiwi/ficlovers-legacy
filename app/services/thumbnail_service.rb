@@ -1,4 +1,4 @@
-# Gets and sets thumbnails
+# Gets and sets thumbnails using dropbox
 class ThumbnailService
   def initialize(story)
     @story = story
@@ -6,7 +6,7 @@ class ThumbnailService
   end
 
   def get_thumb
-    return if not @story.has_thumb?
+    return unless @story.has_thumb?
     refresh if @story.expired?
     @story.thumb_temp_url
   end
