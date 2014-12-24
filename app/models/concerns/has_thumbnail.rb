@@ -4,6 +4,9 @@
 #
 # Right now it uses DropboxThumbService to save thumbnails but this could be
 # any thumbnail service (a PORO which implements `get_thumb` and `set_thumb`).
+#
+# To change the thumb service, from withing the model just set @thumb_service
+# to a valid instance of your service.
 module HasThumbnail
   extend ActiveSupport::Concern
 
