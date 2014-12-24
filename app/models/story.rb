@@ -1,4 +1,6 @@
 class Story < ActiveRecord::Base
+  include HasThumbnail
+
   validates :title, presence: true, length: { in: 5..100 }
   validates :summary, presence: true, length: { in: 50..250 }
 

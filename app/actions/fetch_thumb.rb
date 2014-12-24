@@ -1,19 +1,19 @@
 class FetchThumb
-  def initialize(thumb)
-    @thumb = thumb
-    @story = thumb.story
+  def initialize(story)
+    @story = story
     @dropbox = DropboxService.new
   end
 
-  # Fetches an story's thumb, get's a new link if the old one has expired.
+  # Fetches an story's story, get's a new link if the old one has expired.
   def fetch
-    refresh_link if @thumb.expired?
+    return if not @story.has_thumb?
+    refresh if @story.expired?
     @story.thumb_url
   end
 
   private
     
-    def refresh_link
+    def refresh
       file = @dropbox.get_temp_file_url @story.thumb_path
       @story.thumb_url = file['url']
       @story.thumb_expiration = DateTime.parse file['expires']

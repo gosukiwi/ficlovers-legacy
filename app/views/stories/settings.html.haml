@@ -38,10 +38,10 @@
           = label_tag :thumb
           = file_field_tag :thumb
           .settings-group-info
-            - if @thumb.has_thumb?
+            - if @story.has_thumb?
               .settings-group-image
-                %a{ href: @thumb.thumb_url, target: '_blank' }
-                  %img{ src: @thumb.thumb_url }
+                %a{ href: @story.thumb_url, target: '_blank' }
+                  %img{ src: @story.thumb_url }
             - else
               No image selected.
         .settings-group-action

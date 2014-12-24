@@ -1,19 +1,16 @@
 module HasThumbnail
   extend ActiveSupport::Concern
 
-  module ClassMethods
-    def thumb_url
-      return if not has_thumb?
-      @fetch_service ||= FetchThumb.new(self)
-      @fetch_service.fetch
-    end
+  def thumb_real_url
+    @fetch_service ||= FetchThumb.new self
+    FetchThumb.fetch
+  end
 
-    def expired?
-      DateTime.now > self.thumb_expiration
-    end
+  def expired?
+    DateTime.now > thumb_expiration
+  end
 
-    def has_thumb?
-      !self.thumb_path.nil?
-    end
+  def has_thumb?
+    !thumb_path.nil?
   end
 end

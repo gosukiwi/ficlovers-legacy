@@ -2,7 +2,7 @@ class UploadThumb
   def initialize(uploaded_file, story)
     @uploaded_file = uploaded_file
     @story = story
-    @dropbox = Dropbox.new
+    @dropbox = DropboxService.new
   end
 
   def upload
