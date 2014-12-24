@@ -38,7 +38,13 @@
           = label_tag :thumb
           = file_field_tag :thumb
           .settings-group-info
-            No image selected.
+            - if @thumb.has_thumb?
+              .settings-group-image
+                %a{ href: @thumb.thumb_url, target: '_blank' }
+                  %img{ src: @thumb.thumb_url }
+            - else
+              No image selected.
         .settings-group-action
+          %a{ href: '#', class: 'settings-group-button' } Crop
           = submit_tag 'Upload'
 
