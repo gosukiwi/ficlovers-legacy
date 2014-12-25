@@ -4,6 +4,8 @@ require "dropbox_sdk"
 # An ENV variable 'FANFIC_DROPBOX_TOKEN' must exist and contain the access token
 # for the account to be used to store data.
 class DropboxService
+  attr_accessor :client
+
   def initialize
     raise 'Dropbox token not defined' unless ENV.has_key? 'FANFIC_DROPBOX_TOKEN'
     @client = DropboxClient.new(ENV['FANFIC_DROPBOX_TOKEN'])
