@@ -1,6 +1,8 @@
 module HasThumbnailHelper
   def thumb_for(item, options = {})
-    tag :img, { src: item.get_thumb }.merge(options)
+    url = item.get_thumb
+    url += "?#{rand(0..999)}" if options[:bust_cache]
+    tag :img, { src: url }.merge(options)
   end
 
   def thumb_background_for(item)

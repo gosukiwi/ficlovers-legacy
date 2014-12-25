@@ -41,7 +41,7 @@
             - if @story.has_thumb?
               .settings-group-image
                 %a{ href: @story.get_thumb, target: '_blank' }
-                  = thumb_for @story
+                  = thumb_for @story, bust_cache: true
             - else
               No image selected.
         .settings-group-action

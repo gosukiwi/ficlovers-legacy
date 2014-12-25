@@ -20,7 +20,9 @@ You'll need the following env variables
     FANFIC_DEV_DB_NAME
     FANFIC_DEV_DB_USER
     FANFIC_DEV_DB_PASS
-    FANFIC_DROPBOX_TOKEN
+    FANFIC_S3_BUCKET
+    FANFIC_S3_KEY
+    FANFIC_S3_SECRET
 
 ## Github
 [The official repo](https://github.com/gosukiwi/ficlovers) is at GitHub.
