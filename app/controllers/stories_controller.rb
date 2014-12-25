@@ -4,8 +4,7 @@ class StoriesController < ApplicationController
 
   def save_thumb
     #authorize @story
-    key = params[:key]
-    x1, y1, w, h = params[:x1], params[:y1], params[:w], params[:h]
+    key, x1, y1, w, h = params[:key], params[:x1], params[:y1], params[:w], params[:h]
 
     CropThumb.new.run(
       name: key,
