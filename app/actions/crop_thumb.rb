@@ -8,7 +8,7 @@ class CropThumb
   end
 
   # Run action:
-  # Crop an existing temporal file and remove it
+  # Crop an existing temporal file and removes it
   def run(story: story, name: name, x1: x1, y1: y1, width: width, height: height)
     result = crop_image name, x1, y1, width, height
     story.set_thumb File.open(result.path)
