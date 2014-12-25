@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery-ui/autocomplete
 //= require jquery.tagsinput
+//= require jquery.Jcrop
 //= require underscore
 //x= require turbolinks
 //= require hyphenate
@@ -21,3 +22,4 @@
 //= require common/_dash
 //= require apps/main/stories
 //= require apps/main/stories_search
+//= require apps/main/stories_crop

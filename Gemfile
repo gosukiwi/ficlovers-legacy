@@ -31,7 +31,10 @@ gem 'pundit'
 # Pagination
 gem 'will_paginate', '~> 3.0.6'
 # Dropbox API
-gem "dropbox-sdk"
+gem 'dropbox-sdk'
+# For cropping thumbs
+gem 'jcrop-rails-v2'
+gem "mini_magick"
 
 # Front-end related gems
 gem "haml-rails"

@@ -1,0 +1,10 @@
+%h1 Crop Image
+%img{ src: @path, id: 'crop-thumb' }
+%a{ href: '#', class: 'crop-button' }
+  Crop
+= form_tag save_thumb_story_path(@story), method: :post
+= hidden_field_tag :key, @key
+= hidden_field_tag :x1
+= hidden_field_tag :y1
+= hidden_field_tag :w
+= hidden_field_tag :h

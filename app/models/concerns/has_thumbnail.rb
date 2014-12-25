@@ -30,7 +30,7 @@ module HasThumbnail
   def has_thumb?
     !thumb_path.nil?
   end
-  
+
   private
 
     def construct

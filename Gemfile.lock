@@ -98,6 +98,7 @@ GEM
     jbuilder (2.2.5)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
+    jcrop-rails-v2 (0.9.12.3)
     jquery-rails (3.1.2)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -114,6 +115,7 @@ GEM
     metaclass (0.0.4)
     method_source (0.8.2)
     mime-types (2.4.3)
+    mini_magick (4.0.1)
     mini_portile (0.6.1)
     minitest (5.4.3)
     mocha (1.1.0)
@@ -236,8 +238,10 @@ DEPENDENCIES
   guard-minitest
   haml-rails
   jbuilder (~> 2.0)
+  jcrop-rails-v2
   jquery-rails
   jquery-ui-rails
+  mini_magick
   mocha
   mysql2
   neat

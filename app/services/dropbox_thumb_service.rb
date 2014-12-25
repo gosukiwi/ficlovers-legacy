@@ -19,9 +19,9 @@ class DropboxThumbService
 
   private
 
-    def save_file(uploaded_file)
-      thumb_name = "/#{@story.id}_thumb#{File.extname(uploaded_file.original_filename)}"
-      @dropbox.put_file thumb_name, uploaded_file.read, true
+    def save_file(file)
+      thumb_name = "/#{@story.id}_thumb#{File.extname(file.path)}"
+      @dropbox.put_file thumb_name, file, true
     end
   
     def refresh

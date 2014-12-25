@@ -7,7 +7,10 @@ Rails.application.routes.draw do
     get 'search', on: :collection
     put 'update_tags', to: 'stories#update_tags', on: :member
     get 'settings', to: 'stories#settings', on: :member
+
+    # Thumb
     post 'upload', to: 'stories#upload', on: :member
+    post 'save_thumb', to: 'stories#save_thumb', on: :member, as: :save_thumb
   end
   get 'fresh', to: 'stories#fresh', as: :fresh_stories
   get 'hot', to: 'stories#hot', as: :hot_stories

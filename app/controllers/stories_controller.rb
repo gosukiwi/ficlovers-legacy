@@ -1,17 +1,37 @@
 class StoriesController < ApplicationController
-  before_action :set_story, only: [:show, :edit, :update, :destroy, :add_to_fav, :settings, :upload]
+  before_action :set_story, only: [:show, :edit, :update, :destroy, :add_to_fav, :settings, :upload, :crop, :save_thumb]
   before_action :set_categories, only: [:new, :edit, :create, :search]
+
+  def save_thumb
+    #authorize @story
+    key = params[:key]
+    service = TempStorageService.new
+
+    # Create a cropped image
+    x1, y1, w, h = params[:x1], params[:y1], params[:w], params[:h]
+    image = MiniMagick::Image.open service.get(key)
+    image.crop "#{w}x#{h}+#{x1}+#{y1}"
+    image.format "jpg"
+
+    service.delete key
+
+    @story.set_thumb File.open(image.path)
+    redirect_to settings_story_url(@story), notice: "Fic image updated."
+  end
 
   # POST /stories/1/upload 
   # upload story thumb
   def upload
-    @story.set_thumb params[:thumb]
-    redirect_to settings_story_url(@story), notice: "Your fic's image is beeing processed right now."
+    #authorize @story
+    service = TempStorageService.new 
+    @key = service.put(params[:thumb])
+    @path = service.get_path @key
   end
 
   # GET /stories/1/settings 
   # settings page
   def settings
+    #authorize @story
   end
 
   def search

@@ -5,6 +5,10 @@ FactoryGirl.define do
     association :user
     association :post
 
+    factory :story_no_post do
+      post nil
+    end
+
     factory :story_published do
       published true
 
