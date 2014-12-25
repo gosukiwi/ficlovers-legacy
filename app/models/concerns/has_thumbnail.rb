@@ -12,14 +12,15 @@ module HasThumbnail
 
   included do
     after_initialize :construct
+    attr_accessor :thumb_service
   end
 
   def get_thumb
     @thumb_service.get_thumb
   end
 
-  def set_thumb
-    @thumb_service.set_thumb params[:thumb]
+  def set_thumb(uploaded_file)
+    @thumb_service.set_thumb uploaded_file
   end
 
   def expired?

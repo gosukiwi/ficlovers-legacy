@@ -54,6 +54,8 @@ group :test do
   gem 'sqlite3'
   gem 'shoulda'
   gem 'capybara'
+  # stubs and mocks
+  gem 'mocha'
 end
 
 group :development, :test do
