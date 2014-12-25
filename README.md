@@ -5,6 +5,7 @@ FicLovers is a fan fiction website for authors and readers.
 If you're a developer, there are some important things needed to know to hack on
 this. A summary would be
 
+    $ convert --version # ImageMagick
     $ ruby -v #2.1+
     $ rails -v #4.1+
     $ bundle install
