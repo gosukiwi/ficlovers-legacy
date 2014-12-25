@@ -12,7 +12,7 @@ class DropboxThumbService
   end
 
   def set_thumb(uploaded_file)
-    result = save_file upladed_file
+    result = save_file uploaded_file
     @story.thumb_path = result['path']
     refresh
   end
