@@ -34,12 +34,13 @@ class DropboxThumbServiceTest < ActiveSupport::TestCase
     story = stub(id: 5)
     service = DropboxThumbService.new story
 
+    file_data = stub path: '/some/path/to/somefile.jpg'
+
     # test for call and correct path format
     service.instance_variable_get(:@dropbox)
       .expects(:put_file)
-      .with('/5_thumb.jpg', 'contents', true)
+      .with('/5_thumb.jpg', file_data, true)
 
-    file_data = stub original_filename: 'somefile.jpg', read: 'contents'
     service.send :save_file, file_data
   end
 

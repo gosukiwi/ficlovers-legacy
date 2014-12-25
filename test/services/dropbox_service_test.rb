@@ -1,6 +1,6 @@
 class DropboxServiceTest < ActiveSupport::TestCase
   def setup
-    @service = DropboxService.new
+    @service = DropboxThumbService::DropboxService.new
   end
 
   test 'initialize' do
