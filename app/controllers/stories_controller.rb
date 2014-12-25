@@ -5,17 +5,12 @@ class StoriesController < ApplicationController
   def save_thumb
     #authorize @story
     key = params[:key]
-    service = TempStorageService.new
-
-    # Create a cropped image
     x1, y1, w, h = params[:x1], params[:y1], params[:w], params[:h]
-    image = MiniMagick::Image.open service.get(key)
-    image.crop "#{w}x#{h}+#{x1}+#{y1}"
-    image.format "jpg"
 
-    service.delete key
+    service = ThumbCropService.new
+    result = service.crop key, x1, y1, w, h
 
-    @story.set_thumb File.open(image.path)
+    @story.set_thumb File.open(result.path)
     redirect_to settings_story_url(@story), notice: "Fic image updated."
   end
 
@@ -23,9 +18,9 @@ class StoriesController < ApplicationController
   # upload story thumb
   def upload
     #authorize @story
-    service = TempStorageService.new 
-    @key = service.put(params[:thumb])
-    @path = service.get_path @key
+    service = ThumbCropService.new 
+    @key = service.prepare(params[:thumb])
+    @path = service.path @key
   end
 
   # GET /stories/1/settings 
