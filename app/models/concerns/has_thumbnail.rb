@@ -2,21 +2,17 @@
 # In order to work, the model needs the following attributes:
 #  thumb_url:string
 #
-# Right now it uses S3 to save thumbnails but this could be any thumbnail
-# service (a PORO which implements `get_thumb` and `set_thumb`).
+# Right now it uses S3 to save thumbnails but this could be any file
+# persistance service (a PORO which implements `put` and returns an url).
 #
-# To change the thumb service, from withing the model just set @thumb_service
-# to a valid instance of your service.
+# To change the thumb service, from withing the model just set @service to a
+# valid instance of your service.
 module HasThumbnail
   extend ActiveSupport::Concern
 
   included do
     after_initialize :construct
     attr_accessor :service
-  end
-
-  def get_thumb
-    thumb_url
   end
 
   def set_thumb(file)

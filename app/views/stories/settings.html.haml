@@ -40,7 +40,7 @@
           .settings-group-info
             - if @story.has_thumb?
               .settings-group-image
-                %a{ href: @story.get_thumb, target: '_blank' }
+                %a{ href: @story.thumb_url, target: '_blank' }
                   = thumb_for @story, bust_cache: true
             - else
               No image selected.
