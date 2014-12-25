@@ -7,10 +7,15 @@ class StoriesController < ApplicationController
     key = params[:key]
     x1, y1, w, h = params[:x1], params[:y1], params[:w], params[:h]
 
-    service = ThumbCropService.new
-    result = service.crop key, x1, y1, w, h
+    CropThumb.new.run(
+      name: key,
+      x1: x1,
+      y1: y1,
+      width: w,
+      height: h,
+      story: @story
+    )
 
-    @story.set_thumb File.open(result.path)
     redirect_to settings_story_url(@story), notice: "Fic image updated."
   end
 
@@ -18,9 +23,9 @@ class StoriesController < ApplicationController
   # upload story thumb
   def upload
     #authorize @story
-    service = ThumbCropService.new 
-    @key = service.prepare(params[:thumb])
-    @path = service.path @key
+    crop_action = CropThumb.new 
+    @key = crop_action.prepare(params[:thumb])
+    @path = crop_action.path @key
   end
 
   # GET /stories/1/settings 
