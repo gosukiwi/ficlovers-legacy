@@ -28,11 +28,11 @@ module HasThumbnail
 
   def file_valid?(uploaded_io)
     if uploaded_io.size > MAX_SIZE 
-      self.errors[:thumb] << "Thumb file cannot be bigger than #{MAX_SIZE / 1024} KB."
+      self.errors[:thumb] << "file cannot be bigger than #{MAX_SIZE / 1024} KB."
     end
     
     unless ['image/gif', 'image/jpeg', 'image/jpg', 'image/png'].include? uploaded_io.content_type
-      self.errors[:thumb] << 'Invalid mime type, only images are allowed.'
+      self.errors[:thumb] << 'MIME type is invalid, only images are allowed.'
     end
 
     self.errors.messages.count == 0
