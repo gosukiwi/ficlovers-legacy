@@ -1,30 +1,34 @@
 class StoriesController < ApplicationController
-  before_action :set_story, only: [:show, :edit, :update, :destroy, :add_to_fav, :settings, :upload, :crop, :save_thumb]
+  before_action :set_story, only: [:show, :edit, :update, :destroy, :add_to_fav, :settings, :thumb_crop, :thumb_save]
   before_action :set_categories, only: [:new, :edit, :create, :search]
 
-  def save_thumb
+  def thumb_save
     #authorize @story
     key, x1, y1, w, h = params[:key], params[:x1], params[:y1], params[:w], params[:h]
 
-    CropThumb.new.run(
+    crop_action = CropThumb.new @story
+    crop_action.run(
       name: key,
       x1: x1,
       y1: y1,
       width: w,
-      height: h,
-      story: @story
+      height: h
     )
 
     redirect_to settings_story_url(@story), notice: "Fic image updated."
   end
 
-  # POST /stories/1/upload 
-  # upload story thumb
-  def upload
+  # POST /stories/1/crop
+  # Temporary uploads a file and display the crop menu
+  def thumb_crop
     #authorize @story
-    crop_action = CropThumb.new 
-    @key = crop_action.prepare(params[:thumb])
-    @path = crop_action.path @key
+    crop_action = CropThumb.new @story
+    @key = crop_action.prepare params[:thumb]
+    if @key
+      @path = crop_action.path @key
+    else
+      render :settings
+    end
   end
 
   # GET /stories/1/settings 

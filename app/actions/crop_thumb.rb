@@ -1,17 +1,19 @@
 # Holds an uploaded image, and crops it.
 class CropThumb
-  def initialize(options = {})
+  # 512kb in bytes
+  MAX_SIZE = 512 * 1024
+
+  def initialize(story)
     @path = Pathname.new "#{Rails.root}/public/tmp/thumbs"
     FileUtils.mkdir_p @path unless File.directory? @path
-
-    @options = { quality: 60 }.merge options
+    @story = story
   end
 
   # Run action:
   # Crop an existing temporal file and removes it
-  def run(story: story, name: name, x1: x1, y1: y1, width: width, height: height)
-    result = crop_image name, x1, y1, width, height
-    story.set_thumb File.open(result.path)
+  def run(name: name, x1: x1, y1: y1, width: width, height: height, quality: quality = 60)
+    result = crop_image name, x1, y1, width, height, quality
+    @story.set_thumb File.open(result.path)
     delete name
   end
 
@@ -19,9 +21,8 @@ class CropThumb
   # Create a temporal file, saving the full image that must be cropped
   # Returns the name of the file, needed in the `run` method.
   def prepare(uploaded_io)
-    name = "#{SecureRandom.uuid}.jpg"
-    write_file uploaded_io, name
-    name
+    return unless @story.file_valid? uploaded_io
+    write_file uploaded_io, "#{SecureRandom.uuid}.jpg"
   end
 
   def path(name)
@@ -34,16 +35,19 @@ class CropThumb
     end
 
     # Create a new file cropping the one located in `path`
-    def crop_image(name, x1, y1, w, h)
+    def crop_image(name, x1, y1, w, h, q)
       MiniMagick::Image.new @path.join(name) do |img|
-        img.quality @options[:quality].to_s
+        img.quality q.to_s
         img.crop "#{w}x#{h}+#{x1}+#{y1}"
       end
     end
 
+    # Writes the file to disk (saving it) and returns the file name or nil if
+    # file was not saved. Errors are stored in @errors
     def write_file(uploaded_io, name)
       File.open @path.join(name), 'wb' do |file|
         file.write uploaded_io.read
       end
+      name
     end
 end

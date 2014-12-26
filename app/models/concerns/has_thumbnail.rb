@@ -10,6 +10,9 @@
 module HasThumbnail
   extend ActiveSupport::Concern
 
+  # 512kb in bytes
+  MAX_SIZE = 512 * 1024
+
   included do
     after_initialize :construct
     attr_accessor :service
@@ -23,7 +26,19 @@ module HasThumbnail
     !thumb_url.nil?
   end
 
-  private
+  def file_valid?(uploaded_io)
+    if uploaded_io.size > MAX_SIZE 
+      self.errors[:thumb] << "Thumb file cannot be bigger than #{MAX_SIZE / 1024} KB."
+    end
+    
+    unless ['image/gif', 'image/jpeg', 'image/jpg', 'image/png'].include? uploaded_io.content_type
+      self.errors[:thumb] << 'Invalid mime type, only images are allowed.'
+    end
+
+    self.errors.messages.count == 0
+  end
+
+  protected
 
     def upload(file)
       extension = File.extname file.path

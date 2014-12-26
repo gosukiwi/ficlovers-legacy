@@ -9,8 +9,8 @@ Rails.application.routes.draw do
     get 'settings', to: 'stories#settings', on: :member
 
     # Thumb
-    post 'upload', to: 'stories#upload', on: :member
-    post 'save_thumb', to: 'stories#save_thumb', on: :member, as: :save_thumb
+    post 'crop', to: 'stories#thumb_crop', on: :member
+    post 'save_thumb', to: 'stories#thumb_save', on: :member, as: :save_thumb
   end
   get 'fresh', to: 'stories#fresh', as: :fresh_stories
   get 'hot', to: 'stories#hot', as: :hot_stories

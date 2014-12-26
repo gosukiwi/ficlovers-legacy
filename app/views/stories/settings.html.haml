@@ -19,6 +19,11 @@
           Delete
 
   .settings-content
+    - if @errors
+      .settings-errors
+        - @errors.each do |error|
+          = error
+
     .settings-group
       %h4.settings-group-title#basic-information Basic Information
       = form_for @story do |f|
@@ -33,7 +38,7 @@
 
     .settings-group
       %h4.settings-group-title#fic-image Fic Image
-      = form_tag upload_story_path(@story), multipart: true do
+      = form_tag crop_story_path(@story), multipart: true do
         .settings-group-inputs
           = label_tag :thumb
           = file_field_tag :thumb
