@@ -5,8 +5,8 @@ class StoriesController < ApplicationController
   def thumb_save
     #authorize @story
     begin
-      crop_action = CropThumb.new @story
-      crop_action.crop CropForm.new(params)
+      crop_action = CropThumb.new @story, CropForm.new(params)
+      crop_action.crop
       redirect_to settings_story_url(@story), notice: "Fic image updated."
     rescue ActionError => e
       @errors = e.errors
@@ -19,8 +19,8 @@ class StoriesController < ApplicationController
   def thumb_crop
     #authorize @story
     begin
-      crop_action = CropThumb.new @story
-      @image = crop_action.prepare ThumbForm.new(params)
+      prepare_action = PrepareThumb.new ThumbForm.new(params)
+      @image = prepare_action.prepare
     rescue ActionError => e
       @errors = e.errors
       render :settings
