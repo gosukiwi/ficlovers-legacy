@@ -8,11 +8,8 @@ class StoriesController < ApplicationController
       crop_action = CropThumb.new @story
       crop_action.crop CropForm.new(params)
       redirect_to settings_story_url(@story), notice: "Fic image updated."
-    rescue ValidationError => e
+    rescue ActionError => e
       @errors = e.errors
-      render :settings
-    rescue
-      @errors = ['Please try again']
       render :settings
     end
   end
@@ -24,7 +21,7 @@ class StoriesController < ApplicationController
     begin
       crop_action = CropThumb.new @story
       @image = crop_action.prepare ThumbForm.new(params)
-    rescue ValidationError => e
+    rescue ActionError => e
       @errors = e.errors
       render :settings
     end

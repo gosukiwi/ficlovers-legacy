@@ -1,4 +1,4 @@
-class ValidationError < StandardError
+class ActionError < StandardError
   def initialize(errors)
     @errors = errors
   end

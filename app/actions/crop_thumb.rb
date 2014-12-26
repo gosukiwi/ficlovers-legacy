@@ -1,8 +1,5 @@
 # Holds an uploaded image, and crops it.
 class CropThumb
-  # 512kb in bytes
-  MAX_SIZE = 512 * 1024
-
   def initialize(story)
     @path = Pathname.new "#{Rails.root}/public/tmp/thumbs"
     FileUtils.mkdir_p @path unless File.directory? @path
@@ -12,28 +9,26 @@ class CropThumb
   # Run action:
   # Crop an existing temporal file and removes it
   def crop(form)
-    raise ValidationError, form.errors unless form.valid?
+    raise ActionError, form.errors unless form.valid?
 
-    result = crop_image form, quality
+    result = crop_image form
     @story.set_thumb File.open(result.path)
     @story.save
-    delete name
+    delete form.name
   end
 
   # Prepare action:
   # Create a temporal file, saving the full image that must be cropped
   # Returns the name of the file, needed in the `crop` method.
   def prepare(form)
-    raise ValidationError, form.errors unless form.valid?
-    name = write_file form.thumb, "#{SecureRandom.uuid}.jpg"
-    { name: name, path: path(name) }
+    raise ActionError, form.errors unless form.valid?
+
+    name = "#{SecureRandom.uuid}.jpg"
+    write_file form.thumb, name
+    { name: name, path: "/tmp/thumbs/#{name}" }
   end
 
   protected
-
-    def path(name)
-      "/tmp/thumbs/#{name}"
-    end
 
     def delete(name)
       FileUtils.rm @path.join(name)
@@ -53,6 +48,5 @@ class CropThumb
       File.open @path.join(name), 'wb' do |file|
         file.write uploaded_io.read
       end
-      name
     end
 end

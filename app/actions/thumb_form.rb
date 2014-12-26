@@ -2,8 +2,10 @@
 class ThumbForm
   attr_reader :thumb
 
-  def initialize(params)
+  def initialize(params, max_size = 512)
     @thumb = params[:thumb]
+    # max KB allowed (unit is bytes)
+    @max_size = max_size * 1024
   end
 
   def valid?
@@ -16,8 +18,8 @@ class ThumbForm
     if @thumb.nil?
       errors << 'Thumb cannot be empty.'
     else
-      if @thumb.size > MAX_SIZE 
-        errors << "Thumb file cannot be bigger than #{MAX_SIZE / 1024} KB."
+      if @thumb.size > @max_size 
+        errors << "Thumb file cannot be bigger than #{@max_size / 1024} KB."
       end
       
       unless ['image/gif', 'image/jpeg', 'image/jpg', 'image/png'].include? @thumb.content_type
