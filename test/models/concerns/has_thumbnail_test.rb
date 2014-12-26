@@ -4,16 +4,16 @@ class HasThumbnailTest < ActiveSupport::TestCase
   end
 
   test 'service is initiated' do
-    assert_not_nil @story.thumb_service
+    assert_not_nil @story.thumb_persistance_service
   end
 
   test 'get thumb' do
-    @story.thumb_service.expects(:get_thumb).returns('a-thumb-url')
+    @story.thumb_persistance_service.expects(:get_thumb).returns('a-thumb-url')
     assert_equal 'a-thumb-url', @story.get_thumb
   end
 
   test 'set thumb' do
-    @story.thumb_service.expects(:set_thumb).with('some-file')
+    @story.thumb_persistance_service.expects(:set_thumb).with('some-file')
     @story.set_thumb 'some-file'
   end
 

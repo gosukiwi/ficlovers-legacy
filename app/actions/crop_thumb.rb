@@ -14,6 +14,7 @@ class CropThumb
   def run(name: name, x1: x1, y1: y1, width: width, height: height, quality: quality = 60)
     result = crop_image name, x1, y1, width, height, quality
     @story.set_thumb File.open(result.path)
+    @story.save
     delete name
   end
 

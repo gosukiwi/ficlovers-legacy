@@ -15,7 +15,7 @@ module HasThumbnail
 
   included do
     after_initialize :construct
-    attr_accessor :service
+    attr_accessor :thumb_persistance_service
   end
 
   def set_thumb(file)
@@ -27,6 +27,10 @@ module HasThumbnail
   end
 
   def file_valid?(uploaded_io)
+    if uploaded_io.nil?
+      self.errors[:thumb] << "cannot be empty."
+    end
+
     if uploaded_io.size > MAX_SIZE 
       self.errors[:thumb] << "file cannot be bigger than #{MAX_SIZE / 1024} KB."
     end
@@ -42,10 +46,10 @@ module HasThumbnail
 
     def upload(file)
       extension = File.extname file.path
-      @service.put file, "#{self.id}_thumb#{extension}"
+      @thumb_persitance_service.put file, "#{self.id}_thumb#{extension}"
     end
 
     def construct
-      @service = S3Service.new
+      @thumb_persitance_service = S3Service.new
     end
 end
