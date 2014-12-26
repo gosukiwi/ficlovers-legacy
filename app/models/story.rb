@@ -75,7 +75,7 @@ class Story < ActiveRecord::Base
 
     def create_post
       return unless published?
-      create_action = CreateStoryPost.new(self)
-      create_action.run
+      create_action = CreateStoryPost.new self
+      create_action.create
     end
 end

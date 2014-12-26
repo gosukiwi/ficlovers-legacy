@@ -4,7 +4,7 @@ class CreateStoryPost
     @story = story
   end
 
-  def run
+  def create
     return unless @story.post.nil?
 
     post = Post.create({
