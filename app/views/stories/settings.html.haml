@@ -19,9 +19,9 @@
           Delete
 
   .settings-content
-    - if @story.errors.any?
+    - unless @errors.nil?
       .settings-errors
-        - @story.errors.full_messages.each do |error|
+        - @errors.each do |error|
           = error
 
     .settings-group

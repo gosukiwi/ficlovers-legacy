@@ -11,8 +11,10 @@ class CropThumb
 
   # Run action:
   # Crop an existing temporal file and removes it
-  def run(name: name, x1: x1, y1: y1, width: width, height: height, quality: quality = 60)
-    result = crop_image name, x1, y1, width, height, quality
+  def crop(form)
+    raise ValidationError, form.errors unless form.valid?
+
+    result = crop_image form, quality
     @story.set_thumb File.open(result.path)
     @story.save
     delete name
@@ -20,26 +22,28 @@ class CropThumb
 
   # Prepare action:
   # Create a temporal file, saving the full image that must be cropped
-  # Returns the name of the file, needed in the `run` method.
-  def prepare(uploaded_io)
-    return unless @story.file_valid? uploaded_io
-    write_file uploaded_io, "#{SecureRandom.uuid}.jpg"
-  end
-
-  def path(name)
-    "/tmp/thumbs/#{name}"
+  # Returns the name of the file, needed in the `crop` method.
+  def prepare(form)
+    raise ValidationError, form.errors unless form.valid?
+    name = write_file form.thumb, "#{SecureRandom.uuid}.jpg"
+    { name: name, path: path(name) }
   end
 
   protected
+
+    def path(name)
+      "/tmp/thumbs/#{name}"
+    end
+
     def delete(name)
       FileUtils.rm @path.join(name)
     end
 
     # Create a new file cropping the one located in `path`
-    def crop_image(name, x1, y1, w, h, q)
-      MiniMagick::Image.new @path.join(name) do |img|
-        img.quality q.to_s
-        img.crop "#{w}x#{h}+#{x1}+#{y1}"
+    def crop_image(form, quality = 60)
+      MiniMagick::Image.new @path.join(form.name) do |img|
+        img.quality quality.to_s
+        img.crop "#{form.width}x#{form.height}+#{form.x1}+#{form.y1}"
       end
     end
 

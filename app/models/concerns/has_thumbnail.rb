@@ -26,22 +26,6 @@ module HasThumbnail
     !thumb_url.nil?
   end
 
-  def file_valid?(uploaded_io)
-    if uploaded_io.nil?
-      self.errors[:thumb] << "cannot be empty."
-    else
-      if uploaded_io.size > MAX_SIZE 
-        self.errors[:thumb] << "file cannot be bigger than #{MAX_SIZE / 1024} KB."
-      end
-      
-      unless ['image/gif', 'image/jpeg', 'image/jpg', 'image/png'].include? uploaded_io.content_type
-        self.errors[:thumb] << 'MIME type is invalid, only images are allowed.'
-      end
-    end
-
-    self.errors.messages.count == 0
-  end
-
   protected
 
     def upload(file)

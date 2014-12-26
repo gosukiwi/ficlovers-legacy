@@ -4,29 +4,28 @@ class StoriesController < ApplicationController
 
   def thumb_save
     #authorize @story
-    key, x1, y1, w, h = params[:key], params[:x1], params[:y1], params[:w], params[:h]
-
-    crop_action = CropThumb.new @story
-    crop_action.run(
-      name: key,
-      x1: x1,
-      y1: y1,
-      width: w,
-      height: h
-    )
-
-    redirect_to settings_story_url(@story), notice: "Fic image updated."
+    begin
+      crop_action = CropThumb.new @story
+      crop_action.crop CropForm.new(params)
+      redirect_to settings_story_url(@story), notice: "Fic image updated."
+    rescue ValidationError => e
+      @errors = e.errors
+      render :settings
+    rescue
+      @errors = ['Please try again']
+      render :settings
+    end
   end
 
   # POST /stories/1/crop
   # Temporary uploads a file and display the crop menu
   def thumb_crop
     #authorize @story
-    crop_action = CropThumb.new @story
-    @key = crop_action.prepare params[:thumb]
-    if @key
-      @path = crop_action.path @key
-    else
+    begin
+      crop_action = CropThumb.new @story
+      @image = crop_action.prepare ThumbForm.new(params)
+    rescue ValidationError => e
+      @errors = e.errors
       render :settings
     end
   end
