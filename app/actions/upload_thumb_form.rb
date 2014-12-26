@@ -1,5 +1,5 @@
 # Receives and validates the new thumb form
-class ThumbForm
+class UploadThumbForm
   attr_reader :thumb
 
   def initialize(params, max_size = 512)
