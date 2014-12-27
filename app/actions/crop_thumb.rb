@@ -5,7 +5,7 @@ class CropThumb
     @persistance = service.new
   end
 
-  def crop()
+  def crop
     raise ActionError, @form.errors unless @form.valid?
 
     result = crop_image @form
