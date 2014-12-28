@@ -22,13 +22,17 @@
           .tooltip Notifications
       ._dropdown-content.navigation-notifications
         %p You have no notifications right now
-    %li
-      - if logged_in?
+    - if logged_in?
+      %li 
         %a{ href: user_path(current_user), class: 'nav-link' }
-          %i.fa.fa-user.tooltip-item
-            .tooltip See your profile
+          %i.fa.fa-user
           Profile
-      - else
+      %li
+        %a{ href: logout_path, class: 'nav-link-icon', data: { method: :delete } }
+          %i.fa.fa-sign-out.tooltip-item
+            .tooltip Sign out
+    - else
+      %li 
         %a{ href: login_path, class: 'nav-link-primary' }
           %i.fa.fa-sign-in
           Login
