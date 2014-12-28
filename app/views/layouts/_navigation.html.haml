@@ -16,13 +16,13 @@
       %a{ href: '#', class: 'nav-link-icon' }
         %i.fa.fa-search.tooltip-item
           .tooltip Search
-    %li._dropdown
-      %a{ href: 'javascript:', class: 'nav-link-icon' }
-        %i.fa.fa-bell.tooltip-item
-          .tooltip Notifications
-      ._dropdown-content.navigation-notifications
-        %p You have no notifications right now
     - if logged_in?
+      %li._dropdown
+        %a{ href: 'javascript:', class: 'nav-link-icon' }
+          %i.fa.fa-bell.tooltip-item
+            .tooltip Notifications
+        ._dropdown-content.navigation-notifications
+          %p You have no notifications right now
       %li 
         %a{ href: user_path(current_user), class: 'nav-link' }
           %i.fa.fa-user
