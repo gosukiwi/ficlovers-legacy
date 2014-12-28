@@ -1,7 +1,12 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show]
+  before_action :set_user, only: [:show, :follow]
   before_action :check_logged, only: [:edit]
   after_action :verify_authorized, except: [:index, :new, :create]
+
+  def follow
+    authorize @user
+    @result = current_user.follow_toggle @user
+  end
 
   # GET /users
   # GET /users.json

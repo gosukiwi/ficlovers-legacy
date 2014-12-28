@@ -1,0 +1,19 @@
+function toggle() {
+  $btn   = $('.user-follow-btn');
+  $label = $btn.find('span');
+  $icon  = $btn.find('i');
+
+  if($label.text() === 'Follow') {
+    $label.text('Following');
+    $icon.removeClass('fa-plus').addClass('fa-check');
+  } else {
+    $label.text('Follow');
+    $icon.removeClass('fa-check').addClass('fa-plus');
+  }
+}
+
+<% if @result %>
+  toggle();
+<% else %>
+  console.log('You cannot follow yourself!');
+<% end %>

@@ -11,6 +11,7 @@ module HasThumbnail
   extend ActiveSupport::Concern
 
   # 512kb in bytes
+  # TODO: Be able to easily this somehow
   MAX_SIZE = 512 * 1024
 
   included do

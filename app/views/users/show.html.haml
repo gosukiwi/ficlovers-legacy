@@ -6,9 +6,13 @@
         = @user.name
       %p
         <strong>wrote</strong> #{@user.stories.count} fics, <strong>read</strong> 123
-    %a.user-follow-btn{href: '#'} 
-      Follow
-      %i.fa.fa-plus
+    %a.user-follow-btn{href: follow_user_path(@user, format: :js), data: { remote: true, method: :put } } 
+      - if logged_in? && current_user.following.include?(@user) then
+        %span Following
+        %i.fa.fa-check
+      - else
+        %span Follow
+        %i.fa.fa-plus
 
 %ul.user-bar
   %li.active

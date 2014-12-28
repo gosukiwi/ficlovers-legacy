@@ -18,7 +18,9 @@ Rails.application.routes.draw do
   post 'add_to_fav/:id', to: 'stories#add_to_fav', as: :add_to_fav
 
   # Users
-  resources :users, only: [:create], param: :username
+  resources :users, only: [:create], param: :username do
+    put 'follow', to: 'users#follow', on: :member, as: :follow
+  end
   get 'u/:username', to: 'users#show', as: :user
   get 'register', to: 'users#new', as: :register
   get 'login', to: 'sessions#new', as: :login
