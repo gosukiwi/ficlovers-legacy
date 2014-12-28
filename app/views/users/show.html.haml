@@ -3,9 +3,13 @@
     != gravatar_for(@user, size: 125, class: 'user-avatar')
     .user-profile
       %h3
-        = @user.name
+        = @user.username
       %p
-        <strong>wrote</strong> #{@user.stories.count} fics, <strong>read</strong> 123
+        = @user.followers.count
+        %strong followers
+        , 
+        %strong following 
+        = @user.following.count
     %a.user-follow-btn{href: follow_user_path(@user, format: :js), data: { remote: true, method: :put } } 
       - if logged_in? && current_user.following.include?(@user) then
         %span Following
