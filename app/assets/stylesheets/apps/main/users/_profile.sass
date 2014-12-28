@@ -112,14 +112,13 @@
     background-color: white
     border-top: 2px solid lighten($base-border-color, 10%)
     background-color: #e9e9e9
+    &:hover, 
     &.active
-      border-top: 4px solid $brand-primary
-      font-weight: bold
-      +linear-gradient(to top, #e9e9e9, #fff 50%)
-    &:hover
       border-top: 4px solid $brand-primary
       background-color: white
       transition: all 0.25s
+    &.active
+      font-weight: bold
 
 // Module: User Bio
 .user-bio-title
