@@ -20,6 +20,7 @@
 //= require hyphenate
 //= require common/fonts
 //= require common/_dash
+//= require common/tabs
 //= require apps/main/stories
 //= require apps/main/stories_search
 //= require apps/main/stories_crop
