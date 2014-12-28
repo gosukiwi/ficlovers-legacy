@@ -144,10 +144,26 @@
               %textarea.user-wall-new-content
               %input{ type: 'button', value: 'Preview', class: 'user-wall-new-preview-btn' }
               %input{ type: 'submit', value: 'Add comment', class: 'user-wall-new-add-btn' }
+
     .user-followers.u-hidden
-      Followers here!
+      - if @user.followers.any?
+        %ul
+          - @user.followers.limit(10).each do |user|
+            %li
+              = user.username
+      - else 
+        .fic-nothing
+          No followers yet. Be the first?
+
     .user-following.u-hidden
-      Following here
+      - if @user.following.any?
+        %ul
+          - @user.following.limit(10).each do |user|
+            %li
+              = user.username
+      - else 
+        .fic-nothing
+          Not following anyone yet.
 
     %h3.activity-title Activity
     %ul.activity
