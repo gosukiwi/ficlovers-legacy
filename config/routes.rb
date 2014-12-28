@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   root to: 'stories#hot'
 
+  # Dashbaord
+  resources :dashboard, only: [:index]
+
   # Stories
   resources :stories, only: [:create, :update, :destroy, :new, :show] do
     resources :chapters
@@ -41,7 +44,7 @@ Rails.application.routes.draw do
   end
 
   # Notification
-  resources :notifications, only: [:index]
+  resources :notifications, only: [:index, :destroy]
 
   # Admin/Mod dashboard
   namespace :admin do

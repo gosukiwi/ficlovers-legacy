@@ -29,6 +29,14 @@ class Story < ActiveRecord::Base
     where('published <> 0').order('updated_at desc')
   }
 
+  scope :published, ->{
+    where(published: true)
+  }
+
+  scope :unpublished, ->{
+    where(published: false)
+  }
+
   after_save :create_post
 
   def active_tags

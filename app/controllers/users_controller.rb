@@ -6,6 +6,9 @@ class UsersController < ApplicationController
   def follow
     authorize @user
     @result = current_user.follow_toggle @user
+    Notification.notify @user do
+      "You've got a new follower, #{view_context.link_to(current_user.username, current_user)}!"
+    end
   end
 
   # GET /users

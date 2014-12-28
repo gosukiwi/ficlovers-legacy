@@ -17,7 +17,7 @@ module HasFollowers
   end
 
   def follow(user)
-    return false if user == self
+    #return false if user == self
     following << user
     save
   end
