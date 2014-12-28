@@ -150,7 +150,7 @@
         %ul
           - @user.followers.limit(10).each do |user|
             %li
-              = user.username
+              = link_to user.username, user
       - else 
         .fic-nothing
           No followers yet. Be the first?
@@ -160,7 +160,7 @@
         %ul
           - @user.following.limit(10).each do |user|
             %li
-              = user.username
+              = link_to user.username, user
       - else 
         .fic-nothing
           Not following anyone yet.
