@@ -5,8 +5,7 @@ class StoriesController < ApplicationController
   def thumb_save
     #authorize @story
     begin
-      crop_action = CropThumb.new @story, ThumbCropForm.new(params)
-      crop_action.crop
+      CropThumb.new(@story, ThumbCropForm.new(params)).crop
       redirect_to settings_story_url(@story), notice: "Fic image updated."
     rescue ActionError => e
       @errors = e.errors
