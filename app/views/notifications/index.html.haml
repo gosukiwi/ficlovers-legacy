@@ -1,5 +1,14 @@
-%h1 notifications
+%h1 #{current_user.username}'s Notifications
 
-- @notifications.each do |notification|
-  .notification-message
-    = notification.message
+.notifications
+  - @notifications.each do |notification|
+    %div{ id: "notification-#{notification.id}" }
+      .notification-message
+        != notification.message
+      .notification-action
+        = link_to 'Dismiss', [notification, format: :js], data: { remote: true, method: :delete }
+
+- unless @notifications.empty?
+  = will_paginate @notifications
+  .pagination-info
+    = page_entries_info @notifications, model: 'notifications'
