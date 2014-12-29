@@ -42,7 +42,7 @@ class RepliesController < ApplicationController
 
       message = "#{current_user.username} replied to the post #{view_context.link_to(post.title, [post.forum, post])}"
       post.watchers.each do |user|
-        Notification.notify user, message
+        NotifyUser.new(user, message).notify
       end
     end
 
