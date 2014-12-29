@@ -1,33 +1,7 @@
 class ChaptersController < ApplicationController
   before_action :set_chapter, only: [:show, :edit, :update, :destroy]
   before_action :set_story
-  #protect_from_forgery with: :null_session
-  #
-  #
 
-  # GET /chapters
-  # GET /chapters.json
-  #def index
-  #end
-
-  # GET /chapters/1
-  # GET /chapters/1.json
-  #def show
-  #end
-
-  # GET /chapters/new
-  #def new
-  #  @chapter = Chapter.new
-  #  @chapter.story = @story
-  #  authorize @chapter
-  #end
-
-  # GET /chapters/1/edit
-  #def edit
-  #end
-
-  # POST /chapters
-  # POST /chapters.json
   def create
     @chapter = Chapter.new(chapter_params)
     @chapter.story = @story
@@ -42,8 +16,6 @@ class ChaptersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /chapters/1
-  # PATCH/PUT /chapters/1.json
   def update
     authorize @chapter
     if @chapter.update(chapter_params)
@@ -53,8 +25,6 @@ class ChaptersController < ApplicationController
     end
   end
 
-  # DELETE /chapters/1
-  # DELETE /chapters/1.json
   def destroy
     authorize @chapter
     @chapter.destroy

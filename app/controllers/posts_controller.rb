@@ -11,10 +11,9 @@ class PostsController < ApplicationController
 
   def show
     authorize @post
-    @post = @post
     @post.increment_views
+    @replies = @post.replies.sorted.paginate(page: params[:page], per_page: 10)
     @forums = Forum.all
-    @replies = @post.paginated_replies(params[:page])
     @new_reply = Reply.new
   end
 

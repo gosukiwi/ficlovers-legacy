@@ -3,6 +3,8 @@ class Reply < ActiveRecord::Base
   belongs_to :user
   belongs_to :post
 
+  scope :sorted, ->{ order('id ASC') }
+
   after_create do
     user.increment! :post_count
   end

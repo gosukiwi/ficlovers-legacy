@@ -16,10 +16,6 @@ class Post < ActiveRecord::Base
   scope :latest, ->{ order('id DESC') }
   scope :sorted, ->{ order('pinned DESC, id DESC') }
 
-  def paginated_replies(page, per_page = 10)
-    replies.order('id ASC').paginate(page: page, per_page: per_page)
-  end
-
   def increment_views
     self.increment! :views
   end
