@@ -13,6 +13,9 @@ class Post < ActiveRecord::Base
     user.increment! :post_count
   end
 
+  scope :latest, ->{ order('id DESC') }
+  scope :sorted, ->{ order('pinned DESC, id DESC') }
+
   def paginated_replies(page, per_page = 10)
     replies.order('id ASC').paginate(page: page, per_page: per_page)
   end
