@@ -6,7 +6,7 @@ class Story < ActiveRecord::Base
 
   belongs_to :category
   has_many :chapters, dependent: :destroy
-  belongs_to :user
+  belongs_to :user, autosave: true
   # favs
   has_many :favs
   has_many :favorited_by, through: :favs, source: :user

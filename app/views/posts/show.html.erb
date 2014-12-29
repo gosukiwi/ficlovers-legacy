@@ -63,7 +63,7 @@
 
       <div class="actions">
         <%= link_to 'Edit', edit_forum_post_reply_path(@forum, @post, reply), class: 'btn-default btn-edit' if policy(reply).update? %>
-        <%= link_to 'Delete', [@forum, @post, reply], method: :delete, class: 'btn-default btn-delete' if policy(reply).destroy? %>
+        <%= link_to 'Delete', forum_post_reply_path(@forum, @post, reply, format: :js), data: { remote: true, method: :delete, confirm: 'Are you sure?' }, class: 'btn-default btn-delete' if policy(reply).destroy? %>
       </div>
     </div>
   </div>

@@ -7,6 +7,7 @@ class Post < ActiveRecord::Base
   belongs_to :forum
   has_many :replies
   has_one :story
+  has_and_belongs_to_many :watchers, join_table: :users_posts, class_name: 'User'
 
   after_create do
     user.increment! :post_count

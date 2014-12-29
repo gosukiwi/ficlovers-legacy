@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :favorites, through: :favs, source: :story
   has_many :posts
   has_many :notifications
+  has_and_belongs_to_many :watched_posts, join_table: :users_posts, class_name: 'Post'
 
   has_secure_password
 
@@ -24,6 +25,14 @@ class User < ActiveRecord::Base
 
   def to_param
     username
+  end
+
+  def watch(post)
+    watched_posts << post
+  end
+
+  def unwatch(post)
+    watched_posts.delete post
   end
 
   protected

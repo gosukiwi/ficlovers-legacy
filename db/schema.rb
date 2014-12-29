@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141228020807) do
+ActiveRecord::Schema.define(version: 20141229010941) do
 
   create_table "admin_forum_categories", force: true do |t|
     t.string   "name"
@@ -128,5 +128,12 @@ ActiveRecord::Schema.define(version: 20141228020807) do
     t.integer  "post_count",                 default: 0
     t.string   "username",        limit: 25
   end
+
+  create_table "users_posts", force: true do |t|
+    t.integer "post_id"
+    t.integer "user_id"
+  end
+
+  add_index "users_posts", ["post_id", "user_id"], name: "index_users_posts_on_post_id_and_user_id", unique: true, using: :btree
 
 end

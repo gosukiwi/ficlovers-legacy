@@ -41,6 +41,9 @@
         Next Chapter
         %i.fa.fa-chevron-right
 
+.story-discuss
+  = link_to 'Discuss Story', [@story.post.forum, @story.post]
+
 .story-options
   %a{ href: add_to_fav_path(@story, format: :js), class: 'story-options-link', data: { method: :post, remote: true } }
     %span.story-options-link-text Add to favs
