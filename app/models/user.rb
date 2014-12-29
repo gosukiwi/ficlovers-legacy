@@ -27,12 +27,24 @@ class User < ActiveRecord::Base
     username
   end
 
+  def watch_toggle(post)
+    begin
+      watch post
+    rescue ActiveRecord::RecordNotUnique
+      unwatch post
+    end
+  end
+
   def watch(post)
     watched_posts << post
   end
 
   def unwatch(post)
     watched_posts.delete post
+  end
+
+  def watches?(post)
+    return watched_posts.include? post
   end
 
   protected

@@ -4,7 +4,7 @@ class PostPolicy < ApplicationPolicy
   end
 
   def create?
-    !user.nil?
+    not user.nil?
   end
 
   def destroy?
@@ -13,5 +13,9 @@ class PostPolicy < ApplicationPolicy
 
   def pin?
     !user.nil? && user.admin?
+  end
+
+  def watch?
+    not user.nil?
   end
 end

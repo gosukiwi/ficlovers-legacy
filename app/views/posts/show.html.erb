@@ -32,6 +32,15 @@
         <%= @post.content %>
       </div>
       <div class="actions">
+
+        <% if policy(@post).watch? %>
+          <% if current_user.watches?(@post) %>
+            <%= link_to 'Stop Watching', watch_forum_post_path(@forum, @post, format: :js), method: :post, remote: true, class: 'btn-default btn-watch' %>
+          <% else %> 
+            <%= link_to 'Watch', watch_forum_post_path(@forum, @post, format: :js), method: :post, remote: true, class: 'btn-default btn-watch' %>
+          <% end %>
+        <% end %>
+
         <% if policy(@post).pin? %>
           <% if @post.pinned? %>
             <%= link_to 'Unpin', pin_forum_post_path(@forum, @post, format: :js), method: :delete, remote: true, class: 'btn-default btn-pin' %>
@@ -39,8 +48,10 @@
             <%= link_to 'Pin', pin_forum_post_path(@forum, @post, format: :js), method: :delete, remote: true, class: 'btn-default btn-pin' %>
           <% end %>
         <% end %>
+
         <%= link_to 'Edit', edit_forum_post_path(@forum, @post), class: 'btn-default btn-edit' if policy(@post).update? %>
         <%= link_to 'Delete', [@forum, @post], method: :delete, class: 'btn-default btn-delete' if policy(@post).destroy? %>
+
       </div>
     </div>
   </div>

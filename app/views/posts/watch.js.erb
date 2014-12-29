@@ -1,0 +1,12 @@
+function toggle() {
+  $btn = $('.btn-watch');
+  if($btn.text() === 'Watch') {
+    $btn.text('Stop Watching');
+  } else {
+    $btn.text('Watch');
+  }
+}
+
+<% if @result %>
+  toggle();
+<% end %>
