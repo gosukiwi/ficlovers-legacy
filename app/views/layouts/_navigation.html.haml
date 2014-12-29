@@ -1,6 +1,9 @@
 %nav.navigation
   %h3.logo 
-    = link_to 'FicLovers', root_url
+    - if logged_in?
+      = link_to 'FicLovers', dashboard_index_path
+    - else
+      = link_to 'FicLovers', root_url
   %ul
     %li
       - if logged_in?
@@ -18,7 +21,7 @@
           .tooltip Search
     - if logged_in?
       %li._dropdown
-        %a{ href: 'javascript:', class: 'nav-link-icon' }
+        %a{ href: dashboard_index_path, class: 'nav-link-icon' }
           %i.fa.fa-bell.tooltip-item
             .tooltip Notifications
         ._dropdown-content.navigation-notifications

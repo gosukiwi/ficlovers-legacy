@@ -28,7 +28,7 @@ class PostsController < ApplicationController
     authorize @post
     @post.forum = @forum
     @post.user = current_user
-    if(@post.save)
+    if @post.save
       redirect_to [@forum, @post], notice: 'Post was successfully created.'
     else
       render :new
