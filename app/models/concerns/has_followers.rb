@@ -7,12 +7,10 @@ module HasFollowers
   end
   
   def follow_toggle(user)
-    begin
-      follow user
-    rescue ActiveRecord::RecordNotUnique
+    if following.include? user
       unfollow user
-    rescue
-      false
+    else
+      follow user
     end
   end
 
