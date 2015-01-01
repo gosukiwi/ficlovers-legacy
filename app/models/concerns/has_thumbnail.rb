@@ -10,15 +10,6 @@
 module HasThumbnail
   extend ActiveSupport::Concern
 
-  # 512kb in bytes
-  # TODO: Be able to easily this somehow
-  MAX_SIZE = 512 * 1024
-
-  included do
-    after_initialize :construct
-    attr_accessor :thumb_persistance_service
-  end
-
   def set_thumb(file)
     self.thumb_url = upload file
   end
@@ -31,15 +22,15 @@ module HasThumbnail
   def has_thumb?
     !thumb_url.nil?
   end
+  
+  def persistance_service
+    @persistance_service ||= S3Service.new
+  end
 
   protected
 
     def upload(file)
       extension = File.extname file.path
-      @thumb_persitance_service.put file, "#{self.id}_thumb#{extension}"
-    end
-
-    def construct
-      @thumb_persitance_service = S3Service.new
+      persistance_service.put file, "#{self.id}_thumb#{extension}"
     end
 end
