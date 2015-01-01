@@ -15,9 +15,9 @@ class CreateStoryPost
     Post.create({ title: story_title, content: message, user: story.user, forum: forum })
   end
 
-  def set_post(new_post)
-    story.post = new_post
-    story.user.watch new_post
+  def set_post(post)
+    story.post = post
+    story.user.watch post
   end
 
   def create
