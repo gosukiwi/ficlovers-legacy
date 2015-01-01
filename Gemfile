@@ -37,6 +37,8 @@ gem 'aws-sdk'
 # For cropping thumbs
 gem 'jcrop-rails-v2'
 gem "mini_magick"
+# Easily get image dimensions
+gem "fastimage"
 
 # Front-end related gems
 gem "haml-rails"
