@@ -1,26 +1,48 @@
 class CropThumb
-  def initialize(story, form, service = PersistanceService)
+  attr_reader :form, :story
+  def initialize(story, form)
     @story = story
-    @form = form
-    @persistance = service.new
+    @form  = form
+  end
+
+  # The temporary file name the form uploaded
+  def temp_file
+    form.name
+  end
+
+  # The dimensions of the selected crop area
+  def dimensions
+   "#{form.width}x#{form.height}+#{form.x1}+#{form.y1}"
+  end
+
+  def persistance
+    @persistance ||= PersistanceService.new
+  end
+
+  def unlink
+    persistance.delete temp_file
+  end
+
+  def path
+    persistance.path temp_file
   end
 
   def crop
-    raise ActionError, @form.errors unless @form.valid?
+    raise ActionError, form.errors unless form.valid?
 
-    result = crop_image @form
-    @story.set_thumb File.open(result.path)
-    @story.save
-    @persistance.delete @form.name
+    thumb = File.open cropped_image
+    story.set_thumb! thumb
+    unlink
   end
 
   protected
 
     # Crop an existing file in-place
-    def crop_image(form, quality = 60)
-      MiniMagick::Image.new @persistance.path(form.name) do |img|
+    def cropped_image(quality = 80)
+      result = MiniMagick::Image.new path do |img|
         img.quality quality.to_s
-        img.crop "#{form.width}x#{form.height}+#{form.x1}+#{form.y1}"
+        img.crop dimensions
       end
+      result.path
     end
 end

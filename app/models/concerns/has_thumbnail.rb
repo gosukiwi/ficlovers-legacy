@@ -23,6 +23,11 @@ module HasThumbnail
     self.thumb_url = upload file
   end
 
+  def set_thumb!(file)
+    set_thumb file
+    save
+  end
+
   def has_thumb?
     !thumb_url.nil?
   end
