@@ -5,6 +5,14 @@ class CreateStoryPost
     @story = story
   end
 
+  def create
+    return unless story.post.nil?
+    set_post build_post
+    story.save
+  end
+
+protected
+
   def story_title
     story.title
   end
@@ -18,11 +26,5 @@ class CreateStoryPost
   def set_post(post)
     story.post = post
     story.user.watch post
-  end
-
-  def create
-    return unless story.post.nil?
-    set_post build_post
-    story.save
   end
 end

@@ -2,16 +2,16 @@ class PrepareThumbTest < ActiveSupport::TestCase
   test 'prepare with valid form' do
     form = stub()
     form.stubs(:thumb)
-    form.expects(:valid?).returns(true)
+    form.stubs(:valid?).returns(true)
 
     service = stub()
     service.stubs(:new).returns(service)
-    # must call service's put method
-    service.expects(:put)
+    service.stubs(:put)
 
     action = PrepareThumb.new form, service
-
-    assert_not_nil action.prepare
+    result = action.prepare
+    assert_not_nil result[:name]
+    assert_not_nil result[:path]
   end
 
   test 'prepare with invalid form' do
