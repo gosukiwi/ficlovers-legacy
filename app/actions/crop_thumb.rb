@@ -5,6 +5,24 @@ class CropThumb
     @form  = form
   end
 
+  def image
+    @image ||= MiniMagick::Image.new(path)
+  end
+
+  def persistance
+    @persistance ||= PersistanceService.new
+  end
+
+  def crop
+    raise ActionError, form.errors unless form.valid?
+
+    path = crop_image.path
+    save_thumb path
+    unlink
+  end
+
+protected
+
   # Copy the thumb file into the story, no longer need the file
   def save_thumb(path)
     story.set_thumb! File.open(path)
@@ -20,14 +38,6 @@ class CropThumb
    "#{form.width}x#{form.height}+#{form.x1}+#{form.y1}"
   end
 
-  def image
-    @image ||= MiniMagick::Image.new(path)
-  end
-
-  def persistance
-    @persistance ||= PersistanceService.new
-  end
-
   def unlink
     persistance.delete temp_file
   end
@@ -36,21 +46,11 @@ class CropThumb
     persistance.path temp_file
   end
 
-  def crop
-    raise ActionError, form.errors unless form.valid?
-
-    path = crop_image.path
-    save_thumb path
-    unlink
-  end
-
-  protected
-
-    # Crop an existing file in-place
-    def crop_image(quality = 80)
-      image.combine_options do |img|
-        img.quality quality.to_s
-        img.crop dimensions
-      end
+  # Crop an existing file in-place
+  def crop_image(quality = 80)
+    image.combine_options do |img|
+      img.quality quality.to_s
+      img.crop dimensions
     end
+  end
 end

@@ -9,6 +9,8 @@ class FollowUser
     notify if @follower.follow_toggle @followee
   end
 
+protected
+
   def notify
     message = "Congratulations! #{@follower.username} now follows you!"
     NotifyUser.new(@followee, message).notify

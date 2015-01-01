@@ -10,8 +10,8 @@ class ThumbUploadForm
     @errors = []
   end
 
-  def add_error(error)
-    errors << error
+  def image_service
+    @image_service ||= FastImage
   end
 
   def valid?
@@ -19,8 +19,10 @@ class ThumbUploadForm
     errors.empty?
   end
 
-  def image_service
-    @image_service ||= FastImage
+protected
+
+  def add_error(error)
+    errors << error
   end
 
   def dimensions

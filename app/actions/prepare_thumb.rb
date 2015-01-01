@@ -9,6 +9,16 @@ class PrepareThumb
     @persistance ||= PersistanceService.new
   end
 
+  def prepare
+    raise ActionError, form.errors unless form.valid?
+
+    name = uniq_name
+    put thumb, name
+    { name: name, path: "/tmp/thumbs/#{name}" }
+  end
+
+protected
+
   def put(file, name)
     persistance.put file, name
   end
@@ -19,13 +29,5 @@ class PrepareThumb
 
   def uniq_name
     "#{SecureRandom.uuid}.jpg"
-  end
-
-  def prepare
-    raise ActionError, form.errors unless form.valid?
-
-    name = uniq_name
-    put thumb, name
-    { name: name, path: "/tmp/thumbs/#{name}" }
   end
 end
