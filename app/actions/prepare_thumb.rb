@@ -1,14 +1,31 @@
 class PrepareThumb
-  def initialize(form, service = PersistanceService)
+  attr_reader :form
+  def initialize(form, persistance = nil)
     @form = form
-    @persistance = service.new
+    @persistance = persistance
+  end
+
+  def persistance
+    @persistance ||= PersistanceService.new
+  end
+
+  def put(file, name)
+    persistance.put file, name
+  end
+
+  def thumb
+    form.thumb
+  end
+
+  def uniq_name
+    "#{SecureRandom.uuid}.jpg"
   end
 
   def prepare
-    raise ActionError, @form.errors unless @form.valid?
+    raise ActionError, form.errors unless form.valid?
 
-    name = "#{SecureRandom.uuid}.jpg"
-    @persistance.put @form.thumb, name
+    name = uniq_name
+    put thumb, name
     { name: name, path: "/tmp/thumbs/#{name}" }
   end
 end
