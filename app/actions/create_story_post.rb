@@ -1,21 +1,28 @@
 # Create a post for a story
 class CreateStoryPost
+  attr_reader :story
   def initialize(story)
     @story = story
   end
 
-  def create
-    return unless @story.post.nil?
+  def story_title
+    story.title
+  end
 
-    link = view_context.link_to @story.title, @story
-    post = Post.create({
-      title: @story.title,
-      content: "Discuss \"#{link}\" below. Please be respectful and remember to provide constructive feedback.",
-      user: @story.user,
-      forum: Forum.find_or_create_by(name: 'Fic Discussion')
-    })
-    @story.post = post
-    @story.user.watch post
-    @story.save
+  def build_post
+    forum = Forum.find_or_create_by(name: 'Fic Discussion')
+    message = "Discuss \"#{story_title}\" below. Please be respectful and remember to provide constructive feedback."
+    Post.create({ title: story_title, content: message, user: story.user, forum: forum })
+  end
+
+  def set_post(new_post)
+    story.post = new_post
+    story.user.watch new_post
+  end
+
+  def create
+    return unless story.post.nil?
+    set_post build_post
+    story.save
   end
 end
