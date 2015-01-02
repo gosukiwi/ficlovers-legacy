@@ -4,11 +4,11 @@ class PrepareThumbTest < ActiveSupport::TestCase
     form.stubs(:thumb)
     form.stubs(:valid?).returns(true)
 
-    service = stub()
-    service.stubs(:new).returns(service)
-    service.stubs(:put)
+    persistance = stub()
+    persistance.stubs(:new).returns(persistance)
+    persistance.stubs(:put)
 
-    action = PrepareThumb.new form, service
+    action = PrepareThumb.new form, persistance
     result = action.prepare
     assert_not_nil result[:name]
     assert_not_nil result[:path]
@@ -20,12 +20,12 @@ class PrepareThumbTest < ActiveSupport::TestCase
     form.expects(:valid?).returns(false)
     form.stubs(:errors).returns(['something went wrong!'])
 
-    service = stub()
-    service.stubs(:new).returns(service)
+    persistance = stub()
+    persistance.stubs(:new).returns(persistance)
     # invalid form must never call service's put
-    service.expects(:put).never
+    persistance.expects(:put).never
 
-    action = PrepareThumb.new form, service
+    action = PrepareThumb.new form, persistance
 
     assert_raises ActionError do
       action.prepare

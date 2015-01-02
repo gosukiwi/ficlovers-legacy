@@ -6,7 +6,7 @@ class CropThumb
   end
 
   def image
-    @image ||= MiniMagick::Image.new(path)
+    @image ||= MiniMagick::Image.new(temp_file_path)
   end
 
   def persistance
@@ -18,7 +18,7 @@ class CropThumb
 
     path = crop_image.path
     save_thumb path
-    unlink
+    unlink_temp_file
   end
 
 protected
@@ -38,11 +38,11 @@ protected
    "#{form.width}x#{form.height}+#{form.x1}+#{form.y1}"
   end
 
-  def unlink
+  def unlink_temp_file
     persistance.delete temp_file
   end
 
-  def path
+  def temp_file_path
     persistance.path temp_file
   end
 
