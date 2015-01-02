@@ -1,3 +1,4 @@
+# Uploads/"prepares" a thumb to be cropped
 class PrepareThumb
   attr_reader :form
   def initialize(form, persistance = nil)

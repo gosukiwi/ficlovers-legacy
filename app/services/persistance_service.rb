@@ -1,3 +1,4 @@
+# Persistance object for saving to local disk
 class PersistanceService
   def initialize(full_path = "#{Rails.root}/public/tmp/thumbs")
     @path = Pathname.new full_path

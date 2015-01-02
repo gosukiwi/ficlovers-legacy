@@ -1,5 +1,6 @@
 gem 'aws-sdk'
 
+# Service to put and get files from Amazon S3
 class S3Service
   def bucket
     @bucket ||= default_bucket
