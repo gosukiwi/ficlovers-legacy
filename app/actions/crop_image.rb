@@ -5,14 +5,6 @@ class CropImage
     @dimensions = dimensions
   end
 
-  def image
-    @image ||= MiniMagick::Image.new(path)
-  end
-
-  def dimensions
-   "#{@dimensions[:width]}x#{@dimensions[:height]}+#{@dimensions[:x1]}+#{@dimensions[:y1]}"
-  end
-
   # Crops the image in the given path using the specified dimensions and returns
   # a File object.
   def crop(quality = 80)
@@ -21,5 +13,15 @@ class CropImage
       img.crop dimensions
     end
     File.open result.path
+  end
+
+protected
+
+  def image
+    @image ||= MiniMagick::Image.new(path)
+  end
+
+  def dimensions
+   "#{@dimensions[:width]}x#{@dimensions[:height]}+#{@dimensions[:x1]}+#{@dimensions[:y1]}"
   end
 end

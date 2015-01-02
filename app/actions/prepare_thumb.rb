@@ -6,10 +6,6 @@ class PrepareThumb
     @persistance = persistance
   end
 
-  def persistance
-    @persistance ||= PersistanceService.new
-  end
-
   def prepare
     raise ActionError, form.errors unless form.valid?
 
@@ -19,6 +15,10 @@ class PrepareThumb
   end
 
 protected
+
+  def persistance
+    @persistance ||= PersistanceService.new
+  end
 
   def put(file, name)
     persistance.put file, name

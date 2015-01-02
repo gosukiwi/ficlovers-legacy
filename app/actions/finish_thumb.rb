@@ -5,16 +5,16 @@ class FinishThumb
     @story = story
   end
 
-  def persist
-    @persist ||= PersistanceService.new
-  end
-
   def finish
     story.set_thumb! crop_thumb
     persist.delete form.name
   end
 
 protected
+
+  def persist
+    @persist ||= PersistanceService.new
+  end
 
   def path
     persist.path form.name
