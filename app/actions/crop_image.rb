@@ -1,4 +1,4 @@
-class CropThumb
+class CropImage
   attr_reader :path
   def initialize(path, dimensions)
     @path = path

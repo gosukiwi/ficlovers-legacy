@@ -25,6 +25,6 @@ protected
   end
 
   def crop_thumb
-    CropThumb.new(path, dimensions).crop
+    CropImage.new(path, dimensions).crop
   end
 end
