@@ -19,8 +19,8 @@ class StoriesController < ApplicationController
   def thumb_crop
     #authorize @story
     begin
-      prepare_action = PrepareThumb.new ThumbUploadForm.new(params)
-      @image = prepare_action.prepare
+      form = ThumbUploadForm.new params
+      @image = PrepareThumb.new(form).prepare
     rescue ActionError => e
       @errors = e.errors
       render :settings
