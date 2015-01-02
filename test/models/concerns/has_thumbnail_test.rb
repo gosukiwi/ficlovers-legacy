@@ -4,24 +4,25 @@ class HasThumbnailTest < ActiveSupport::TestCase
   end
 
   test 'service is initiated' do
-    assert_not_nil @story.thumb_persistance_service
-  end
-
-  test 'get thumb' do
-    @story.thumb_persistance_service.expects(:get_thumb).returns('a-thumb-url')
-    assert_equal 'a-thumb-url', @story.get_thumb
+    assert_not_nil @story.persistance_service
   end
 
   test 'set thumb' do
-    @story.thumb_persistance_service.expects(:set_thumb).with('some-file')
-    @story.set_thumb 'some-file'
+    @story.expects(:upload).with('some-file').returns('some-path')
+    result = @story.set_thumb 'some-file'
+    assert_equal @story.thumb_url, 'some-path'
   end
 
-  test 'is expired' do
-    @story.thumb_expiration = DateTime.now + 1.day
-    assert_not @story.expired?
+  test 'set thumb and save' do
+    @story.expects(:upload).with('some-file').returns('some-path')
+    @story.set_thumb! 'some-file'
 
-    @story.thumb_expiration = 1.day.ago
-    assert @story.expired?
+    other = Story.find @story.id
+    assert_equal other.thumb_url, 'some-path'
+  end
+
+  test 'has thumb' do
+    @story.thumb_url = 'something-not-nil'
+    assert @story.has_thumb?
   end
 end

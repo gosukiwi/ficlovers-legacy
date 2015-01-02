@@ -4,19 +4,20 @@ class CreateStoryPostTest < ActiveSupport::TestCase
     @action = CreateStoryPost.new @story
   end
 
-  test 'with existing post' do
-    assert_nil @action.run
+  test 'do not create with existing post' do
+    assert_not_nil @story.post
+    assert_nil @action.create
   end
 
-  test 'with non-existant post' do
+  test 'create when there is no post' do
     @story.post = nil
-    @action.run
+    assert_not_nil @action.create
     assert_not_nil @story.post
   end
 
   test 'created post is valid' do
     @story.post = nil
-    @action.run
+    @action.create
 
     post = @story.post
 
