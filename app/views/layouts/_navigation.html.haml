@@ -1,9 +1,6 @@
 %nav.navigation
   %h3.logo 
-    - if logged_in?
-      = link_to 'FicLovers', dashboard_index_path
-    - else
-      = link_to 'FicLovers', root_url
+    = link_to 'FicLovers', root_url
   %ul
     %li
       - if logged_in?
