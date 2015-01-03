@@ -20,7 +20,7 @@
     - @user.stories.published.each do |story|
       %tr
         %td
-          = story.title
+          = link_to story.title, story
         %td
           = story.views
         %td
