@@ -19,8 +19,12 @@
     - if logged_in?
       %li._dropdown
         %a{ href: dashboard_index_path, class: 'nav-link-icon' }
+          - if current_user.notifications.any?
+            %span.notification-number 
+              = current_user.notifications.count
           %i.fa.fa-bell.tooltip-item
-            .tooltip Notifications
+            .tooltip 
+              Notifications
         ._dropdown-content.navigation-notifications
           %p You have no notifications right now
       %li 
