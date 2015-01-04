@@ -17,9 +17,15 @@ as a debugger also, so don't forget to use it if you are stuck.
 ## ENV Variables
 You'll need the following env variables
 
+    # MySQL settings
     FANFIC_DEV_DB_NAME
     FANFIC_DEV_DB_USER
     FANFIC_DEV_DB_PASS
+    FANFIC_DEV_DB_HOST
+    # the path of the mysql daemon socket, to find it run: mysqladmin variables
+    FANFIC_DEV_DB_SOCKET
+
+    # Amazon S3 settings
     FANFIC_S3_BUCKET
     FANFIC_S3_KEY
     FANFIC_S3_SECRET
