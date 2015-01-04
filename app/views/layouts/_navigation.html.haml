@@ -17,7 +17,7 @@
         %i.fa.fa-search.tooltip-item
           .tooltip Search
     - if logged_in?
-      %li._dropdown
+      %li._dropdown.notification-container
         %a{ href: dashboard_index_path, class: 'nav-link-icon' }
           - if current_user.notifications.any?
             %span.notification-number 
@@ -26,7 +26,15 @@
             .tooltip 
               Notifications
         ._dropdown-content.navigation-notifications
-          %p You have no notifications right now
+          - if current_user.notifications.any?
+            %ul
+              - current_user.notifications.sorted.limit(5).each do |notification|
+                %li
+                  = link_to notification.message, notifications_path
+              %li.notification-button
+                = link_to 'See All', notifications_path
+          - else
+            %p You have no notifications right now
       %li 
         %a{ href: user_path(current_user), class: 'nav-link' }
           %i.fa.fa-user

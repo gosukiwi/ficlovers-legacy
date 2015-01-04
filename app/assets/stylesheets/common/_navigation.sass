@@ -42,6 +42,7 @@
   .nav-link-icon
     color: #444
     padding: 0 10px
+    font-size: 1.1em
     &:hover
       color: #777
   .nav-link-hidden
@@ -51,10 +52,41 @@
   background-color: $tooltip-background
   margin-top: 10px
   font-size: 85%
-  p
+  box-shadow: $box-shadow-bottom
+  p, ul
     background-color: $tooltip-background
-    padding: 5px 10px
     margin: 0
-    color: $tooltip-color
+    padding: 0
     font-weight: 80%
+    width: 350px
+  li
+    padding: 5px 10px
+    border-bottom: 1px solid #ccc
+    display: block
+    &:hover
+      background-color: darken($tooltip-background, 10%)
+    a
+      color: $tooltip-color
+  .notification-button
+    background-color: $color-primary
+    text-align: center
+    border-bottom: none
+    margin-top: -1px
+    border-top: 1px solid $color-primary
+    &:hover
+      background-color: darken($color-primary, 10%)
+    a
+      color: white
 
+.notification-container
+  position: relative
+  .notification-number
+    position: absolute
+    font-size: 65%
+    color: white
+    background-color: $color-primary
+    right: 0
+    bottom: 0
+    padding: 0 4px
+    font-weight: bold
+    z-index: 200
