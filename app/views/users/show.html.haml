@@ -110,10 +110,10 @@
       %li{ data: { for: '.user-following' } } Following
 
     %ul.user-wall.u-hidden
-      - @user.wall_messages.each do |message|
+      - @user.wall_messages.limit(10).each do |message|
         %li.user-wall-entry
           .user-wall-author 
-            %img{ src: 'http://placehold.it/50x50' }
+            != gravatar_for message.author, size: 50
           .user-wall-message 
             .user-wall-message-content 
               .user-wall-message-info
@@ -126,7 +126,7 @@
       - if logged_in?
         %li.user-wall-entry
           .user-wall-author 
-            %img{ src: 'http://placehold.it/50x50' }
+            != gravatar_for @user, size: 50
           .user-wall-message 
             .user-wall-message-content.user-wall-new
               = form_for [@user, @wall_message] do |f|
@@ -154,13 +154,3 @@
       - else 
         .fic-nothing
           Not following anyone yet.
-
-    %h3.activity-title Activity
-    %ul.activity
-      %li Created fic SOME FIC
-      %li Commented on SOMEONE's profile
-      %li Created ASDASD forum post
-      %li Replied to potato's MYTITLE forum post
-      %li Followed ANAUTHOR
-      %li Faved SOMEFIC
-
