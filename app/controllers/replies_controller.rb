@@ -40,7 +40,7 @@ class RepliesController < ApplicationController
     def notify_users(post)
       return unless post.watchers.any?
 
-      message = "#{current_user.username} replied to the post #{view_context.link_to(post.title, [post.forum, post])}"
+      message = "#{current_user.username} replied to the post #{post.title}"
       post.watchers.each do |user|
         NotifyUser.new(user, message).notify
       end

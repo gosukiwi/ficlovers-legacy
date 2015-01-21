@@ -1,53 +1,47 @@
-%h1 Dashboard
-
-%h3 Fics in progress
-- if @user.stories.unpublished.any?
-  - @user.stories.unpublished.each do |story|
-    = story.title
-- else
-  Nothing in progress.
-  = link_to 'Write a new fic!', new_story_path
-
-%h3 Published Fics
-- if @user.stories.published.any?
-  %table
-    %thead
-      %tr
-        %th Title
-        %th Views
-        %th Actions
-    %tbody
-    - @user.stories.published.each do |story|
-      %tr
-        %td
-          = link_to story.title, story
-        %td
-          = story.views
-        %td
-          = link_to 'Continue Writing', write_story_path(story)
-          = link_to 'Settings', settings_story_path(story)
-- else
-  Nothing published yet.
-
-%h3 Notifications
-%ul
-  - @notifications.each do |notification|
-    %li{ id: "notification-#{notification.id}" }
-      != notification.message
-      %a{ href: notification_path(notification, format: :js), class: 'notification-dismiss', data: { remote: true, method: :delete } } Dismiss
-  %li 
-    %a SOMEONE 
-    is now following you!
-    %a.notification-dismiss Dismiss
-  %li
-    %a ANOTHER
-    replied in
-    %a A post you're watching
-    %a.notification-dismiss Dismiss
-  %li
-    %a ANOTHER
-    faved
-    %a Your fic
-    %a.notification-dismiss Dismiss
-%a{ href: notifications_path } Dismiss All
-%a{ href: notifications_path } See All
+.dashboard-container
+  .dashboard-box
+    %h3 Fics in progress
+    - if @user.stories.unpublished.any?
+      - @user.stories.unpublished.each do |story|
+        = story.title
+    - else
+      Nothing in progress.
+      .dashboard-action
+        = link_to 'Write a new fic!', new_story_path
+  .dashboard-box
+    %h3 Published Fics
+    - if @user.stories.published.any?
+      %table.dashboard-table
+        %thead
+          %tr
+            %th Title
+            %th Views
+            %th 
+        %tbody
+        - @user.stories.published.each do |story|
+          %tr
+            %td
+              = link_to story.title, story
+            %td
+              = story.views
+            %td.dashboard-table-actions
+              = link_to 'Continue Writing', write_story_path(story)
+              = link_to 'Settings', settings_story_path(story)
+    - else
+      Nothing published yet.
+  .dashboard-box
+    %h3 Notifications
+    - if @notifications.any?
+      %ul
+        - @notifications.each do |notification|
+          %li{ id: "notification-#{notification.id}" }
+            != notification.message
+            %a{ href: notification_path(notification, format: :js), class: 'notification-dismiss', data: { remote: true, method: :delete } } Dismiss
+      .dashboard-action
+        %a{ href: notifications_path } Dismiss All
+        %a{ href: notifications_path } See All
+    - else
+      No notifications. You are up to date :)
+    .dashboard-action
+      %a{ href: notifications_path } Dismiss All
+      %a{ href: notifications_path } See All

@@ -32,7 +32,6 @@
       %i.fa.fa-heart
       Favs
 
-
 .user-container
   .user-entries
     .fic-container
@@ -110,7 +109,7 @@
       %li{ data: { for: '.user-followers' } } Followers
       %li{ data: { for: '.user-following' } } Following
 
-    %ul.user-wall.u-hidden
+    %ul.user-wall
       - @user.wall_messages.sorted.limit(10).each do |message|
         %li.user-wall-entry
           .user-wall-author 

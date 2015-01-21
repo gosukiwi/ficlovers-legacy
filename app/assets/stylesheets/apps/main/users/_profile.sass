@@ -195,10 +195,11 @@
   box-sizing: border-box
   height: 250px
   max-height: 50px
-  transition: max-height 0.25s
+  &:hover
+    border: 1px solid #777
   &:focus
-    max-height: 250px
-    transition: max-height 0.25s
+    outline: none
+    border: 1px solid #444
 
 .user-wall-new-add-btn
   +button
