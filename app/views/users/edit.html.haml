@@ -17,3 +17,11 @@
     .settings-group
       %h4 Basic Information
       = render 'form'
+    .settings-group
+      %h4 About me
+      = form_tag about_user_path, method: :put do
+        .settings-group-inputs
+          = text_area_tag :about, @user.about
+        .settings-group-action
+          = submit_tag 'Save'
+

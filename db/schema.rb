@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141229010941) do
+ActiveRecord::Schema.define(version: 20150121052433) do
 
   create_table "admin_forum_categories", force: true do |t|
     t.string   "name"
@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(version: 20141229010941) do
     t.string   "role",                       default: "user"
     t.integer  "post_count",                 default: 0
     t.string   "username",        limit: 25
+    t.text     "about"
   end
 
   create_table "users_posts", force: true do |t|

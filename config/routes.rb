@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   # resource is /u/:username
   resources :users, only: [:create, :edit, :update, :show], param: :username, path: 'u' do
     put 'follow', to: 'users#follow', on: :member, as: :follow
+    put 'about', to: 'users#about', on: :member, as: :about
   end
   get 'register', to: 'users#new', as: :register
   get 'login', to: 'sessions#new', as: :login

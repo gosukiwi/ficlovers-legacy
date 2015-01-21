@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :follow, :edit]
+  before_action :set_user, only: [:show, :follow, :edit, :update, :about]
   before_action :check_logged, only: [:edit]
   after_action :verify_authorized, except: [:index, :new, :create]
 
@@ -32,6 +32,16 @@ class UsersController < ApplicationController
     authorize @user
   end
 
+  def about
+    authorize @user
+
+    if @user.update about: params[:about]
+      render :edit, notice: 'User information saved'
+    else
+      render :edit
+    end
+  end
+
   # POST /users
   # POST /users.json
   def create
@@ -52,14 +62,11 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     authorize @user
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+
+    if @user.update(user_params)
+      render :edit, notice: 'User was successfully updated.'
+    else
+      render :edit
     end
   end
 

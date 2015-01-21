@@ -97,11 +97,12 @@
 
   .user-info
 
-    .user-bio
-      %h3.user-bio-title 
-        About me
-      %p.user-bio-content 
-        Full stack web developer, gamer and cat lover from Argentina
+    - unless @user.about.nil?
+      .user-bio
+        %h3.user-bio-title 
+          About me
+        %p.user-bio-content 
+          = @user.about
 
     %ul.tabs
       %li{ class: 'active', data: { for: '.user-wall' } } Wall
