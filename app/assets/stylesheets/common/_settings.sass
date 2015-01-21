@@ -1,0 +1,99 @@
+// Settings boxes used for configuration in Story and User
+// ---------------------------------------------------------------------------
+.settings
+  +outer-container(1110px)
+
+.settings-title
+  margin: 0 0 25px 0
+  font-size: 1.25em
+  font-weight: bold
+  .fa
+    padding-right: 5px
+
+.settings-menu
+  +span-columns(2)
+  font-size: 95%
+  box-shadow: $box-shadow-bottom
+
+  ul
+    list-style: none
+    border: $base-border
+    border-radius: $base-border-radius
+    margin: 0
+    padding: 0
+
+  li
+    border-bottom: $base-border
+    &:last-child
+      border-bottom: none
+
+  a
+    padding: 5px 10px
+    display: block
+    color: #111
+    position: relative
+    &:hover
+      background-color: #e9e9e9
+
+  .settings-menu-danger
+    color: darken($color-danger, 10%)
+    &:hover
+      color: white
+      text-shadow: 0 0 1px black
+      background-color: $color-danger
+      border: 1px solid darken($color-danger, 10%)
+      border-radius: 0 0 $base-border-radius $base-border-radius
+      margin: -1px
+
+.settings-content
+  +span-columns(10)
+  +omega
+
+.settings-group
+  border-radius: $base-border-radius
+  border: $base-border
+  padding: 10px
+  margin-bottom: 25px
+  box-shadow: $box-shadow-bottom
+  &:last-child
+    margin-bottom: 0
+
+.settings-group-title
+  padding: 0 10px
+  margin: 0 -10px 15px -11px
+  text-transform: uppercase
+  border-left: 2px solid $color-primary
+
+.settings-group-inputs
+  margin-bottom: 10px
+  &:last-child
+    margin-bottom: 0
+  label
+    text-transform: capitalize
+    color: #777
+    display: block
+    width: 100%
+  input, textarea, select
+    display: block
+    border: $base-border
+    padding: 5px
+    font-family: $sans-serif
+    width: 100%
+  textarea
+    height: 150px
+
+.settings-group-image
+  text-align: center
+
+  img
+    width: auto
+    height: 200px
+  
+.settings-group-action
+  font-size: 90%
+  text-align: right
+  input[type=submit]
+    +button
+    
+.settings-group-button
+  +button(#e9e9e9, #111)
