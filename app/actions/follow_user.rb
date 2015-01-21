@@ -13,6 +13,6 @@ protected
 
   def notify
     message = "Congratulations! #{@follower.username} now follows you!"
-    NotifyUser.new(@followee, message).notify
+    NotifyUser.new(@followee, message, @follower).notify
   end
 end

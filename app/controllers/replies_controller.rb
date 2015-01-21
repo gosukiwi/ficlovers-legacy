@@ -41,8 +41,11 @@ class RepliesController < ApplicationController
       return unless post.watchers.any?
 
       message = "#{current_user.username} replied to the post #{post.title}"
-      post.watchers.each do |user|
-        NotifyUser.new(user, message).notify
+
+      ActiveRecord::Base.transaction do
+        post.watchers.each do |user|
+          NotifyUser.new(user, message).notify
+        end
       end
     end
 

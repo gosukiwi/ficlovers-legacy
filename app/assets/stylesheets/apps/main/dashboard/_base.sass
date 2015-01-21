@@ -1,0 +1,29 @@
+.dashboard-container
+  +outer-container(1110px)
+
+.dashboard-box
+  +span-columns(6)
+  +omega(2n)
+  h3
+    font-size: 1.5em
+    text-transform: uppercase
+
+.dashboard-table
+  width: 100%
+  th
+    text-align: left
+  td
+    padding: 2px 0
+
+.dashboard-table-actions
+  font-size: 90%
+  text-align: right
+  a
+    +button
+
+.dashboard-action
+  font-size: 90%
+  text-align: center
+  padding-top: 25px
+  a
+    +button

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150121053942) do
+ActiveRecord::Schema.define(version: 20150121112810) do
 
   create_table "admin_forum_categories", force: true do |t|
     t.string   "name"
@@ -60,9 +60,10 @@ ActiveRecord::Schema.define(version: 20150121053942) do
     t.text     "message"
     t.boolean  "read"
     t.integer  "user_id"
-    t.string   "action"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "target_id"
+    t.string   "target_type"
   end
 
   create_table "posts", force: true do |t|
