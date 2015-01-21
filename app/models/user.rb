@@ -12,8 +12,9 @@ class User < ActiveRecord::Base
   has_many :favs
   has_many :favorites, through: :favs, source: :story
   has_many :posts
-  has_many :notifications
+  has_many :notifications, dependent: :destroy
   has_and_belongs_to_many :watched_posts, join_table: :users_posts, class_name: 'Post'
+  has_many :wall_messages, foreign_key: :receiver_id, class_name: 'WallMessage', dependent: :destroy
 
   has_secure_password
 

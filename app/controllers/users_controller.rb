@@ -20,6 +20,7 @@ class UsersController < ApplicationController
     authorize @user
     @stories = @user.stories.fresh.limit(6)
     @favs = @user.favorites.fresh.limit(6)
+    @wall_message = WallMessage.new
   end
 
   # GET /users/new

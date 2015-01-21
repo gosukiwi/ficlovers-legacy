@@ -26,6 +26,9 @@ Rails.application.routes.draw do
   resources :users, only: [:create, :edit, :update, :show], param: :username, path: 'u' do
     put 'follow', to: 'users#follow', on: :member, as: :follow
     put 'about', to: 'users#about', on: :member, as: :about
+
+    # Wall Messages
+    resources :wall_messages, only: [:create]
   end
   get 'register', to: 'users#new', as: :register
   get 'login', to: 'sessions#new', as: :login

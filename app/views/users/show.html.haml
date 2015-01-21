@@ -110,45 +110,30 @@
       %li{ data: { for: '.user-following' } } Following
 
     %ul.user-wall.u-hidden
-      %li.user-wall-entry
-        .user-wall-author 
-          %img{ src: 'http://placehold.it/50x50' }
-        .user-wall-message 
-          .user-wall-message-content 
-            .user-wall-message-info
-              %a{ href: '#', class: 'user-wall-message-info-link' } Someone
-              .user-wall-message-info-date 1 day ago
-            %p Hello, World
-            %p Hello, World
-            %p Hello, World
-      %li.user-wall-entry
-        .user-wall-author 
-          %img{ src: 'http://placehold.it/50x50' }
-        .user-wall-message 
-          .user-wall-message-content 
-            .user-wall-message-info
-              %a{ href: '#', class: 'user-wall-message-info-link' } Someone
-              .user-wall-message-info-date 1 day ago
-            Hello There! 
-      %li.user-wall-entry
-        .user-wall-author 
-          %img{ src: 'http://placehold.it/50x50' }
-        .user-wall-message 
-          .user-wall-message-content 
-            .user-wall-message-info
-              %a{ href: '#', class: 'user-wall-message-info-link' } Someone
-              .user-wall-message-info-date 1 day ago
-            Hello There! 
+      - @user.wall_messages.each do |message|
+        %li.user-wall-entry
+          .user-wall-author 
+            %img{ src: 'http://placehold.it/50x50' }
+          .user-wall-message 
+            .user-wall-message-content 
+              .user-wall-message-info
+                = link_to message.author.username, message.author
+                .user-wall-message-info-date 
+                  = time_ago_in_words message.created_at
+                  ago
+              %p 
+                = message.content
       - if logged_in?
         %li.user-wall-entry
           .user-wall-author 
             %img{ src: 'http://placehold.it/50x50' }
           .user-wall-message 
             .user-wall-message-content.user-wall-new
-              %h3.user-wall-new-title Add a comment
-              %textarea.user-wall-new-content
-              %input{ type: 'button', value: 'Preview', class: 'user-wall-new-preview-btn' }
-              %input{ type: 'submit', value: 'Add comment', class: 'user-wall-new-add-btn' }
+              = form_for [@user, @wall_message] do |f|
+                %h3.user-wall-new-title Add a comment
+                = f.text_area :content, class: 'user-wall-new-content'
+                %input{ type: 'button', value: 'Preview', class: 'user-wall-new-preview-btn' }
+                = f.submit value: 'Add comment', class: 'user-wall-new-add-btn'
 
     .user-followers.u-hidden
       - if @user.followers.any?
