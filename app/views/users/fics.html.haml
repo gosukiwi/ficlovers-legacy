@@ -1,0 +1,65 @@
+.user-header
+  .user-header-content
+    != gravatar_for(@user, size: 125, class: 'user-avatar')
+    .user-profile
+      %h3
+        = @user.username
+      %p
+        = @user.followers.count
+        %strong followers
+        , 
+        %strong following 
+        = @user.following.count
+    %a.user-follow-btn{href: follow_user_path(@user, format: :js), data: { remote: true, method: :put } } 
+      - if logged_in? && current_user.following.include?(@user) then
+        %span Following
+        %i.fa.fa-check
+      - else
+        %span Follow
+        %i.fa.fa-plus
+
+%ul.user-bar
+  %li
+    %a.user-link{href: user_path(@user)}
+      %i.fa.fa-user
+      Profile
+  %li.active 
+    %a.user-link{href: fics_user_path(@user)}
+      %i.fa.fa-file-text
+      Fics
+  %li 
+    %a.user-link{href: favs_user_path(@user)}
+      %i.fa.fa-heart
+      Favs
+
+.fics-container
+  .fic-container
+    - @fics.each do |story|
+      .fic
+        .fic-content
+          %h4.fic-title
+            = link_to story.title, story
+          .fic-description 
+            %p 
+              = story.summary
+          %ul.fic-info
+            %li
+              = story.chapters.count
+              chapters
+            %li
+              = story.views
+              views
+            %li
+              = story.favorited_by.count
+              favs
+          %ul.fic-tags
+            %li.fic-tags-info
+              =story.active_tags.count
+              tags:
+            - story.active_tags.each do |tag|
+              %li 
+                %span{ class: "tag-#{tag.context}" }
+                  = tag.name
+          = link_to 'Read', story, class: 'fic-link'
+  .fics-pagination
+    = will_paginate @fics unless @fics.empty?

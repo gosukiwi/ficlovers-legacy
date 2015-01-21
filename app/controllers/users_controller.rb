@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :follow, :edit, :update, :about]
+  before_action :set_user, only: [:show, :follow, :edit, :update, :about, :fics]
   before_action :check_logged, only: [:edit]
   after_action :verify_authorized, except: [:index, :new, :create]
 
@@ -69,6 +69,11 @@ class UsersController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def fics
+    authorize @user
+    @fics = @user.stories.fresh.paginate(page: params[:page], per_page: 12)
   end
 
   # DELETE /users/1

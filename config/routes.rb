@@ -27,6 +27,9 @@ Rails.application.routes.draw do
     put 'follow', to: 'users#follow', on: :member, as: :follow
     put 'about', to: 'users#about', on: :member, as: :about
 
+    get 'fics', to: 'users#fics', on: :member, as: :fics
+    get 'favs', to: 'users#favs', on: :member, as: :favs
+
     # Wall Messages
     resources :wall_messages, only: [:create]
   end

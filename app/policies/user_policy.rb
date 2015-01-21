@@ -16,6 +16,10 @@ class UserPolicy < ApplicationPolicy
     not user.nil?
   end
 
+  def fics?
+    true
+  end
+
   # Only admins can delete, and they cannot delete themselves!
   def destroy?
     return false if user.nil?
