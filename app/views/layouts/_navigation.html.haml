@@ -41,7 +41,7 @@
             %i.fa.fa-dashboard.tooltip-item
               .tooltip Admin Panel
       %li 
-        %a{ href: user_path(current_user), class: 'nav-link' }
+        %a{ href: dashboard_index_path, class: 'nav-link' }
           %i.fa.fa-user
           = current_user.username
       %li

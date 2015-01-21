@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :dashboard, only: [:index]
 
   # Stories
-  resources :stories, only: [:create, :update, :destroy, :new, :show] do
+  resources :stories, only: [:create, :update, :destroy, :new, :show], path: 'fics' do
     resources :chapters
     get 'search', on: :collection
     put 'update_tags', to: 'stories#update_tags', on: :member
