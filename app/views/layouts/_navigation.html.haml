@@ -35,6 +35,11 @@
                 = link_to 'See All', notifications_path
           - else
             %p You have no notifications right now
+      - if admin?
+        %li 
+          %a{ href: admin_dashboard_path, class: 'nav-link-icon' }
+            %i.fa.fa-dashboard.tooltip-item
+              .tooltip Admin Panel
       %li 
         %a{ href: user_path(current_user), class: 'nav-link' }
           %i.fa.fa-user
