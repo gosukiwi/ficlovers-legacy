@@ -20,6 +20,10 @@ class UserPolicy < ApplicationPolicy
     true
   end
 
+  def favs?
+    true
+  end
+
   # Only admins can delete, and they cannot delete themselves!
   def destroy?
     return false if user.nil?

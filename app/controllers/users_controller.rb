@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :follow, :edit, :update, :about, :fics]
+  before_action :set_user, only: [:show, :follow, :edit, :update, :about, :fics, :favs]
   before_action :check_logged, only: [:edit]
   after_action :verify_authorized, except: [:index, :new, :create]
 
@@ -74,6 +74,11 @@ class UsersController < ApplicationController
   def fics
     authorize @user
     @fics = @user.stories.fresh.paginate(page: params[:page], per_page: 12)
+  end
+
+  def favs
+    authorize @user
+    @favs = @user.favorites.fresh.paginate(page: params[:page], per_page: 12)
   end
 
   # DELETE /users/1
