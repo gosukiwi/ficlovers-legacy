@@ -1,0 +1,19 @@
+.settings
+  %h1.settings-title 
+    %i.fa.fa-cog Account Settings
+
+  .settings-menu
+    %ul
+      %li 
+        %a{ href: '#basic-information' } 
+          Basic Information
+      %li 
+        %a{ href: '#fic-image' } 
+          Bio
+      %li 
+        = link_to 'Back', @user
+
+  .settings-content
+    .settings-group
+      %h4 Basic Information
+      = render 'form'

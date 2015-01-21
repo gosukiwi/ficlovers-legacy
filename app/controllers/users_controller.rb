@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :follow]
+  before_action :set_user, only: [:show, :follow, :edit]
   before_action :check_logged, only: [:edit]
   after_action :verify_authorized, except: [:index, :new, :create]
 
@@ -28,9 +28,9 @@ class UsersController < ApplicationController
   end
 
   # GET /users/1/edit
-  #def edit
-  #  authorize @user
-  #end
+  def edit
+    authorize @user
+  end
 
   # POST /users
   # POST /users.json
@@ -50,18 +50,18 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
-  #def update
-  #  authorize @user
-  #  respond_to do |format|
-  #    if @user.update(user_params)
-  #      format.html { redirect_to @user, notice: 'User was successfully updated.' }
-  #      format.json { render :show, status: :ok, location: @user }
-  #    else
-  #      format.html { render :edit }
-  #      format.json { render json: @user.errors, status: :unprocessable_entity }
-  #    end
-  #  end
-  #end
+  def update
+    authorize @user
+    respond_to do |format|
+      if @user.update(user_params)
+        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.json { render :show, status: :ok, location: @user }
+      else
+        format.html { render :edit }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   # DELETE /users/1
   # DELETE /users/1.json

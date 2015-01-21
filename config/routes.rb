@@ -21,10 +21,11 @@ Rails.application.routes.draw do
   post 'add_to_fav/:id', to: 'stories#add_to_fav', as: :add_to_fav
 
   # Users
-  resources :users, only: [:create], param: :username do
+  # It's importat to have a short URL so by default the path for the users
+  # resource is /u/:username
+  resources :users, only: [:create, :edit, :update, :show], param: :username, path: 'u' do
     put 'follow', to: 'users#follow', on: :member, as: :follow
   end
-  get 'u/:username', to: 'users#show', as: :user
   get 'register', to: 'users#new', as: :register
   get 'login', to: 'sessions#new', as: :login
   post 'login', to: 'sessions#create'
