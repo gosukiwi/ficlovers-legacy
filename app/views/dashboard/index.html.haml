@@ -22,7 +22,8 @@
         %a{ href: notifications_path } Dismiss All
         %a{ href: notifications_path } See All
     - else
-      No notifications. You are up to date :)
+      .alert-gift
+        %p No notifications. You are up to date :)
   .dashboard-box
     %h3 Published Fics
     - if @user.stories.published.any?
