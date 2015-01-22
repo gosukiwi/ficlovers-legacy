@@ -1,0 +1,32 @@
+.fic
+  .fic-content
+    %h4.fic-title
+      = link_to story.title, story
+    .fic-author
+      by
+      = link_to story.user.username, story.user
+      = time_ago_in_words story.updated_at 
+      ago in
+      = link_to story.category.name, search_stories_path(category: story.category.id)
+    .fic-description 
+      %p 
+        = story.summary
+    %ul.fic-info
+      %li
+        = story.chapters.count
+        chapters
+      %li
+        = story.views
+        views
+      %li
+        = story.favorited_by.count
+        favs
+    %ul.fic-tags
+      %li.fic-tags-info
+        =story.active_tags.count
+        tags:
+      - story.active_tags.each do |tag|
+        %li 
+          %span{ class: "tag-#{tag.context}" }
+            = link_to tag.name, search_stories_path(tags: tag.to_s)
+    = link_to 'Read', story, class: 'fic-link'

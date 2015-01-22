@@ -1,13 +1,28 @@
 .dashboard-container
   .dashboard-box
-    %h3 Fics in progress
-    - if @user.stories.unpublished.any?
-      - @user.stories.unpublished.each do |story|
-        = story.title
-    - else
-      Nothing in progress.
+    %h3 Feed
+    - if @feed.any?
+      .stories-container
+        - @feed.each do |story|
+          = render partial: 'story', locals: { story: story }
       .dashboard-action
-        = link_to 'Write a new fic!', new_story_path
+        = link_to 'See full feed', new_story_path
+    - else
+      We couldn't make a custom feed for you, please follow some authors and
+      come again later.
+  .dashboard-box
+    %h3 Notifications
+    - if @notifications.any?
+      %ul
+        - @notifications.each do |notification|
+          %li{ id: "notification-#{notification.id}" }
+            != notification.message
+            %a{ href: notification_path(notification, format: :js), class: 'notification-dismiss', data: { remote: true, method: :delete } } Dismiss
+      .dashboard-action
+        %a{ href: notifications_path } Dismiss All
+        %a{ href: notifications_path } See All
+    - else
+      No notifications. You are up to date :)
   .dashboard-box
     %h3 Published Fics
     - if @user.stories.published.any?
@@ -30,15 +45,11 @@
     - else
       Nothing published yet.
   .dashboard-box
-    %h3 Notifications
-    - if @notifications.any?
-      %ul
-        - @notifications.each do |notification|
-          %li{ id: "notification-#{notification.id}" }
-            != notification.message
-            %a{ href: notification_path(notification, format: :js), class: 'notification-dismiss', data: { remote: true, method: :delete } } Dismiss
-      .dashboard-action
-        %a{ href: notifications_path } Dismiss All
-        %a{ href: notifications_path } See All
+    %h3 Fics in progress
+    - if @user.stories.unpublished.any?
+      - @user.stories.unpublished.each do |story|
+        = story.title
     - else
-      No notifications. You are up to date :)
+      Nothing in progress.
+      .dashboard-action
+        = link_to 'Write a new fic!', new_story_path

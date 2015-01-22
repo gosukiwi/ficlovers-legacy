@@ -16,7 +16,7 @@
     },
 
     setStoryId: function (id) {
-      this.url = '/stories/' + id + '/chapters';
+      this.url = '/fics/' + id + '/chapters';
     },
 
     // Gets the first chapter, creating one if there isn't any, selects it and

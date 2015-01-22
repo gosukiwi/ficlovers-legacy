@@ -21,7 +21,7 @@
 
       var self = this;
       this.url = function () {
-        return '/stories/' + self.get('id');
+        return '/fics/' + self.get('id');
       };
     }
   });
