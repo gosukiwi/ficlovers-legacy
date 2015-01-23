@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150121112810) do
+ActiveRecord::Schema.define(version: 20150123092841) do
 
   create_table "admin_forum_categories", force: true do |t|
     t.string   "name"
@@ -79,6 +79,14 @@ ActiveRecord::Schema.define(version: 20150121112810) do
 
   add_index "posts", ["forum_id"], name: "index_posts_on_forum_id", using: :btree
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
+
+  create_table "private_messages", force: true do |t|
+    t.integer  "author_id"
+    t.integer  "receiver_id"
+    t.text     "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "replies", force: true do |t|
     t.text     "content"

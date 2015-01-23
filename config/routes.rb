@@ -31,6 +31,8 @@ Rails.application.routes.draw do
     get 'favs', to: 'users#favs', on: :member, as: :favs
     get 'feed', to: 'users#feed', on: :member, as: :feed
 
+    get 'search', to: 'users#search', on: :collection, as: :search
+
     # Wall Messages
     resources :wall_messages, only: [:create]
   end
@@ -57,6 +59,9 @@ Rails.application.routes.draw do
   resources :notifications, only: [:index, :destroy] do
     delete 'destroy_all', to: 'notifications#destroy_all', on: :collection, as: :delete_all
   end
+
+  # PMs
+  resources :private_messages, only: [:index, :create, :new, :destroy], path: 'messages'
 
   # Admin/Mod dashboard
   namespace :admin do

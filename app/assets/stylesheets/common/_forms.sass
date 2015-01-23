@@ -1,0 +1,32 @@
+.field
+  display: block
+
+  #{$all-text-inputs},
+  textarea
+    width: 100%
+    font-family: $sans-serif
+    color: $forms-color
+    font-size: $forms-font-size
+    padding: 5px
+    margin-bottom: 5px
+    border: 1px solid $forms-border-color
+
+    &:hover
+      outline: none
+      border: 1px solid darken($forms-border-color, 10%)
+
+    &:focus
+      outline: none
+      border: 1px solid darken($forms-border-color, 20%)
+  textarea
+    height: 200px
+
+.field-actions
+  font-size: $forms-font-size
+  text-align: right
+  button,
+  a
+    @extend %secondary-button
+  button[type=submit],
+  input[type=submit]
+    @extend %button

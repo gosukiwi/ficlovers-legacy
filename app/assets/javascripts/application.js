@@ -24,3 +24,4 @@
 //= require apps/main/stories
 //= require apps/main/stories_search
 //= require apps/main/stories_crop
+//= require apps/main/private_messages

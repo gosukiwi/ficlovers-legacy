@@ -1,0 +1,33 @@
+.private-messages-container
+  %h3 #{current_user.username}'s Private Messages
+
+  %ul.tabs
+    %li{ class: 'active', data: { for: '.private-messages-received' } } Received
+    %li{ data: { for: '.private-messages-sent' } } Sent
+
+  %ul.private-messages.received
+    - @received.each do |pm|
+      %li{ class: "message-#{pm.id}" }
+        .private-message-text
+          %span.private-message-message
+            = pm.message
+          %span.private-message-meta
+            from
+            = link_to pm.author.username, pm.author
+        .private-message-options
+          = link_to 'Delete', private_message_path(pm, format: :js), remote: true, method: :delete, class: 'private-message-link'
+
+  %ul.private-messages.sent.u-hidden
+    - @sent.each do |pm|
+      %li{ class: "message-#{pm.id}" }
+        .private-message-text
+          %span.private-message-message
+            = pm.message
+          %span.private-message-meta
+            from
+            = link_to pm.author.username, pm.author
+        .private-message-options
+          = link_to 'Delete', private_message_path(pm, format: :js), remote: true, method: :delete, class: 'private-message-link'
+
+  .private-messages-actions
+    = link_to 'Compose', new_private_message_path

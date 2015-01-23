@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
   has_many :notifications, dependent: :destroy
   has_and_belongs_to_many :watched_posts, join_table: :users_posts, class_name: 'Post'
   has_many :wall_messages, foreign_key: :receiver_id, class_name: 'WallMessage', dependent: :destroy
+  has_many :received_messages, foreign_key: :receiver_id, class_name: 'PrivateMessage', dependent: :destroy
+  has_many :sent_messages, foreign_key: :author_id, class_name: 'PrivateMessage', dependent: :destroy
 
   has_secure_password
 

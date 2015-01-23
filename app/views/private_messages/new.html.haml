@@ -1,0 +1,23 @@
+.private-messages-container
+  %h3 Send Private Message
+
+  - if flash[:alert]
+    .alert.error
+      = flash[:alert]
+
+  = form_for @pm do |f|
+    - if @pm.errors.any?
+      .alert.alert-danger
+        %h3 Please fix the following #{pluralize(@pm.errors.count, "error")} before continuing:
+        %ul
+        - @pm.errors.full_messages.each do |message|
+          %li
+            = message
+    .field.ui-widget
+      = f.label 'To'
+      = f.text_field :receiver, placeholder: "Receiver's username"
+    .field
+      = f.text_area :message
+    .field-actions
+      = link_to 'Back', private_messages_path
+      = f.submit 'Send Message'

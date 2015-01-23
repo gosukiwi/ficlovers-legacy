@@ -86,6 +86,12 @@ class UsersController < ApplicationController
     @feed = @user.feed.paginate(page: params[:page], per_page: 12)
   end
 
+  def search
+    authorize User
+    wildcard_username = "%#{params[:term]}%"
+    render json: User.where('username LIKE :username', username: wildcard_username).pluck('username')
+  end
+
   # DELETE /users/1
   # DELETE /users/1.json
   #def destroy
