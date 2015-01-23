@@ -18,31 +18,31 @@
         %span Follow
         %i.fa.fa-plus
     .user-header-title 
-      #{@user.username}&#8217;s Fics
+      #{@user.username}&#8217;s Feed
 
 %ul.user-bar
   %li
     %a.user-link{href: user_path(@user)}
       %i.fa.fa-user
       Profile
-  %li
+  %li.active
     %a.user-link{href: feed_user_path(@user)}
       %i.fa.fa-rss
       Feed
-  %li.active 
+  %li
     %a.user-link{href: fics_user_path(@user)}
       %i.fa.fa-file-text
       Fics
-  %li 
+  %li
     %a.user-link{href: favs_user_path(@user)}
       %i.fa.fa-heart
       Favs
 
 .fics-container
   .fic-container
-    - @fics.each do |story|
+    - @feed.each do |story|
       = render partial: 'shared/story', locals: { story: story }
   .fics-pagination
-    = will_paginate @fics unless @fics.empty?
+    = will_paginate @feed unless @feed.empty?
     .pagination-info
-      = page_entries_info @fics, model: 'fics'
+      = page_entries_info @feed, model: 'fics'

@@ -17,7 +17,7 @@
           .tooltip Search
     - if logged_in?
       %li._dropdown.notification-container
-        %a{ href: dashboard_index_path, class: 'nav-link-icon' }
+        %a{ href: notifications_path, class: 'nav-link-icon' }
           - if current_user.notifications.any?
             %span.notification-number 
               = current_user.notifications.count

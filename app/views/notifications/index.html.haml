@@ -1,13 +1,16 @@
 .notification-container
   %h3 #{current_user.username}’s Notifications
-  - @notifications.each do |notification|
-    %div{ id: "notification-#{notification.id}", class: 'notification' }
-      .notification-action
-        = link_to 'Dismiss', [notification, format: :js], data: { remote: true, method: :delete }
-      .notification-message
-        != notification_link_for notification
   - if @notifications.empty?
-    %p Nothing here. You are up to date!
+    .alert-gift
+      %p No notifications. You are up to date :)
+  - else
+    - @notifications.each do |notification|
+      %div{ id: "notification-#{notification.id}", class: 'notification' }
+        .notification-action
+          = link_to 'Dismiss', [notification, format: :js], data: { remote: true, method: :delete }
+        .notification-message
+          != notification_link_for notification
+    = link_to 'Dismiss All', notifications_path
 
 - unless @notifications.empty?
   .notification-pagination

@@ -3,7 +3,7 @@ class NotifyUser
   def initialize(user, message, target = nil)
     @user = user
     @message = message
-    @target ||= { type: target.class, id: target.id }
+    @target = { type: target.class, id: target.id } unless target.nil?
   end
 
   def notify

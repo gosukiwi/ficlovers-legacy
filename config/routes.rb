@@ -29,6 +29,7 @@ Rails.application.routes.draw do
 
     get 'fics', to: 'users#fics', on: :member, as: :fics
     get 'favs', to: 'users#favs', on: :member, as: :favs
+    get 'feed', to: 'users#feed', on: :member, as: :feed
 
     # Wall Messages
     resources :wall_messages, only: [:create]

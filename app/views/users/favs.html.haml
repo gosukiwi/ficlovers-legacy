@@ -26,6 +26,10 @@
       %i.fa.fa-user
       Profile
   %li
+    %a.user-link{href: feed_user_path(@user)}
+      %i.fa.fa-rss
+      Feed
+  %li
     %a.user-link{href: fics_user_path(@user)}
       %i.fa.fa-file-text
       Fics
@@ -37,31 +41,8 @@
 .fics-container
   .fic-container
     - @favs.each do |story|
-      .fic
-        .fic-content
-          %h4.fic-title
-            = link_to story.title, story
-          .fic-description 
-            %p 
-              = story.summary
-          %ul.fic-info
-            %li
-              = story.chapters.count
-              chapters
-            %li
-              = story.views
-              views
-            %li
-              = story.favorited_by.count
-              favs
-          %ul.fic-tags
-            %li.fic-tags-info
-              =story.active_tags.count
-              tags:
-            - story.active_tags.each do |tag|
-              %li 
-                %span{ class: "tag-#{tag.context}" }
-                  = tag.name
-          = link_to 'Read', story, class: 'fic-link'
+      = render partial: 'shared/story', locals: { story: story }
   .fics-pagination
     = will_paginate @favs unless @favs.empty?
+    .pagination-info
+      = page_entries_info @favs, model: 'fics'
