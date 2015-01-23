@@ -54,7 +54,9 @@ Rails.application.routes.draw do
   end
 
   # Notification
-  resources :notifications, only: [:index, :destroy]
+  resources :notifications, only: [:index, :destroy] do
+    delete 'destroy_all', to: 'notifications#destroy_all', on: :collection, as: :delete_all
+  end
 
   # Admin/Mod dashboard
   namespace :admin do

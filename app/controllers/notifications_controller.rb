@@ -9,4 +9,8 @@ class NotificationsController < ApplicationController
     authorize @notification
     @notification.destroy
   end
+
+  def destroy_all
+    policy_scope(Notification).delete_all
+  end
 end

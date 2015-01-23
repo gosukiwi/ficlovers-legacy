@@ -19,8 +19,8 @@
             != notification.message
             %a{ href: notification_path(notification, format: :js), class: 'notification-dismiss', data: { remote: true, method: :delete } } Dismiss
       .dashboard-action
-        %a{ href: notifications_path } Dismiss All
-        %a{ href: notifications_path } See All
+        = link_to 'Dismiss All', delete_all_notifications_path(format: :js), remote: true, method: :delete
+        = link_to 'See All', notifications_path
     - else
       .alert-gift
         %p No notifications. You are up to date :)

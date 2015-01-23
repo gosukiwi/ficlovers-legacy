@@ -10,7 +10,7 @@
           = link_to 'Dismiss', [notification, format: :js], data: { remote: true, method: :delete }
         .notification-message
           != notification_link_for notification
-    = link_to 'Dismiss All', notifications_path
+    = link_to 'Dismiss All', delete_all_notifications_path(format: :js), remote: true, method: :delete
 
 - unless @notifications.empty?
   .notification-pagination
