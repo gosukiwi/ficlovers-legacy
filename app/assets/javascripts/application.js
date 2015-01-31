@@ -10,6 +10,7 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+// VENDOR --------------------------------------------------------------------
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui/autocomplete
@@ -18,9 +19,11 @@
 //= require underscore
 //x= require turbolinks
 //= require hyphenate
+// APP SHARED ----------------------------------------------------------------
 //= require common/fonts
 //= require common/_dash
 //= require common/tabs
+// APP SPECIFIC --------------------------------------------------------------
 //= require apps/main/stories
 //= require apps/main/stories_search
 //= require apps/main/stories_crop

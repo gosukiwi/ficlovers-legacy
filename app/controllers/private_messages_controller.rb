@@ -1,7 +1,9 @@
 class PrivateMessagesController < ApplicationController
+  before_action :set_pm, only: [:show, :destroy]
+
   def index
     authorize PrivateMessage
-    @received = current_user.received_messages
+    @received = current_user.received_messages.sorted
   end
 
   def create
@@ -18,10 +20,14 @@ class PrivateMessagesController < ApplicationController
     @pm.receiver = receiver
     @pm.author = current_user
     if @pm.save
+      notify receiver, @pm
       redirect_to private_messages_url, notice: 'Your message has been sent'
     else
       render :new, notice: 'Oops! Something happened. Please try again.'
     end
+  end
+
+  def show
   end
 
   def new
@@ -39,12 +45,20 @@ class PrivateMessagesController < ApplicationController
   end
 
   def destroy
-    @pm = PrivateMessage.find(params[:id])
     authorize @pm
     @pm.destroy
   end
 
 protected
+
+  def notify(user, pm)
+    action = NotifyUser.new user, 'You have a new private message', pm
+    action.notify
+  end
+
+  def set_pm
+    @pm = PrivateMessage.find(params[:id])
+  end
 
   def pm_params
     params.require(:private_message).permit(:message)

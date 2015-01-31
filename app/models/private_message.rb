@@ -3,4 +3,6 @@ class PrivateMessage < ActiveRecord::Base
 
   belongs_to :receiver, foreign_key: :receiver_id, class_name: 'User'
   belongs_to :author, foreign_key: :author_id, class_name: 'User'
+
+  scope :sorted, ->{ order(id: :desc) }
 end
