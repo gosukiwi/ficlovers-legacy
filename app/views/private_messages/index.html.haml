@@ -1,35 +1,27 @@
 .private-messages-container
   %h3 #{current_user.username}'s Private Messages
 
-  %ul.tabs
-    %li{ class: 'active', data: { for: '.private-messages-received' } } Received
-    %li{ data: { for: '.private-messages-sent' } } Sent
-
-  %ul.private-messages.received
+  %table.private-messages
+    %thead
+      %tr
+        %th Author
+        %th Message
+        %th Actions
     - @received.each do |pm|
-      %li{ class: "message-#{pm.id}" }
-        .private-message-text
-          %span.private-message-meta
-            = link_to pm.author.username, pm.author
-            says:
+      %tr.private-message-text{ data: { id: pm.id } }
+        %td
+          = link_to pm.author.username, pm.author
+        %td
           %span.private-message-message
             = pm.message
-        .private-message-options
-          = link_to 'Delete', private_message_path(pm, format: :js), remote: true, method: :delete, class: 'private-message-link'
-
-  %ul.private-messages.sent.u-hidden
-    - @sent.each do |pm|
-      %li{ class: "message-#{pm.id}" }
-        .private-message-text
-          %span.private-message-message
-            = pm.message
-          %span.private-message-meta
-            from
-            = link_to pm.author.username, pm.author
-        .private-message-options
+        %td
           = link_to 'Delete', private_message_path(pm, format: :js), remote: true, method: :delete, class: 'private-message-link'
 
   .private-messages-actions
     = link_to 'Compose', new_private_message_path
   
-  .private-message-view
+  .private-message-view-container
+    %a.private-message-close
+      %i.fa.fa-times
+    .private-message-view
+    = link_to 'Reply', new_private_message_path, class: 'private-message-view-reply'

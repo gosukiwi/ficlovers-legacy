@@ -7,34 +7,24 @@
     padding-bottom: 15px
 
 .private-messages
-  padding: 0 0 25px
-  margin: 0
-  list-style: none
-  li
-    +clearfix
-    padding: 3px
+  width: 100%
+  margin-bottom: 25px
+  th
+    text-align: left
+  tr
+    padding: 5px
     cursor: pointer
-
+    &:hover
+      background-color: #e1e1e1
 .private-message-message
-  +ellipsis
-
-.private-message-text
-  float: left
-  max-width: 92%
-  span, a
-    vertical-align: top
-  &.show-pm
-    .private-message-message
-      max-width: 100%
-      display: block
-    .private-message-meta
-      display: none
-
-.private-message-options
-  float: right
-  a
-    @extend %secondary-button
-    font-size: 90%
+  +ellipsis(700px)
+  vertical-align: bottom
+  color: #111
+  &:hover
+    color: black
+.private-message-link
+  @extend %secondary-button
+  font-size: 90%
 
 .private-messages-actions
   text-align: right
@@ -42,3 +32,23 @@
   a
     @extend %button
 
+// Private message view box
+.private-message-view-container
+  display: none
+  position: relative
+  border: 1px solid #ccc
+  padding: 10px
+  margin-top: 25px
+.private-message-view
+  padding-bottom: 30px
+.private-message-close
+  position: absolute
+  right: 7px
+  top: 2px
+  cursor: pointer
+.private-message-view-reply
+  @extend %button
+  position: absolute
+  right: 5px
+  bottom: 5px
+  font-size: 90%

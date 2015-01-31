@@ -50,6 +50,10 @@ class User < ActiveRecord::Base
     return watched_posts.include? post
   end
 
+  def to_s
+    return username
+  end
+
   protected
 
     def set_defaults

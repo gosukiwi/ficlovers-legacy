@@ -2,7 +2,6 @@ class PrivateMessagesController < ApplicationController
   def index
     authorize PrivateMessage
     @received = current_user.received_messages
-    @sent = current_user.sent_messages
   end
 
   def create
@@ -28,6 +27,15 @@ class PrivateMessagesController < ApplicationController
   def new
     @pm = PrivateMessage.new
     authorize @pm
+
+    unless params[:reply_id].empty?
+      old_pm = PrivateMessage.find(params[:reply_id])
+      @pm.message = old_pm.message
+        .split("\n")
+        .map { |line| "> #{line}" }
+        .join("\n")
+      @pm.receiver = old_pm.author
+    end
   end
 
   def destroy
