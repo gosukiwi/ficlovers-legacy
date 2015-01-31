@@ -1,13 +1,9 @@
 (function ($) {
   'use strict';
 
-
   $('.private-message-text').click(function () {
-    $(this).toggleClass('show-pm');
-  });
-
-  $('.private-message-text').find('a').click(function (e) {
-    e.stopPropagation();
+    var $el = $(this);
+    $('.private-message-view').text($el.text());
   });
 
   var cache = [];

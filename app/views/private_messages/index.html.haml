@@ -9,11 +9,11 @@
     - @received.each do |pm|
       %li{ class: "message-#{pm.id}" }
         .private-message-text
+          %span.private-message-meta
+            = link_to pm.author.username, pm.author
+            says:
           %span.private-message-message
             = pm.message
-          %span.private-message-meta
-            from
-            = link_to pm.author.username, pm.author
         .private-message-options
           = link_to 'Delete', private_message_path(pm, format: :js), remote: true, method: :delete, class: 'private-message-link'
 
@@ -31,3 +31,5 @@
 
   .private-messages-actions
     = link_to 'Compose', new_private_message_path
+  
+  .private-message-view
