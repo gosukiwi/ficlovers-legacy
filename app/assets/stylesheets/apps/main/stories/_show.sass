@@ -45,6 +45,10 @@
     text-decoration: underline
     color: white
 
+// Module: Story metadata
+.story-meta
+  text-align: center
+
 // Module: Tags
 .story-tags
   padding: 25px 0
@@ -52,6 +56,7 @@
   list-style: none
   text-align: center
   display: inline-block
+  width: 500px
 
   li
     color: #777
@@ -62,9 +67,6 @@
       text-transform: uppercase
       padding-right: 1em
 
-.story-meta
-  text-align: center
-
 // Module: Chapters
 .story-chapters
   +button(#111, white)
@@ -72,6 +74,8 @@
   margin: 0 10px
   display: inline-block
   font-size: 90%
+  vertical-align: top
+  margin-top: 25px
 
   &:after
     +fa('chevron-right')
