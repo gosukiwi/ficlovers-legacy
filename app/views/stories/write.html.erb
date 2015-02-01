@@ -47,6 +47,7 @@
       </div>
 
       <div class="write-actions">
+        <%= link_to 'Back', @story, { class: 'btn' } %>
         <% if @story.published? %>
           <a class="btn btn-publish" href="#">Unpublish</a>
         <% else %>
