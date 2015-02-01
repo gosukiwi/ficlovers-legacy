@@ -41,14 +41,18 @@
         Next Chapter
         %i.fa.fa-chevron-right
 
-- if @story.post
-  .story-discuss
-    = link_to 'Discuss Story', [@story.post.forum, @story.post]
-
 .story-options
   %a{ href: add_to_fav_path(@story, format: :js), class: 'story-options-link', data: { method: :post, remote: true } }
     %span.story-options-link-text Add to favs
     %i.fa.fa-heart
+
+  %a{ href: forum_post_path(@story.post.forum, @story.post), class: 'story-options-link' }
+    %span.story-options-link-text Discuss
+    %i.fa.fa-comments
+
+  %a{ href: forum_post_path(@story.post.forum, @story.post), class: 'story-options-link' }
+    %span.story-options-link-text Generate EPUB
+    %i.fa.fa-cloud-download
 
   - if policy(@story).write?
     %a{ href: write_story_path(@story), class: 'story-options-link' }
