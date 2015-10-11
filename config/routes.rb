@@ -14,6 +14,9 @@ Rails.application.routes.draw do
     # Thumb
     post 'crop', to: 'stories#thumb_crop', on: :member
     post 'save_thumb', to: 'stories#thumb_save', on: :member, as: :save_thumb
+
+    # Actions
+    get 'epub', to: 'stories#epub', on: :member, as: :epub
   end
   get 'fresh', to: 'stories#fresh', as: :fresh_stories
   get 'hot', to: 'stories#hot', as: :hot_stories

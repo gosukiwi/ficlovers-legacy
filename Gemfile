@@ -47,6 +47,8 @@ gem 'neat'
 gem 'font-awesome-rails'
 gem 'autoprefixer-rails'
 gem 'jquery-ui-rails'
+# Epub generation
+gem 'epubber'
 
 group :development do
   gem 'guard'

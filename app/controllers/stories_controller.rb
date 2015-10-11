@@ -1,6 +1,11 @@
 class StoriesController < ApplicationController
-  before_action :set_story, only: [:show, :edit, :update, :destroy, :add_to_fav, :settings, :thumb_crop, :thumb_save]
+  before_action :set_story, only: [:show, :edit, :update, :destroy, :add_to_fav, :settings, :thumb_crop, :thumb_save, :epub]
   before_action :set_categories, only: [:new, :edit, :create, :search]
+
+  def epub
+    path = GenerateEpub.new(story: @story, url: story_url(@story)).generate
+    send_file path, type: 'application/epub'
+  end
 
   def thumb_save
     #authorize @story
