@@ -1,7 +1,5 @@
-source 'http://rubygems.org' # the https version fails in windows...
-
-# windows fix <https://github.com/tzinfo/tzinfo/wiki/Resolving-TZInfo::DataSourceNotFound-Errors>
-gem 'tzinfo-data'
+source 'https://rubygems.org' 
+ruby '2.2.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.8'
@@ -54,6 +52,7 @@ group :development do
   gem 'guard'
   gem 'guard-minitest'
   gem 'web-console', '~> 2.0'
+  gem 'pry-byebug'
 end
 
 group :test do

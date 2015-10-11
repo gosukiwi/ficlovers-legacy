@@ -1,0 +1,8 @@
+$el = $('.new-reply').find('.alert');
+<% if(@success) %>
+  $el.addClass('u-hidden');
+  location.reload();
+<% else %>
+  $el.removeClass('u-hidden')
+     .find('.errors').html("<%= @errors %>");
+<% end %>

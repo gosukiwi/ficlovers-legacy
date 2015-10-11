@@ -1,3 +1,14 @@
+.alert
+  padding: .5em 1em
+  box-sizing: border-box
+  margin-bottom: 1em
+
+  h1, h2, h3
+    margin: 0 0 10px
+  ul
+    padding-left: 20px
+
 .alert.error
-  color: #A94442
-  background-color: #F2DEDE
+  color: $alert-error-color
+  background-color: tint($alert-error-color, 85)
+  border: 1px solid shade($alert-error-color, 10)

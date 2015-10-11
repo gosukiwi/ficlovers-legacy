@@ -89,15 +89,13 @@
 
 <% if policy(@new_reply).new? %>
 <div class="new-reply">
-  <% if flash[:alert] %>
-    <div class="alert alert-danger">
-      <h3>Oops! Please fix the following errors before continuing:</h3>
-      <%= flash[:alert] %>
-    </div>
-  <% end %>
+  <div class="u-hidden alert error">
+    <h3>Oops! Something went wrong</h3>
+    <div class="errors"></div>
+  </div>
 
   <h3 class="new-reply-title">Reply</h3>
-  <%= form_for [@forum, @post, @new_reply] do |f| %>
+  <%= form_for [@forum, @post, @new_reply], remote: true do |f| %>
   <div class="field">
    <%= f.text_area :content, class: 'new-reply-content', placeholder: 'Reply content in here...' %>
   </div>
