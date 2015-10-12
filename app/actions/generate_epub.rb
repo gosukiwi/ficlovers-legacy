@@ -22,7 +22,6 @@ private
     book = Epubber::Models::Book.new
     book.title story.title
     book.author story.user.name
-    book.description story.summary
     book.url url
 
     # Set introduction
