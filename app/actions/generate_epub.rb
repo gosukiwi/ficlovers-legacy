@@ -51,10 +51,10 @@ private
   end
 
   def work_dir
-    "#{Rails.public_path}/epubs"
+    "#{Rails.public_path}/epubs/#{story.id}"
   end
 
   def filename
-    "#{story.title}_#{story.id}.epub"
+    "#{story.title}.epub"
   end
 end

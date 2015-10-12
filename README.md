@@ -6,7 +6,7 @@ If you're a developer, there are some important things needed to know to hack on
 this. A summary would be
 
     $ convert --version # ImageMagick
-    $ ruby -v #2.1+
+    $ ruby -v #2.2+
     $ rails -v #4.1+
     $ bundle install
     $ bundle exec guard # watch and run tests
