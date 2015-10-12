@@ -17,13 +17,13 @@ as a debugger also, so don't forget to use it if you are stuck.
 ## ENV Variables
 You'll need the following env variables
 
-    # MySQL settings
-    FANFIC_DEV_DB_NAME
-    FANFIC_DEV_DB_USER
-    FANFIC_DEV_DB_PASS
-    FANFIC_DEV_DB_HOST
+    # MySQL settings, only needed for deployment. Initially copy
+    # `database.example.yml` to `database.yml` and tune settings
+    FANFIC_DATABASE_USERNAME
+    FANFIC_DATABASE_PASSWORD
     # the path of the mysql daemon socket, to find it run: mysqladmin variables
-    FANFIC_DEV_DB_SOCKET
+    # defaults to '/tmp/mysql.sock'
+    MYSQL_UNIX_PORT
 
     # Amazon S3 settings
     FANFIC_S3_BUCKET
