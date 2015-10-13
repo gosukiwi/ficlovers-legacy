@@ -1,14 +1,14 @@
 class PostPolicy < ApplicationPolicy
   def update?
-    author_or_admin?
+    author_or_admin? && forum_open
   end
 
   def create?
-    not user.nil?
+    !user.nil? && forum_open
   end
 
   def destroy?
-    author_or_admin?
+    author_or_admin? && forum_open
   end
 
   def pin?
@@ -17,5 +17,11 @@ class PostPolicy < ApplicationPolicy
 
   def watch?
     not user.nil?
+  end
+
+private
+
+  def forum_open
+    record.forum.open? || user.admin?
   end
 end

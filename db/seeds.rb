@@ -20,7 +20,7 @@ Category.create([
 ])
 
 Forum.create([
-  { name: 'Fic Discussion' },
+  { name: 'Fic Discussion', status: :read_only },
   { name: 'General Discussion' },
   { name: 'Support' },
   { name: 'Off-Topic' }

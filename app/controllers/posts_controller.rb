@@ -18,14 +18,13 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new
+    @post = Post.new forum: @forum
     authorize @post
   end
 
   def create
     @post = Post.new post_params
     authorize @post
-    @post.forum = @forum
     @post.user = current_user
     if @post.save
       redirect_to [@forum, @post], notice: 'Post was successfully created.'
@@ -62,6 +61,6 @@ class PostsController < ApplicationController
     end
 
     def post_params
-      params.require(:post).permit(:title, :content)
+      params.require(:post).permit(:title, :content).merge(forum: @forum)
     end
 end

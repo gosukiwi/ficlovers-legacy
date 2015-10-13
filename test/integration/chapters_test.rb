@@ -12,7 +12,7 @@ class ChaptersApiTest < ActionDispatch::IntegrationTest
   test 'add chapter to story without logging in' do
     story = FactoryGirl.create(:story)
 
-    post "/stories/#{story.id}/chapters", {
+    post "/fics/#{story.id}/chapters", {
       title: 'This is a chapter title',
       content: 'This is the contentthe contentthe contentthe contentthe contentthe contentthe contentthe contentthe contentthe contentthe contentthe contentthe content'
     }.to_json, { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s }
@@ -25,7 +25,7 @@ class ChaptersApiTest < ActionDispatch::IntegrationTest
     story = FactoryGirl.create(:story)
     login_as story.user
 
-    post "/stories/#{story.id}/chapters", {
+    post "/fics/#{story.id}/chapters", {
       title: 'This is a chapter title',
       content: 'This is the contentthe contentthe contentthe contentthe contentthe contentthe contentthe contentthe contentthe contentthe contentthe contentthe content'
     }.to_json, { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s }
@@ -38,7 +38,7 @@ class ChaptersApiTest < ActionDispatch::IntegrationTest
     story = FactoryGirl.create(:story)
     login_as story.user
 
-    post "/stories/#{story.id}/chapters", {
+    post "/fics/#{story.id}/chapters", {
       title: 'This is a chapter title',
       content: 'This content is too short'
     }.to_json, { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s }
@@ -54,7 +54,7 @@ class ChaptersApiTest < ActionDispatch::IntegrationTest
     story = chapter.story
     login_as story.user
 
-    patch "/stories/#{story.id}/chapters/#{chapter.id}", {
+    patch "/fics/#{story.id}/chapters/#{chapter.id}", {
       title: 'This is another title',
       content: chapter.content
     }.to_json, { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s }
@@ -68,7 +68,7 @@ class ChaptersApiTest < ActionDispatch::IntegrationTest
     story = chapter.story
     login_as story.user
 
-    delete "/stories/#{story.id}/chapters/#{chapter.id}", {}, { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s }
+    delete "/fics/#{story.id}/chapters/#{chapter.id}", {}, { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s }
 
     # 204: no_content
     assert_equal 204, response.status

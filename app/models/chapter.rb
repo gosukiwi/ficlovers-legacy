@@ -6,5 +6,7 @@ class Chapter < ActiveRecord::Base
   # `touch` allows us to bump story updated_at whenever this gets updated
   belongs_to :story, touch: true
 
+  delegate :user, to: :story
+
   scope :ordered, ->{ order('`order` ASC') }
 end
