@@ -47,7 +47,7 @@
           = link_to 'Dashboard', dashboard_index_path
           = link_to 'Profile', current_user
           = link_to 'Messages', private_messages_path
-          = link_to 'Logout', logout_path
+          = link_to 'Logout', logout_path, method: :delete
     - else
       %li 
         %a{ href: login_path, class: 'nav-link-primary' }
