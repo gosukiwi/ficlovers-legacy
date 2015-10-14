@@ -5,7 +5,7 @@ class StoryTest < ActiveSupport::TestCase
   should ensure_length_of(:title).is_at_least(5).is_at_most(100)
 
   should validate_presence_of :summary
-  should ensure_length_of(:summary).is_at_least(50).is_at_most(250)
+  should ensure_length_of(:summary).is_at_least(50).is_at_most(1000)
 
   should belong_to :category
   should belong_to :user

@@ -2,7 +2,7 @@ class Story < ActiveRecord::Base
   include HasThumbnail
 
   validates :title, presence: true, length: { in: 5..100 }
-  validates :summary, presence: true, length: { in: 50..250 }
+  validates :summary, presence: true, length: { in: 50..1000 }
 
   belongs_to :category
   has_many :chapters, dependent: :destroy
