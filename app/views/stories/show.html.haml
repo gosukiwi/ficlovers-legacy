@@ -12,7 +12,7 @@
     %i.fa.fa-navicon
     Chapters
     %ul._dropdown-content.story-chapters-list
-      - @story.chapters.each_with_index do |chapter, index|
+      - @story.chapters.ordered.each_with_index do |chapter, index|
         %li
           %a{ href: '#', data: { page: index }, class: 'btn-chapter' } Chapter #{index + 1}: #{chapter.title}
 
