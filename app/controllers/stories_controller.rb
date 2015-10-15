@@ -58,6 +58,11 @@ class StoriesController < ApplicationController
     @stories = Story.hot.limit(10)
   end
 
+  def feed
+    authorize current_user
+    @stories = current_user.feed.paginate(page: params[:page], per_page: 10)
+  end
+
   # GET /stories/1
   # GET /stories/1.json
   def show

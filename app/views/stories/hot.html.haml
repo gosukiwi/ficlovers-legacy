@@ -7,6 +7,7 @@
   .button-group
     = link_to 'Hot', hot_stories_path, class: 'button-group-item active'
     = link_to 'Fresh', fresh_stories_path, class: 'button-group-item'
+    = link_to 'Feed', feed_stories_path, class: 'button-group-item'
 
 .stories-container
   - @stories.each do |story|

@@ -1,0 +1,24 @@
+.stories-header
+  %h1.stories-header-title Your Stories
+  %p.stories-header-info A fic selection, just for you
+
+.stories-navigation
+  %span.stories-navigation-title Browsing Fics
+  .button-group
+    = link_to 'Hot', hot_stories_path, class: 'button-group-item'
+    = link_to 'Fresh', fresh_stories_path, class: 'button-group-item'
+    = link_to 'Feed', feed_stories_path, class: 'button-group-item active'
+
+.stories-container
+  - @stories.each do |story|
+    = render partial: 'shared/story', locals: { story: story }
+
+  .stories-pagination
+    = will_paginate @stories unless @stories.empty?
+    - if @stories.any?
+      .pagination-info
+        = page_entries_info @stories, model: 'fics'
+    - else
+      %p.pagination-info-title Looks like we can't make a custom feed for you
+      .alert-gift
+        %p Go follow some authors! We'll wait 😉
