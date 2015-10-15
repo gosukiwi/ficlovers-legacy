@@ -51,12 +51,22 @@
 
 // Module: Tags
 .story-tags
-  padding: 25px 0
+  padding: 25px 0 0
   margin: 0
   list-style: none
   text-align: center
   display: inline-block
   width: 500px
+  max-height: 50px
+  overflow: hidden
+  transition: max-height 0.2s
+  box-sizing: border-box
+
+  &:hover
+    overflow: visible
+    transition: max-height 0.2s
+    max-height: 500px
+    transition: max-height 1s
 
   li
     color: #777
@@ -118,9 +128,11 @@
   margin: 0 auto
   color: #444
   position: relative
+  padding-top: 1em
 
   h1, h2, h3, h4, h5 
     line-height: 1.35
+    margin-bottom: .5em
 
 .chapter
   animation: appear-from-right 1s
