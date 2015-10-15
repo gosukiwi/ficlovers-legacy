@@ -12,7 +12,7 @@
         %i.fa.fa-comments.tooltip-item
           .tooltip Forums
     %li
-      %a{ href: search_stories_path, class: 'nav-link-icon' }
+      %a{ href: search_stories_path(tags: '', category: 0), class: 'nav-link-icon' }
         %i.fa.fa-search.tooltip-item
           .tooltip Search
     - if logged_in?

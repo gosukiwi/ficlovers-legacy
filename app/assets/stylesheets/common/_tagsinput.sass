@@ -1,0 +1,16 @@
+// Overrides for tagsInput styles
+// Normally ignoring the element in the selector is preferred, but given
+// tagsInput uses them in the selector, to override them I must use an equal or
+// more specific selector.
+div.tagsinput
+  span.tag
+    @extend %base-tag
+    border: none
+    border-radius: 0
+    background-color: $color-grey
+    cursor: pointer
+    &:hover, &:active, &:focus
+      background-color: shade($color-grey, 10%)
+
+    a
+      color: white

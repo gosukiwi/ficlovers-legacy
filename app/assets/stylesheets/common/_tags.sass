@@ -1,0 +1,24 @@
+%base-tag
+  color: white
+  padding: 2px 10px
+  text-decoration: none
+  display: inline-block
+  margin: 1px 0
+  font-weight: bold
+  box-sizing: border-box
+  text-transform: capitalize
+  font-family: $sans-serif
+  &:hover, &:active, &:focus
+    color: white
+    text-decoration: none
+
+=tag-genre($name, $color)
+  .tag-#{$name}
+    @extend %base-tag
+    background-color: $color
+    &:hover, &:active, &:focus
+      background-color: lighten($color, 10%)
+
++tag-genre("fandoms", $color-fandoms)
++tag-genre("characters", $color-characters)
++tag-genre("genres", $color-genres)

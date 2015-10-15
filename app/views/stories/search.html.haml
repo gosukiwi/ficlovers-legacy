@@ -1,0 +1,30 @@
+.stories-header
+  %h1.stories-header-title Search Story
+  %p.stories-header-info Find that fic you were looking for
+
+.search-container
+  .search-actions
+    = form_tag search_stories_path, method: :get do
+      .input
+        = label_tag :tags, 'Tags'
+        = text_field_tag :tags, params[:tags]
+      .input
+        = label_tag :category, 'Category'
+        = select_tag :category, options_from_collection_for_select(@categories, 'id', 'name', params[:category])
+      .input
+        = label_tag :order, 'Order'
+        .button-group
+          = link_to 'Most Popular', hot_stories_path, class: 'button-group-item active'
+          = link_to 'Newest', fresh_stories_path, class: 'button-group-item'
+      = submit_tag "Search", name: nil, class: 'search-btn'
+  .search-results.stories-container
+    - @stories.each do |story|
+      = render partial: 'shared/story', locals: { story: story }
+    - if @stories.empty?
+      .search-results-none
+        We could not find any story with that criteria.
+
+  = will_paginate @stories unless @stories.empty?
+
+  .pagination-info
+    = page_entries_info @stories, model: 'fics' unless @stories.empty?

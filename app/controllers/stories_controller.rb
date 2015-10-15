@@ -39,7 +39,7 @@ class StoriesController < ApplicationController
   end
 
   def search
-    @categories = [Category.new(name: 'All', id: 0)] + @categories
+    @categories = [Category.new(name: 'Any', id: 0)] + @categories
     @stories = StorySearch
       .search(tags: params[:tags], category: params[:category])
       .paginate(page: params[:page], per_page: 10)
