@@ -83,7 +83,7 @@ class UsersController < ApplicationController
 
   def feed
     authorize @user
-    @feed = @user.feed.paginate(page: params[:page], per_page: 12)
+    @feed = StoryFeed.new(current_user).generate.paginate(page: params[:page], per_page: 12)
   end
 
   def search

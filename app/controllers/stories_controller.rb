@@ -60,7 +60,7 @@ class StoriesController < ApplicationController
 
   def feed
     authorize current_user
-    @stories = current_user.feed.paginate(page: params[:page], per_page: 10)
+    @stories = StoryFeed.new(current_user).generate.paginate(page: params[:page], per_page: 10)
   end
 
   # GET /stories/1

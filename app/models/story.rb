@@ -74,6 +74,10 @@ class Story < ActiveRecord::Base
     end
   end
 
+  def feed
+    Story.where(user: following).order(updated_at: :desc)
+  end
+
   # make pretty URL's {id}-{title} format
   def to_param
     "#{id}-#{title.parameterize}"

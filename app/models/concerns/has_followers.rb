@@ -23,8 +23,4 @@ module HasFollowers
   def unfollow(user)
     !!following.delete(user)
   end
-
-  def feed
-    Story.where(user: following).order(updated_at: :desc)
-  end
 end

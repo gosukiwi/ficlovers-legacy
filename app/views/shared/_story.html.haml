@@ -27,6 +27,8 @@
         tags:
       - story.active_tags.each do |tag|
         %li 
-          %span{ class: "tag-#{tag.context}" }
+          %span{ class: "tag-#{tag.context} tag-#{tag.id}" }
             = link_to tag.name, search_stories_path(tags: tag.to_s)
+            = link_to follow_tag_path(tag), class: 'tag-follow-btn', remote: true do
+              %i.fa.fa-plus
     = link_to 'Read', story, class: 'fic-link'

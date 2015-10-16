@@ -14,11 +14,24 @@
 
 =tag-genre($name, $color)
   .tag-#{$name}
-    @extend %base-tag
-    background-color: $color
-    &:hover, &:active, &:focus
-      background-color: lighten($color, 10%)
+    display: flex
 
-+tag-genre("fandoms", $color-fandoms)
+    a
+      @extend %base-tag
+      background-color: $color
+      &:hover, &:active, &:focus
+        background-color: lighten($color, 5%)
+
+    .tag-follow-btn
+      background-color: tint($color, 10%)
+      cursor: pointer
+      margin: 1px 0
+      padding: 0 .5em
+      color: white
+      line-height: 1.8
+      &:hover, &:active, &:focus
+        background-color: lighten($color, 15%)
+
++tag-genre("fandoms"   , $color-fandoms)
 +tag-genre("characters", $color-characters)
-+tag-genre("genres", $color-genres)
++tag-genre("genres"    , $color-genres)
