@@ -18,6 +18,11 @@ class TagsController < ApplicationController
     render json: tags, status: :ok
   end
 
+  def follow
+    tag = Tag.find(params[:id])
+    tag.add_follower(current_user)
+  end
+
   private
 
     def user_params

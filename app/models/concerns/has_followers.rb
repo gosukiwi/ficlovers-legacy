@@ -1,26 +1,38 @@
+# Something which users can follow
 module HasFollowers
   extend ActiveSupport::Concern
 
   included do
-    has_and_belongs_to_many :followers, association_foreign_key: :followee_id, foreign_key: :follower_id, join_table: :followers, class_name: 'User'
-    has_and_belongs_to_many :following, association_foreign_key: :follower_id,  foreign_key: :followee_id, join_table: :followers, class_name: 'User'
+    has_many :follows
+    #has_many :users, through: :follows, as: :followable
+
+    scope :followed_by, ->(user) { where(id: Follow.where(user: user, followable_type: self.name).pluck(:followable_id)) }
   end
-  
+
+  def followers
+    @followers ||= User.where(id: user_ids)
+  end
+
   def follow_toggle(user)
-    if following.include? user
-      unfollow user
+    if followers.include? user
+      remove_follower user
     else
-      follow user
+      add_follower user
     end
   end
 
-  def follow(user)
+  def add_follower(user)
     return false if user == self
-    following << user
-    save
+    Follow.create followable: self, user: user
   end
 
-  def unfollow(user)
-    !!following.delete(user)
+  def remove_follower(user)
+    Follow.find(followable: self, user: user).destroy!
+  end
+
+private
+
+  def user_ids
+    Follow.where(followable_id: id, followable_type: self.class.name).pluck(:user_id)
   end
 end

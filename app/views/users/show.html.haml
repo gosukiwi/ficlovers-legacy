@@ -9,9 +9,9 @@
         %strong followers
         , 
         %strong following 
-        = @user.following.count
+        = @user.followers.count
     %a.user-follow-btn{href: follow_user_path(@user, format: :js), data: { remote: true, method: :put } } 
-      - if logged_in? && current_user.following.include?(@user) then
+      - if logged_in? && current_user.followers.include?(@user) then
         %span Following
         %i.fa.fa-check
       - else
@@ -150,9 +150,9 @@
           No followers yet. Be the first?
 
     .user-following.u-hidden
-      - if @user.following.any?
+      - if User.followed_by(@user).any?
         %ul
-          - @user.following.limit(10).each do |user|
+          - User.followed_by(@user).limit(10).each do |user|
             %li
               = link_to user.username, user
       - else 

@@ -48,6 +48,7 @@ Rails.application.routes.draw do
   # Tags
   resources :tags, only: [:create] do
     get 'search', to: 'tags#search', on: :collection, as: 'search'
+    get 'follow', to: 'tags#follow', on: :member, as: 'follow'
   end
 
   # Forum

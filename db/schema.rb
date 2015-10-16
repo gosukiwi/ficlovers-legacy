@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151014054105) do
+ActiveRecord::Schema.define(version: 20151016075720) do
 
   create_table "admin_forum_categories", force: true do |t|
     t.string   "name"
@@ -42,12 +42,15 @@ ActiveRecord::Schema.define(version: 20151014054105) do
 
   add_index "favs", ["user_id", "story_id"], name: "index_favs_on_user_id_and_story_id", unique: true, using: :btree
 
-  create_table "followers", force: true do |t|
-    t.integer "follower_id"
-    t.integer "followee_id"
+  create_table "follows", force: true do |t|
+    t.integer  "followable_id"
+    t.string   "followable_type"
+    t.integer  "user_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
-  add_index "followers", ["follower_id", "followee_id"], name: "index_followers_on_follower_id_and_followee_id", unique: true, using: :btree
+  add_index "follows", ["followable_id", "user_id"], name: "index_follows_on_followable_id_and_user_id", using: :btree
 
   create_table "forums", force: true do |t|
     t.string   "name"

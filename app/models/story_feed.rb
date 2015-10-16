@@ -11,6 +11,6 @@ class StoryFeed
 private
 
   def followers
-    user.following
+    user.followers
   end
 end

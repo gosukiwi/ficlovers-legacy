@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def follow
     authorize @user
-    @result = FollowUser.new(current_user, @user).follow
+    @result = @user.add_follower(current_user)
   end
 
   # GET /users

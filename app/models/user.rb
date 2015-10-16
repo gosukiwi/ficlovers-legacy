@@ -18,6 +18,9 @@ class User < ActiveRecord::Base
   has_many :received_messages, foreign_key: :receiver_id, class_name: 'PrivateMessage', dependent: :destroy
   has_many :sent_messages, foreign_key: :author_id, class_name: 'PrivateMessage', dependent: :destroy
 
+  has_many :follows
+  #has_many :followables, through: :follows
+
   has_secure_password
 
   before_save :set_defaults
