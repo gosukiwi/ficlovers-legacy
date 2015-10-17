@@ -16,29 +16,30 @@
         %i.fa.fa-comments 
         Forums
     - if logged_in?
-      %li
-        %a.button.button--small{ href: notifications_path }
-          - if current_user.notifications.any?
-            %span.button__notification
-              = current_user.notifications.count
-          %i.fa.fa-bell.tooltip-item
-          Notifications
       - if admin?
         %li 
           %a.button.button--small{ href: admin_dashboard_path }
             %i.fa.fa-dashboard.tooltip-item
             Admin
-      %li.dropdown
+      %li.dropdown{ data: { align: 'right' } }
         %a.button.button--small
+          - if current_user.notifications.any?
+            %span.button__notification
+              = current_user.notifications.count
           %i.fa.fa-user
           = current_user.username
-        .dropdown-content
-          = link_to 'Dashboard', dashboard_index_path
-          = link_to 'Profile', current_user
-          = link_to 'Messages', private_messages_path
-          = link_to 'Logout', logout_path, method: :delete
+        .dropdown-content.dropdown-content--triangle-top.vertical-menu
+          - if current_user.notifications.any?
+            = link_to "Dashboard (#{current_user.notifications.count})", dashboard_index_path, class: 'vertical-menu__item'
+          - else
+            = link_to 'Dashboard', dashboard_index_path, class: 'vertical-menu__item'
+          = link_to 'Profile', current_user, class: 'vertical-menu__item'
+          = link_to 'Messages', private_messages_path, class: 'vertical-menu__item'
+          %span.vertical-menu__separator
+          = link_to 'Settings', edit_user_path(current_user), method: :delete, class: 'vertical-menu__item'
+          = link_to 'Logout', logout_path, method: :delete, class: 'vertical-menu__item'
     - else
       %li 
-        %a{ href: login_path, class: 'nav-link-primary' }
+        %a.button.button--primary.button--small{ href: login_path }
           %i.fa.fa-sign-in
           Login

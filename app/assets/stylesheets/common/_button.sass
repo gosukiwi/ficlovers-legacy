@@ -1,6 +1,6 @@
 .button
   color: $color-grey-dark
-  +linear-gradient($color-grey-light, tint($color-grey-light, 25%))
+  +linear-gradient($color-grey-pale, tint($color-grey-pale, 25%))
   font-weight: bold
   padding: 3px 15px
   text-transform: capitalize
@@ -13,11 +13,11 @@
 
   &:hover, &:focus
     color: $color-grey-dark
-    +linear-gradient(shade($color-grey-light, 5%), $color-grey-light)
+    +linear-gradient(shade($color-grey-pale, 5%), $color-grey-pale)
 
   &:active
     color: $color-grey-dark
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.25)
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.25)
 
 .button--primary
   color: $color-primary-contrast
@@ -31,7 +31,7 @@
     color: $color-primary-contrast
 
 .button--small
-  font-size: 95%
+  font-size: 13px
 
 .button__notification
   font-family: sans-serif

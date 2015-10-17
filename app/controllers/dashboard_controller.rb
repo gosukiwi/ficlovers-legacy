@@ -3,7 +3,8 @@ class DashboardController < ApplicationController
 
   def index
     @notifications = policy_scope(Notification).sorted.limit(5)
-    @feed = @user.feed.limit(2)
+    #@feed = @user.feed.limit(2)
+    @feed = StoryFeed.new(@user).generate.limit(2)
   end
 
 protected

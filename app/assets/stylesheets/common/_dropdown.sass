@@ -8,22 +8,32 @@
 
   &.active
     .dropdown-content
-      transition: max-height .5s ease-in-out, opacity .2s
-      max-height: 999px
-      height: auto
-      opacity: 1
+      display: block
 
-  .dropdown-content
-    position: absolute
-    z-index: 1000
-    top: 110%
-    min-width: 150px
-    white-space: normal
-    background-color: white
-    border-radius: 2px
-    height: 0
-    max-height: 0
-    overflow-y: hidden
-    opacity: 0
-    // reset transition
-    transition: none
+.dropdown-content
+  position: absolute
+  z-index: 1000
+  top: 110%
+  min-width: 150px
+  white-space: normal
+  display: none
+
+%top-triangle
+  position: absolute
+  content: '▲'
+  color: white
+  font-size: 13px
+
+.dropdown-content--triangle-top
+  top: 140%
+
+  &:after
+    @extend %top-triangle
+    right: 10px
+    top: -13px
+
+  &:before
+    @extend %top-triangle
+    right: 10px
+    top: -14px
+    color: $color-grey
