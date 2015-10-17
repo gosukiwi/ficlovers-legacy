@@ -1,4 +1,6 @@
 class TagsController < ApplicationController
+  before_action :set_tag, only: [:follow]
+
   def create
     tag = Tag.new(user_params)
     story = Story.find(params[:story_id])
@@ -19,13 +21,16 @@ class TagsController < ApplicationController
   end
 
   def follow
-    tag = Tag.find(params[:id])
-    tag.add_follower(current_user)
+    @result = @tag.add_follower(current_user)
   end
 
   private
 
     def user_params
       params.require(:tag).permit([:name, :context])
+    end
+
+    def set_tag
+      @tag = Tag.find(params[:id])
     end
 end

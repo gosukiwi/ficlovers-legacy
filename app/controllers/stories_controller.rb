@@ -43,8 +43,6 @@ class StoriesController < ApplicationController
     @stories = StorySearch
       .search(tags: params[:tags], category: params[:category])
       .paginate(page: params[:page], per_page: 10)
-
-    binding.pry
   end
   
   def add_to_fav

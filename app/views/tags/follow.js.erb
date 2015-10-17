@@ -1,0 +1,9 @@
+<% if @result %>
+  $(".tag-<%= @tag.id %>")
+    .find('i')
+    .toggleClass('fa-plus')
+    .toggleClass('fa-minus')
+  ;
+<% else %>
+  alert('Something went wrong, please, try again.');
+<% end %>

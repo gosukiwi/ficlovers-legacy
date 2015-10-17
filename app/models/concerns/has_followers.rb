@@ -30,6 +30,10 @@ module HasFollowers
     Follow.find(followable: self, user: user).destroy!
   end
 
+  def followed_by?(user)
+    followers.include?(user)
+  end
+
 private
 
   def user_ids
