@@ -4,46 +4,35 @@
   %ul
     %li
       - if logged_in?
-        %a{ href: new_story_path, class: 'nav-link-primary' }
-          %i.fa.fa-pencil
+        %a.button.button--primary.button--small{ href: new_story_path }
+          %i.fa.fa-pencil 
           Write
     %li
-      %a{ href: forums_path, class: 'nav-link-icon' }
-        %i.fa.fa-comments.tooltip-item
-          .tooltip Forums
+      %a.button.button--small{ href: forums_path }
+        %i.fa.fa-comments 
+        Forums
     %li
-      %a{ href: search_stories_path(tags: '', category: 0), class: 'nav-link-icon' }
-        %i.fa.fa-search.tooltip-item
-          .tooltip Search
+      %a.button.button--small{ href: search_stories_path(tags: '', category: 0) }
+        %i.fa.fa-search
+        Search
     - if logged_in?
-      %li.dropdown.notification-container
-        %a{ href: notifications_path, class: 'nav-link-icon' }
+      %li
+        %a.button.button--small{ href: notifications_path }
           - if current_user.notifications.any?
-            %span.notification-number 
+            %span.button__notification
               = current_user.notifications.count
           %i.fa.fa-bell.tooltip-item
-            .tooltip 
-              Notifications
-        .dropdown-content.navigation-notifications
-          - if current_user.notifications.any?
-            %ul
-              - current_user.notifications.sorted.limit(5).each do |notification|
-                %li
-                  = link_to notification.message, notifications_path
-              %li.notification-button
-                = link_to 'See All', notifications_path
-          - else
-            %p You have no notifications right now
+          Notifications
       - if admin?
         %li 
-          %a{ href: admin_dashboard_path, class: 'nav-link-icon' }
+          %a.button.button--small{ href: admin_dashboard_path }
             %i.fa.fa-dashboard.tooltip-item
-              .tooltip Admin Panel
-      %li.tooltip-item
-        %a.nav-link
-          %i.fa.fa-user.tooltip-item
+            Admin
+      %li.dropdown
+        %a.button.button--small
+          %i.fa.fa-user
           = current_user.username
-        .tooltip.navigation-tooltip-buttons
+        .dropdown-content
           = link_to 'Dashboard', dashboard_index_path
           = link_to 'Profile', current_user
           = link_to 'Messages', private_messages_path
@@ -53,6 +42,3 @@
         %a{ href: login_path, class: 'nav-link-primary' }
           %i.fa.fa-sign-in
           Login
-    %li.nav-link-hidden
-      %a{ href: '#' }
-        %i.fa.fa-navicon

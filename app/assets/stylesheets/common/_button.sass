@@ -1,0 +1,37 @@
+.button
+  color: $color-grey-dark
+  +linear-gradient($color-grey-light, tint($color-grey-light, 25%))
+  font-weight: bold
+  padding: 3px 15px
+  text-transform: capitalize
+  text-decoration: none
+  border: none
+  border-radius: 2px
+  font-family: $sans-serif
+  cursor: pointer
+  position: relative
+
+  &:hover, &:active, &:focus
+    color: $color-grey-dark
+    +linear-gradient(shade($color-grey-light, 5%), $color-grey-light)
+
+.button--primary
+  color: $color-primary-contrast
+  +linear-gradient($color-primary, tint($color-primary, 25%))
+
+  &:hover, &:active, &:focus
+    color: $color-primary-contrast
+    +linear-gradient(shade($color-primary, 5%), $color-primary)
+
+.button--small
+  font-size: 95%
+
+.button__notification
+  background-color: $color-primary
+  color: $color-primary-contrast
+  display: inline-block
+  padding: 0 0.5em
+  font-size: 80%
+  position: absolute
+  bottom: -3px
+  right: -3px

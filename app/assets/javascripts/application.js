@@ -23,6 +23,7 @@
 //= require common/fonts
 //= require common/dropdown
 //= require common/tabs
+//= require common/tooltip
 // APP SPECIFIC --------------------------------------------------------------
 //= require apps/main/stories
 //= require apps/main/stories_search

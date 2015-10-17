@@ -1,8 +1,11 @@
 %span{ class: "tag-#{tag.context} tag-#{tag.id}" }
   = link_to tag.name, search_stories_path(tags: tag.to_s)
   - if logged_in?
-    = link_to follow_tag_path(tag), class: 'tag-follow-btn', remote: true do
+    = link_to follow_tag_path(tag), class: 'tag-follow-btn tooltip-item', remote: true do
       - if tag.followed_by?(current_user)
         %i.fa.fa-minus
+        .tooltip You are following this
       - else
         %i.fa.fa-plus
+        .tooltip.top Following this
+
