@@ -8,13 +8,13 @@
           %i.fa.fa-pencil 
           Write
     %li
-      %a.button.button--small{ href: forums_path }
-        %i.fa.fa-comments 
-        Forums
-    %li
       %a.button.button--small{ href: search_stories_path(tags: '', category: 0) }
         %i.fa.fa-search
         Search
+    %li
+      %a.button.button--small{ href: forums_path }
+        %i.fa.fa-comments 
+        Forums
     - if logged_in?
       %li
         %a.button.button--small{ href: notifications_path }
