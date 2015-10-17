@@ -1,22 +1,31 @@
-.user-header
-  .user-header-content
-    != gravatar_for(@user, size: 125, class: 'user-avatar')
-    .user-profile
-      %h3
+.header
+  .header__user.user-box
+    != gravatar_for(@user, size: 125, class: 'user-box__avatar')
+    .user-box__text
+      .user-box__title
         = @user.username
-      %p
-        = @user.followers.count
-        %strong followers
-        , 
-        %strong following 
-        = @user.followers.count
-    %a.user-follow-btn{href: follow_user_path(@user, format: :js), data: { remote: true, method: :put } } 
-      - if logged_in? && current_user.followers.include?(@user) then
-        %span Following
-        %i.fa.fa-check
-      - else
-        %span Follow
-        %i.fa.fa-plus
+      .number-card
+        .number-card__title
+          Followers
+        .number-card__number
+          = @user.followers.count
+      .number-card
+        .number-card__title
+          Following
+        .number-card__number
+          = User.followed_by(@user).count
+  - if logged_in?
+    .header__actions
+      %a.button.button--primary.follow-button{href: follow_user_path(@user, format: :js), data: { remote: true, method: :put } } 
+        - if current_user.followers.include?(@user) then
+          %i.fa.fa-check
+          %span Following
+        - else
+          %i.fa.fa-plus
+          %span Follow
+      %a.button{ href: new_private_message_path } 
+        %i.fa.fa-envelope
+        Send Message
 
 %ul.user-bar
   %li.active 

@@ -1,5 +1,5 @@
 function toggle() {
-  $btn   = $('.user-follow-btn');
+  $btn   = $('.header').find('.follow-button');
   $label = $btn.find('span');
   $icon  = $btn.find('i');
 
@@ -15,5 +15,5 @@ function toggle() {
 <% if @result %>
   toggle();
 <% else %>
-  console.log('You cannot follow yourself!');
+  alert('You cannot follow yourself!');
 <% end %>

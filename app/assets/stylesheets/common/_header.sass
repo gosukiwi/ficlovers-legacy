@@ -1,0 +1,53 @@
+// Header
+.header
+  background: asset-url("pattern-dark-wood.png")
+  box-shadow: $box-shadow-top
+  position: relative
+  min-height: 200px
+
+  &__user
+    position: absolute
+    left: 10px
+    bottom: -10%
+
+  &__actions
+    position: absolute
+    right: 10px
+    bottom: 10px
+    font-size: 13px
+    
+    .button
+      margin: 0 2px
+
+.user-box
+  color: white
+  display: flex
+  align-items: flex-end
+
+  &__avatar
+    border: 2px solid $color-grey-dark
+    border-radius: 2px
+
+  &__text
+    color: white
+    margin: 0 10px 25px
+
+  &__title
+    font-weight: bold
+    font-size: 1.5em
+
+.number-card
+  background-color: white
+  display: inline-block
+  padding: 0.25em 0.5em
+
+  .number-card__title
+    color: $color-body
+    text-transform: uppercase
+    font-size: 11px
+    display: block
+
+  .number-card__number
+    font-size: 16px
+    color: $color-primary
+    margin-top: -5px
