@@ -8,10 +8,10 @@
         = @story.user.username
 
 .story-meta
-  .story-chapters._dropdown{ data: { align: :left } }
+  .story-chapters.dropdown{ data: { align: :left } }
     %i.fa.fa-navicon
     Chapters
-    %ul._dropdown-content.story-chapters-list
+    %ul.dropdown-content.story-chapters-list
       - @story.chapters.ordered.each_with_index do |chapter, index|
         %li
           %a{ href: '#', data: { page: index }, class: 'btn-chapter' } Chapter #{index + 1}: #{chapter.title}
@@ -23,8 +23,7 @@
         tags:
       - @story.active_tags.each do |tag|
         %li
-          %a{ class: "tag-#{tag.context}", href: search_stories_path(tags: tag.to_s, category: 0) }
-            = tag.name
+          = render 'shared/tag', tag: tag
 
 .reader
   .reader-chapters

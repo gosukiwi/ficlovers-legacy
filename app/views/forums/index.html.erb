@@ -1,8 +1,8 @@
 <div class="forum-menu-container">
   <ul class="location">
-    <li class="_dropdown" data-align="left">
+    <li class="dropdown" data-align="left">
       All categories
-      <div class="_dropdown-content location-forums">
+      <div class="dropdown-content location-forums">
         <% @forums.each do |forum| %>
           <% if forum == @forum %>
             <%= link_to forum.name, forum, class: 'location-forums-link active' %>

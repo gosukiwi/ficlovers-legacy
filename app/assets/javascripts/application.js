@@ -21,7 +21,7 @@
 //= require hyphenate
 // APP SHARED ----------------------------------------------------------------
 //= require common/fonts
-//= require common/_dash
+//= require common/dropdown
 //= require common/tabs
 // APP SPECIFIC --------------------------------------------------------------
 //= require apps/main/stories

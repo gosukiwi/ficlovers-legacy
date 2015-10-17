@@ -1,4 +1,4 @@
-// _dash is a collection of minimal CSS + JS widgets for swift websites.
+// Dropdowns
 // @author Federico Ramirez
 // @licence MIT
 (function ($) {
@@ -6,18 +6,26 @@
 
   // DROPDOWNS
   // ---------------------------------------------------------------------------
-  // Turn all elements with `_dropdown` class into dropdown widgets.
+  // Turn all elements with the `dropdown` class into dropdown widgets.
   //
   // OPTIONS
   //  align: [left|center|right]
   //
-  // Ex: <div class="_dropdown" data-align="center"></div>
+  // Eg: 
+  // <div class="dropdown" data-align="center">
+  //
+  //   <!-- There can be any HTML here -->
+  //
+  //   <div class="dropdown-content">
+  //     Hello! I'm a dropdown message
+  //   </div>
+  // </div>
 
-  var $dropdowns = $('._dropdown').click(function (e) {
+  var $dropdowns = $('.dropdown').click(function (e) {
     e.preventDefault();
     e.stopPropagation();
     var $el = $(this);
-    var $content = $el.find('._dropdown-content');
+    var $content = $el.find('.dropdown-content');
     $el.toggleClass('active');
 
     // Check for alignment option

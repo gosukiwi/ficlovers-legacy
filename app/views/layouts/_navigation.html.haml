@@ -16,7 +16,7 @@
         %i.fa.fa-search.tooltip-item
           .tooltip Search
     - if logged_in?
-      %li._dropdown.notification-container
+      %li.dropdown.notification-container
         %a{ href: notifications_path, class: 'nav-link-icon' }
           - if current_user.notifications.any?
             %span.notification-number 
@@ -24,7 +24,7 @@
           %i.fa.fa-bell.tooltip-item
             .tooltip 
               Notifications
-        ._dropdown-content.navigation-notifications
+        .dropdown-content.navigation-notifications
           - if current_user.notifications.any?
             %ul
               - current_user.notifications.sorted.limit(5).each do |notification|
