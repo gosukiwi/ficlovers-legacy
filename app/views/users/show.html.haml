@@ -23,7 +23,7 @@
         - else
           %i.fa.fa-plus
           %span Follow
-      %a.button{ href: new_private_message_path } 
+      %a.button{ href: new_private_message_path(to: @user.username) }
         %i.fa.fa-envelope
         Send Message
 

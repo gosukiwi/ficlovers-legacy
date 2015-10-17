@@ -34,6 +34,10 @@ class PrivateMessagesController < ApplicationController
     @pm = PrivateMessage.new
     authorize @pm
 
+    if params[:to]
+      @pm.receiver = User.find_by(username: params[:to])
+    end
+
     unless params[:reply_id].nil?
       old_pm = PrivateMessage.find(params[:reply_id])
       @pm.message = old_pm.message
