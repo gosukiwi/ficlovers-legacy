@@ -11,9 +11,14 @@
           = @user.followers.count
       .number-card
         .number-card__title
-          Following
+          Users Following
         .number-card__number
           = User.followed_by(@user).count
+      .number-card
+        .number-card__title
+          Tags Following
+        .number-card__number
+          = Tag.followed_by(@user).count
   - if logged_in?
     .header__actions
       %a.button.button--primary.follow-button{href: follow_user_path(@user, format: :js), data: { remote: true, method: :put } } 

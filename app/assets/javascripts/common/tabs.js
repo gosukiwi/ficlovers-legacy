@@ -7,7 +7,6 @@
     var $target = $( $active.data('for') ).show();
 
     $el.find('li').click(function(e) {
-      e.preventDefault();
       $active.removeClass('active');
       $active = $(this).addClass('active');
       $target.hide();

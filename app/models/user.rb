@@ -23,6 +23,15 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
+  # Scopes for private messages
+  def active_received_messages
+    received_messages.for_receivers
+  end
+
+  def active_sent_messages
+    sent_messages.for_authors
+  end
+
   before_save :set_defaults
 
   def admin?

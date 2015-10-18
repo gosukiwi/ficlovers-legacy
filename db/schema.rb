@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151016075720) do
+ActiveRecord::Schema.define(version: 20151018022148) do
 
   create_table "admin_forum_categories", force: true do |t|
     t.string   "name"
@@ -76,8 +76,8 @@ ActiveRecord::Schema.define(version: 20151016075720) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "target_id"
-    t.string   "target_type"
+    t.integer  "notificable_id"
+    t.string   "notificable_type"
   end
 
   create_table "posts", force: true do |t|
@@ -100,7 +100,10 @@ ActiveRecord::Schema.define(version: 20151016075720) do
     t.text     "message"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "deleted_by",  default: 0
   end
+
+  add_index "private_messages", ["deleted_by"], name: "index_private_messages_on_deleted_by", using: :btree
 
   create_table "replies", force: true do |t|
     t.text     "content"

@@ -1,5 +1,9 @@
 .private-messages-container
-  %h3 #{current_user.username}'s Private Messages
+  %ul.tabs
+    %li{ class: ('active' if @box == 'inbox') } 
+      %a{ href: private_messages_path(box: 'inbox') } Inbox
+    %li{ class: ('active' if @box == 'sent') } 
+      %a{ href: private_messages_path(box: 'sent') } Sent
 
   %table.private-messages
     %thead
@@ -7,14 +11,14 @@
         %th Message
         %th From
         %th Actions
-    - @received.each do |pm|
+    - @messages.each do |pm|
       %tr.private-message-text{ data: { id: pm.id } }
         %td.private-message-message
           = link_to pm.message, pm
         %td
           = link_to pm.author.username, pm.author
         %td
-          = link_to 'Delete', private_message_path(pm, format: :js), remote: true, method: :delete, class: 'private-message-link'
+          = link_to 'Delete', pm, remote: true, method: :delete, class: 'private-message-link'
 
   .private-messages-actions
     = link_to 'Compose', new_private_message_path, class: 'primary'

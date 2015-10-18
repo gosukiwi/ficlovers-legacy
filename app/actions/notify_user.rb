@@ -1,16 +1,16 @@
 class NotifyUser
-  attr_reader :user, :message, :target
-  def initialize(user, message, target = nil)
+  attr_reader :user, :message, :notificable
+  def initialize(user:, message:, notificable: = nil)
     @user = user
     @message = message
-    @target = { type: target.class, id: target.id } unless target.nil?
+    @notificable = notificable unless notificable.nil?
   end
 
   def notify
     if target.nil?
       Notification.create(user: user, message: message)
     else
-      Notification.create(user: user, message: message, target_type: target[:type], target_id: target[:id])
+      Notification.create(user: user, message: message, notificable: target)
     end
   end
 end
