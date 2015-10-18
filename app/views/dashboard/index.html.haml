@@ -16,10 +16,7 @@
       %ul
         - @notifications.each do |notification|
           %li{ id: "notification-#{notification.id}" }
-            - if notification.notificable.nil?
-              = notification.message
-            - else
-              = link_to notification.message, notification.notificable
+            = notification_link_to notification
             %a{ href: notification_path(notification, format: :js), class: 'notification-dismiss', data: { remote: true, method: :delete } } Dismiss
       .dashboard-action
         = link_to 'Dismiss All', delete_all_notifications_path(format: :js), remote: true, method: :delete

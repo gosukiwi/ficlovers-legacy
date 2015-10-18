@@ -13,10 +13,8 @@ class RepliesController < ApplicationController
     @errors  = nil
     if @reply.save
       notify_users @post
-      #redirect_to [@post.forum, @post], notice: 'Reply was successfully created.'
       @success = true
     else
-      #redirect_to [@post.forum, @post], alert: @reply.errors.full_messages.to_sentence
       @errors = @reply.errors.full_messages.to_sentence
     end
   end
@@ -48,7 +46,7 @@ class RepliesController < ApplicationController
 
       ActiveRecord::Base.transaction do
         post.watchers.each do |user|
-          NotifyUser.new(user, message).notify
+          Notification.create(user: user, message: message, notificable: post)
         end
       end
     end

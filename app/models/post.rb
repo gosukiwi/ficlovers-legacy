@@ -9,6 +9,9 @@ class Post < ActiveRecord::Base
   has_one :story
   has_and_belongs_to_many :watchers, join_table: :users_posts, class_name: 'User'
 
+  # Used to generate notifications
+  has_many :notifications, as: :notificables
+
   after_create do
     user.increment! :post_count
   end

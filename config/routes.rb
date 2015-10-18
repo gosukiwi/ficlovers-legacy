@@ -66,7 +66,7 @@ Rails.application.routes.draw do
   end
 
   # PMs
-  resources :private_messages, only: [:index, :create, :new, :destroy, :show], path: 'messages'
+  resources :private_messages, path: 'messages'
 
   # Admin/Mod dashboard
   namespace :admin do
