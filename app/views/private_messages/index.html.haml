@@ -14,7 +14,7 @@
     - @messages.each do |pm|
       %tr.private-message-text{ data: { id: pm.id } }
         %td.private-message-message
-          = link_to pm.message, pm
+          = link_to pm.title, pm
         %td
           = link_to pm.author.username, pm.author
         %td

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151018022148) do
+ActiveRecord::Schema.define(version: 20151023015801) do
 
   create_table "admin_forum_categories", force: true do |t|
     t.string   "name"
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 20151018022148) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "deleted_by",  default: 0
+    t.string   "title"
   end
 
   add_index "private_messages", ["deleted_by"], name: "index_private_messages_on_deleted_by", using: :btree

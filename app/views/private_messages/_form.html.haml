@@ -1,16 +1,17 @@
 = form_for message do |f|
   - if message.errors.any?
     .alert.alert-danger
-      %h3 Please fix the following #{pluralize(@message.errors.count, "error")} before continuing:
+      %h3 Please fix the following #{pluralize(message.errors.count, "error")} before continuing:
       %ul
       - message.errors.full_messages.each do |message|
         %li
           = message
-  .field.ui-widget
-    = f.label 'To'
+  .field
     = f.text_field :receiver, placeholder: "Receiver's username"
   .field
-    = f.text_area :message
+    = f.text_field :title, placeholder: 'Title'
+  .field
+    = f.text_area :message, placeholder: 'Message...'
   .field-actions
     = link_to 'Back', private_messages_path
     = f.submit 'Send Message'

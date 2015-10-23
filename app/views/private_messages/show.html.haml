@@ -5,6 +5,4 @@
     .alert.error
       = flash[:alert]
 
-  = simple_format @pm.message
-
   = render partial: 'form', locals: { message: @reply }

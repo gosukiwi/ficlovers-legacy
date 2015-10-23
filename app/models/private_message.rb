@@ -1,5 +1,6 @@
 class PrivateMessage < ActiveRecord::Base
   validates :message, presence: true
+  validates :title, presence: true
 
   belongs_to :receiver, foreign_key: :receiver_id, class_name: 'User'
   belongs_to :author, foreign_key: :author_id, class_name: 'User'
@@ -26,7 +27,7 @@ class PrivateMessage < ActiveRecord::Base
     new_pm = PrivateMessage.new
     new_pm.author   = receiver
     new_pm.receiver = author
-    new_pm.message  = '> ' + message.gsub("\n", "\n> ")
+    new_pm.message  = '> ' + message.gsub("\n", "\n> ") + "\n"
     new_pm
   end
 
