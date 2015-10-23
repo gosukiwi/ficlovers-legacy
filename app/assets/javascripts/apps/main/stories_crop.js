@@ -1,6 +1,4 @@
-(function ($) {
-  'use strict';
-
+function setupCrop () {
   $('#crop-thumb').Jcrop({
     aspectRatio: 10/2,
     setSelect: [100, 100, 500, 50],
@@ -18,4 +16,7 @@
   $('.crop-button').click(function () {
     $('form').submit();
   });
-}(jQuery));
+}
+
+$(document).ready(setupCrop);
+$(document).on('page:load', setupCrop);

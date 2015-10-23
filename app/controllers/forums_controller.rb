@@ -1,6 +1,4 @@
 class ForumsController < ApplicationController
-  layout 'forums'
-
   def index
     @forums = Forum.all
     @posts = Post.latest.paginate(page: params[:page], per_page: 25)

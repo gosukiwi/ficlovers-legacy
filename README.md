@@ -1,7 +1,7 @@
 # FicLovers
 FicLovers is a fan fiction website for authors and readers.
 
-# Developers
+## Developers
 If you're a developer, there are some important things needed to know to hack on
 this. A summary would be
 
@@ -29,6 +29,6 @@ You'll need the following env variables
     FANFIC_S3_BUCKET
     FANFIC_S3_KEY
     FANFIC_S3_SECRET
-
+  
 ## Github
 [The official repo](https://github.com/gosukiwi/ficlovers) is at GitHub.

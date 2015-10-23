@@ -6,6 +6,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <%= stylesheet_link_tag 'forums', media: 'all' %>
+    <%= javascript_include_tag 'forums' %>
     <%= csrf_meta_tags %>
   </head>
   <body>
@@ -26,7 +27,5 @@
     <div class="forum-content">
       <%= yield %>
     </div>
-
-    <%= javascript_include_tag 'forums' %>
   </body>
 </html>

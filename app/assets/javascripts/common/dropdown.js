@@ -21,29 +21,40 @@
   //   </div>
   // </div>
 
-  var $dropdowns = $('.dropdown').click(function (e) {
-    e.preventDefault();
-    e.stopPropagation();
-    var $el = $(this);
-    var $content = $el.find('.dropdown-content');
-    $el.toggleClass('active');
+  var $dropdowns;
+  
+  function bindDropdowns() {
+    $dropdowns = $('.dropdown').click(function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var $el = $(this);
+      var $content = $el.find('.dropdown-content');
+      $el.toggleClass('active');
 
-    // Check for alignment option
-    var align = $el.data('align');
-    if(align === 'left') {
-      $content.css('left', 0);
-    } else if(align === 'right') {
-      $content.css('right', 0);
-    } else {
-      $content.css('left', '-' + (($content.outerWidth() / 2) - ($el.outerWidth() / 2)) + 'px')
-    }
+      // Check for alignment option
+      var align = $el.data('align');
+      if(align === 'left') {
+        $content.css('left', 0);
+      } else if(align === 'right') {
+        $content.css('right', 0);
+      } else {
+        $content.css('left', '-' + (($content.outerWidth() / 2) - ($el.outerWidth() / 2)) + 'px')
+      }
 
-    $content.click(function (e) { e.stopPropagation(); } );
-    $content.find('a').click(function(e) { $dropdowns.removeClass('active'); });
-  })
+      $content.click(function (e) { e.stopPropagation(); } );
+      $content.find('a').click(function(e) { $dropdowns.removeClass('active'); });
+    })
+  }
 
-  $('html').click(function (e) {
-    $dropdowns.removeClass('active');
-  });
+  function setupDropdowns() {
+    bindDropdowns();
+
+    $('html').click(function (e) {
+      $dropdowns.removeClass('active');
+    });
+  }
+
+  $(document).ready(setupDropdowns);
+  $(document).on('page:load', setupDropdowns);
 
 }(jQuery));

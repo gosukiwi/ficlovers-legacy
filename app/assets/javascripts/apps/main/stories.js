@@ -166,9 +166,15 @@ var buildFicScroll = function (idx, el) {
   });
 };
 
-$('.fic-description').each(buildFicScroll);
-$(window).resize(_.debounce(function () {
+function setupFicScroll() {
   $('.fic-description').each(buildFicScroll);
-}, 200));
+
+  $(window).resize(_.debounce(function () {
+    $('.fic-description').each(buildFicScroll);
+  }, 200));
+}
+
+$(document).ready(setupFicScroll);
+$(document).on('page:load', setupFicScroll);
 
 }(jQuery));

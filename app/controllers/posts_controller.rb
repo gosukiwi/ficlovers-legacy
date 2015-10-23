@@ -2,8 +2,6 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :pin, :watch]
   before_action :set_forum
 
-  layout 'forums'
-
   def watch
     authorize @post
     @result = current_user.watch_toggle @post
