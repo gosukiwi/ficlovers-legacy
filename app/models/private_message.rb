@@ -21,6 +21,15 @@ class PrivateMessage < ActiveRecord::Base
     end
   end
 
+  # Builds a new PM instance which is a reply to this one
+  def build_reply
+    new_pm = PrivateMessage.new
+    new_pm.author   = receiver
+    new_pm.receiver = author
+    new_pm.message  = '> ' + message.gsub("\n", "\n> ")
+    new_pm
+  end
+
 private
 
   def role_for(user)

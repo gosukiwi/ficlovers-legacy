@@ -1,5 +1,5 @@
 class PrivateMessagesController < ApplicationController
-  before_action :set_pm, only: [:show, :destroy]
+  before_action :set_pm, only: [:show, :destroy, :reply]
   before_action :set_box, only: [:index]
 
   def index
@@ -33,6 +33,8 @@ class PrivateMessagesController < ApplicationController
   end
 
   def show
+    authorize @pm
+    @reply = @pm.build_reply
   end
 
   def new

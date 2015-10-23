@@ -8,11 +8,17 @@ class PrivateMessagePolicy < ApplicationPolicy
   end
 
   def destroy?
-    record.receiver == user || record.author == user
+    sender_or_receiver?
   end
 
   def show?
+    sender_or_receiver?
+  end
+
+private
+  
+  def sender_or_receiver?
     return false if user.nil?
-    record.author == user || record.receiver == user
+    record.receiver == user || record.author == user
   end
 end
