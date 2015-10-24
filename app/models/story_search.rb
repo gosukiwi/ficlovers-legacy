@@ -1,10 +1,11 @@
 class StorySearch
-  # Searches a story which includse all of the given tags. If category is
-  # specified, it will only return stories in that given category.
+  # Searches a story which includse all of the given tags, which is a string of
+  # comma separated tags like:
+  # 
+  #   Naruto Shippduden (Fandom), Another Tag (Another Type)
   #
-  # `tags` is a string of comma separated tags
-  # `category` is optional and it's the id of the category to filter by, user 0
-  # or nil to ignore category
+  # Tags not following this format are ignored. Also, only tags which are 
+  # marked as "active" can be used for searching.
   def self.search(tags:, language: :english, category: 0, order: 'popular')
     return Story.none if tags.nil?
 
@@ -37,27 +38,27 @@ class StorySearch
 
   protected
 
-    # returns a list of items such as: [['tag name', 'context'], ...]
-    def self.split_tags(tags)
-      tags.split(',').map do |tag|
-        matches = tag.match(/^(.+?)(?:\((.+?)\))?$/).to_a
-        next if matches[1].nil?
-        [matches[1].strip!, matches[2]]
-      end
+  # returns a list of items such as: [['tag name', 'context'], ...]
+  def self.split_tags(tags)
+    tags.split(',').map do |tag|
+      matches = tag.match(/^(.+?)(?:\((.+?)\))?$/).to_a
+      next if matches[1].nil?
+      [matches[1].strip!, matches[2]]
+    end
+  end
+
+  # given a string of comma-separated tags, parse them into HAVING statements
+  # joined by AND's, return an array with all the prepared statement's
+  # parameters returns something which looks like
+  # { stmt: 'COUNT(?) > 0 AND COUNT(?) > 0 ...', args: [arg1, arg2, ...] }
+  def self.parse_tags(tags) 
+    clauses = []
+    args = []
+    split_tags(tags).each do |tag|
+      clauses << "SUM(`tags`.name = ?) > 0"
+      args << tag[0]
     end
 
-    # given a string of comma-separated tags, parse them into HAVING statements
-    # joined by AND's, return an array with all the prepared statement's
-    # parameters returns something which looks like
-    # { stmt: 'COUNT(?) > 0 AND COUNT(?) > 0 ...', args: [arg1, arg2, ...] }
-    def self.parse_tags(tags) 
-      clauses = []
-      args = []
-      split_tags(tags).each do |tag|
-        clauses << "SUM(`tags`.name = ?) > 0"
-        args << tag[0]
-      end
-
-      return { stmt: clauses.join(' AND '), args: args }
-    end
+    return { stmt: clauses.join(' AND '), args: args }
+  end
 end
