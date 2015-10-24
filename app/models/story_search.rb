@@ -15,7 +15,13 @@ class StorySearch
     query = query.where(category_id: category) unless category.to_i == 0
     query = query.where(language: language)
 
-    query = if order == 'popular'
+    query = case order 
+    when 'favs'
+      query
+        .select('`stories`.*, count(`favs`.id) as favs_count')
+        .joins('LEFT JOIN `favs` ON `favs`.story_id = `stories`.id')
+        .order('favs_count DESC, stories.views DESC')
+    when 'popular'
       query.popular
     else
       query.fresh
