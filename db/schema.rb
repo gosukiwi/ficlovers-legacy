@@ -129,7 +129,9 @@ ActiveRecord::Schema.define(version: 20151024023801) do
     t.integer  "language",         default: 0
   end
 
+  add_index "stories", ["language"], name: "index_stories_on_language", using: :btree
   add_index "stories", ["published"], name: "index_stories_on_published", using: :btree
+  add_index "stories", ["views"], name: "index_stories_on_views", using: :btree
 
   create_table "tags", force: true do |t|
     t.string   "name"
