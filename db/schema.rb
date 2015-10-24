@@ -126,7 +126,7 @@ ActiveRecord::Schema.define(version: 20151024023801) do
     t.integer  "post_id"
     t.string   "thumb_url"
     t.datetime "thumb_expiration"
-    t.integer  "language"
+    t.integer  "language",         default: 0
   end
 
   add_index "stories", ["published"], name: "index_stories_on_published", using: :btree

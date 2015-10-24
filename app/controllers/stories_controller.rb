@@ -40,8 +40,8 @@ class StoriesController < ApplicationController
 
   def search
     @categories = [Category.new(name: 'Any', id: 0)] + @categories
-    @stories = StorySearch
-      .search(tags: params[:tags], category: params[:category])
+    @stories    = StorySearch
+      .search(search_params)
       .paginate(page: params[:page], per_page: 10)
   end
   
@@ -122,17 +122,21 @@ class StoriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_story
-      @story = Story.find(params[:id])
-    end
 
-    def set_categories
-      @categories = Category.all
-    end      
+  def search_params
+    params.permit(:tags, :category, :language, :order).symbolize_keys
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def story_params
-      params.require(:story).permit(:title, :user_id, :category_id, :summary, :published, :language)
-    end
+  def set_story
+    @story = Story.find(params[:id])
+  end
+
+  def set_categories
+    @categories = Category.all
+  end      
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def story_params
+    params.require(:story).permit(:title, :user_id, :category_id, :summary, :published, :language)
+  end
 end

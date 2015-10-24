@@ -12,10 +12,11 @@
         = label_tag :category, 'Category'
         = select_tag :category, options_from_collection_for_select(@categories, 'id', 'name', params[:category])
       .input
+        = label_tag :language
+        = select_tag :language, options_for_select(Story.languages.keys.to_a, params[:language])
+      .input
         = label_tag :order, 'Order'
-        .button-group
-          = link_to 'Most Popular', hot_stories_path, class: 'button-group-item active'
-          = link_to 'Newest', fresh_stories_path, class: 'button-group-item'
+        = select_tag :order, options_for_select(['popular', 'newest'], params[:order])
       = submit_tag "Search", name: nil, class: 'search-btn'
   .search-results.stories-container
     - @stories.each do |story|

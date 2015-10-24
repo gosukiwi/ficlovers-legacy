@@ -20,7 +20,6 @@
 //= require underscore
 //= require hyphenate
 // APP SHARED ----------------------------------------------------------------
-//= require common/fonts
 //= require common/dropdown
 //= require common/tabs
 //= require common/tooltip

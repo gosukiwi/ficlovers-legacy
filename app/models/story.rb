@@ -27,8 +27,12 @@ class Story < ActiveRecord::Base
       .where('updated_at >= :one_week_ago and published <> 0', { one_week_ago: 1.week.ago })
   }
 
+  scope :popular, ->{
+    published.order(views: :desc)
+  }
+
   scope :fresh, ->{
-    where('published <> 0').order('updated_at desc')
+    published.order(updated_at: :desc)
   }
 
   scope :published, ->{

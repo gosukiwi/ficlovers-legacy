@@ -5,20 +5,25 @@ class StorySearch
   # `tags` is a string of comma separated tags
   # `category` is optional and it's the id of the category to filter by, user 0
   # or nil to ignore category
-  def self.search(tags: tags, category: category = 0)
+  def self.search(tags:, language: :english, category: 0, order: 'popular')
     return Story.none if tags.nil?
 
     query = Story
-      .select('stories.*')
       .joins('JOIN `taxonomies` ON `taxonomies`.`story_id` = `stories`.id')
-      .joins('JOIN `tags` ON `taxonomies`.tag_id = `tags`.id')
+      .joins('JOIN `tags` ON `taxonomies`.tag_id = `tags`.id AND `tags`.status = "active"')
 
     query = query.where(category_id: category) unless category.to_i == 0
+    query = query.where(language: language)
+
+    query = if order == 'popular'
+      query.popular
+    else
+      query.fresh
+    end
 
     having = parse_tags(tags)
 
     return query
-      .where('`tags`.status = "active" and `stories`.published <> 0')
       .group('stories.id')
       .having(having[:stmt], *having[:args])
       .includes([:category, :tags])
@@ -30,6 +35,7 @@ class StorySearch
     def self.split_tags(tags)
       tags.split(',').map do |tag|
         matches = tag.match(/^(.+?)(?:\((.+?)\))?$/).to_a
+        next if matches[1].nil?
         [matches[1].strip!, matches[2]]
       end
     end

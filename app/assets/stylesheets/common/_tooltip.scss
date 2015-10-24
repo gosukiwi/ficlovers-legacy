@@ -19,6 +19,7 @@
   font-size: 12px;
   opacity: 0;
   filter: alpha(opacity=0);
+  font-family: $system
 }
 .tooltip.in {
   opacity: 0.9;
