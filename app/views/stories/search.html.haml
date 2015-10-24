@@ -16,7 +16,7 @@
         = select_tag :language, options_for_select(Story.languages.keys.to_a, params[:language])
       .input
         = label_tag :order, 'Order'
-        = select_tag :order, options_for_select(['popular', 'favs', 'newest'], params[:order])
+        = select_tag :order, options_for_select(['views', 'favs', 'newest'], params[:order])
       = submit_tag "Search", name: nil, class: 'search-btn'
   .search-results.stories-container
     - @stories.each do |story|

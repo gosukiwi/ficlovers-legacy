@@ -22,10 +22,10 @@ class StorySearch
         .select('`stories`.*, count(`favs`.id) as favs_count')
         .joins('LEFT JOIN `favs` ON `favs`.story_id = `stories`.id')
         .order('favs_count DESC, stories.views DESC')
-    when 'popular'
-      query.popular
-    else
+    when 'newest'
       query.fresh
+    else
+      query.popular
     end
 
     having = parse_tags(tags)
