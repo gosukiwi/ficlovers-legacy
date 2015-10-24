@@ -10,6 +10,7 @@
   font-family: $sans-serif
   cursor: pointer
   position: relative
+  display: inline-block
 
   &:hover, &:focus
     color: $color-grey-dark
@@ -32,6 +33,15 @@
 
 .button--small
   font-size: 13px
+
+.button--disabled
+  color: $color-grey
+  cursor: not-allowed
+
+  &:hover,
+  &:active,
+  &:focus,
+    color: $color-grey
 
 .button__notification
   font-family: sans-serif

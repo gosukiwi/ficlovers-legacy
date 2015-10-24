@@ -1,8 +1,33 @@
+- if flash[:alert]
+  .alert.error
+    = flash[:alert]
+
+.private-messages-top-menu.horizontal-menu
+  .private-messages-top-menu__left
+    %a.horizontal-menu__item.button.button--primary.button--small{ href: new_private_message_path(box: @box), data: { toggle: 'tooltip' }, title: 'New message' }
+      %i.fa.fa-envelope
+  .private-messages-top-menu__right
+    %a.horizontal-menu__item.button.button--small{ href: private_message_path(@pm, box: @box), data: { method: :delete, toggle: 'tooltip' }, title: 'Delete selected' }
+      %i.fa.fa-times
+    %a.horizontal-menu__item.button.button--small{ data: { toggle: 'tooltip' }, title: 'Delete all in box' }
+      %i.fa.fa-trash
+
 .private-messages-container
-  %h3 Send Private Message
+  .vertical-menu.vertical-menu--no-border.private-messages-container__menu
+    %a.vertical-menu__item{ class: ('active' if @box == 'inbox'), href: private_messages_path(box: 'inbox') } 
+      Inbox
+    %a.vertical-menu__item{ class: ('active' if @box == 'sent'), href: private_messages_path(box: 'sent') } 
+      Sent
 
-  - if flash[:alert]
-    .alert.error
-      = flash[:alert]
+  .private-messages-container__list
+    - @messages.each do |message|
+      %a.private-message-preview{ href: private_message_path(message, box: @box), class: ('private-message-preview--active' if message.id == @pm.id) }
+        .private-message-preview__author
+          = message.author.username
+        .private-message-preview__title
+          = message.title
+          //= link_to 'Reply', pm, class: 'private-message-link'
+          //= link_to 'Delete', pm, remote: true, method: :delete, class: 'private-message-link'
 
-  = render partial: 'form', locals: { message: @reply }
+  .private-messages-container__message
+    = render partial: 'form', locals: { message: @reply }

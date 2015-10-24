@@ -1,14 +1,10 @@
 class PrivateMessagesController < ApplicationController
-  before_action :set_pm, only: [:show, :destroy, :reply]
-  before_action :set_box, only: [:index]
+  before_action :set_pm, only: [:show, :destroy]
+  before_action :set_box, only: [:index, :show, :new, :destroy]
+  before_action :set_messages, only: [:index, :show, :new, :create]
 
   def index
     authorize PrivateMessage
-    if @box == 'sent'
-      @messages = current_user.active_sent_messages.sorted
-    else
-      @messages = current_user.active_received_messages.sorted
-    end
   end
 
   def create
@@ -49,9 +45,18 @@ class PrivateMessagesController < ApplicationController
   def destroy
     authorize @pm
     @pm.destroy_as(current_user)
+    redirect_to private_messages_url(box: @box)
   end
 
 protected
+
+  def set_messages
+    @messages = if @box == 'sent'
+      current_user.active_sent_messages.sorted
+    else
+      current_user.active_received_messages.sorted
+    end
+  end
 
   def notify(user, pm)
     Notification.create user: user, message: "You have a new private message from #{pm.author.username}", notificable: pm

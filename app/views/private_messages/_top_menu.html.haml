@@ -1,0 +1,9 @@
+.private-messages-top-menu.horizontal-menu
+  .private-messages-top-menu__left
+    %a.horizontal-menu__item.button.button--primary.button--small{ href: new_private_message_path(box: @box), data: { toggle: 'tooltip' }, title: 'New message' }
+      %i.fa.fa-envelope
+  .private-messages-top-menu__right
+    %a.horizontal-menu__item.button.button--small{ data: { toggle: 'tooltip' }, title: 'Delete selected' }
+      %i.fa.fa-times
+    %a.horizontal-menu__item.button.button--small{ data: { toggle: 'tooltip' }, title: 'Delete all in box' }
+      %i.fa.fa-trash

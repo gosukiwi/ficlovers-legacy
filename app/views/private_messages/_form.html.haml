@@ -6,12 +6,9 @@
       - message.errors.full_messages.each do |message|
         %li
           = message
-  .field
-    = f.text_field :receiver, placeholder: "Receiver's username"
-  .field
-    = f.text_field :title, placeholder: 'Title'
-  .field
-    = f.text_area :message, placeholder: 'Message...'
-  .field-actions
-    = link_to 'Back', private_messages_path
-    = f.submit 'Send Message'
+  = f.text_field :receiver, placeholder: "Receiver's username", class: 'private-message-input'
+  = f.text_field :title, placeholder: 'Title', class: 'private-message-input'
+  = f.text_area :message, placeholder: 'Message...', class: 'private-message-textarea'
+  .private-message-actions
+    = link_to 'Back', private_messages_path, class: 'button'
+    = f.submit 'Send Message', class: 'button button--primary'
