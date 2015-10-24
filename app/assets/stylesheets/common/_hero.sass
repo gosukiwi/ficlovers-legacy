@@ -1,0 +1,44 @@
+.hero-heading
+  text-align: center
+  text-transform: uppercase
+  font-size: 3em
+  margin-bottom: 1em
+
+.hero-input
+  border-top: 1px solid $color-grey
+  font-size: 1.5em
+  padding: 5px 0
+
+  &__field,
+  &__textarea,
+  &__select
+    border: none
+    font-family: $sans-serif
+    padding: 5px
+    color: $color-body
+    display: block
+    width: 1110px
+    background-color: white
+    box-sizing: border-box
+    margin: auto
+
+    &:focus
+      outline: 0
+
+    &::placeholder
+      color: $color-grey
+
+  &__select
+    text-transform: capitalize
+
+  &__label
+    display: block
+    width: 1110px
+    margin: auto
+    font-size: 90%
+    color: $color-grey
+    text-transform: uppercase
+
+.hero-actions
+  text-align: center
+  padding-top: 3em

@@ -74,7 +74,6 @@ class StoriesController < ApplicationController
   def new
     @story = Story.new
     authorize @story
-    render layout: 'story_new'
   end
 
   def write
@@ -93,7 +92,7 @@ class StoriesController < ApplicationController
     if @story.save
       redirect_to write_story_path @story
     else
-      render :new, layout: 'story_new'
+      render :new
     end
   end
 
@@ -134,6 +133,6 @@ class StoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def story_params
-      params.require(:story).permit(:title, :user_id, :category_id, :summary, :published)
+      params.require(:story).permit(:title, :user_id, :category_id, :summary, :published, :language)
     end
 end

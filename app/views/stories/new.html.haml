@@ -1,0 +1,26 @@
+%h1.hero-heading
+  new fic
+
+- if @story.errors.any?
+  .container
+    .alert.alert--error
+      %h2 Oops! Please fix the following issues before continuing:
+      %ul
+        - @story.errors.full_messages.each do |message|
+          %li
+            = message
+
+= form_for(@story) do |f|
+  .hero-input
+    = f.text_field :title, class: 'hero-input__field', placeholder: 'My story title'
+  .hero-input
+    = f.text_area :summary, class: 'hero-input__textarea', placeholder: 'This story is about...'
+  .hero-input
+    = f.label :category, class: 'hero-input__label'
+    = f.select :category_id, @categories.all.collect { |c| [c.name, c.id] }, {}, { class: 'hero-input__select', placeholder: 'This story is about...' }
+  .hero-input
+    = f.label :language, class: 'hero-input__label'
+    = f.select :language, Story.languages.keys.to_a, {}, class: 'hero-input__select'
+  .hero-actions
+    = f.submit 'Start Writing', class: 'button button--primary button--big'
+    = link_to  'Cancel', current_user, class: 'button button--big'

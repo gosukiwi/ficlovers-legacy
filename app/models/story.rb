@@ -3,18 +3,20 @@ class Story < ActiveRecord::Base
 
   validates :title, presence: true, length: { in: 5..100 }
   validates :summary, presence: true, length: { in: 50..1000 }
+  validates :language, presence: true
 
   belongs_to :category
-  has_many :chapters, dependent: :destroy
   belongs_to :user, autosave: true
+  belongs_to :post
+  has_many :chapters, dependent: :destroy
   # favs
   has_many :favs
   has_many :favorited_by, through: :favs, source: :user
   # tags
   has_many :taxonomies
   has_many :tags, through: :taxonomies
-  # forum
-  belongs_to :post
+
+  enum language: [:english, :spanish, :portuguese, :japanese, :russian, :french, :german, :chinese]
 
   # Find hot stories
   scope :hot, ->{
