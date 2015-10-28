@@ -1,54 +1,51 @@
 class PrivateMessagesController < ApplicationController
+  before_action :check_authorization
   before_action :set_pm, only: [:show, :destroy]
   before_action :set_box, only: [:index, :show, :new, :destroy]
   before_action :set_messages, only: [:index, :show, :new, :create]
 
   def index
-    authorize PrivateMessage
   end
 
   def create
-    @pm = PrivateMessage.new pm_params
-    authorize @pm
-
-    username = params[:private_message][:receiver]
-    receiver = User.find_by(username: username)
-    if receiver.nil?
-      flash[:alert] = "Could not find user #{username}"
+    receiver = fetch_receiver(params[:private_message][:receiver]) do |error|
+      flash.now[:alert] = error
       return render :new
     end
 
-    @pm.receiver = receiver
-    @pm.author = current_user
+    @pm = PrivateMessage.new pm_params.merge(receiver: receiver, author: current_user)
     if @pm.save
       notify receiver, @pm
-      redirect_to private_messages_url, notice: 'Your message has been sent'
+      flash[:notice] = 'Your message has been sent!'
+      redirect_to private_messages_url
     else
-      render :new, notice: 'Oops! Something happened. Please try again.'
+      render :new
     end
   end
 
   def show
-    authorize @pm
     @reply = @pm.build_reply
   end
 
   def new
-    @pm = PrivateMessage.new
-    authorize @pm
-
-    if params[:to]
-      @pm.receiver = User.find_by(username: params[:to])
-    end
+    receiver = User.find_by(username: params[:to])
+    @pm      = PrivateMessage.new(receiver: receiver)
   end
 
   def destroy
-    authorize @pm
     @pm.destroy_as(current_user)
     redirect_to private_messages_url(box: @box)
   end
 
 protected
+
+  def check_authorization
+    authorize @pm || PrivateMessage
+  end
+
+  def fetch_receiver(username, &handle_failure)
+    User.find_by(username: username) || handle_failure.call("Could not find user '#{username}'")
+  end
 
   def set_messages
     @messages = if @box == 'sent'
