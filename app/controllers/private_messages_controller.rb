@@ -15,7 +15,7 @@ class PrivateMessagesController < ApplicationController
     end
 
     if @pm.save
-      notify receiver, @pm
+      send_notification @pm
       flash[:notice] = 'Your message has been sent!'
       redirect_to private_messages_url
     else
@@ -56,8 +56,8 @@ protected
     end
   end
 
-  def notify(user, pm)
-    Notification.create user: user, message: "You have a new private message from #{pm.author.username}", notificable: pm
+  def send_notification(pm)
+    Notification.create user: pm.receiver, message: "You have a new private message from #{pm.author.username}", notificable: pm
   end
 
   def set_pm
