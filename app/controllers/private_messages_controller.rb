@@ -8,19 +8,10 @@ class PrivateMessagesController < ApplicationController
   end
 
   def create
-    @pm = PrivateMessage.new pm_params.merge(author: current_user)
-    @pm.receiver = fetch_receiver(params[:private_message][:receiver]) do |error|
-      flash.now[:alert] = error
-      return render :new
-    end
-
-    if @pm.save
-      send_notification @pm
-      flash[:notice] = 'Your message has been sent!'
-      redirect_to private_messages_url
-    else
-      render :new
-    end
+    build_message or return render :new
+    send_notification @pm
+    flash[:notice] = 'Your message has been sent!'
+    redirect_to private_messages_url
   end
 
   def show
@@ -38,6 +29,15 @@ class PrivateMessagesController < ApplicationController
   end
 
 protected
+
+  def build_message
+    @pm = PrivateMessage.new pm_params.merge(author: current_user)
+    @pm.receiver = fetch_receiver(params[:private_message][:receiver]) do |error|
+      flash.now[:alert] = error
+      return false
+    end
+    @pm.save
+  end
 
   def check_authorization
     authorize @pm || PrivateMessage
