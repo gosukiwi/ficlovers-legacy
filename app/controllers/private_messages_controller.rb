@@ -43,8 +43,8 @@ protected
     authorize @pm || PrivateMessage
   end
 
-  def fetch_receiver(username, &handle_failure)
-    User.find_by(username: username) || handle_failure.call("Could not find user '#{username}'")
+  def fetch_receiver(username, &on_error)
+    User.find_by(username: username) || on_error.call("Could not find user '#{username}'")
   end
 
   def set_messages
