@@ -28,7 +28,7 @@
               = current_user.notifications.count
           %i.fa.fa-user
           = current_user.username
-        .dropdown-content.dropdown-content--triangle-top.vertical-menu
+        .dropdown-content.dropdown-content--triangle-top.vertical-menu.vertical-menu--small
           - if current_user.notifications.any?
             = link_to "Dashboard (#{current_user.notifications.count})", dashboard_index_path, class: 'vertical-menu__item'
           - else

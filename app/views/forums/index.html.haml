@@ -1,0 +1,46 @@
+.container
+  .forum-menu
+    .forum-menu__categories
+      %span.forum-menu__button.dropdown{ data: { align: 'left' } }
+        .button All categories
+        .dropdown-content.dropdown-content--wide.vertical-menu
+          - @forums.each do |forum|
+            - if forum == @forum
+              = link_to forum.name, forum, class: 'vertical-menu__item vertical-menu__item--active'
+            - else
+              = link_to forum.name, forum, class: 'vertical-menu__item'
+    .forum-menu__filters
+      .button-group
+        %a.button-group__item.button-group__item--active Latest
+        %a.button-group__item Top
+        %a.button-group__item Categories
+
+  %table.table
+    %thead
+      %tr
+        %th.table--left Topic
+        %th Category
+        %th Replies
+        %th Views
+        %th Activity
+    %tbody
+      - @posts.each do |post|
+        %tr
+          %td
+            = link_to post.title, [post.forum, post]
+          %td
+            %a.forum-tag{ href: forum_path(post.forum), class: "forum-tag--#{post.forum.name.downcase.parameterize}" }
+              = post.forum.name
+          %td
+            = post.replies.count
+          %td
+            = post.views
+          - if post.replies.count > 0
+            %td #{time_ago_in_words(post.replies.last.updated_at)} ago
+          - else
+            %td #{time_ago_in_words(post.updated_at)} ago
+
+.pagination
+  = will_paginate @posts unless @posts.empty?
+  .pagination-info
+    = page_entries_info @posts, model: 'posts' unless @posts.empty?

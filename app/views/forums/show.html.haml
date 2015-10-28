@@ -1,0 +1,117 @@
+.container
+  .forum-menu
+    .forum-menu__categories
+      = link_to 'Forums', forums_path, class: 'button'
+      %span.forum-menu__button.dropdown{ data: { align: 'left' } }
+        %a.button #{@forum.name}
+        .dropdown-content.dropdown-content--wide.vertical-menu
+          - @forums.each do |forum|
+            - if forum == @forum
+              = link_to forum.name, forum, class: 'vertical-menu__item vertical-menu__item--active'
+            - else
+              = link_to forum.name, forum, class: 'vertical-menu__item'
+      - if logged_in?
+        %a.button.button--primary{ href: new_forum_post_path(@forum) }
+          %i.fa.fa-plus
+          New Post
+
+    .forum-menu__filters
+      .button-group
+        %a.button-group__item.button-group__item--active Latest
+        %a.button-group__item Top
+
+  %table.table
+    %thead
+      %tr
+        %th.table--left Topic
+        %th Replies
+        %th Views
+        %th Activity
+    %tbody
+      - @posts.each do |post|
+        %tr
+          %td
+            - if post.pinned?
+              %i.fa.fa-thumb-tack
+            = link_to post.title, [post.forum, post]
+          %td
+            = post.replies.count
+          %td
+            = post.views
+          - if post.replies.count > 0
+            %td #{time_ago_in_words(post.replies.last.updated_at)} ago
+          - else
+            %td #{time_ago_in_words(post.updated_at)} ago
+
+.pagination
+  = will_paginate @posts unless @posts.empty?
+  .pagination-info
+    = page_entries_info @posts, model: 'posts' unless @posts.empty?
+
+//<div class="forum-content">
+//  <div class="forum-menu-container">
+//    <ul class="location">
+//      <li><%= link_to 'Forums', forums_path %></li>
+//      <li class="dropdown" data-align="left">
+//        <%= @forum.name %>
+//        <div class="dropdown-content location-forums">
+//          <% @forums.each do |forum| %>
+//            <% if forum == @forum %>
+//              <%= link_to forum.name, forum, class: 'location-forums-link active' %>
+//            <% else %>
+//              <%= link_to forum.name, forum, class: 'location-forums-link' %>
+//            <% end %>
+//          <% end %>
+//        </div>
+//      </li>
+//    </ul>
+//
+//    <ul class="forum-menu">
+//      <li class="forum-menu-item"><a class="forum-menu-link active" href="#">Latest</a></li>
+//      <li class="forum-menu-item"><a class="forum-menu-link" href="#">New</a></li>
+//      <li class="forum-menu-item"><a class="forum-menu-link" href="#">Starred</a></li>
+//    </ul>
+//
+//  </div>
+//
+//  <h1 class="forum-title"><%= @forum.name %></h1>
+//
+//  <table class="posts-table">
+//    <thead>
+//      <tr>
+//        <th>Topic</th>
+//        <th>Replies</th>
+//        <th>Category</th>
+//        <th>Views</th>
+//        <th>Activity</th>
+//      </tr>
+//    </thead>
+//    <tbody>
+//      <% @posts.each do |post| %>
+//        <tr>
+//          <td>
+//            <% if post.pinned? %>
+//              <i class="fa fa-thumb-tack"></i>
+//            <% end %>
+//            <%= link_to post.title, [@forum, post], class: 'posts-table-link' %>
+//          </td>
+//          <td><%= post.replies.count %></td>
+//          <td><a href="<%= forum_path post.forum %>" class="forum-tag forum-<%= post.forum.name.downcase.parameterize %>"><%= post.forum.name %></a></td>
+//          <td><%= post.views %></td>
+//          <% if post.replies.count > 0 %>
+//            <td><%= time_ago_in_words post.replies.last.updated_at %> ago</td>
+//          <% else %>
+//            <td><%= time_ago_in_words post.updated_at %> ago</td>
+//          <% end %>
+//        </tr>
+//      <% end %>
+//    </tbody>
+//  </table>
+//
+//  <div class="forum-pagination">
+//    <%= will_paginate @posts unless @posts.empty? %>
+//    <div class="pagination-info">
+//      <%= page_entries_info @posts, model: 'posts' unless @posts.empty? %>
+//    </div>
+//  </div>
+//</div>

@@ -16,12 +16,12 @@
 
     <%= render '/layouts/navigation' %>
 
-    <% if flash[:danger] %>
-      <div class="danger"><%= flash[:danger] %></div>
+    <% if flash[:notice] %>
+      <div class="alert alert--notice"><%= flash[:notice] %></div>
     <% end %>
 
-    <% if flash[:error] %>
-      <div class="error"><%= flash[:error] %></div>
+    <% if flash[:alert] %>
+      <div class="error"><%= flash[:alert] %></div>
     <% end %>
 
     <%= yield %>
