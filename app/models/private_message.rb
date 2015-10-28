@@ -1,6 +1,8 @@
 class PrivateMessage < ActiveRecord::Base
   validates :message, presence: true
   validates :title, presence: true
+  validates :receiver, presence: true
+  validates :author, presence: true
   validate  :check_sender_is_not_receiver
 
   belongs_to :receiver, foreign_key: :receiver_id, class_name: 'User'

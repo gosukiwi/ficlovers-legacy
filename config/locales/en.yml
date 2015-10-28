@@ -20,4 +20,13 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      private_message:
+        receiver: 'Receiver'
+    errors:
+      models:
+        private_message:
+          attributes:
+            receiver:
+              blank: 'with given username was not found'

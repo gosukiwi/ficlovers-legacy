@@ -31,11 +31,8 @@ class PrivateMessagesController < ApplicationController
 protected
 
   def create_message
-    @pm = PrivateMessage.new pm_params.merge(author: current_user)
-    @pm.receiver = fetch_receiver(params[:private_message][:receiver]) do |error|
-      flash.now[:alert] = error
-      return false
-    end
+    receiver = User.find_by(username: pm_params[:receiver])
+    @pm = PrivateMessage.new pm_params.merge(author: current_user, receiver: receiver)
     @pm.save
   end
 
@@ -69,6 +66,6 @@ protected
   end
 
   def pm_params
-    params.require(:private_message).permit(:message, :title)
+    params.require(:private_message).permit(:message, :title, :receiver)
   end
 end
