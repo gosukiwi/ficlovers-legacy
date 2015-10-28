@@ -8,12 +8,12 @@ class PrivateMessagesController < ApplicationController
   end
 
   def create
-    receiver = fetch_receiver(params[:private_message][:receiver]) do |error|
+    @pm = PrivateMessage.new pm_params.merge(author: current_user)
+    @pm.receiver = fetch_receiver(params[:private_message][:receiver]) do |error|
       flash.now[:alert] = error
       return render :new
     end
 
-    @pm = PrivateMessage.new pm_params.merge(receiver: receiver, author: current_user)
     if @pm.save
       notify receiver, @pm
       flash[:notice] = 'Your message has been sent!'
@@ -28,7 +28,7 @@ class PrivateMessagesController < ApplicationController
   end
 
   def new
-    receiver = User.find_by(username: params[:to])
+    receiver = fetch_receiver(params[:to])
     @pm      = PrivateMessage.new(receiver: receiver)
   end
 
@@ -44,6 +44,7 @@ protected
   end
 
   def fetch_receiver(username, &on_error)
+    on_error ||= ->(error){}
     User.find_by(username: username) || on_error.call("Could not find user '#{username}'")
   end
 
