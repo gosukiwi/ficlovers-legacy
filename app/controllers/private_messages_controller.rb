@@ -36,18 +36,6 @@ protected
     @pm.save
   end
 
-  def check_authorization
-    authorize @pm || PrivateMessage
-  end
-
-  def set_messages
-    @messages = if @box == 'sent'
-      current_user.active_sent_messages.sorted
-    else
-      current_user.active_received_messages.sorted
-    end
-  end
-
   def send_notification
     Notification.create user: @pm.receiver, message: "You have a new private message from #{@pm.author.username}", notificable: @pm
   end
@@ -58,6 +46,18 @@ protected
 
   def set_box
     @box = params[:box] || 'inbox'
+  end
+
+  def check_authorization
+    authorize @pm || PrivateMessage
+  end
+
+  def set_messages
+    @messages = if @box == 'sent'
+      current_user.active_sent_messages.sorted
+    else
+      current_user.active_received_messages.sorted
+    end
   end
 
   def pm_params
