@@ -8,7 +8,7 @@ class PrivateMessagesController < ApplicationController
   end
 
   def create
-    build_message or return render :new
+    create_message or return render :new
     send_notification @pm
     flash[:notice] = 'Your message has been sent!'
     redirect_to private_messages_url
@@ -30,7 +30,7 @@ class PrivateMessagesController < ApplicationController
 
 protected
 
-  def build_message
+  def create_message
     @pm = PrivateMessage.new pm_params.merge(author: current_user)
     @pm.receiver = fetch_receiver(params[:private_message][:receiver]) do |error|
       flash.now[:alert] = error
