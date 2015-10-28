@@ -19,7 +19,7 @@ class PrivateMessagesController < ApplicationController
   end
 
   def new
-    receiver = fetch_receiver(params[:to])
+    receiver = User.find_by(username: params[:to])
     @pm      = PrivateMessage.new(receiver: receiver)
   end
 
@@ -38,11 +38,6 @@ protected
 
   def check_authorization
     authorize @pm || PrivateMessage
-  end
-
-  def fetch_receiver(username, &on_error)
-    on_error ||= ->(error){}
-    User.find_by(username: username) || on_error.call("Could not find user '#{username}'")
   end
 
   def set_messages
