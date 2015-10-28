@@ -1,6 +1,6 @@
 class PrivateMessagesController < ApplicationController
-  before_action :check_authorization
   before_action :set_pm, only: [:show, :destroy]
+  before_action :check_authorization
   before_action :set_box, only: [:index, :show, :new, :destroy]
   before_action :set_messages, only: [:index, :show, :new, :create]
 
