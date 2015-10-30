@@ -1,5 +1,6 @@
 class NotificationsController < ApplicationController
   before_action :set_notification, only: [:destroy]
+
   def index
     authorize Notification
     @notifications = scope.sorted.paginate(page: params[:page], per_page: 25)
