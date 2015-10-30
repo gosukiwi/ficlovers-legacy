@@ -16,7 +16,6 @@ class ForumFacade
     current.posts.sorted.paginate(page: page, per_page: per_page)
   end
 
-
   def latest_posts
     Post.latest.paginate(page: page, per_page: per_page)
   end
