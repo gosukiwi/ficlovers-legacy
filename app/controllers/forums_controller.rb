@@ -1,5 +1,6 @@
 class ForumsController < ApplicationController
   before_action :set_forum, only: [:show]
+
   def index
     @forum = ForumFacade.new page: params[:page]
   end
