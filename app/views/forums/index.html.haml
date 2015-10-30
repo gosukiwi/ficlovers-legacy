@@ -4,8 +4,8 @@
       %span.forum-menu__button.dropdown{ data: { align: 'left' } }
         .button All categories
         .dropdown-content.dropdown-content--wide.vertical-menu
-          - @forums.each do |forum|
-            - if forum == @forum
+          - @forum.forums.each do |forum|
+            - if forum == @forum.current_forum
               = link_to forum.name, forum, class: 'vertical-menu__item vertical-menu__item--active'
             - else
               = link_to forum.name, forum, class: 'vertical-menu__item'
@@ -24,7 +24,7 @@
         %th Views
         %th Activity
     %tbody
-      - @posts.each do |post|
+      - @forum.latest_posts.each do |post|
         %tr
           %td
             = link_to post.title, [post.forum, post]
@@ -40,7 +40,8 @@
           - else
             %td #{time_ago_in_words(post.updated_at)} ago
 
-.pagination
-  = will_paginate @posts unless @posts.empty?
-  .pagination-info
-    = page_entries_info @posts, model: 'posts' unless @posts.empty?
+- unless @forum.latest_posts.empty?
+  .pagination
+    = will_paginate @forum.latest_posts 
+    .pagination-info
+      = page_entries_info @forum.latest_posts, model: 'posts'
