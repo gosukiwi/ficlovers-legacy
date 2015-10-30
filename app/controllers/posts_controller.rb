@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :pin, :watch]
   before_action :set_forum
+  before_action :increment_views, only: [:show]
 
   def watch
     authorize @post
@@ -9,10 +10,7 @@ class PostsController < ApplicationController
 
   def show
     authorize @post
-    @post.increment_views
-    @replies = @post.replies.sorted.paginate(page: params[:page], per_page: 10)
-    @forums = Forum.all
-    @new_reply = Reply.new
+    @post = PostFacade.new post: @post, page: params[:page]
   end
 
   def new
@@ -23,7 +21,6 @@ class PostsController < ApplicationController
   def create
     @post = Post.new post_params
     authorize @post
-    @post.user = current_user
     if @post.save
       redirect_to [@forum, @post], notice: 'Post was successfully created.'
     else
@@ -50,15 +47,19 @@ class PostsController < ApplicationController
 
   private
 
-    def set_post
-      @post = Post.find(params[:id])
-    end
+  def set_post
+    @post = Post.find(params[:id])
+  end
 
-    def set_forum
-      @forum = Forum.find(params[:forum_id])
-    end
+  def set_forum
+    @forum = Forum.find(params[:forum_id])
+  end
 
-    def post_params
-      params.require(:post).permit(:title, :content).merge(forum: @forum)
-    end
+  def increment_views
+    @post.increment_views
+  end
+
+  def post_params
+    params.require(:post).permit(:title, :content).merge(forum: @forum, user: current_user)
+  end
 end

@@ -5,7 +5,7 @@
         .button All categories
         .dropdown-content.dropdown-content--wide.vertical-menu
           - @forum.forums.each do |forum|
-            - if forum == @forum.current_forum
+            - if forum == @forum.current
               = link_to forum.name, forum, class: 'vertical-menu__item vertical-menu__item--active'
             - else
               = link_to forum.name, forum, class: 'vertical-menu__item'

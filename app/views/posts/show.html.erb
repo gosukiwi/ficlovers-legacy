@@ -1,12 +1,12 @@
 <div class="container">
-  <h1 class="post-title"><%= @post.title %></h1>
+  <h1 class="post-title"><%= @post.current.title %></h1>
 
   <ul class="location">
     <li><%= link_to 'Forums', forums_path %></li>
     <li class="dropdown" data-align="left">
       <%= @post.forum.name %>
       <div class="dropdown-content location-forums">
-        <% @forums.each do |forum| %>
+        <% @post.forums.each do |forum| %>
           <% if forum == @post.forum %>
             <%= link_to forum.name, forum, class: 'location-forums-link active' %>
           <% else %>
@@ -34,7 +34,7 @@
         </div>
         <div class="actions">
 
-          <% if policy(@post).watch? %>
+          <% if policy(@post.current).watch? %>
             <% if current_user.watches?(@post) %>
               <%= link_to 'Stop Watching', watch_forum_post_path(@forum, @post, format: :js), method: :post, remote: true, class: 'btn-default btn-watch' %>
             <% else %> 
@@ -42,7 +42,7 @@
             <% end %>
           <% end %>
 
-          <% if policy(@post).pin? %>
+          <% if policy(@post.current).pin? %>
             <% if @post.pinned? %>
               <%= link_to 'Unpin', pin_forum_post_path(@forum, @post, format: :js), method: :delete, remote: true, class: 'btn-default btn-pin' %>
             <% else %>
@@ -50,8 +50,8 @@
             <% end %>
           <% end %>
 
-          <%= link_to 'Edit', edit_forum_post_path(@forum, @post), class: 'btn-default btn-edit' if policy(@post).update? %>
-          <%= link_to 'Delete', [@forum, @post], method: :delete, class: 'btn-default btn-delete' if policy(@post).destroy? %>
+          <%= link_to 'Edit', edit_forum_post_path(@post.forum, @post.current), class: 'btn-default btn-edit' if policy(@post.current).update? %>
+          <%= link_to 'Delete', [@post.forum, @post.current], method: :delete, class: 'btn-default btn-delete' if policy(@post.current).destroy? %>
 
         </div>
       </div>
@@ -59,7 +59,7 @@
   </div>
   <% end %>
 
-  <% @replies.each do |reply| %>
+  <% @post.replies.each do |reply| %>
     <div class="l-post-stack reply id-<%= reply.id %>">
       <div class="stack author">
         <%= link_to reply.user.username, reply.user %>
@@ -82,13 +82,13 @@
   <% end %>
 
   <div class="post-pagination">
-    <%= will_paginate @replies unless @replies.empty? %>
+    <%= will_paginate @post.replies unless @post.replies.empty? %>
     <div class="pagination-info">
-      <%= page_entries_info @replies, model: 'replies' unless @replies.empty? %>
+      <%= page_entries_info @post.replies, model: 'replies' unless @post.replies.empty? %>
     </div>
   </div>
 
-  <% if policy(@new_reply).new? %>
+  <% if policy(@post.new_reply).new? %>
   <div class="new-reply">
     <div class="u-hidden alert error">
       <h3>Oops! Something went wrong</h3>
@@ -96,7 +96,7 @@
     </div>
 
     <h3 class="new-reply-title">Reply</h3>
-    <%= form_for [@forum, @post, @new_reply], remote: true do |f| %>
+    <%= form_for [@post.forum, @post.current, @post.new_reply], remote: true do |f| %>
     <div class="field">
      <%= f.text_area :content, class: 'new-reply-content', placeholder: 'Reply content in here...' %>
     </div>

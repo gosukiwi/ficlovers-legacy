@@ -3,15 +3,15 @@
     .forum-menu__categories
       = link_to 'Forums', forums_path, class: 'button'
       %span.forum-menu__button.dropdown{ data: { align: 'left' } }
-        %a.button #{@forum.current_forum.name}
+        %a.button #{@forum.name}
         .dropdown-content.dropdown-content--wide.vertical-menu
           - @forum.forums.each do |forum|
-            - if forum == @forum.current_forum
+            - if forum == @forum.current
               = link_to forum.name, forum, class: 'vertical-menu__item vertical-menu__item--active'
             - else
               = link_to forum.name, forum, class: 'vertical-menu__item'
       - if logged_in?
-        %a.button.button--primary{ href: new_forum_post_path(@forum.current_forum) }
+        %a.button.button--primary{ href: new_forum_post_path(@forum.current) }
           %i.fa.fa-plus
           New Post
 
@@ -28,7 +28,7 @@
         %th Views
         %th Activity
     %tbody
-      - @forum.current_forum_posts.each do |post|
+      - @forum.posts.each do |post|
         %tr
           %td
             - if post.pinned?
@@ -43,11 +43,11 @@
           - else
             %td #{time_ago_in_words(post.updated_at)} ago
 
-- unless @forum.current_forum_posts.empty?
+- unless @forum.posts.empty?
   .pagination
-    = will_paginate @forum.current_forum_posts
+    = will_paginate @forum.posts
     .pagination-info
-      = page_entries_info @forum.current_forum_posts, model: 'posts'
+      = page_entries_info @forum.posts, model: 'posts'
 
 //<div class="forum-content">
 //  <div class="forum-menu-container">

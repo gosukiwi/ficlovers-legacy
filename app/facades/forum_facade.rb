@@ -1,17 +1,19 @@
 class ForumFacade
-  attr_reader :current_forum, :page, :per_page
+  attr_reader :current, :page, :per_page
   def initialize(forum: NullForum.new, page: 1, per_page: 25)
-    @current_forum = forum
-    @page          = page
-    @per_page      = per_page
+    @current  = forum
+    @page     = page
+    @per_page = per_page
   end
+
+  delegate :name, to: :current
 
   def forums
     Forum.all
   end
 
-  def current_forum_posts
-    current_forum.posts.sorted.paginate(page: page, per_page: per_page)
+  def posts
+    current.posts.sorted.paginate(page: page, per_page: per_page)
   end
 
 
