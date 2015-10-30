@@ -1,16 +1,26 @@
 class NotificationsController < ApplicationController
+  before_action :set_notification, only: [:destroy]
   def index
     authorize Notification
-    @notifications = policy_scope(Notification).sorted.paginate(page: params[:page], per_page: 25)
+    @notifications = scope.sorted.paginate(page: params[:page], per_page: 25)
   end
 
   def destroy
-    @notification = Notification.find(params[:id])
     authorize @notification
     @notification.destroy
   end
 
   def destroy_all
-    policy_scope(Notification).delete_all
+    scope.delete_all
+  end
+
+  private
+
+  def scope
+    policy_scope(Notification)
+  end
+
+  def set_notification
+    @notification = Notification.find(params[:id])
   end
 end
