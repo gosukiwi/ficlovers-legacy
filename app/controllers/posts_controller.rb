@@ -4,10 +4,6 @@ class PostsController < ApplicationController
   before_action :check_authorization
   before_action :increment_views, only: [:show]
 
-  def watch
-    @result = current_user.watch_toggle @post
-  end
-
   def show
     @post = PostFacade.new post: @post, page: params[:page]
   end
@@ -38,6 +34,10 @@ class PostsController < ApplicationController
 
   def pin
     @success = @post.toggle! :pinned
+  end
+
+  def watch
+    @result = current_user.watch_toggle @post
   end
 
   private
