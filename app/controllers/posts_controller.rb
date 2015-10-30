@@ -42,6 +42,7 @@ class PostsController < ApplicationController
   end
 
   def pin
+    authorize @post
     @success = @post.toggle! :pinned
   end
 
