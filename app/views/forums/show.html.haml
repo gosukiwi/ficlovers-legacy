@@ -42,6 +42,7 @@
             %td #{time_ago_in_words(post.replies.last.updated_at)} ago
           - else
             %td #{time_ago_in_words(post.updated_at)} ago
+
 - unless @forum.current_forum_posts.empty?
   .pagination
     = will_paginate @forum.current_forum_posts
