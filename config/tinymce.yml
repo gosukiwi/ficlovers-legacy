@@ -1,6 +1,7 @@
 menubar: false
 statusbar: false
 content_css: '/assets/tinymce.css'
+min_height: 200
 toolbar:
   - bold italic link | undo redo
 plugins:
