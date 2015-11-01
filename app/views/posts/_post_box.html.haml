@@ -1,0 +1,20 @@
+.boxed-group
+  .boxed-group__details
+    = raw gravatar_for(post.user, class: 'rounded')
+    = link_to post.user.username, post.user, class: 'bold block'
+    .boxed-list.boxed-list--separate-top.boxed-list--no-border.small
+      .boxed-list__item
+        #{post.user.post_count} posts
+      .boxed-list__item
+        #{post.user.followers.count} following
+      .boxed-list__item
+        #{User.followed_by(post.user).count} followers
+  .boxed-group__body
+    .boxed-group__title
+      = link_to post.user.username, post.user
+      posted #{time_ago_in_words(post.created_at)} ago
+    = post.content
+  - if post.is_a? Post
+    = render partial: 'post_actions', locals: { post: post }
+  - else
+    = render partial: 'reply_actions', locals: { reply: post }

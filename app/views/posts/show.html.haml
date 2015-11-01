@@ -21,60 +21,10 @@
     = @post.title
 
   - if params[:page].to_i < 2
-    .boxed-group
-      .boxed-group__details
-        = raw gravatar_for(@post.user, class: 'rounded')
-        = link_to @post.user.username, @post.user, class: 'bold block'
-        .boxed-list.boxed-list--separate-top.boxed-list--no-border.small
-          .boxed-list__item
-            #{@post.user.post_count} posts
-          .boxed-list__item
-            #{@post.user.followers.count} following
-          .boxed-list__item
-            #{User.followed_by(@post.user).count} followers
-      .boxed-group__body
-        .boxed-group__title
-          = link_to @post.user.username, @post.user
-          posted #{time_ago_in_words(@post.created_at)} ago
-        = @post.content
-      .boxed-group__actions
-        - if policy(@post.current).watch?
-          - if current_user.watches?(@post)
-            = link_to 'Stop Watching', watch_forum_post_path(@post.forum, @post.current, format: :js), method: :post, remote: true, class: 'button button--small btn-watch'
-          - else
-            = link_to 'Watch', watch_forum_post_path(@post.forum, @post.current, format: :js), method: :post, remote: true, class: 'button button--small btn-watch'
-        - if policy(@post.current).pin?
-          - if @post.pinned?
-            = link_to 'Unpin', pin_forum_post_path(@post.forum, @post.current, format: :js), method: :delete, remote: true, class: 'button button--small btn-pin'
-          - else
-            = link_to 'Pin', pin_forum_post_path(@post.forum, @post.current, format: :js), method: :delete, remote: true, class: 'button button--small btn-pin'
-        - if policy(@post.current).update?
-          = link_to 'Edit', edit_forum_post_path(@post.forum, @post.current), class: 'button button--small btn-edit'
-        - if policy(@post.current).destroy?
-          = link_to 'Delete', [@post.forum, @post.current], method: :delete, class: 'button button--small btn-delete'
+    = render partial: 'post_box', locals: { post: @post.current }
 
   - @post.replies.each do |reply|
-    .boxed-group
-      .boxed-group__details
-        = raw gravatar_for(reply.user, class: 'rounded')
-        = link_to reply.user.username, reply.user, class: 'bold block'
-        .boxed-list.boxed-list--separate-top.boxed-list--no-border.small
-          .boxed-list__item
-            #{reply.user.post_count} posts
-          .boxed-list__item
-            #{reply.user.followers.count} following
-          .boxed-list__item
-            #{User.followed_by(reply.user).count} followers
-      .boxed-group__body
-        .boxed-group__title
-          = link_to reply.user.username, reply.user
-          posted #{time_ago_in_words(reply.created_at)} ago
-        = reply.content
-      .boxed-group__actions
-        - if policy(reply).update?
-          = link_to 'Edit', edit_forum_post_path(reply.forum, reply), class: 'button button--small btn-edit'
-        - if policy(reply).destroy?
-          = link_to 'Delete', [reply.forum, reply.post], method: :delete, class: 'button button--small btn-delete'
+    = render partial: 'post_box', locals: { post: reply }
 
   - unless @post.replies.empty?
     .pagination.pagination--spaced

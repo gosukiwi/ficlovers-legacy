@@ -1,0 +1,15 @@
+.boxed-group__actions
+  - if policy(post).watch?
+    - if current_user.watches?(post)
+      = link_to 'Stop Watching', watch_forum_post_path(post.forum, post, format: :js), method: :post, remote: true, class: 'button button--small btn-watch'
+    - else
+      = link_to 'Watch', watch_forum_post_path(post.forum, post, format: :js), method: :post, remote: true, class: 'button button--small btn-watch'
+  - if policy(post).pin?
+    - if post.pinned?
+      = link_to 'Unpin', pin_forum_post_path(post.forum, post, format: :js), method: :delete, remote: true, class: 'button button--small btn-pin'
+    - else
+      = link_to 'Pin', pin_forum_post_path(post.forum, post, format: :js), method: :delete, remote: true, class: 'button button--small btn-pin'
+  - if policy(post).update?
+    = link_to 'Edit', edit_forum_post_path(post.forum, post), class: 'button button--small btn-edit'
+  - if policy(post).destroy?
+    = link_to 'Delete', [post.forum, post], method: :delete, class: 'button button--small btn-delete'

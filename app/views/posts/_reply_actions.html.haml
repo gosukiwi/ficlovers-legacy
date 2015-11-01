@@ -1,0 +1,5 @@
+.boxed-group__actions
+  - if policy(reply).update?
+    = link_to 'Edit', edit_forum_post_path(reply.forum, reply.post), class: 'button button--small btn-edit'
+  - if policy(reply).destroy?
+    = link_to 'Delete', [reply.forum, reply.post], method: :delete, class: 'button button--small btn-delete'
