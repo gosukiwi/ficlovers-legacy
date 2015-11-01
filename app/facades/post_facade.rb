@@ -4,11 +4,12 @@ class PostFacade
     @current = post
   end
 
-  delegate :forum  , to: :current
-  delegate :title  , to: :current
-  delegate :content, to: :current
-  delegate :user   , to: :current
-  delegate :pinned?, to: :current
+  delegate :forum     , to: :current
+  delegate :title     , to: :current
+  delegate :content   , to: :current
+  delegate :user      , to: :current
+  delegate :pinned?   , to: :current
+  delegate :created_at, to: :current
 
   def replies
     current.replies.sorted.paginate(page: page, per_page: per_page)

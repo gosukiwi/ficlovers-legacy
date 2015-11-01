@@ -5,6 +5,8 @@ class Reply < ActiveRecord::Base
 
   scope :sorted, ->{ order('id ASC') }
 
+  delegate :forum, to: :post
+
   after_create do
     user.increment! :post_count
   end

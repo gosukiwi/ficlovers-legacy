@@ -1,0 +1,18 @@
+.boxed-list
+  display: block
+  min-width: 200px
+  border-left: 1px solid $color-grey
+  border-right: 1px solid $color-grey
+
+  &--no-border
+    border: none
+
+  &--separate-top
+    margin-top: 1em
+
+  &__item
+    padding: 5px 10px
+    border-top: 1px solid $color-grey
+
+    &:last-child
+      border-bottom: 1px solid $color-grey

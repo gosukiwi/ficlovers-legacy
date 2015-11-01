@@ -1,0 +1,93 @@
+.container
+  .forum-menu
+    .forum-menu__categories
+      = link_to 'Forums', forums_path, class: 'button'
+      %span.forum-menu__button.dropdown{ data: { align: 'left' } }
+        %a.button #{@post.forum.name}
+        .dropdown-content.dropdown-content--wide.vertical-menu
+          - @post.forums.each do |forum|
+            - if forum == @post.forum
+              = link_to forum.name, forum, class: 'vertical-menu__item vertical-menu__item--active'
+            - else
+              = link_to forum.name, forum, class: 'vertical-menu__item'
+
+    .forum-menu__filters
+      .button-group
+        %a.button-group__item.button-group__item--active Latest
+        %a.button-group__item Top
+        %a.button-group__item Feed
+
+  %h3 
+    = @post.title
+
+  - if params[:page].to_i < 2
+    .boxed-group
+      .boxed-group__details
+        = raw gravatar_for(@post.user, class: 'rounded')
+        = link_to @post.user.username, @post.user, class: 'bold block'
+        .boxed-list.boxed-list--separate-top.boxed-list--no-border.small
+          .boxed-list__item
+            #{@post.user.post_count} posts
+          .boxed-list__item
+            #{@post.user.followers.count} following
+          .boxed-list__item
+            #{User.followed_by(@post.user).count} followers
+      .boxed-group__body
+        .boxed-group__title
+          = link_to @post.user.username, @post.user
+          posted #{time_ago_in_words(@post.created_at)} ago
+        = @post.content
+      .boxed-group__actions
+        - if policy(@post.current).watch?
+          - if current_user.watches?(@post)
+            = link_to 'Stop Watching', watch_forum_post_path(@post.forum, @post.current, format: :js), method: :post, remote: true, class: 'button button--small btn-watch'
+          - else
+            = link_to 'Watch', watch_forum_post_path(@post.forum, @post.current, format: :js), method: :post, remote: true, class: 'button button--small btn-watch'
+        - if policy(@post.current).pin?
+          - if @post.pinned?
+            = link_to 'Unpin', pin_forum_post_path(@post.forum, @post.current, format: :js), method: :delete, remote: true, class: 'button button--small btn-pin'
+          - else
+            = link_to 'Pin', pin_forum_post_path(@post.forum, @post.current, format: :js), method: :delete, remote: true, class: 'button button--small btn-pin'
+        - if policy(@post.current).update?
+          = link_to 'Edit', edit_forum_post_path(@post.forum, @post.current), class: 'button button--small btn-edit'
+        - if policy(@post.current).destroy?
+          = link_to 'Delete', [@post.forum, @post.current], method: :delete, class: 'button button--small btn-delete'
+
+  - @post.replies.each do |reply|
+    .boxed-group
+      .boxed-group__details
+        = raw gravatar_for(reply.user, class: 'rounded')
+        = link_to reply.user.username, reply.user, class: 'bold block'
+        .boxed-list.boxed-list--separate-top.boxed-list--no-border.small
+          .boxed-list__item
+            #{reply.user.post_count} posts
+          .boxed-list__item
+            #{reply.user.followers.count} following
+          .boxed-list__item
+            #{User.followed_by(reply.user).count} followers
+      .boxed-group__body
+        .boxed-group__title
+          = link_to reply.user.username, reply.user
+          posted #{time_ago_in_words(reply.created_at)} ago
+        = reply.content
+      .boxed-group__actions
+        - if policy(reply).update?
+          = link_to 'Edit', edit_forum_post_path(reply.forum, reply), class: 'button button--small btn-edit'
+        - if policy(reply).destroy?
+          = link_to 'Delete', [reply.forum, reply.post], method: :delete, class: 'button button--small btn-delete'
+
+  - unless @post.replies.empty?
+    .pagination.pagination--spaced
+      = will_paginate @post.replies 
+      .pagination-info
+        = page_entries_info @post.replies, model: 'replies'
+
+  - if policy(@post.new_reply).new?
+    .boxed-group.new-reply
+      .boxed-group__body
+        .boxed-group__title.boxed-group__title--fluid Write new reply
+        .alert.alert--error.hidden
+          .errors
+        = form_for [@post.forum, @post.current, @post.new_reply], remote: true do |f|
+          = f.text_area :content, placeholder: 'Reply content in here...'
+          = f.submit 'Reply', class: 'button button--primary'
