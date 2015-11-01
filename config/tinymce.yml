@@ -1,0 +1,7 @@
+menubar: false
+statusbar: false
+content_css: '/assets/tinymce.css'
+toolbar:
+  - bold italic link | undo redo
+plugins:
+  - link

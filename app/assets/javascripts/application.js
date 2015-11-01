@@ -19,6 +19,7 @@
 //= require jquery.Jcrop
 //= require underscore
 //= require hyphenate
+//= require tinymce-jquery
 // APP SHARED ----------------------------------------------------------------
 //= require common/dropdown
 //= require common/tabs

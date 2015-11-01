@@ -49,6 +49,8 @@ gem 'autoprefixer-rails'
 gem 'jquery-ui-rails'
 # Epub generation
 gem 'epubber'
+# TinyMCE WYSIWYG editor
+gem 'tinymce-rails'
 
 group :development do
   gem 'guard'

@@ -39,5 +39,6 @@
         .alert.alert--error.hidden
           .errors
         = form_for [@post.forum, @post.current, @post.new_reply], remote: true do |f|
-          = f.text_area :content, placeholder: 'Reply content in here...'
+          = f.text_area :content, placeholder: 'Reply content in here...', class: 'tinymce'
+          = tinymce
           = f.submit 'Reply', class: 'button button--primary'
